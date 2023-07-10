@@ -1,0 +1,20 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/3e09dde4-7f0a-42e3-80bb-91409836fbeb",
+    "@type": "PicklistName",
+    "name": "RegulatoryBody",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/257ec29f-5f8c-4928-a771-59f86778e9ac",
+            "@type": "Picklist",
+            "itemValue": "GDPR",
+            "orderIndex": 0,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/3e09dde4-7f0a-42e3-80bb-91409836fbeb",
+            "uuid": "257ec29f-5f8c-4928-a771-59f86778e9ac"
+        }
+    ],
+    "uuid": "3e09dde4-7f0a-42e3-80bb-91409836fbeb"
+}

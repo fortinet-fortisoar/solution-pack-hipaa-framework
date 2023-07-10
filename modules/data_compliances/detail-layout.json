@@ -1,0 +1,759 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "rows",
+    "config": {
+        "rows": [
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "primaryDetail",
+                                "config": {
+                                    "wid": "c58fc202-2fca-4fd9-ab82-ebedfc34824a",
+                                    "idField": "id",
+                                    "picklistFieldReadOnly": false,
+                                    "titleFieldReadOnly": true,
+                                    "titleFieldLinky": true,
+                                    "featuredRelationship": {
+                                        "field": "incidents",
+                                        "preText": "Under Investigation In",
+                                        "query": {
+                                            "sort": [],
+                                            "limit": 30,
+                                            "logic": "AND",
+                                            "filters": []
+                                        },
+                                        "statusField": "status",
+                                        "sort": []
+                                    },
+                                    "titleField": "name",
+                                    "picklistField": "severity"
+                                }
+                            },
+                            {
+                                "type": "rows",
+                                "config": {
+                                    "wid": "31aaa775-7292-4378-8742-aff98ce7ee4e",
+                                    "rows": [
+                                        {
+                                            "columns": [
+                                                {
+                                                    "widgets": [
+                                                        {
+                                                            "type": "tabs",
+                                                            "config": {
+                                                                "wid": "15a29672-ad60-4651-89c6-000736363d4d",
+                                                                "tabs": [
+                                                                    {
+                                                                        "title": "Primary Data",
+                                                                        "active": 0,
+                                                                        "widget": {
+                                                                            "type": "rows",
+                                                                            "config": {
+                                                                                "wid": "f501ceb0-fe23-4d02-be63-af6d1bd36fe1",
+                                                                                "rows": [
+                                                                                    {
+                                                                                        "columns": [
+                                                                                            {
+                                                                                                "widgets": [
+                                                                                                    {
+                                                                                                        "type": "editableFormGroup",
+                                                                                                        "config": {
+                                                                                                            "wid": "c978b2e2-583f-4275-aac8-b23f00a9bd1a",
+                                                                                                            "rows": [
+                                                                                                                {
+                                                                                                                    "columns": [
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "description",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    }
+                                                                                                ],
+                                                                                                "style": "col-lg-9"
+                                                                                            },
+                                                                                            {
+                                                                                                "widgets": [
+                                                                                                    {
+                                                                                                        "type": "slaCountDownClock-2.0.0",
+                                                                                                        "config": {
+                                                                                                            "wid": "fcd804d9-4e64-414f-97f9-9ff550859f51",
+                                                                                                            "title": "Time Remaining to Notify DPA",
+                                                                                                            "duedate": "breachNotifyDueDate",
+                                                                                                            "sladate": "resolvedDate",
+                                                                                                            "slapaused": "breachPausedDate",
+                                                                                                            "slaPausedOn": "breachNotificationSLA",
+                                                                                                            "slaMappedOn": "breachNotificationSLA",
+                                                                                                            "pausedItemvalue": "Paused",
+                                                                                                            "metItemvalue": "Met",
+                                                                                                            "stopStateTitle": "DPA Authority is Notified",
+                                                                                                            "timeToDisplay": "consumedTime"
+                                                                                                        }
+                                                                                                    }
+                                                                                                ],
+                                                                                                "style": "col-lg-3"
+                                                                                            }
+                                                                                        ],
+                                                                                        "wid": "cee5ff68-87a0-4e7e-8a86-632f7791d3ee",
+                                                                                        "container": true,
+                                                                                        "collapsible": false,
+                                                                                        "collapsibleIndex": 0,
+                                                                                        "_collapsed": false
+                                                                                    },
+                                                                                    {
+                                                                                        "columns": [
+                                                                                            {
+                                                                                                "widgets": [
+                                                                                                    {
+                                                                                                        "type": "editableFormGroup",
+                                                                                                        "config": {
+                                                                                                            "wid": "25fc58ae-d6b3-4cd9-88ac-681fe1d34e9a",
+                                                                                                            "rows": [
+                                                                                                                {
+                                                                                                                    "columns": [
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "assignedTo",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": false
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "severity",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": false
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "status",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": false
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "regulatoryCompliance",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": false
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        }
+                                                                                                                    ],
+                                                                                                                    "style": "display-inline-block"
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "type": "editableFormGroup",
+                                                                                                        "config": {
+                                                                                                            "wid": "17a428c0-3e1c-4998-ae65-7eed303756f4",
+                                                                                                            "rows": [
+                                                                                                                {
+                                                                                                                    "columns": [
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "wasPersonalDataAffected",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "isHarmRiskOrMisuseForeseeable",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "wasTheExposureResolved",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "wasTheDataEncrypted",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "whatWasTheDataFormat",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "whatWasTheDataSource",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        }
+                                                                                                                    ],
+                                                                                                                    "style": "display-inline-block"
+                                                                                                                }
+                                                                                                            ],
+                                                                                                            "title": "Data Breach Details"
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "type": "editableFormGroup",
+                                                                                                        "config": {
+                                                                                                            "wid": "1f26dcc7-925e-47c5-842f-c4efcc1f21e2",
+                                                                                                            "rows": [
+                                                                                                                {
+                                                                                                                    "columns": [
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "companyName",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "companyAddress",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "companyCountry",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "companySize",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "companyCity",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "postalCode",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        }
+                                                                                                                    ],
+                                                                                                                    "style": "display-inline-block"
+                                                                                                                }
+                                                                                                            ],
+                                                                                                            "title": "Data Breach Location Details"
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "type": "editableFormGroup",
+                                                                                                        "config": {
+                                                                                                            "wid": "0a34b312-a742-4ef5-b335-e2c45ea2cca3",
+                                                                                                            "rows": [
+                                                                                                                {
+                                                                                                                    "columns": [
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "causeOfDataBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "dataType",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "noOfAffectedUsers",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "whatHappened",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "repercussionsOfBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "affectedUsersEmails",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "typeOfDataBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "whereDataWasHosted",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "noOfAffectedDataRecords",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "mitigationActions",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "anyAdditionalInformation",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        }
+                                                                                                                    ],
+                                                                                                                    "style": ""
+                                                                                                                }
+                                                                                                            ],
+                                                                                                            "title": "Data Breach Risk Assessment"
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "type": "editableFormGroup",
+                                                                                                        "config": {
+                                                                                                            "wid": "a3486170-23ed-4419-a753-37d873f0552e",
+                                                                                                            "rows": [
+                                                                                                                {
+                                                                                                                    "columns": [
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "dPOName",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "dPOEmail",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "dPOTelephone",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "dPAAddress",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "dPAEmail",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "dPAWebsite",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "dataRegulator",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        }
+                                                                                                                    ],
+                                                                                                                    "style": "display-inline-block"
+                                                                                                                }
+                                                                                                            ],
+                                                                                                            "title": "DPO and DPA Contact Details"
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "type": "editableFormGroup",
+                                                                                                        "config": {
+                                                                                                            "wid": "717085c3-8ffb-4ecf-821b-f54e853cc136",
+                                                                                                            "rows": [
+                                                                                                                {
+                                                                                                                    "columns": [
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "isValidBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "isDPIARequired",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "reasonToPerformDPIA",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "impactSeverityOnAffectedUsers",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "measuresToReduceFutureRisks",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "summaryOfDPOAdvice",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        }
+                                                                                                                    ],
+                                                                                                                    "style": ""
+                                                                                                                }
+                                                                                                            ],
+                                                                                                            "title": "DPO Assessment Details"
+                                                                                                        }
+                                                                                                    }
+                                                                                                ],
+                                                                                                "style": "col-lg-9"
+                                                                                            },
+                                                                                            {
+                                                                                                "widgets": [
+                                                                                                    {
+                                                                                                        "type": "editableFormGroup",
+                                                                                                        "config": {
+                                                                                                            "wid": "683fe95f-76b8-4964-9d15-3f5646211a26",
+                                                                                                            "rows": [
+                                                                                                                {
+                                                                                                                    "columns": [
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "createDate",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "assignedDate",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "resolvedDate",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ],
+                                                                                                                    "style": "display-inline-block"
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "type": "editableFormGroup",
+                                                                                                        "config": {
+                                                                                                            "wid": "36a2b8d2-fcde-4db5-b8d8-c13efcba4a0a",
+                                                                                                            "rows": [
+                                                                                                                {
+                                                                                                                    "columns": [
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "breachOccurrenceDate",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "breachDetectionDate",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "breachNotifyDueDate",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "breachNotifiedOn",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "breachNotificationSLA",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ],
+                                                                                                                    "style": "display-inline-block"
+                                                                                                                }
+                                                                                                            ],
+                                                                                                            "title": "Breach Notification SLA"
+                                                                                                        }
+                                                                                                    }
+                                                                                                ],
+                                                                                                "style": "col-lg-3"
+                                                                                            }
+                                                                                        ],
+                                                                                        "wid": "aed9e956-c0ec-4536-b547-fa9a7b781692",
+                                                                                        "collapsible": false,
+                                                                                        "collapsibleIndex": 0,
+                                                                                        "_collapsed": false,
+                                                                                        "container": true
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        "icon": "fa fa-database",
+                                                                        "show": true,
+                                                                        "visible": true
+                                                                    },
+                                                                    {
+                                                                        "title": "Playbooks",
+                                                                        "active": 0,
+                                                                        "widget": {
+                                                                            "type": "executedPlaybooks",
+                                                                            "config": {
+                                                                                "wid": "6bc64a77-8f6e-4848-b27d-f0fb3ddf646b"
+                                                                            }
+                                                                        },
+                                                                        "icon": "icon icon-playbooks",
+                                                                        "show": false,
+                                                                        "visible": true
+                                                                    },
+                                                                    {
+                                                                        "title": "Audit Logs",
+                                                                        "active": 0,
+                                                                        "widget": {
+                                                                            "type": "rows",
+                                                                            "config": {
+                                                                                "wid": "3a7be46a-0a63-4c9f-b9a9-9dd84e1062b5",
+                                                                                "rows": [
+                                                                                    {
+                                                                                        "columns": [
+                                                                                            {
+                                                                                                "widgets": [
+                                                                                                    {
+                                                                                                        "type": "timeline",
+                                                                                                        "config": {
+                                                                                                            "wid": "2a0455b7-caad-4cd6-8cb8-13399a792244"
+                                                                                                        }
+                                                                                                    }
+                                                                                                ]
+                                                                                            }
+                                                                                        ],
+                                                                                        "wid": "a6f61abb-57b9-484b-9e75-76a66559e90f"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        "icon": "fa fa-eye",
+                                                                        "show": false,
+                                                                        "visible": true
+                                                                    }
+                                                                ],
+                                                                "isPrimaryTab": true
+                                                            }
+                                                        }
+                                                    ],
+                                                    "style": "col-lg-12"
+                                                }
+                                            ],
+                                            "wid": "7f8b3ca3-9382-4005-965f-290df9ce6b75",
+                                            "_collapsed": false,
+                                            "container": true
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "a10566fa-e394-48c2-b044-bd40abf2afd4",
+                "_collapsed": false,
+                "container": true
+            },
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "tabs",
+                                "config": {
+                                    "tabs": [
+                                        {
+                                            "title": "Correlations",
+                                            "widget": {
+                                                "type": "relationship.subtab",
+                                                "config": {
+                                                    "excludes": [
+                                                        "notes",
+                                                        "comments",
+                                                        "userOwners",
+                                                        "attachments",
+                                                        "owners",
+                                                        "tasks"
+                                                    ],
+                                                    "wid": "03b4f6c1-292e-4e8c-9cc0-ae23d79c8bc3",
+                                                    "selectionType": "exclude",
+                                                    "expandableCol": [],
+                                                    "enableHorizontalScroll": [],
+                                                    "includes": []
+                                                }
+                                            },
+                                            "show": true,
+                                            "icon": "fa fa-exchange",
+                                            "visible": true
+                                        },
+                                        {
+                                            "title": "Tasks",
+                                            "active": 0,
+                                            "widget": {
+                                                "type": "relationship.subtab",
+                                                "config": {
+                                                    "wid": "ffcccc7a-2a5a-44c6-8756-77cbbe9f2f6f",
+                                                    "excludes": [
+                                                        "notes",
+                                                        "comments",
+                                                        "userOwners",
+                                                        "attachments",
+                                                        "incidents",
+                                                        "owners",
+                                                        "contacts"
+                                                    ],
+                                                    "selectionType": "exclude",
+                                                    "expandableCol": [],
+                                                    "enableHorizontalScroll": [],
+                                                    "includes": []
+                                                }
+                                            },
+                                            "icon": "fa fa-tasks",
+                                            "show": false,
+                                            "visible": true
+                                        },
+                                        {
+                                            "title": "Access Control",
+                                            "active": 0,
+                                            "widget": {
+                                                "type": "accessControl-2.1.0",
+                                                "config": {
+                                                    "wid": "7e8442a6-2c49-4723-901c-bcca2eec05fc"
+                                                }
+                                            },
+                                            "icon": "icon icon-access-control",
+                                            "show": false,
+                                            "visible": true
+                                        }
+                                    ],
+                                    "wid": "86e88cd0-b5ab-4bad-8d06-2c1b82eeb1f7"
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "05700597-6c74-4175-a603-a73150af29ec",
+                "_collapsed": false,
+                "container": true
+            }
+        ],
+        "wid": "1deda212-25f2-40db-a01d-dd59818ac5c2",
+        "actionButtons": [],
+        "metadata": []
+    },
+    "uuid": "modules-data_compliances-detail"
+}
