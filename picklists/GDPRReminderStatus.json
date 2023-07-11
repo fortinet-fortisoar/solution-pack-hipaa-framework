@@ -1,0 +1,40 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/f242ed5b-e573-4fc2-937e-147a79504ccb",
+    "@type": "PicklistName",
+    "name": "GDPRReminderStatus",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/2a27d83a-1030-47eb-af83-0a83718f898c",
+            "@type": "Picklist",
+            "itemValue": "Reminder 1 Sent",
+            "orderIndex": 0,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/f242ed5b-e573-4fc2-937e-147a79504ccb",
+            "uuid": "2a27d83a-1030-47eb-af83-0a83718f898c"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/9428c7b3-ac2b-4c3e-83dd-5a567ce0a580",
+            "@type": "Picklist",
+            "itemValue": "Reminder 2 Sent",
+            "orderIndex": 1,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/f242ed5b-e573-4fc2-937e-147a79504ccb",
+            "uuid": "9428c7b3-ac2b-4c3e-83dd-5a567ce0a580"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/c1ecf186-a366-4dfc-9d76-00b910074cf1",
+            "@type": "Picklist",
+            "itemValue": "Breach Reminder Sent",
+            "orderIndex": 2,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/f242ed5b-e573-4fc2-937e-147a79504ccb",
+            "uuid": "c1ecf186-a366-4dfc-9d76-00b910074cf1"
+        }
+    ],
+    "uuid": "f242ed5b-e573-4fc2-937e-147a79504ccb"
+}

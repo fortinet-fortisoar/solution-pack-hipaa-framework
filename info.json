@@ -1,0 +1,97 @@
+{
+    "name": "hIPAAFramework",
+    "version": "1.0.0",
+    "fsrMinCompatibility": "7.2.0",
+    "type": "solutionpack",
+    "local": true,
+    "label": "HIPAA Framework",
+    "dependencies": [
+        {
+            "name": "sOARFramework",
+            "type": "solutionpack",
+            "label": "SOAR Framework",
+            "minVersion": null
+        }
+    ],
+    "prerequisite": null,
+    "publisher": "Fortinet",
+    "description": "This solution pack demonstrates procedures involved in HIPAA",
+    "help": "https://github.com/fortinet-fortisoar/solution-pack-hipaa-framework/blob/release/1.0.0/README.md",
+    "category": [
+        "Compliance and Reporting"
+    ],
+    "supportInfo": null,
+    "iconLarge": null,
+    "postInstallConfig": {
+        "enabled": false
+    },
+    "recordTags": [
+        "HIPPA"
+    ],
+    "date": "2023-07-10T18:01:41+00:00",
+    "contents": {
+        "picklistNames": [
+            {
+                "name": "Contact Title"
+            },
+            {
+                "name": "GDPRReminderStatus"
+            },
+            {
+                "name": "IncidentStatus"
+            },
+            {
+                "name": "RegulatoryBody"
+            },
+            {
+                "name": "Severity"
+            },
+            {
+                "name": "SLAState"
+            },
+            {
+                "name": "YesNoInput"
+            }
+        ],
+        "modules": {
+            "contact": {
+                "name": "Contacts",
+                "apiName": "contact"
+            },
+            "": {
+                "name": "Data Compliances",
+                "apiName": "data_compliances"
+            }
+        },
+        "viewTemplates": {
+            "contact": {
+                "name": "Contacts",
+                "apiName": "contact",
+                "views": [
+                    "list",
+                    "detail",
+                    "form"
+                ]
+            },
+            "data_compliances": {
+                "name": "Data Compliances",
+                "apiName": "data_compliances",
+                "views": [
+                    "list",
+                    "detail",
+                    "form"
+                ]
+            }
+        },
+        "views": {
+            "navigation": [
+                "Data Compliances"
+            ]
+        },
+        "playbooks": [
+            {
+                "name": "10 - SP - HIPAA Framework"
+            }
+        ]
+    }
+}

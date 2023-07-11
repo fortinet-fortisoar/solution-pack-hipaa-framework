@@ -1,0 +1,25 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "app",
+    "config": {
+        "navigation": [
+            {
+                "editMode": false,
+                "icon": "icon icon-data_sets",
+                "require": {
+                    "action": "read",
+                    "module": "data_compliances"
+                },
+                "state": {
+                    "name": "main.modules.list",
+                    "parameters": {
+                        "module": "data_compliances"
+                    }
+                },
+                "title": "Data Compliances"
+            }
+        ]
+    },
+    "uuid": "navigation"
+}

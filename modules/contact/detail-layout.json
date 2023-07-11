@@ -1,0 +1,241 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "rows",
+    "config": {
+        "rows": [
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "primaryDetail",
+                                "config": {
+                                    "wid": "662babe6-35d7-46a4-b3af-126f5ccbc753",
+                                    "idField": "id",
+                                    "picklistFieldReadOnly": false,
+                                    "titleFieldReadOnly": true,
+                                    "featuredRelationship": {
+                                        "field": null,
+                                        "preText": "Under Investigation In",
+                                        "query": null,
+                                        "statusField": null,
+                                        "sort": []
+                                    },
+                                    "titleField": "name"
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "5b37ec20-d2e3-4101-9d66-d9368911a30d",
+                "_collapsed": false
+            },
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "editableFormGroup",
+                                "config": {
+                                    "wid": "8391057f-df35-439d-bd9e-f4dff4b9e910",
+                                    "rows": [
+                                        {
+                                            "columns": [
+                                                {
+                                                    "fields": [
+                                                        {
+                                                            "name": "title",
+                                                            "highlightMode": true,
+                                                            "readOnly": false
+                                                        },
+                                                        {
+                                                            "name": "eMailAddress",
+                                                            "highlightMode": true,
+                                                            "readOnly": false
+                                                        },
+                                                        {
+                                                            "name": "website",
+                                                            "highlightMode": true,
+                                                            "readOnly": false
+                                                        }
+                                                    ],
+                                                    "style": "col-lg-4"
+                                                },
+                                                {
+                                                    "fields": [
+                                                        {
+                                                            "name": "firstName",
+                                                            "highlightMode": true,
+                                                            "readOnly": false
+                                                        },
+                                                        {
+                                                            "name": "telephoneNumber",
+                                                            "highlightMode": true,
+                                                            "readOnly": false
+                                                        }
+                                                    ],
+                                                    "style": "col-lg-4"
+                                                },
+                                                {
+                                                    "fields": [
+                                                        {
+                                                            "name": "lastName",
+                                                            "highlightMode": true,
+                                                            "readOnly": false
+                                                        },
+                                                        {
+                                                            "name": "alias",
+                                                            "highlightMode": true,
+                                                            "readOnly": false
+                                                        }
+                                                    ],
+                                                    "style": "col-lg-4"
+                                                }
+                                            ],
+                                            "style": "display-inline-block"
+                                        }
+                                    ],
+                                    "title": "Contact Details"
+                                }
+                            },
+                            {
+                                "type": "editableFormGroup",
+                                "config": {
+                                    "wid": "2e8b0391-e687-4069-b1cb-d52c6d71ebac",
+                                    "rows": [
+                                        {
+                                            "columns": [
+                                                {
+                                                    "fields": [
+                                                        {
+                                                            "name": "address",
+                                                            "highlightMode": true,
+                                                            "readOnly": false
+                                                        },
+                                                        {
+                                                            "name": "postalCode",
+                                                            "highlightMode": true,
+                                                            "readOnly": false
+                                                        }
+                                                    ],
+                                                    "style": "col-lg-4"
+                                                },
+                                                {
+                                                    "fields": [
+                                                        {
+                                                            "name": "city",
+                                                            "highlightMode": true,
+                                                            "readOnly": false
+                                                        }
+                                                    ],
+                                                    "style": "col-lg-4"
+                                                },
+                                                {
+                                                    "fields": [
+                                                        {
+                                                            "name": "country",
+                                                            "highlightMode": true,
+                                                            "readOnly": false
+                                                        }
+                                                    ],
+                                                    "style": "col-lg-4"
+                                                }
+                                            ],
+                                            "style": "display-inline-block"
+                                        }
+                                    ],
+                                    "title": "Address Details"
+                                }
+                            },
+                            {
+                                "type": "editableFormGroup",
+                                "config": {
+                                    "wid": "ab6fa242-0971-465a-93f3-9a2b6c2f1056",
+                                    "rows": [
+                                        {
+                                            "columns": [
+                                                {
+                                                    "fields": [
+                                                        {
+                                                            "name": "recordTags",
+                                                            "highlightMode": true,
+                                                            "readOnly": false
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "67ace540-eb35-445e-ba69-11edc8fde381",
+                "_collapsed": false
+            },
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "tabs",
+                                "config": {
+                                    "tabs": [
+                                        {
+                                            "title": "Correlations",
+                                            "widget": {
+                                                "type": "relationship.subtab",
+                                                "config": {
+                                                    "excludes": [
+                                                        "notes",
+                                                        "comments",
+                                                        "userOwners",
+                                                        "attachments",
+                                                        "owners"
+                                                    ],
+                                                    "wid": "a1ec5314-3e73-422c-aebb-f9a57ccfad5e",
+                                                    "selectionType": "exclude",
+                                                    "expandableCol": [],
+                                                    "enableHorizontalScroll": [],
+                                                    "includes": []
+                                                }
+                                            },
+                                            "show": true,
+                                            "visible": true,
+                                            "icon": "fa fa-exchange"
+                                        },
+                                        {
+                                            "title": "Access Control",
+                                            "active": 0,
+                                            "widget": {
+                                                "type": "accessControl-2.1.0",
+                                                "config": {
+                                                    "wid": "69e05ddd-7e52-4df6-b62b-bbd7978b219f"
+                                                }
+                                            },
+                                            "icon": "icon icon-access-control",
+                                            "show": false,
+                                            "visible": true
+                                        }
+                                    ],
+                                    "wid": "ebf0ea1d-44b9-450b-85e4-bb6698764908"
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "9b81ebd6-586f-4d3a-a027-701220ec8665",
+                "_collapsed": false
+            }
+        ],
+        "actionButtons": [],
+        "wid": "2cce2da5-8932-4c9c-9615-c01ce5502973",
+        "metadata": []
+    },
+    "uuid": "modules-contact-detail"
+}

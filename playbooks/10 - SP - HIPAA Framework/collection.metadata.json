@@ -1,0 +1,11 @@
+{
+    "@context": "\/api\/3\/contexts\/WorkflowCollection",
+    "@type": "WorkflowCollection",
+    "name": "10 - SP - HIPAA Framework",
+    "description": null,
+    "visible": true,
+    "image": null,
+    "uuid": "4c384067-79c3-4821-a70a-d69c3c149ec6",
+    "deletedAt": null,
+    "recordTags": []
+}
