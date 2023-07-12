@@ -89,7 +89,7 @@
                                                                                                         "type": "slaCountDownClock-2.0.0",
                                                                                                         "config": {
                                                                                                             "wid": "fcd804d9-4e64-414f-97f9-9ff550859f51",
-                                                                                                            "title": "Time Remaining to Notify DPA",
+                                                                                                            "title": "Time Remaining to Notify Breach",
                                                                                                             "duedate": "breachNotifyDueDate",
                                                                                                             "sladate": "resolvedDate",
                                                                                                             "slapaused": "breachPausedDate",
@@ -165,12 +165,24 @@
                                                                                                     {
                                                                                                         "type": "editableFormGroup",
                                                                                                         "config": {
-                                                                                                            "wid": "17a428c0-3e1c-4998-ae65-7eed303756f4",
+                                                                                                            "wid": "52d8f3b4-1ce5-432b-a1fe-d2a27377800a",
                                                                                                             "rows": [
                                                                                                                 {
                                                                                                                     "columns": [
                                                                                                                         {
                                                                                                                             "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "wasThePHIEPHIEncrypted",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "whatHealthInformationWasExposed",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
                                                                                                                                 {
                                                                                                                                     "name": "wasPersonalDataAffected",
                                                                                                                                     "highlightMode": true,
@@ -195,6 +207,12 @@
                                                                                                                         {
                                                                                                                             "fields": [
                                                                                                                                 {
+                                                                                                                                    "name": "whoAccessedPHIEPHIWithoutPermission",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
                                                                                                                                     "name": "wasTheDataEncrypted",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
@@ -211,6 +229,12 @@
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
                                                                                                                                     "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "measuresInPlaceToMitigateTheRisk",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "linky": true,
+                                                                                                                                    "readOnly": false
                                                                                                                                 }
                                                                                                                             ],
                                                                                                                             "style": "col-lg-6"

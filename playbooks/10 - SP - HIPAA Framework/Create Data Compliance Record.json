@@ -4,7 +4,7 @@
     "name": "Create Data Compliance Record",
     "aliasName": null,
     "tag": null,
-    "description": "Create a data compliance record and link it with a corresponding task to the parent incident.",
+    "description": "Create a data compliance record and link it with a corresponding task and to the parent incident.",
     "isActive": true,
     "debug": false,
     "singleRecordExecution": false,
@@ -26,8 +26,10 @@
                     ],
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
                     "tenant": "",
-                    "content": "<div>Thanks for your input.<\/div>\n<div>&nbsp;<\/div>\n<div><a href=\"https:\/\/{{globalVars.Server_fqhn}}\/modules\/view-panel\/data_compliances\/{{vars.steps.Create_GDPR_Data_Compliance_Record.uuid}}\">&nbsp;GDPR Compliance Record #{{vars.steps.Create_GDPR_Data_Compliance_Record.id}}<\/a> and corresponding <a href=\"https:\/\/{{globalVars.Server_fqhn}}\/modules\/view-panel\/tasks\/{{vars.steps.Create_Task_GDPR_Assessment.uuid}}\">Task #{{vars.steps.Create_Task_GDPR_Assessment.id}} <\/a>has been created.<\/div>",
-                    "records": ""
+                    "thread": true,
+                    "content": "<div>Thanks for your input.<\/div>\n<div>&nbsp;<\/div>\n<div><a href=\"\/modules\/data_compliances\/{{vars.steps.Create_GDPR_Data_Compliance_Record.uuid}}\">&nbsp;GDPR Compliance Record #{{vars.steps.Create_GDPR_Data_Compliance_Record.id}}<\/a> and corresponding <a href=\"\/modules\/tasks\/{{vars.steps.Create_Task_GDPR_Assessment.uuid}}\">Task #{{vars.steps.Create_Task_GDPR_Assessment.id}} <\/a>has been created.<\/div>",
+                    "records": "",
+                    "parentstepid": "\/api\/3\/workflow_steps\/1a3cbe27-45b9-4c34-8b5b-afdcb365234c"
                 },
                 "resource": [],
                 "_showJson": false,
@@ -42,10 +44,43 @@
             },
             "status": null,
             "top": "1110",
-            "left": "300",
+            "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
             "group": null,
             "uuid": "fb8b0ed6-f392-4157-b655-8872ff2dc693"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Add Comment and Update HIPAA SLA",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/GDPR"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<div>Thanks for your input.<\/div>\n<div>&nbsp;<\/div>\n<div><a href=\"https:\/\/{{globalVars.Server_fqhn}}\/modules\/view-panel\/data_compliances\/{{vars.steps.Create_GDPR_Data_Compliance_Record.uuid}}\">&nbsp;GDPR Compliance Record #{{vars.steps.Create_GDPR_Data_Compliance_Record.id}}<\/a> and corresponding <a href=\"https:\/\/{{globalVars.Server_fqhn}}\/modules\/view-panel\/tasks\/{{vars.steps.Create_Task_GDPR_Assessment.uuid}}\">Task #{{vars.steps.Create_Task_GDPR_Assessment.id}} <\/a>has been created.<\/div>",
+                    "records": "",
+                    "parentstepid": "\/api\/3\/workflow_steps\/5449ee4b-cf71-4995-9d56-95ab467a56bf"
+                },
+                "resource": [],
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/incidents",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1110",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "56ec5978-f056-459d-90c0-7c7d5f9a1668"
         },
         {
             "@type": "WorkflowStep",
@@ -99,6 +134,16 @@
             "name": "Create GDPR Data Compliance Record",
             "description": null,
             "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/GDPR"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p>Initiating Data Breach Risk Assessment.<\/p>",
+                    "records": ""
+                },
                 "resource": {
                     "name": "GDPR Assessment for Incident #{{vars.input.records[0].id}} - {{vars.input.records[0].name}}",
                     "status": "\/api\/3\/picklists\/bb73fe9e-f699-11e7-8c3f-9a214cf093ae",
@@ -127,16 +172,75 @@
                 "collection": "\/api\/3\/data_compliances",
                 "__recommend": [],
                 "fieldOperation": {
-                    "recordTags": "Overwrite"
+                    "recordTags": "Overwrite",
+                    "reminderMailStatus": "Overwrite"
                 },
                 "step_variables": []
             },
             "status": null,
             "top": "840",
-            "left": "300",
+            "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
             "group": null,
             "uuid": "1a3cbe27-45b9-4c34-8b5b-afdcb365234c"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create HIPAA Data Compliance Record",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p>Initiating PHI(Protected Health Information) Breach Risk Assessment.<\/p>",
+                    "records": ""
+                },
+                "resource": {
+                    "name": "HIPAA Assessment for Incident #{{vars.input.records[0].id}} - {{vars.input.records[0].name}}",
+                    "__link": {
+                        "incidents": "{{vars.input.records[0]['@id']}}",
+                        "indicators": "{{vars.steps.Find_Correlated_Compliance_Record[0].indicators | json_query('[].\"@id\"')}}"
+                    },
+                    "status": "\/api\/3\/picklists\/bb73fe9e-f699-11e7-8c3f-9a214cf093ae",
+                    "severity": "\/api\/3\/picklists\/40187287-89fc-4e9c-b717-e9443d57eedb",
+                    "testMode": "{{vars.testModeStatus}}",
+                    "__replace": "",
+                    "testEmail": "{{vars.testEmail}}",
+                    "assignedTo": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+                    "recordTags": "{% if vars.testMode %}HIPAA,Test Mode{% else %}HIPAA{% endif %}",
+                    "assignedDate": "{{arrow.utcnow().int_timestamp}}",
+                    "breachDetectionDate": "{{arrow.get(vars.steps.Get_Data_Breach_Details.input.breachDetectionDate).int_timestamp}}",
+                    "breachNotifyDueDate": "{{arrow.get(vars.steps.Get_Data_Breach_Details.input.breachDetectionDate).shift(hours=+72).int_timestamp}}",
+                    "breachOccurrenceDate": "{{arrow.get(vars.steps.Get_Data_Breach_Details.input.breachOccurrenceDate).int_timestamp}}",
+                    "regulatoryCompliance": "{{vars.steps.Get_Data_Breach_Details.input.regulatoryBody['@id']}}",
+                    "breachNotificationSLA": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
+                    "wasThePHIEPHIEncrypted": "{{vars.steps.Get_Data_Breach_Details.input.wasThePHIEPHIEncrypted['@id']}}",
+                    "wasPersonalDataAffected": "\/api\/3\/picklists\/cfd49634-d25a-476f-8485-99585e589a8c",
+                    "isHarmRiskOrMisuseForeseeable": "{{vars.steps.Get_Data_Breach_Details.input.isHarmRiskOrMisuseForeseeable}}",
+                    "whatHealthInformationWasExposed": "{{vars.steps.Get_Data_Breach_Details.input.whatHealthInformationWasExposed}}",
+                    "measuresInPlaceToMitigateTheRisk": "{{vars.steps.Get_Data_Breach_Details.input.measuresInPlaceToMitigateTheRisk}}",
+                    "whoAccessedPHIEPHIWithoutPermission": "{{vars.steps.Get_Data_Breach_Details.input.whoAccessedPHIEPHIWithoutPermission}}"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "\/api\/3\/data_compliances",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite",
+                    "reminderMailStatus": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "840",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "e15cf2c9-9000-4d17-b636-1f1eaa4642c0"
         },
         {
             "@type": "WorkflowStep",
@@ -153,7 +257,7 @@
                     "recordTags": [
                         "\/api\/3\/tags\/GDPR Assessment"
                     ],
-                    "description": "{% if vars.testModeStatus %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}\nAs per GDPR guidelines provided in [*Article - 33*](https:\/\/gdpr-info.eu\/art-33-gdpr\/), in the event of a personal data breach, it is mandatory to notify Data Protection Authority within 72 hours of the breach happening.\n\nBased on your information, the following GDPR Data Compliance record has been created.\n\n[GDPR Assessment Record #{{vars.steps.Create_GDPR_Data_Compliance_Record.id}}](https:\/\/{{globalVars.Server_fqhn}}\/modules\/incidents\/{{vars.steps.Create_GDPR_Data_Compliance_Record.uuid}})\n\nPerform the tasks provided in the record and complete the GDPR Assessment",
+                    "description": "{% if vars.testModeStatus %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}\nAs per GDPR guidelines provided in [*Article - 33*](https:\/\/gdpr-info.eu\/art-33-gdpr\/), in the event of a personal data breach, it is mandatory to notify Data Protection Authority within 72 hours of the breach happening.\n\nBased on your information, the following GDPR Data Compliance record has been created.\n\n[GDPR Assessment Record #{{vars.steps.Create_GDPR_Data_Compliance_Record.id}}](\/modules\/incidents\/{{vars.steps.Create_GDPR_Data_Compliance_Record.uuid}})\n\nPerform the tasks provided in the record and complete the GDPR Assessment",
                     "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
                     "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
                 },
@@ -168,10 +272,45 @@
             },
             "status": null,
             "top": "975",
-            "left": "300",
+            "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
             "group": null,
             "uuid": "794136d9-3313-4d30-a284-a617fe04499b"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Task HIPAA Assessment",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "Perform GDPR Assessment",
+                    "dueBy": "{{arrow.get(vars.steps.Get_Data_Breach_Details.input.breachOccurrenceDate).shift(hours=+72).int_timestamp}}",
+                    "priority": "\/api\/3\/picklists\/612befbc-4255-403a-958b-11efce3e1d8c",
+                    "__replace": "",
+                    "incidents": "{{vars.input.records[0]['@id']}}",
+                    "startDate": "{{arrow.utcnow().int_timestamp}}",
+                    "recordTags": [
+                        "\/api\/3\/tags\/GDPR Assessment"
+                    ],
+                    "description": "{% if vars.testModeStatus %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}\nAs per HIPPA guidelines provided in [*Article - 33*](https:\/\/gdpr-info.eu\/art-33-gdpr\/), in the event of a PHI\/ePHI breach, it is mandatory to notify Data Protection Authority within 72 hours of the breach happening.\n\nBased on your information, the following GDPR Data Compliance record has been created.\n\n[GDPR Assessment Record #{{vars.steps.Create_GDPR_Data_Compliance_Record.id}}](https:\/\/{{globalVars.Server_fqhn}}\/modules\/incidents\/{{vars.steps.Create_GDPR_Data_Compliance_Record.uuid}})\n\nPerform the tasks provided in the record and complete the GDPR Assessment",
+                    "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
+                    "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/tasks",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "975",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "9980fcdf-9f98-470a-bf04-e7bd71904de5"
         },
         {
             "@type": "WorkflowStep",
@@ -192,11 +331,12 @@
                         }
                     ],
                     "__selectFields": [
+                        "tasks",
                         "dataCompliances",
-                        "tasks"
+                        "indicators"
                     ]
                 },
-                "module": "incidents?$limit=30&$relationships=true",
+                "module": "incidents?$limit=30&$relationships=true&$fsr_max_relation_count=100",
                 "checkboxFields": true,
                 "step_variables": {
                     "testModeStatus": "{% if vars.testMode %}true{% elif (not vars.testMode) and (vars.testEmail | length > 0 and vars.testEmail != 'NA') %}true{% elif (not vars.testMode) and (vars.testEmail | length == 0 or vars.testEmail == 'NA') %}false{% endif %}"
@@ -230,7 +370,7 @@
                                 "dataType": "picklist",
                                 "formType": "picklist",
                                 "required": true,
-                                "_expanded": true,
+                                "_expanded": false,
                                 "mmdUpdate": true,
                                 "collection": false,
                                 "dataSource": {
@@ -259,6 +399,10 @@
                                         "52458b27-6943-4b65-b96b-ae07322873ed": {
                                             "conditions": null,
                                             "visibility": "visible"
+                                        },
+                                        "858e341d-2ee4-4cd0-bc5a-462c5f40199a": {
+                                            "conditions": null,
+                                            "visibility": "visible"
                                         }
                                     }
                                 },
@@ -279,11 +423,11 @@
                                 "label": "Breach Occurrence Date",
                                 "title": "Date\/Time Field",
                                 "usable": true,
-                                "tooltip": "Date and time when the personal data breach incident took place",
+                                "tooltip": "Date and time when the data breach incident took place",
                                 "dataType": "datetime",
                                 "formType": "datetime",
                                 "required": true,
-                                "_expanded": true,
+                                "_expanded": false,
                                 "mmdUpdate": true,
                                 "collection": false,
                                 "searchable": true,
@@ -296,15 +440,20 @@
                                     "logic": "AND",
                                     "filters": [
                                         {
-                                            "type": "object",
+                                            "type": "array",
                                             "field": "regulatoryBody",
-                                            "value": "\/api\/3\/picklists\/257ec29f-5f8c-4928-a771-59f86778e9ac",
-                                            "_value": {
-                                                "@id": "\/api\/3\/picklists\/257ec29f-5f8c-4928-a771-59f86778e9ac",
-                                                "display": "GDPR",
-                                                "itemValue": "GDPR"
-                                            },
-                                            "operator": "eq"
+                                            "value": [
+                                                "257ec29f-5f8c-4928-a771-59f86778e9ac",
+                                                "858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                                            ],
+                                            "module": "regulatoryBody",
+                                            "display": "",
+                                            "operator": "in",
+                                            "template": "multiselectpicklist",
+                                            "OPERATOR_KEY": "$",
+                                            "useInOperator": true,
+                                            "previousOperator": "in",
+                                            "previousTemplate": "multiselectpicklist"
                                         }
                                     ]
                                 },
@@ -325,7 +474,7 @@
                                 "dataType": "datetime",
                                 "formType": "datetime",
                                 "required": true,
-                                "_expanded": true,
+                                "_expanded": false,
                                 "mmdUpdate": true,
                                 "collection": false,
                                 "searchable": true,
@@ -338,15 +487,20 @@
                                     "logic": "AND",
                                     "filters": [
                                         {
-                                            "type": "object",
+                                            "type": "array",
                                             "field": "regulatoryBody",
-                                            "value": "\/api\/3\/picklists\/257ec29f-5f8c-4928-a771-59f86778e9ac",
-                                            "_value": {
-                                                "@id": "\/api\/3\/picklists\/257ec29f-5f8c-4928-a771-59f86778e9ac",
-                                                "display": "GDPR",
-                                                "itemValue": "GDPR"
-                                            },
-                                            "operator": "eq"
+                                            "value": [
+                                                "257ec29f-5f8c-4928-a771-59f86778e9ac",
+                                                "858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                                            ],
+                                            "module": "regulatoryBody",
+                                            "display": "",
+                                            "operator": "in",
+                                            "template": "multiselectpicklist",
+                                            "OPERATOR_KEY": "$",
+                                            "useInOperator": true,
+                                            "previousOperator": "in",
+                                            "previousTemplate": "multiselectpicklist"
                                         }
                                     ]
                                 },
@@ -367,7 +521,7 @@
                                 "dataType": "picklist",
                                 "formType": "picklist",
                                 "required": true,
-                                "_expanded": true,
+                                "_expanded": false,
                                 "mmdUpdate": true,
                                 "collection": false,
                                 "dataSource": {
@@ -444,7 +598,7 @@
                                 "dataType": "picklist",
                                 "formType": "picklist",
                                 "required": true,
-                                "_expanded": true,
+                                "_expanded": false,
                                 "mmdUpdate": true,
                                 "collection": false,
                                 "dataSource": {
@@ -512,6 +666,134 @@
                                 "_addVisibilityConditions": true
                             },
                             {
+                                "name": "wasThePHIEPHIEncrypted",
+                                "type": "picklists",
+                                "label": "Was the PHI\/ePHI encrypted?",
+                                "title": "Picklist",
+                                "usable": true,
+                                "tooltip": "",
+                                "dataType": "picklist",
+                                "formType": "picklist",
+                                "required": true,
+                                "_expanded": false,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "dataSource": {
+                                    "model": "picklists",
+                                    "query": {
+                                        "sort": [
+                                            {
+                                                "field": "orderIndex",
+                                                "direction": "ASC"
+                                            }
+                                        ],
+                                        "logic": "AND",
+                                        "filters": [
+                                            {
+                                                "field": "listName__name",
+                                                "value": "YesNoInput",
+                                                "operator": "eq"
+                                            }
+                                        ]
+                                    },
+                                    "displayConditions": {
+                                        "27ff216f-6363-4c93-9fc4-e0e8c15cb0b1": {
+                                            "conditions": null,
+                                            "visibility": "visible"
+                                        },
+                                        "711303d3-75ea-437d-a871-0a8d14fcdb7d": {
+                                            "conditions": null,
+                                            "visibility": "visible"
+                                        },
+                                        "cfd49634-d25a-476f-8485-99585e589a8c": {
+                                            "conditions": null,
+                                            "visibility": "visible"
+                                        }
+                                    }
+                                },
+                                "searchable": false,
+                                "templateUrl": "app\/components\/form\/fields\/typeahead.html",
+                                "_nameTouched": true,
+                                "defaultValue": null,
+                                "_previousName": "whoAccessedPHIEPHIWithoutPermission",
+                                "playbookField": true,
+                                "displayTemplate": "{{ itemValue }}",
+                                "visibilityQuery": {
+                                    "sort": [],
+                                    "limit": 30,
+                                    "logic": "AND",
+                                    "filters": [
+                                        {
+                                            "type": "object",
+                                            "field": "regulatoryBody",
+                                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                                            "_value": {
+                                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                                                "display": "HIPAA",
+                                                "itemValue": "HIPAA"
+                                            },
+                                            "operator": "eq"
+                                        }
+                                    ]
+                                },
+                                "lengthConstraint": false,
+                                "allowedEncryption": false,
+                                "allowedGridColumn": true,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false,
+                                "_addVisibilityConditions": true
+                            },
+                            {
+                                "name": "whatHealthInformationWasExposed",
+                                "type": "string",
+                                "label": "What health information was exposed?",
+                                "tooltip": "",
+                                "dataType": "text",
+                                "formType": "text",
+                                "required": true,
+                                "_expanded": true,
+                                "_nameTouched": true,
+                                "defaultValue": null,
+                                "_previousName": "",
+                                "visibilityQuery": {
+                                    "sort": [],
+                                    "limit": 30,
+                                    "logic": "AND",
+                                    "filters": [
+                                        {
+                                            "type": "object",
+                                            "field": "regulatoryBody",
+                                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                                            "_value": {
+                                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                                                "display": "HIPAA",
+                                                "itemValue": "HIPAA"
+                                            },
+                                            "operator": "eq"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "field": "wasThePHIEPHIEncrypted",
+                                            "value": [
+                                                "711303d3-75ea-437d-a871-0a8d14fcdb7d",
+                                                "27ff216f-6363-4c93-9fc4-e0e8c15cb0b1"
+                                            ],
+                                            "module": "wasThePHIEPHIEncrypted",
+                                            "display": "Yes",
+                                            "operator": "in",
+                                            "template": "multiselectpicklist",
+                                            "OPERATOR_KEY": "$",
+                                            "displayTemplate": "",
+                                            "previousOperator": "in",
+                                            "previousTemplate": "multiselectpicklist"
+                                        }
+                                    ]
+                                },
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false,
+                                "_addVisibilityConditions": true
+                            },
+                            {
                                 "name": "isHarmRiskOrMisuseForeseeable",
                                 "type": "picklists",
                                 "label": "Is data misuse foreseeable?",
@@ -521,7 +803,7 @@
                                 "dataType": "picklist",
                                 "formType": "picklist",
                                 "required": true,
-                                "_expanded": true,
+                                "_expanded": false,
                                 "mmdUpdate": true,
                                 "collection": false,
                                 "dataSource": {
@@ -569,15 +851,20 @@
                                     "logic": "AND",
                                     "filters": [
                                         {
-                                            "type": "object",
+                                            "type": "array",
                                             "field": "regulatoryBody",
-                                            "value": "\/api\/3\/picklists\/257ec29f-5f8c-4928-a771-59f86778e9ac",
-                                            "_value": {
-                                                "@id": "\/api\/3\/picklists\/257ec29f-5f8c-4928-a771-59f86778e9ac",
-                                                "display": "GDPR",
-                                                "itemValue": "GDPR"
-                                            },
-                                            "operator": "eq"
+                                            "value": [
+                                                "257ec29f-5f8c-4928-a771-59f86778e9ac",
+                                                "858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                                            ],
+                                            "module": "regulatoryBody",
+                                            "display": "",
+                                            "operator": "in",
+                                            "template": "multiselectpicklist",
+                                            "OPERATOR_KEY": "$",
+                                            "useInOperator": true,
+                                            "previousOperator": "in",
+                                            "previousTemplate": "multiselectpicklist"
                                         }
                                     ]
                                 },
@@ -596,7 +883,7 @@
                                 "dataType": "text",
                                 "formType": "text",
                                 "required": true,
-                                "_expanded": true,
+                                "_expanded": false,
                                 "_nameTouched": true,
                                 "defaultValue": null,
                                 "_previousName": "whatWasTheDataFormat?",
@@ -630,7 +917,7 @@
                                 "dataType": "text",
                                 "formType": "text",
                                 "required": true,
-                                "_expanded": true,
+                                "_expanded": false,
                                 "_nameTouched": true,
                                 "defaultValue": null,
                                 "_previousName": "whatWasTheDataSource?",
@@ -652,6 +939,83 @@
                                         }
                                     ]
                                 },
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false,
+                                "_addVisibilityConditions": true
+                            },
+                            {
+                                "name": "whoAccessedPHIEPHIWithoutPermission",
+                                "type": "string",
+                                "label": "Who accessed PHI\/ePHI without permission? (If known)",
+                                "tooltip": "",
+                                "dataType": "text",
+                                "formType": "text",
+                                "required": false,
+                                "_expanded": false,
+                                "_nameTouched": true,
+                                "defaultValue": null,
+                                "_previousName": "",
+                                "visibilityQuery": {
+                                    "sort": [],
+                                    "limit": 30,
+                                    "logic": "AND",
+                                    "filters": [
+                                        {
+                                            "type": "object",
+                                            "field": "regulatoryBody",
+                                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                                            "_value": {
+                                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                                                "display": "HIPAA",
+                                                "itemValue": "HIPAA"
+                                            },
+                                            "operator": "eq"
+                                        }
+                                    ]
+                                },
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false,
+                                "_addVisibilityConditions": true
+                            },
+                            {
+                                "name": "measuresInPlaceToMitigateTheRisk",
+                                "type": "string",
+                                "label": "Measures in place to mitigate the risk",
+                                "title": "Text Area",
+                                "usable": false,
+                                "tooltip": "",
+                                "dataType": "text",
+                                "formType": "textarea",
+                                "required": false,
+                                "_expanded": true,
+                                "mmdUpdate": false,
+                                "collection": false,
+                                "searchable": false,
+                                "templateUrl": "app\/components\/form\/fields\/json.html",
+                                "_nameTouched": true,
+                                "defaultValue": null,
+                                "_previousName": "",
+                                "playbookField": true,
+                                "visibilityQuery": {
+                                    "sort": [],
+                                    "limit": 30,
+                                    "logic": "AND",
+                                    "filters": [
+                                        {
+                                            "type": "object",
+                                            "field": "regulatoryBody",
+                                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                                            "_value": {
+                                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                                                "display": "HIPAA",
+                                                "itemValue": "HIPAA"
+                                            },
+                                            "operator": "eq"
+                                        }
+                                    ]
+                                },
+                                "lengthConstraint": false,
+                                "allowedGridColumn": false,
                                 "jinjaExpressionView": true,
                                 "useRecordFieldDefault": false,
                                 "_addVisibilityConditions": true
@@ -677,7 +1041,7 @@
                         }
                     ],
                     "duplicateOption": false,
-                    "customSuccessMessage": "Awaiting Playbook resumed successfully."
+                    "customSuccessMessage": "Data breach details have been collected successfully."
                 },
                 "email_notification": {
                     "enabled": false,
@@ -735,7 +1099,7 @@
             },
             "status": null,
             "top": "840",
-            "left": "650",
+            "left": "825",
             "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
             "group": null,
             "uuid": "3a55913b-49d6-4714-a50f-40faf6b39391"
@@ -757,8 +1121,15 @@
                         "default": true,
                         "step_iri": "\/api\/3\/workflow_steps\/3a55913b-49d6-4714-a50f-40faf6b39391",
                         "step_name": "No Operation"
+                    },
+                    {
+                        "option": "HIPAA",
+                        "step_iri": "\/api\/3\/workflow_steps\/e15cf2c9-9000-4d17-b636-1f1eaa4642c0",
+                        "condition": "{{ 'HIPAA' == vars.steps.Get_Data_Breach_Details.input.regulatoryBody.itemValue }}",
+                        "step_name": "Create HIPAA Data Compliance Record"
                     }
-                ]
+                ],
+                "step_variables": []
             },
             "status": null,
             "top": "705",
@@ -772,15 +1143,6 @@
             "name": "Start",
             "description": null,
             "arguments": {
-                "message": {
-                    "tags": [
-                        "\/api\/3\/tags\/GDPR"
-                    ],
-                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
-                    "tenant": "",
-                    "content": "<p>Initiating Data Breach Risk Assessment.<\/p>",
-                    "records": "{{vars.input.records[0]['@id']}}"
-                },
                 "resource": "incidents",
                 "resources": [
                     "incidents"
@@ -804,6 +1166,7 @@
                             "value": "\/api\/3\/picklists\/cfd49634-d25a-476f-8485-99585e589a8c",
                             "_value": {
                                 "@id": "\/api\/3\/picklists\/cfd49634-d25a-476f-8485-99585e589a8c",
+                                "display": "Yes",
                                 "itemValue": "Yes"
                             },
                             "operator": "eq"
@@ -873,6 +1236,16 @@
         },
         {
             "@type": "WorkflowRoute",
+            "name": "Create HIPAA Data Compliance Record -> Create Task HIPAA Assessment",
+            "targetStep": "\/api\/3\/workflow_steps\/9980fcdf-9f98-470a-bf04-e7bd71904de5",
+            "sourceStep": "\/api\/3\/workflow_steps\/e15cf2c9-9000-4d17-b636-1f1eaa4642c0",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "84113d08-3856-4bda-9c24-8d913847bf82"
+        },
+        {
+            "@type": "WorkflowRoute",
             "name": "Create Task GDPR Assessment -> Add Comment and Update GDPR SLA",
             "targetStep": "\/api\/3\/workflow_steps\/fb8b0ed6-f392-4157-b655-8872ff2dc693",
             "sourceStep": "\/api\/3\/workflow_steps\/794136d9-3313-4d30-a284-a617fe04499b",
@@ -880,6 +1253,16 @@
             "isExecuted": false,
             "group": null,
             "uuid": "f02653a5-1a1f-4878-a02a-7449b5d769be"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Task HIPAA Assessment -> Add Comment and Update HIPAA SLA",
+            "targetStep": "\/api\/3\/workflow_steps\/56ec5978-f056-459d-90c0-7c7d5f9a1668",
+            "sourceStep": "\/api\/3\/workflow_steps\/9980fcdf-9f98-470a-bf04-e7bd71904de5",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "c814335a-4d90-41e5-832b-0ef66323b7d6"
         },
         {
             "@type": "WorkflowRoute",
@@ -920,6 +1303,16 @@
             "isExecuted": false,
             "group": null,
             "uuid": "5a02632a-da57-4b11-997a-75d96075517a"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Regulatory Body -> Create HIPAA Data Compliance Record",
+            "targetStep": "\/api\/3\/workflow_steps\/e15cf2c9-9000-4d17-b636-1f1eaa4642c0",
+            "sourceStep": "\/api\/3\/workflow_steps\/96f27629-ec34-4a92-b9ac-6420f32eab5a",
+            "label": "HIPAA",
+            "isExecuted": false,
+            "group": null,
+            "uuid": "06aa8112-1b0f-42b3-a2aa-90a57dd88fa1"
         },
         {
             "@type": "WorkflowRoute",

@@ -26,31 +26,25 @@
         "enabled": false
     },
     "recordTags": [
-        "HIPPA"
+        "HIPAA"
     ],
-    "date": "2023-07-10T18:01:41+00:00",
+    "date": "2023-07-12T17:39:33+00:00",
     "contents": {
         "picklistNames": [
             {
                 "name": "Contact Title"
             },
             {
+                "name": "GDPRDataBreachType"
+            },
+            {
+                "name": "GDPREUCountryList"
+            },
+            {
                 "name": "GDPRReminderStatus"
             },
             {
-                "name": "IncidentStatus"
-            },
-            {
                 "name": "RegulatoryBody"
-            },
-            {
-                "name": "Severity"
-            },
-            {
-                "name": "SLAState"
-            },
-            {
-                "name": "YesNoInput"
             }
         ],
         "modules": {
@@ -58,7 +52,7 @@
                 "name": "Contacts",
                 "apiName": "contact"
             },
-            "": {
+            "data_compliances": {
                 "name": "Data Compliances",
                 "apiName": "data_compliances"
             }
