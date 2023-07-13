@@ -49,6 +49,10 @@
             "data_compliances": {
                 "name": "Data Compliances",
                 "apiName": "data_compliances"
+            },
+            "keys": {
+                "name": "Key Store",
+                "apiName": "keys"
             }
         },
         "viewTemplates": {
@@ -73,9 +77,15 @@
         },
         "views": {
             "navigation": [
+                "Resources",
                 "Data Compliances"
             ]
         },
+        "roles": [
+            {
+                "name": "Full App Permissions"
+            }
+        ],
         "playbooks": [
             {
                 "name": "10 - SP - HIPAA Framework"
