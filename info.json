@@ -28,17 +28,11 @@
     "recordTags": [
         "HIPAA"
     ],
-    "date": "2023-07-12T17:39:33+00:00",
+    "date": "2023-07-13T09:36:17+00:00",
     "contents": {
         "picklistNames": [
             {
                 "name": "Contact Title"
-            },
-            {
-                "name": "GDPRDataBreachType"
-            },
-            {
-                "name": "GDPREUCountryList"
             },
             {
                 "name": "GDPRReminderStatus"
@@ -85,6 +79,13 @@
         "playbooks": [
             {
                 "name": "10 - SP - HIPAA Framework"
+            }
+        ],
+        "recordSets": [
+            {
+                "name": "Key Store",
+                "apiName": "keys",
+                "count": 1
             }
         ]
     }
