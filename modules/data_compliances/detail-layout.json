@@ -700,23 +700,56 @@
                                 "config": {
                                     "tabs": [
                                         {
+                                            "title": "Indicators",
+                                            "active": 0,
+                                            "widget": {
+                                                "type": "relationship.subtab",
+                                                "config": {
+                                                    "wid": "ab7007f4-7e6c-4953-83ce-4b2998e95a14",
+                                                    "excludes": [],
+                                                    "selectionType": "include",
+                                                    "expandableCol": [],
+                                                    "enableHorizontalScroll": [],
+                                                    "includes": [
+                                                        "indicators"
+                                                    ]
+                                                }
+                                            },
+                                            "icon": "fa fa-star",
+                                            "conditionalVisibility": true,
+                                            "filter": {
+                                                "sort": [],
+                                                "limit": 30,
+                                                "logic": "AND",
+                                                "filters": [
+                                                    {
+                                                        "field": "regulatoryCompliance",
+                                                        "operator": "eq",
+                                                        "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                                                        "_value": {
+                                                            "display": "HIPAA",
+                                                            "itemValue": "HIPAA",
+                                                            "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
                                             "title": "Correlations",
                                             "widget": {
                                                 "type": "relationship.subtab",
                                                 "config": {
-                                                    "excludes": [
-                                                        "notes",
-                                                        "comments",
-                                                        "userOwners",
-                                                        "attachments",
-                                                        "owners",
-                                                        "tasks"
-                                                    ],
+                                                    "excludes": [],
                                                     "wid": "03b4f6c1-292e-4e8c-9cc0-ae23d79c8bc3",
-                                                    "selectionType": "exclude",
+                                                    "selectionType": "include",
                                                     "expandableCol": [],
                                                     "enableHorizontalScroll": [],
-                                                    "includes": []
+                                                    "includes": [
+                                                        "contacts",
+                                                        "incidents"
+                                                    ]
                                                 }
                                             },
                                             "show": true,
@@ -730,19 +763,13 @@
                                                 "type": "relationship.subtab",
                                                 "config": {
                                                     "wid": "ffcccc7a-2a5a-44c6-8756-77cbbe9f2f6f",
-                                                    "excludes": [
-                                                        "notes",
-                                                        "comments",
-                                                        "userOwners",
-                                                        "attachments",
-                                                        "incidents",
-                                                        "owners",
-                                                        "contacts"
-                                                    ],
-                                                    "selectionType": "exclude",
+                                                    "excludes": [],
+                                                    "selectionType": "include",
                                                     "expandableCol": [],
                                                     "enableHorizontalScroll": [],
-                                                    "includes": []
+                                                    "includes": [
+                                                        "tasks"
+                                                    ]
                                                 }
                                             },
                                             "icon": "fa fa-tasks",

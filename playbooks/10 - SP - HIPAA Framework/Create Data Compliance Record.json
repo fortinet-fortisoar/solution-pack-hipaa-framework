@@ -56,11 +56,11 @@
             "arguments": {
                 "message": {
                     "tags": [
-                        "\/api\/3\/tags\/GDPR"
+                        "\/api\/3\/tags\/HIPAA"
                     ],
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
                     "tenant": "",
-                    "content": "<div>Thanks for your input.<\/div>\n<div>&nbsp;<\/div>\n<div><a href=\"https:\/\/{{globalVars.Server_fqhn}}\/modules\/view-panel\/data_compliances\/{{vars.steps.Create_GDPR_Data_Compliance_Record.uuid}}\">&nbsp;GDPR Compliance Record #{{vars.steps.Create_GDPR_Data_Compliance_Record.id}}<\/a> and corresponding <a href=\"https:\/\/{{globalVars.Server_fqhn}}\/modules\/view-panel\/tasks\/{{vars.steps.Create_Task_GDPR_Assessment.uuid}}\">Task #{{vars.steps.Create_Task_GDPR_Assessment.id}} <\/a>has been created.<\/div>",
+                    "content": "<div>Thanks for your input.<\/div>\n<div>&nbsp;<\/div>\n<div><a href=\"\/modules\/view-panel\/data_compliances\/{{vars.steps.Create_HIPAA_Data_Compliance_Record.uuid}}\">&nbsp;HIPAA Compliance Record #{{vars.steps.Create_HIPAA_Data_Compliance_Record.id}}<\/a> and corresponding <a href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Create_Task_HIPAA_Assessment.uuid}}\">Task #{{vars.steps.Create_Task_HIPAA_Assessment.id}} <\/a>has been created.<\/div>",
                     "records": "",
                     "parentstepid": "\/api\/3\/workflow_steps\/5449ee4b-cf71-4995-9d56-95ab467a56bf"
                 },
@@ -94,7 +94,7 @@
                         "incidents": "{{vars.input.records[0]['@id']}}"
                     },
                     "people": [],
-                    "content": "<div>Thanks for your input.<\/div>\n<div>&nbsp;<\/div>\n<div><a href=\"https:\/\/{{globalVars.Server_fqhn}}\/modules\/view-panel\/data_compliances\/{{vars.steps.Find_Correlated_Compliance_Record[0].dataCompliances[0].uuid}}\">&nbsp;GDPR Compliance Record #{{vars.steps.Find_Correlated_Compliance_Record[0].dataCompliances[0].id}}<\/a> and corresponding <a href=\"https:\/\/{{globalVars.Server_fqhn}}\/modules\/view-panel\/tasks\/{{vars.steps.Find_Correlated_Compliance_Record[0].tasks[0].uuid}}\">Task #{{vars.steps.Find_Correlated_Compliance_Record[0].tasks[0].id}} <\/a>has already been created.<\/div>",
+                    "content": "<div>Thanks for your input.<\/div>\n<div>&nbsp;<\/div>\n<div><a href=\"\/modules\/view-panel\/data_compliances\/{{vars.steps.Find_Correlated_Compliance_Record[0].dataCompliances[0].uuid}}\">&nbsp;Data Compliance Record #{{vars.steps.Find_Correlated_Compliance_Record[0].dataCompliances[0].id}}<\/a> and corresponding <a href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Find_Correlated_Compliance_Record[0].tasks[0].uuid}}\">Task #{{vars.steps.Find_Correlated_Compliance_Record[0].tasks[0].id}} <\/a>has already been created.<\/div>",
                     "__replace": "",
                     "isImportant": false,
                     "peopleUpdated": false
@@ -108,8 +108,8 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "705",
-            "left": "125",
+            "top": "700",
+            "left": "120",
             "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
             "group": null,
             "uuid": "7f055afe-168a-4c6a-a6f7-f42a875f4cd0"
@@ -214,12 +214,11 @@
                     "recordTags": "{% if vars.testMode %}HIPAA,Test Mode{% else %}HIPAA{% endif %}",
                     "assignedDate": "{{arrow.utcnow().int_timestamp}}",
                     "breachDetectionDate": "{{arrow.get(vars.steps.Get_Data_Breach_Details.input.breachDetectionDate).int_timestamp}}",
-                    "breachNotifyDueDate": "{{arrow.get(vars.steps.Get_Data_Breach_Details.input.breachDetectionDate).shift(hours=+72).int_timestamp}}",
+                    "breachNotifyDueDate": "{{arrow.get(vars.steps.Get_Data_Breach_Details.input.breachDetectionDate).shift(days=+60).int_timestamp}}",
                     "breachOccurrenceDate": "{{arrow.get(vars.steps.Get_Data_Breach_Details.input.breachOccurrenceDate).int_timestamp}}",
-                    "regulatoryCompliance": "{{vars.steps.Get_Data_Breach_Details.input.regulatoryBody['@id']}}",
+                    "regulatoryCompliance": "{{\"RegulatoryBody\" | picklist(vars.steps.Get_Data_Breach_Details.input.regulatoryBody, \"@id\")}}",
                     "breachNotificationSLA": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
                     "wasThePHIEPHIEncrypted": "{{vars.steps.Get_Data_Breach_Details.input.wasThePHIEPHIEncrypted['@id']}}",
-                    "wasPersonalDataAffected": "\/api\/3\/picklists\/cfd49634-d25a-476f-8485-99585e589a8c",
                     "isHarmRiskOrMisuseForeseeable": "{{vars.steps.Get_Data_Breach_Details.input.isHarmRiskOrMisuseForeseeable}}",
                     "whatHealthInformationWasExposed": "{{vars.steps.Get_Data_Breach_Details.input.whatHealthInformationWasExposed}}",
                     "measuresInPlaceToMitigateTheRisk": "{{vars.steps.Get_Data_Breach_Details.input.measuresInPlaceToMitigateTheRisk}}",
@@ -283,16 +282,16 @@
             "description": null,
             "arguments": {
                 "resource": {
-                    "name": "Perform GDPR Assessment",
-                    "dueBy": "{{arrow.get(vars.steps.Get_Data_Breach_Details.input.breachOccurrenceDate).shift(hours=+72).int_timestamp}}",
+                    "name": "Perform HIPAA Assessment",
+                    "dueBy": "{{arrow.get(vars.steps.Get_Data_Breach_Details.input.breachOccurrenceDate).shift(days=+60).int_timestamp}}",
                     "priority": "\/api\/3\/picklists\/612befbc-4255-403a-958b-11efce3e1d8c",
                     "__replace": "",
                     "incidents": "{{vars.input.records[0]['@id']}}",
                     "startDate": "{{arrow.utcnow().int_timestamp}}",
                     "recordTags": [
-                        "\/api\/3\/tags\/GDPR Assessment"
+                        "\/api\/3\/tags\/HIPAA Assessment"
                     ],
-                    "description": "{% if vars.testModeStatus %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}\nAs per HIPPA guidelines provided in [*Article - 33*](https:\/\/gdpr-info.eu\/art-33-gdpr\/), in the event of a PHI\/ePHI breach, it is mandatory to notify Data Protection Authority within 72 hours of the breach happening.\n\nBased on your information, the following GDPR Data Compliance record has been created.\n\n[GDPR Assessment Record #{{vars.steps.Create_GDPR_Data_Compliance_Record.id}}](https:\/\/{{globalVars.Server_fqhn}}\/modules\/incidents\/{{vars.steps.Create_GDPR_Data_Compliance_Record.uuid}})\n\nPerform the tasks provided in the record and complete the GDPR Assessment",
+                    "description": "{% if vars.testModeStatus %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}\nAs per HIPPA guidelines provided in [*Breach Notification Rule*](https:\/\/www.hhs.gov\/hipaa\/for-professionals\/breach-notification\/index.html), in event of a breach of unsecured PHI\/ePHI, it is mandatory to notify  individuals, the relevant federal agency, and \u2013 in some cases \u2013 local media atleast within 60 days.\n\nBased on your information, the following HIPAA Data Compliance record has been created.\n\n[HIPAA Assessment Record #{{vars.steps.Create_HIPAA_Data_Compliance_Record.id}}](\/modules\/incidents\/{{vars.steps.Create_HIPAA_Data_Compliance_Record.uuid}})\n\nPerform the tasks provided in the record and complete the HIPAA Assessment",
                     "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
                     "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
                 },
@@ -1167,7 +1166,7 @@
                     {
                         "option": "GDPR",
                         "step_iri": "\/api\/3\/workflow_steps\/1a3cbe27-45b9-4c34-8b5b-afdcb365234c",
-                        "condition": "{{ 'GDPR' == vars.steps.Get_Data_Breach_Details.input.regulatoryBody.itemValue }}",
+                        "condition": "{{ 'GDPR' == vars.steps.Get_Data_Breach_Details.input.regulatoryBody }}",
                         "step_name": "Create GDPR Data Compliance Record"
                     },
                     {
@@ -1179,7 +1178,7 @@
                     {
                         "option": "HIPAA",
                         "step_iri": "\/api\/3\/workflow_steps\/e15cf2c9-9000-4d17-b636-1f1eaa4642c0",
-                        "condition": "{{ 'HIPAA' == vars.steps.Get_Data_Breach_Details.input.regulatoryBody.itemValue }}",
+                        "condition": "{{ 'HIPAA' == vars.steps.Get_Data_Breach_Details.input.regulatoryBody }}",
                         "step_name": "Create HIPAA Data Compliance Record"
                     }
                 ],
