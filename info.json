@@ -73,6 +73,15 @@
                     "detail",
                     "form"
                 ]
+            },
+            "keys": {
+                "name": "Key Store",
+                "apiName": "keys",
+                "views": [
+                    "list",
+                    "detail",
+                    "form"
+                ]
             }
         },
         "views": {

@@ -151,7 +151,7 @@
                                                                                                                                     "name": "regulatoryCompliance",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
-                                                                                                                                    "readOnly": false
+                                                                                                                                    "readOnly": true
                                                                                                                                 }
                                                                                                                             ],
                                                                                                                             "style": "col-lg-6"
@@ -171,18 +171,6 @@
                                                                                                                     "columns": [
                                                                                                                         {
                                                                                                                             "fields": [
-                                                                                                                                {
-                                                                                                                                    "name": "wasThePHIEPHIEncrypted",
-                                                                                                                                    "highlightMode": true,
-                                                                                                                                    "linky": true,
-                                                                                                                                    "readOnly": true
-                                                                                                                                },
-                                                                                                                                {
-                                                                                                                                    "name": "whatHealthInformationWasExposed",
-                                                                                                                                    "highlightMode": true,
-                                                                                                                                    "linky": true,
-                                                                                                                                    "readOnly": true
-                                                                                                                                },
                                                                                                                                 {
                                                                                                                                     "name": "wasPersonalDataAffected",
                                                                                                                                     "highlightMode": true,
@@ -207,12 +195,6 @@
                                                                                                                         {
                                                                                                                             "fields": [
                                                                                                                                 {
-                                                                                                                                    "name": "whoAccessedPHIEPHIWithoutPermission",
-                                                                                                                                    "highlightMode": true,
-                                                                                                                                    "linky": true,
-                                                                                                                                    "readOnly": true
-                                                                                                                                },
-                                                                                                                                {
                                                                                                                                     "name": "wasTheDataEncrypted",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
@@ -229,12 +211,6 @@
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
                                                                                                                                     "readOnly": true
-                                                                                                                                },
-                                                                                                                                {
-                                                                                                                                    "name": "measuresInPlaceToMitigateTheRisk",
-                                                                                                                                    "highlightMode": true,
-                                                                                                                                    "linky": true,
-                                                                                                                                    "readOnly": false
                                                                                                                                 }
                                                                                                                             ],
                                                                                                                             "style": "col-lg-6"
@@ -316,6 +292,16 @@
                                                                                                                         {
                                                                                                                             "fields": [
                                                                                                                                 {
+                                                                                                                                    "name": "wasThePHIEPHIEncrypted",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "whatHealthInformationWasExposed",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
                                                                                                                                     "name": "causeOfDataBreach",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
@@ -349,12 +335,37 @@
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
                                                                                                                                     "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "measuresToReduceFutureRisks",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "measuresInPlaceToMitigateTheRisk",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
                                                                                                                                 }
                                                                                                                             ],
                                                                                                                             "style": "col-lg-6"
                                                                                                                         },
                                                                                                                         {
                                                                                                                             "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "wasThePHIEPHIAccessedImpermissibly",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "whoAccessedPHIEPHIWithoutPermission",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "isPHIMisuseOrDisclosureForeseeable",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
                                                                                                                                 {
                                                                                                                                     "name": "typeOfDataBreach",
                                                                                                                                     "highlightMode": true,
@@ -383,6 +394,11 @@
                                                                                                                                     "name": "anyAdditionalInformation",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "isABreachReportable",
+                                                                                                                                    "highlightMode": true,
                                                                                                                                     "readOnly": true
                                                                                                                                 }
                                                                                                                             ],
@@ -731,10 +747,13 @@
                                                             "itemValue": "HIPAA",
                                                             "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
                                                         },
-                                                        "type": "object"
+                                                        "type": "object",
+                                                        "display": "HIPAA"
                                                     }
                                                 ]
-                                            }
+                                            },
+                                            "show": true,
+                                            "visible": true
                                         },
                                         {
                                             "title": "Correlations",
@@ -752,7 +771,7 @@
                                                     ]
                                                 }
                                             },
-                                            "show": true,
+                                            "show": false,
                                             "icon": "fa fa-exchange",
                                             "visible": true
                                         },

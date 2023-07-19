@@ -1,3 +1,5 @@
 [
+    "ManualTrigger",
+    "PostCreate",
     "PostUpdate"
 ]
