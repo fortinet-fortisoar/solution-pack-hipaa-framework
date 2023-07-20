@@ -1,7 +1,7 @@
 {
     "name": "hIPAAFramework",
     "version": "1.0.0",
-    "fsrMinCompatibility": "7.2.0",
+    "fsrMinCompatibility": "7.2.2",
     "type": "solutionpack",
     "local": true,
     "label": "HIPAA Framework",
@@ -26,9 +26,9 @@
         "enabled": false
     },
     "recordTags": [
-        "HIPPA"
+        "HIPAA"
     ],
-    "date": "2023-07-10T18:01:41+00:00",
+    "date": "2023-07-13T09:36:17+00:00",
     "contents": {
         "picklistNames": [
             {
@@ -38,19 +38,7 @@
                 "name": "GDPRReminderStatus"
             },
             {
-                "name": "IncidentStatus"
-            },
-            {
                 "name": "RegulatoryBody"
-            },
-            {
-                "name": "Severity"
-            },
-            {
-                "name": "SLAState"
-            },
-            {
-                "name": "YesNoInput"
             }
         ],
         "modules": {
@@ -58,9 +46,13 @@
                 "name": "Contacts",
                 "apiName": "contact"
             },
-            "": {
+            "data_compliances": {
                 "name": "Data Compliances",
                 "apiName": "data_compliances"
+            },
+            "keys": {
+                "name": "Key Store",
+                "apiName": "keys"
             }
         },
         "viewTemplates": {
@@ -81,16 +73,38 @@
                     "detail",
                     "form"
                 ]
+            },
+            "keys": {
+                "name": "Key Store",
+                "apiName": "keys",
+                "views": [
+                    "list",
+                    "detail",
+                    "form"
+                ]
             }
         },
         "views": {
             "navigation": [
+                "Resources",
                 "Data Compliances"
             ]
         },
+        "roles": [
+            {
+                "name": "Full App Permissions"
+            }
+        ],
         "playbooks": [
             {
                 "name": "10 - SP - HIPAA Framework"
+            }
+        ],
+        "recordSets": [
+            {
+                "name": "Key Store",
+                "apiName": "keys",
+                "count": 1
             }
         ]
     }

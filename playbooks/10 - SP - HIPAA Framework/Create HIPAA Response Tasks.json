@@ -1,0 +1,345 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Create HIPAA Response Tasks",
+    "aliasName": null,
+    "tag": null,
+    "description": "Create tasks for HIPAA Response and link them to the HIPAA compliance record.",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/4c384067-79c3-4821-a70a-d69c3c149ec6",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/46d0c883-6879-4127-8e91-f8c17fb96265",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Apply Technical Fix to Stop Incident",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "Apply Technical Fix to Stop Incident",
+                    "type": "\/api\/3\/picklists\/6d113f01-123a-4c78-b68c-029e16df9b8b",
+                    "dueBy": "{{vars.input.records[0].breachNotifyDueDate}}",
+                    "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
+                    "__replace": "",
+                    "startDate": "{{arrow.utcnow().int_timestamp}}",
+                    "recordTags": [
+                        "\/api\/3\/tags\/HIPAA - Technical Fix"
+                    ],
+                    "description": "{{vars.demoMode}}\n \nApply a required technical fix to prevent or reduce the impact of the breach incident.\n\nPlease mark this task as <span style=\"background: #5d636a; padding: 5px;\">**Complete**<\/span> once the fix is implemented.",
+                    "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
+                    "dataCompliances": "{{vars.input.records[0]['@id']}}",
+                    "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/tasks",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "placeholder": "{{vars.taskList.append(vars.result['@id'])}}"
+                }
+            },
+            "status": null,
+            "top": "300",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "b046e6f5-ce62-4746-b4dc-092c691cb900"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "demoMode": "{% if vars.input.records[0].testMode %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}",
+                "taskList": "[]"
+            },
+            "status": null,
+            "top": "165",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "50cd5b5e-4338-42d7-b2ae-88a15b4b12e8"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Notify Data Protection Officer",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "Notify Data Protection Officer",
+                    "type": "\/api\/3\/picklists\/a6064def-fc9d-4d52-ac45-e0a55679c140",
+                    "dueBy": "{{vars.input.records[0].breachNotifyDueDate}}",
+                    "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
+                    "__replace": "",
+                    "startDate": "{{arrow.utcnow().int_timestamp}}",
+                    "recordTags": [
+                        "\/api\/3\/tags\/Notify DPO"
+                    ],
+                    "description": "{{vars.demoMode}}\n\nSend **'Breach Risk Assessment'** details to DPO to determine if this valid threat or not. Also get the Data Breach Report Approved.\n\nClick on <span style=\"background: #5d636a; padding: 5px;\">**Notify Data Protection Officer**<\/span> button ",
+                    "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
+                    "dataCompliances": "{{vars.input.records[0]['@id']}}",
+                    "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/tasks",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "placeholder": "{{vars.taskList.append(vars.result['@id'])}}"
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "9529559d-7dca-4b8c-aa92-273481032453"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Report the Crime to Law Enforcement Agencies",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "Report the Crime to Law Enforcement Agencies",
+                    "type": "\/api\/3\/picklists\/6d113f01-123a-4c78-b68c-029e16df9b8b",
+                    "dueBy": "{{vars.input.records[0].breachNotifyDueDate}}",
+                    "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
+                    "__replace": "",
+                    "startDate": "{{arrow.utcnow().int_timestamp}}",
+                    "recordTags": [
+                        "\/api\/3\/tags\/DPO and DPA Contacts"
+                    ],
+                    "description": "{{vars.demoMode}}\n \nReport the crime to law enforcement agencies like the FBI or Secret Service. If they advise that breach reporting may affect their investigation, delay notifying affected individuals or media until requested or for 30 days (if requested orally).\n\nPlease mark this task as <span style=\"background: #5d636a; padding: 5px;\">**Complete**<\/span> once the fix is implemented.",
+                    "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
+                    "dataCompliances": "{{vars.input.records[0]['@id']}}",
+                    "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/tasks",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "placeholder": "{{vars.taskList.append(vars.result['@id'])}}"
+                }
+            },
+            "status": null,
+            "top": "435",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "67b9fe72-8f4c-4e5f-8899-4339a3c4c91e"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Report Threat Indicators to Federal Agencies",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "Report Threat Indicators to Federal Agencies",
+                    "type": "\/api\/3\/picklists\/a6064def-fc9d-4d52-ac45-e0a55679c140",
+                    "dueBy": "{{vars.input.records[0].breachNotifyDueDate}}",
+                    "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
+                    "__replace": "",
+                    "startDate": "{{arrow.utcnow().int_timestamp}}",
+                    "recordTags": [
+                        "\/api\/3\/tags\/Notify DPO"
+                    ],
+                    "description": "{{vars.demoMode}}\n\nReport all the threat indicators to the federal and information sharing and analysis organizations (ISAO)\n\nClick on <span style=\"background: #5d636a; padding: 5px;\">**Notify Data Protection Officer**<\/span> button ",
+                    "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
+                    "dataCompliances": "{{vars.input.records[0]['@id']}}",
+                    "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/tasks",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "placeholder": "{{vars.taskList.append(vars.result['@id'])}}"
+                }
+            },
+            "status": null,
+            "top": "570",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "31933abf-d91c-4c4b-87ef-7864fec6b088"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "resource": "data_compliances",
+                "resources": [
+                    "data_compliances"
+                ],
+                "step_variables": {
+                    "input": {
+                        "params": [],
+                        "records": [
+                            "{{vars.input.records[0]}}"
+                        ]
+                    }
+                },
+                "fieldbasedtrigger": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "object",
+                            "field": "isABreachReportable",
+                            "value": "\/api\/3\/picklists\/cfd49634-d25a-476f-8485-99585e589a8c",
+                            "_value": {
+                                "@id": "\/api\/3\/picklists\/cfd49634-d25a-476f-8485-99585e589a8c",
+                                "display": "Yes",
+                                "itemValue": "Yes"
+                            },
+                            "operator": "eq"
+                        },
+                        {
+                            "type": "object",
+                            "field": "isABreachReportable",
+                            "value": "",
+                            "_value": {
+                                "@id": "",
+                                "display": "",
+                                "itemValue": ""
+                            },
+                            "operator": "changed"
+                        },
+                        {
+                            "type": "object",
+                            "field": "regulatoryCompliance",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                                "display": "HIPAA",
+                                "itemValue": "HIPAA"
+                            },
+                            "operator": "eq"
+                        }
+                    ]
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/9300bf69-5063-486d-b3a6-47eb9da24872",
+            "group": null,
+            "uuid": "46d0c883-6879-4127-8e91-f8c17fb96265"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update GDPR Record",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<p>Following tasks have been created to perform GDPR Assessment.&nbsp;<\/p>\n<p>&nbsp;<\/p>\n<p>{% for item in vars.taskList %}<\/p>\n<p><a href=\"https:\/\/{{globalVars.Server_fqhn}}\/modules\/view-panel\/tasks\/{{(item | fromIRI).uuid}}\">Task #{{(item | fromIRI).id}} - {{(item | fromIRI).name}}<\/a><\/p>\n<p>{% endfor %}<\/p>",
+                    "records": ""
+                },
+                "resource": {
+                    "description": "##### Make sure to complete following tasks within 60 Days of breach occurrence\n\n| Sr. No. | Task Name | Task Link | Status  |\n| --- | --- | --- | --- |{% for item in vars.taskList %}\n| {{loop.index}} | {{(item | fromIRI).name}} | [*Click Here*](https:\/\/{{globalVars.Server_fqhn}}\/modules\/view-panel\/tasks\/{{(item | fromIRI).uuid}})  | <span>&#10060;<\/span> |{% endfor %}"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "recordTags": "Append",
+                    "reminderMailStatus": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "705",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "42eca79d-509c-40ae-b78c-c7ec053f8bf2"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Submit Risk Assessment Information",
+            "targetStep": "\/api\/3\/workflow_steps\/b046e6f5-ce62-4746-b4dc-092c691cb900",
+            "sourceStep": "\/api\/3\/workflow_steps\/50cd5b5e-4338-42d7-b2ae-88a15b4b12e8",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "37b6c27e-0b35-430a-8735-6e77e59328f3"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get GDPR Risk Assessment Information -> Provide DPO Contact Details",
+            "targetStep": "\/api\/3\/workflow_steps\/67b9fe72-8f4c-4e5f-8899-4339a3c4c91e",
+            "sourceStep": "\/api\/3\/workflow_steps\/b046e6f5-ce62-4746-b4dc-092c691cb900",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "ae75016e-f68b-4289-bc25-e133d97fbeac"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Report the Crime to Law Enforcement Agencies -> Copy of Notify Data Protection Officer",
+            "targetStep": "\/api\/3\/workflow_steps\/31933abf-d91c-4c4b-87ef-7864fec6b088",
+            "sourceStep": "\/api\/3\/workflow_steps\/67b9fe72-8f4c-4e5f-8899-4339a3c4c91e",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "8703dbba-4453-45e0-9890-24e11bc0849d"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Report Threat Indicators to Federal Agencies -> Update GDPR Record",
+            "targetStep": "\/api\/3\/workflow_steps\/42eca79d-509c-40ae-b78c-c7ec053f8bf2",
+            "sourceStep": "\/api\/3\/workflow_steps\/31933abf-d91c-4c4b-87ef-7864fec6b088",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "1d486d4f-c661-4484-a2a1-3b4396f92262"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/50cd5b5e-4338-42d7-b2ae-88a15b4b12e8",
+            "sourceStep": "\/api\/3\/workflow_steps\/46d0c883-6879-4127-8e91-f8c17fb96265",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "256a27a2-75c5-4a59-b209-5158bd648239"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "69df7b0d-15dc-41c5-889d-330aeae98a4d",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "PostCreate"
+    ]
+}

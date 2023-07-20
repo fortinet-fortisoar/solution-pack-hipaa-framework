@@ -1,0 +1,580 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Get HIPAA Risk Assessment Details",
+    "aliasName": null,
+    "tag": null,
+    "description": "Collects HIPAA assessment details and completes the corresponding task",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/4c384067-79c3-4821-a70a-d69c3c149ec6",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/485318e6-d483-45fd-bd73-a56be1ac8c9c",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "description": "[]",
+                "breachNotifyDueDate": "{% if vars.input.params.noOfAffectedUsers > 500 %}{% endif %}"
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "d82472f9-b968-4a8b-9b91-d422ff930cf7"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Compliance Record ID",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "id",
+                            "value": "{{vars.input.records[0].id}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ],
+                    "__selectFields": [
+                        "dataCompliances"
+                    ]
+                },
+                "module": "tasks?$limit=30&$relationships=true&$fsr_max_relation_count=100",
+                "checkboxFields": true,
+                "step_variables": {
+                    "demoMode": "{% if vars.result[0].dataCompliances[0].testMode %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}",
+                    "placeholder": "{% for item in vars.result[0].dataCompliances[0].description.split('\\n') %}\n{% if 'Submit Risk Assessment Information' in item %}\n{% set _dummy = item | replace('10060', '9989') %}\n{{vars.description.append(_dummy)}}\n{% else %}\n{{vars.description.append(item)}}\n{% endif %}\n{% endfor %}",
+                    "complianceID": "{{vars.result[0].dataCompliances[0].id}}",
+                    "complianceIRI": "{{vars.result[0].dataCompliances[0]['@id']}}",
+                    "complianceUUID": "{{vars.result[0].dataCompliances[0].uuid}}"
+                }
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "74af9803-5643-4c10-a5d6-16b6f6f572fa"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Parent Incident ID",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "id",
+                            "value": "{{vars.complianceID}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ],
+                    "__selectFields": [
+                        "incidents"
+                    ]
+                },
+                "module": "data_compliances?$limit=30&$relationships=true",
+                "checkboxFields": true,
+                "step_variables": {
+                    "incidentIRI": "{{vars.result[0].incidents[0]['@id']}}"
+                }
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "100d4515-d76b-4b1e-b4d3-f8bc437d558a"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "route": "5b08e550-8b9c-4125-82c5-7321dda82f76",
+                "title": "Submit HIPAA Risk Assessment Details",
+                "resources": [
+                    "tasks"
+                ],
+                "inputVariables": [
+                    {
+                        "name": "wasThePHIEncrypted",
+                        "type": "array",
+                        "label": "Was the PHI\/ePHI encrypted?",
+                        "title": "Dynamic List",
+                        "usable": true,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "tooltip": "",
+                        "dataType": "dynamicList",
+                        "formType": "dynamicList",
+                        "required": true,
+                        "_expanded": false,
+                        "mmdUpdate": true,
+                        "collection": false,
+                        "dataSource": [],
+                        "searchable": false,
+                        "templateUrl": "app\/components\/form\/fields\/dynamicList.html",
+                        "_nameTouched": true,
+                        "defaultValue": null,
+                        "_previousName": "wasThePHI\/EPHIEncrypted?",
+                        "playbookField": true,
+                        "displayTemplate": "{{ itemValue }}",
+                        "lengthConstraint": true,
+                        "allowedEncryption": false,
+                        "allowedGridColumn": false,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false
+                    },
+                    {
+                        "name": "whatHealthInformationWasExposed",
+                        "type": "string",
+                        "label": "What health information was exposed?",
+                        "tooltip": "",
+                        "dataType": "text",
+                        "formType": "text",
+                        "required": true,
+                        "_expanded": false,
+                        "_nameTouched": true,
+                        "defaultValue": null,
+                        "_previousName": "whatHealthInformationWasExposed?",
+                        "visibilityQuery": {
+                            "sort": [],
+                            "limit": 30,
+                            "logic": "AND",
+                            "filters": [
+                                {
+                                    "type": "array",
+                                    "field": "wasThePHIEncrypted",
+                                    "value": [
+                                        "No"
+                                    ],
+                                    "module": "wasThePHIEncrypted",
+                                    "display": "",
+                                    "operator": "in",
+                                    "template": "tags",
+                                    "OPERATOR_KEY": "$",
+                                    "useInOperator": true,
+                                    "previousOperator": "in",
+                                    "previousTemplate": "tags"
+                                }
+                            ]
+                        },
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false,
+                        "_addVisibilityConditions": true
+                    },
+                    {
+                        "name": "wasThePHIAccessedImpermissibly",
+                        "type": "array",
+                        "label": "Was the PHI\/ePHI accessed impermissibly?",
+                        "title": "Dynamic List",
+                        "usable": true,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "tooltip": "",
+                        "dataType": "dynamicList",
+                        "formType": "dynamicList",
+                        "required": true,
+                        "_expanded": false,
+                        "mmdUpdate": true,
+                        "collection": false,
+                        "dataSource": [],
+                        "searchable": false,
+                        "templateUrl": "app\/components\/form\/fields\/dynamicList.html",
+                        "_nameTouched": true,
+                        "defaultValue": null,
+                        "_previousName": "wasThePHI\/EPHIAccessedImpermissibly?",
+                        "playbookField": true,
+                        "displayTemplate": "%7B%7B%20itemValue%20%7D%7D",
+                        "lengthConstraint": true,
+                        "allowedEncryption": false,
+                        "allowedGridColumn": false,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false
+                    },
+                    {
+                        "name": "whoAccessedPHIWithoutPermission",
+                        "type": "string",
+                        "label": "Who accessed PHI\/ePHI without permission? (If known)",
+                        "tooltip": "",
+                        "dataType": "text",
+                        "formType": "text",
+                        "required": false,
+                        "_expanded": false,
+                        "_nameTouched": true,
+                        "defaultValue": null,
+                        "_previousName": "whoAccessedPHI\/EPHIWithoutPermission?(IfKnown)",
+                        "visibilityQuery": {
+                            "sort": [],
+                            "limit": 30,
+                            "logic": "AND",
+                            "filters": [
+                                {
+                                    "type": "array",
+                                    "field": "wasThePHIAccessedImpermissibly",
+                                    "value": [
+                                        "Yes"
+                                    ],
+                                    "module": "wasThePHIAccessedImpermissibly",
+                                    "display": "",
+                                    "operator": "in",
+                                    "template": "tags",
+                                    "OPERATOR_KEY": "$",
+                                    "useInOperator": true,
+                                    "previousOperator": "in",
+                                    "previousTemplate": "tags"
+                                }
+                            ]
+                        },
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false,
+                        "_addVisibilityConditions": true
+                    },
+                    {
+                        "name": "isDataMisuseForeseeable",
+                        "type": "array",
+                        "label": "Is PHI misuse or disclosure foreseeable?",
+                        "title": "Dynamic List",
+                        "usable": true,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "tooltip": "Choose Yes - If the data breach risks the PHI misuse",
+                        "dataType": "dynamicList",
+                        "formType": "dynamicList",
+                        "required": true,
+                        "_expanded": true,
+                        "mmdUpdate": true,
+                        "collection": false,
+                        "dataSource": [],
+                        "searchable": false,
+                        "templateUrl": "app\/components\/form\/fields\/dynamicList.html",
+                        "_nameTouched": true,
+                        "defaultValue": null,
+                        "_previousName": "isDataMisuseForeseeable?",
+                        "playbookField": true,
+                        "displayTemplate": "%7B%7B%20itemValue%20%7D%7D",
+                        "lengthConstraint": true,
+                        "allowedEncryption": false,
+                        "allowedGridColumn": false,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false
+                    },
+                    {
+                        "name": "measuresInPlaceToMitigateTheRisk",
+                        "type": "string",
+                        "label": "Measures in place to mitigate the risk",
+                        "tooltip": "",
+                        "dataType": "text",
+                        "formType": "text",
+                        "required": true,
+                        "_expanded": false,
+                        "defaultValue": null,
+                        "_previousName": "",
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false
+                    },
+                    {
+                        "name": "noOfAffectedUsers",
+                        "type": "number",
+                        "label": "No. of Affected Users",
+                        "title": "Decimal Field",
+                        "usable": true,
+                        "tooltip": "The approximate number of individuals affected by the breach",
+                        "dataType": "decimal",
+                        "formType": "decimal",
+                        "required": true,
+                        "_expanded": false,
+                        "mmdUpdate": true,
+                        "collection": false,
+                        "searchable": true,
+                        "templateUrl": "app\/components\/form\/fields\/number.html",
+                        "_nameTouched": true,
+                        "defaultValue": null,
+                        "_previousName": "no.OfAffectedUsers",
+                        "lengthConstraint": true,
+                        "allowedEncryption": false,
+                        "allowedGridColumn": true,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false
+                    },
+                    {
+                        "name": "isABreachReportable?",
+                        "type": "array",
+                        "label": "Is a breach reportable?",
+                        "title": "Dynamic List",
+                        "usable": true,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "tooltip": "",
+                        "dataType": "dynamicList",
+                        "formType": "dynamicList",
+                        "required": true,
+                        "_expanded": false,
+                        "mmdUpdate": true,
+                        "collection": false,
+                        "searchable": false,
+                        "templateUrl": "app\/components\/form\/fields\/dynamicList.html",
+                        "defaultValue": null,
+                        "_previousName": "isABreachReportable?",
+                        "playbookField": true,
+                        "lengthConstraint": true,
+                        "allowedGridColumn": false,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false
+                    }
+                ],
+                "step_variables": {
+                    "input": {
+                        "params": {
+                            "noOfAffectedUsers": "{{vars.request.data[\"noOfAffectedUsers\"]}}",
+                            "wasThePHIEncrypted": "{{vars.request.data[\"wasThePHIEncrypted\"]}}",
+                            "isABreachReportable?": "{{vars.request.data[\"isABreachReportable?\"]}}",
+                            "isDataMisuseForeseeable": "{{vars.request.data[\"isDataMisuseForeseeable\"]}}",
+                            "wasThePHIAccessedImpermissibly": "{{vars.request.data[\"wasThePHIAccessedImpermissibly\"]}}",
+                            "whatHealthInformationWasExposed": "{{vars.request.data[\"whatHealthInformationWasExposed\"]}}",
+                            "whoAccessedPHIWithoutPermission": "{{vars.request.data[\"whoAccessedPHIWithoutPermission\"]}}",
+                            "measuresInPlaceToMitigateTheRisk": "{{vars.request.data[\"measuresInPlaceToMitigateTheRisk\"]}}"
+                        },
+                        "records": "{{vars.input.records}}"
+                    }
+                },
+                "_promptexpanded": true,
+                "displayConditions": {
+                    "tasks": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": [
+                            {
+                                "type": "array",
+                                "field": "recordTags",
+                                "value": [
+                                    "\/api\/3\/tags\/HIPAA Risk Assessment Form"
+                                ],
+                                "module": "recordTags",
+                                "display": "",
+                                "operator": "in",
+                                "template": "tags",
+                                "OPERATOR_KEY": "$",
+                                "useInOperator": true,
+                                "previousOperator": "in",
+                                "previousTemplate": "tags"
+                            },
+                            {
+                                "type": "object",
+                                "field": "status",
+                                "value": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                                "_value": {
+                                    "@id": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                                    "itemValue": "Completed"
+                                },
+                                "operator": "neq"
+                            }
+                        ]
+                    }
+                },
+                "executeButtonText": "Submit",
+                "noRecordExecution": false,
+                "singleRecordExecution": false
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+            "group": null,
+            "uuid": "485318e6-d483-45fd-bd73-a56be1ac8c9c"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update Compliance Record Description",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "status": "\/api\/3\/picklists\/bb7402d6-f699-11e7-8c3f-9a214cf093ae",
+                    "description": "{{vars.description | join('\\n')}}"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "reminderMailStatus": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "840",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "21a175d7-0b77-4b90-9fe3-4321d3533949"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update HIPAA Assessment Data",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<p>Necessary information for the Data Breach Risk Assessment has been collected.<\/p>",
+                    "records": "{{vars.complianceIRI}},{{vars.incidentIRI}}"
+                },
+                "resource": {
+                    "noOfAffectedUsers": "{{vars.input.params.noOfAffectedUsers}}",
+                    "isABreachReportable": "{{\"YesNoInput\" | picklist(vars.input.params['isABreachReportable?'], \"@id\")}}",
+                    "wasThePHIEPHIEncrypted": "{{\"YesNoInput\" | picklist(vars.input.params.wasThePHIEncrypted, \"@id\")}}",
+                    "whatHealthInformationWasExposed": "{{vars.input.params.whatHealthInformationWasExposed}}",
+                    "measuresInPlaceToMitigateTheRisk": "{{vars.input.params.measuresInPlaceToMitigateTheRisk}}",
+                    "isPHIMisuseOrDisclosureForeseeable": "{{\"YesNoInput\" | picklist(vars.input.params.isDataMisuseForeseeable, \"@id\")}}",
+                    "wasThePHIEPHIAccessedImpermissibly": "{{\"YesNoInput\" | picklist(vars.input.params.wasThePHIAccessedImpermissibly, \"@id\")}}",
+                    "whoAccessedPHIEPHIWithoutPermission": "{{vars.input.params.whoAccessedPHIWithoutPermission}}"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "recordTags": "Append",
+                    "reminderMailStatus": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "4ece4af6-db9a-4f93-a487-9480ceb8e781"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update Task Status",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                    "description": "{{vars.demoMode}}\n\n##### The information for HIPAA risk assessment has been collected.\n\nGo back to <a href=\"\/modules\/data_compliances\/{{vars.complianceUUID}}\" target=\"_blank\" rel=\"noopener\"> Data Compliance Record #{{vars.complianceID}}<\/a> to execute next task <span style=\"background: #5d636a; padding: 5px;\">**Provide DPO and DPA Contact Details**<\/span>"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/tasks",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "705",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "ab4a390c-52c4-4c21-8a77-9feb6ec7dadf"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Get Compliance Record ID",
+            "targetStep": "\/api\/3\/workflow_steps\/74af9803-5643-4c10-a5d6-16b6f6f572fa",
+            "sourceStep": "\/api\/3\/workflow_steps\/d82472f9-b968-4a8b-9b91-d422ff930cf7",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "51f1bacd-83c8-429b-8b50-5e657fa8e888"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Compliance Record ID -> Get Parent Incident Record ID",
+            "targetStep": "\/api\/3\/workflow_steps\/100d4515-d76b-4b1e-b4d3-f8bc437d558a",
+            "sourceStep": "\/api\/3\/workflow_steps\/74af9803-5643-4c10-a5d6-16b6f6f572fa",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "c305d946-5977-4eb0-8f52-0a65b7d38386"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Parent Incident ID -> Update GDPR Assessment Data",
+            "targetStep": "\/api\/3\/workflow_steps\/4ece4af6-db9a-4f93-a487-9480ceb8e781",
+            "sourceStep": "\/api\/3\/workflow_steps\/100d4515-d76b-4b1e-b4d3-f8bc437d558a",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "ace283f9-708e-4e99-bea5-bbf923bcc119"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/d82472f9-b968-4a8b-9b91-d422ff930cf7",
+            "sourceStep": "\/api\/3\/workflow_steps\/485318e6-d483-45fd-bd73-a56be1ac8c9c",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "d6826d22-a6f6-48f3-8b8b-937f9fc47437"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Update GDPR Assessment Data -> Update Task Status",
+            "targetStep": "\/api\/3\/workflow_steps\/ab4a390c-52c4-4c21-8a77-9feb6ec7dadf",
+            "sourceStep": "\/api\/3\/workflow_steps\/4ece4af6-db9a-4f93-a487-9480ceb8e781",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "38b5e49e-6f50-49d8-860d-1f0e20d622fd"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Update Task Status -> Update Compliance Record Description",
+            "targetStep": "\/api\/3\/workflow_steps\/21a175d7-0b77-4b90-9fe3-4321d3533949",
+            "sourceStep": "\/api\/3\/workflow_steps\/ab4a390c-52c4-4c21-8a77-9feb6ec7dadf",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "6e60a522-e653-4756-8911-f45f31654c1a"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "00ae2b3d-0d1d-4a0a-baad-d5ceb7b8ab4c",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "ManualTrigger"
+    ]
+}

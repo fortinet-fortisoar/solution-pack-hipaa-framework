@@ -89,7 +89,7 @@
                                                                                                         "type": "slaCountDownClock-2.0.0",
                                                                                                         "config": {
                                                                                                             "wid": "fcd804d9-4e64-414f-97f9-9ff550859f51",
-                                                                                                            "title": "Time Remaining to Notify DPA",
+                                                                                                            "title": "Time Remaining to Notify Breach",
                                                                                                             "duedate": "breachNotifyDueDate",
                                                                                                             "sladate": "resolvedDate",
                                                                                                             "slapaused": "breachPausedDate",
@@ -151,7 +151,7 @@
                                                                                                                                     "name": "regulatoryCompliance",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
-                                                                                                                                    "readOnly": false
+                                                                                                                                    "readOnly": true
                                                                                                                                 }
                                                                                                                             ],
                                                                                                                             "style": "col-lg-6"
@@ -165,7 +165,7 @@
                                                                                                     {
                                                                                                         "type": "editableFormGroup",
                                                                                                         "config": {
-                                                                                                            "wid": "17a428c0-3e1c-4998-ae65-7eed303756f4",
+                                                                                                            "wid": "52d8f3b4-1ce5-432b-a1fe-d2a27377800a",
                                                                                                             "rows": [
                                                                                                                 {
                                                                                                                     "columns": [
@@ -292,6 +292,16 @@
                                                                                                                         {
                                                                                                                             "fields": [
                                                                                                                                 {
+                                                                                                                                    "name": "wasThePHIEPHIEncrypted",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "whatHealthInformationWasExposed",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
                                                                                                                                     "name": "causeOfDataBreach",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
@@ -325,12 +335,37 @@
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
                                                                                                                                     "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "measuresToReduceFutureRisks",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "measuresInPlaceToMitigateTheRisk",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
                                                                                                                                 }
                                                                                                                             ],
                                                                                                                             "style": "col-lg-6"
                                                                                                                         },
                                                                                                                         {
                                                                                                                             "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "wasThePHIEPHIAccessedImpermissibly",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "whoAccessedPHIEPHIWithoutPermission",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "isPHIMisuseOrDisclosureForeseeable",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
                                                                                                                                 {
                                                                                                                                     "name": "typeOfDataBreach",
                                                                                                                                     "highlightMode": true,
@@ -359,6 +394,11 @@
                                                                                                                                     "name": "anyAdditionalInformation",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "isABreachReportable",
+                                                                                                                                    "highlightMode": true,
                                                                                                                                     "readOnly": true
                                                                                                                                 }
                                                                                                                             ],
@@ -676,26 +716,62 @@
                                 "config": {
                                     "tabs": [
                                         {
+                                            "title": "Indicators",
+                                            "active": 0,
+                                            "widget": {
+                                                "type": "relationship.subtab",
+                                                "config": {
+                                                    "wid": "ab7007f4-7e6c-4953-83ce-4b2998e95a14",
+                                                    "excludes": [],
+                                                    "selectionType": "include",
+                                                    "expandableCol": [],
+                                                    "enableHorizontalScroll": [],
+                                                    "includes": [
+                                                        "indicators"
+                                                    ]
+                                                }
+                                            },
+                                            "icon": "fa fa-star",
+                                            "conditionalVisibility": true,
+                                            "filter": {
+                                                "sort": [],
+                                                "limit": 30,
+                                                "logic": "AND",
+                                                "filters": [
+                                                    {
+                                                        "field": "regulatoryCompliance",
+                                                        "operator": "eq",
+                                                        "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                                                        "_value": {
+                                                            "display": "HIPAA",
+                                                            "itemValue": "HIPAA",
+                                                            "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                                                        },
+                                                        "type": "object",
+                                                        "display": "HIPAA"
+                                                    }
+                                                ]
+                                            },
+                                            "show": true,
+                                            "visible": true
+                                        },
+                                        {
                                             "title": "Correlations",
                                             "widget": {
                                                 "type": "relationship.subtab",
                                                 "config": {
-                                                    "excludes": [
-                                                        "notes",
-                                                        "comments",
-                                                        "userOwners",
-                                                        "attachments",
-                                                        "owners",
-                                                        "tasks"
-                                                    ],
+                                                    "excludes": [],
                                                     "wid": "03b4f6c1-292e-4e8c-9cc0-ae23d79c8bc3",
-                                                    "selectionType": "exclude",
+                                                    "selectionType": "include",
                                                     "expandableCol": [],
                                                     "enableHorizontalScroll": [],
-                                                    "includes": []
+                                                    "includes": [
+                                                        "contacts",
+                                                        "incidents"
+                                                    ]
                                                 }
                                             },
-                                            "show": true,
+                                            "show": false,
                                             "icon": "fa fa-exchange",
                                             "visible": true
                                         },
@@ -706,19 +782,13 @@
                                                 "type": "relationship.subtab",
                                                 "config": {
                                                     "wid": "ffcccc7a-2a5a-44c6-8756-77cbbe9f2f6f",
-                                                    "excludes": [
-                                                        "notes",
-                                                        "comments",
-                                                        "userOwners",
-                                                        "attachments",
-                                                        "incidents",
-                                                        "owners",
-                                                        "contacts"
-                                                    ],
-                                                    "selectionType": "exclude",
+                                                    "excludes": [],
+                                                    "selectionType": "include",
                                                     "expandableCol": [],
                                                     "enableHorizontalScroll": [],
-                                                    "includes": []
+                                                    "includes": [
+                                                        "tasks"
+                                                    ]
                                                 }
                                             },
                                             "icon": "fa fa-tasks",
