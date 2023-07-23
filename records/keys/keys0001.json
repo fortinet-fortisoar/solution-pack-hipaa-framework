@@ -7,11 +7,13 @@
         "createUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
         "createDate": 1689239765.836233,
         "modifyUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
-        "modifyDate": 1689239765.836233,
+        "modifyDate": 1689917767.370154,
         "tenant": "\/api\/3\/tenants\/b3a700f7-00be-4ef9-90c6-3c8fe6e1be63",
         "conflict": false,
         "tenantRecordId": 2,
         "id": 2,
-        "recordTags": []
+        "recordTags": [
+            "Data Compliances"
+        ]
     }
 ]

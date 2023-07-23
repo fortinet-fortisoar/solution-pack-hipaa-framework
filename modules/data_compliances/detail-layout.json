@@ -97,7 +97,7 @@
                                                                                                             "slaMappedOn": "breachNotificationSLA",
                                                                                                             "pausedItemvalue": "Paused",
                                                                                                             "metItemvalue": "Met",
-                                                                                                            "stopStateTitle": "DPA Authority is Notified",
+                                                                                                            "stopStateTitle": "Breach has been Notified",
                                                                                                             "timeToDisplay": "consumedTime"
                                                                                                         }
                                                                                                     }

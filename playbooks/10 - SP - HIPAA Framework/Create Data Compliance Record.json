@@ -91,6 +91,9 @@
                     "people": [],
                     "content": "<p>Following task has been created to perform HIPAA Assessment.<\/p>\n<p>&nbsp;<\/p>\n<p>{% for item in vars.taskList %}<a href=\"\/modules\/tasks\/{{(item | fromIRI).uuid}}\" target=\"_blank\" rel=\"noopener\">Task #{{(item | fromIRI).id}} - {{(item | fromIRI).name}}<\/a><\/p>\n<p>{% endfor %}<\/p>",
                     "__replace": "",
+                    "recordTags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
                     "isImportant": false,
                     "peopleUpdated": false,
                     "dataCompliances": "{{vars.steps.Create_HIPAA_Data_Compliance_Record['@id']}}"
@@ -881,6 +884,21 @@
                             "useInOperator": true,
                             "previousOperator": "in",
                             "previousTemplate": "tags"
+                        },
+                        {
+                            "type": "array",
+                            "field": "recordTags",
+                            "value": [
+                                "\/api\/3\/tags\/Data Compliances"
+                            ],
+                            "module": "recordTags",
+                            "display": null,
+                            "operator": "in",
+                            "template": "tags",
+                            "enableJinja": true,
+                            "OPERATOR_KEY": "$",
+                            "previousOperator": "in",
+                            "previousTemplate": "tags"
                         }
                     ],
                     "__selectFields": [
@@ -1048,7 +1066,7 @@
                     "recordTags": [
                         "\/api\/3\/tags\/HIPAA Risk Assessment Form"
                     ],
-                    "description": "{{vars.demoMode}}\n \nTo submit information necessary for PHI Breach Risk Assessment \n\nClick on <span style=\"background: #5d636a; padding: 5px;\">**Submit HIPAA Risk Assessment Information**<\/span> Button",
+                    "description": "{{vars.demoMode}}\n \nPlease submit necessary information for PHI Breach Risk Assessment, including the number of affected individuals and whether the breach is reportable.\n\nClick on <span style=\"background: #5d636a; padding: 5px;\">**Submit HIPAA Risk Assessment Information**<\/span> Button",
                     "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
                     "dataCompliances": "{{vars.steps.Create_HIPAA_Data_Compliance_Record['@id']}}",
                     "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"

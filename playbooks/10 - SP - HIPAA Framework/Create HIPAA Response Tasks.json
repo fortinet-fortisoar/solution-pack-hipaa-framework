@@ -24,6 +24,7 @@
                     "name": "Apply Technical Fix to Stop Incident",
                     "type": "\/api\/3\/picklists\/6d113f01-123a-4c78-b68c-029e16df9b8b",
                     "dueBy": "{{vars.input.records[0].breachNotifyDueDate}}",
+                    "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
                     "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
                     "__replace": "",
                     "startDate": "{{arrow.utcnow().int_timestamp}}",
@@ -43,12 +44,12 @@
                     "recordTags": "Overwrite"
                 },
                 "step_variables": {
-                    "placeholder": "{{vars.taskList.append(vars.result['@id'])}}"
+                    "placeholder": "{% set _item = \"\" %}\n{{vars.taskList.append(vars.result['@id'])}}"
                 }
             },
             "status": null,
             "top": "300",
-            "left": "475",
+            "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
             "group": null,
             "uuid": "b046e6f5-ce62-4746-b4dc-092c691cb900"
@@ -59,31 +60,33 @@
             "description": null,
             "arguments": {
                 "demoMode": "{% if vars.input.records[0].testMode %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}",
-                "taskList": "[]"
+                "taskList": "[]",
+                "description": "{{vars.input.records[0].description}}"
             },
             "status": null,
             "top": "165",
-            "left": "475",
+            "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "group": null,
             "uuid": "50cd5b5e-4338-42d7-b2ae-88a15b4b12e8"
         },
         {
             "@type": "WorkflowStep",
-            "name": "Notify Data Protection Officer",
+            "name": "Notify Affected Individuals",
             "description": null,
             "arguments": {
                 "resource": {
-                    "name": "Notify Data Protection Officer",
+                    "name": "Notify Affected Individuals",
                     "type": "\/api\/3\/picklists\/a6064def-fc9d-4d52-ac45-e0a55679c140",
                     "dueBy": "{{vars.input.records[0].breachNotifyDueDate}}",
+                    "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
                     "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
                     "__replace": "",
                     "startDate": "{{arrow.utcnow().int_timestamp}}",
                     "recordTags": [
                         "\/api\/3\/tags\/Notify DPO"
                     ],
-                    "description": "{{vars.demoMode}}\n\nSend **'Breach Risk Assessment'** details to DPO to determine if this valid threat or not. Also get the Data Breach Report Approved.\n\nClick on <span style=\"background: #5d636a; padding: 5px;\">**Notify Data Protection Officer**<\/span> button ",
+                    "description": "{{vars.demoMode}}\n\nSend **'Breach Risk Assessment'** details to DPO to determine if this valid threat or not. Also get the Data Breach Report Approved.\n\nClick on <span style=\"background: #5d636a; padding: 5px;\">**Notify Affected Individuals**<\/span> button ",
                     "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
                     "dataCompliances": "{{vars.input.records[0]['@id']}}",
                     "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
@@ -100,7 +103,7 @@
                 }
             },
             "status": null,
-            "top": "30",
+            "top": "705",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
             "group": null,
@@ -115,6 +118,7 @@
                     "name": "Report the Crime to Law Enforcement Agencies",
                     "type": "\/api\/3\/picklists\/6d113f01-123a-4c78-b68c-029e16df9b8b",
                     "dueBy": "{{vars.input.records[0].breachNotifyDueDate}}",
+                    "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
                     "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
                     "__replace": "",
                     "startDate": "{{arrow.utcnow().int_timestamp}}",
@@ -139,7 +143,7 @@
             },
             "status": null,
             "top": "435",
-            "left": "475",
+            "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
             "group": null,
             "uuid": "67b9fe72-8f4c-4e5f-8899-4339a3c4c91e"
@@ -153,13 +157,14 @@
                     "name": "Report Threat Indicators to Federal Agencies",
                     "type": "\/api\/3\/picklists\/a6064def-fc9d-4d52-ac45-e0a55679c140",
                     "dueBy": "{{vars.input.records[0].breachNotifyDueDate}}",
+                    "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
                     "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
                     "__replace": "",
                     "startDate": "{{arrow.utcnow().int_timestamp}}",
                     "recordTags": [
                         "\/api\/3\/tags\/Notify DPO"
                     ],
-                    "description": "{{vars.demoMode}}\n\nReport all the threat indicators to the federal and information sharing and analysis organizations (ISAO)\n\nClick on <span style=\"background: #5d636a; padding: 5px;\">**Notify Data Protection Officer**<\/span> button ",
+                    "description": "{{vars.demoMode}}\n\nReport all the threat indicators to the federal and information sharing and analysis organizations (ISAO)\n\nPlease mark this task as <span style=\"background: #5d636a; padding: 5px;\">**Complete**<\/span> once the fix is implemented.",
                     "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
                     "dataCompliances": "{{vars.input.records[0]['@id']}}",
                     "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
@@ -177,7 +182,7 @@
             },
             "status": null,
             "top": "570",
-            "left": "475",
+            "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
             "group": null,
             "uuid": "31933abf-d91c-4c4b-87ef-7864fec6b088"
@@ -242,7 +247,7 @@
             },
             "status": null,
             "top": "30",
-            "left": "475",
+            "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/9300bf69-5063-486d-b3a6-47eb9da24872",
             "group": null,
             "uuid": "46d0c883-6879-4127-8e91-f8c17fb96265"
@@ -256,11 +261,11 @@
                     "tags": [],
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
                     "tenant": "",
-                    "content": "<p>Following tasks have been created to perform GDPR Assessment.&nbsp;<\/p>\n<p>&nbsp;<\/p>\n<p>{% for item in vars.taskList %}<\/p>\n<p><a href=\"https:\/\/{{globalVars.Server_fqhn}}\/modules\/view-panel\/tasks\/{{(item | fromIRI).uuid}}\">Task #{{(item | fromIRI).id}} - {{(item | fromIRI).name}}<\/a><\/p>\n<p>{% endfor %}<\/p>",
+                    "content": "<p>Following tasks have been created to perform HIPAA Assessment.</p>\n<p>&nbsp;</p>\n<p>{% for item in vars.taskList %}</p>\n<p><a href=\"/modules/view-panel/tasks/{{(item | fromIRI).uuid}}\" target=\"_blank\" rel=\"noopener\">Task #{{(item | fromIRI).id}} - {{(item | fromIRI).name}}</a></p>\n<p>{% endfor %}</p>",
                     "records": ""
                 },
                 "resource": {
-                    "description": "##### Make sure to complete following tasks within 60 Days of breach occurrence\n\n| Sr. No. | Task Name | Task Link | Status  |\n| --- | --- | --- | --- |{% for item in vars.taskList %}\n| {{loop.index}} | {{(item | fromIRI).name}} | [*Click Here*](https:\/\/{{globalVars.Server_fqhn}}\/modules\/view-panel\/tasks\/{{(item | fromIRI).uuid}})  | <span>&#10060;<\/span> |{% endfor %}"
+                    "description": "{{vars.description}}{% for item in vars.taskList %}\n| {{loop.index + 1}} | {{(item | fromIRI).name}} | <a href=\"\/modules\/tasks\/{{(item | fromIRI).uuid}}\" target=\"_blank\" rel=\"noopener\">Click Here<\/a> | <span>&#10060;<\/span> |{% endfor %}"
                 },
                 "_showJson": false,
                 "operation": "Append",
@@ -274,8 +279,8 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "705",
-            "left": "475",
+            "top": "840",
+            "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
             "group": null,
             "uuid": "42eca79d-509c-40ae-b78c-c7ec053f8bf2"
@@ -284,13 +289,13 @@
     "routes": [
         {
             "@type": "WorkflowRoute",
-            "name": "Configuration -> Submit Risk Assessment Information",
+            "name": "Configuration -> Apply Technical Fix to Stop Incident",
             "targetStep": "\/api\/3\/workflow_steps\/b046e6f5-ce62-4746-b4dc-092c691cb900",
             "sourceStep": "\/api\/3\/workflow_steps\/50cd5b5e-4338-42d7-b2ae-88a15b4b12e8",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "37b6c27e-0b35-430a-8735-6e77e59328f3"
+            "uuid": "f8c80085-99d6-433a-8a3e-8628795f7e35"
         },
         {
             "@type": "WorkflowRoute",
@@ -304,6 +309,16 @@
         },
         {
             "@type": "WorkflowRoute",
+            "name": "Notify Affected Individuals -> Update GDPR Record",
+            "targetStep": "\/api\/3\/workflow_steps\/42eca79d-509c-40ae-b78c-c7ec053f8bf2",
+            "sourceStep": "\/api\/3\/workflow_steps\/9529559d-7dca-4b8c-aa92-273481032453",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "251291f7-255f-4288-8460-e68d80c04879"
+        },
+        {
+            "@type": "WorkflowRoute",
             "name": "Report the Crime to Law Enforcement Agencies -> Copy of Notify Data Protection Officer",
             "targetStep": "\/api\/3\/workflow_steps\/31933abf-d91c-4c4b-87ef-7864fec6b088",
             "sourceStep": "\/api\/3\/workflow_steps\/67b9fe72-8f4c-4e5f-8899-4339a3c4c91e",
@@ -314,13 +329,13 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Report Threat Indicators to Federal Agencies -> Update GDPR Record",
-            "targetStep": "\/api\/3\/workflow_steps\/42eca79d-509c-40ae-b78c-c7ec053f8bf2",
+            "name": "Report Threat Indicators to Federal Agencies -> Notify Data Protection Officer",
+            "targetStep": "\/api\/3\/workflow_steps\/9529559d-7dca-4b8c-aa92-273481032453",
             "sourceStep": "\/api\/3\/workflow_steps\/31933abf-d91c-4c4b-87ef-7864fec6b088",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "1d486d4f-c661-4484-a2a1-3b4396f92262"
+            "uuid": "7ad1ce6a-11fe-44db-b5cb-aa2d8738ca56"
         },
         {
             "@type": "WorkflowRoute",
