@@ -1,0 +1,60 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/b8810a5f-dffd-41f5-8353-fe7f371e9fe2",
+    "@type": "PicklistName",
+    "name": "PHISafeguardType",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/219feeab-9a3e-4a16-8dfc-d393a9bfdf20",
+            "@type": "Picklist",
+            "itemValue": "None",
+            "orderIndex": 0,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/b8810a5f-dffd-41f5-8353-fe7f371e9fe2",
+            "uuid": "219feeab-9a3e-4a16-8dfc-d393a9bfdf20"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/b0a55bdc-6a5d-4964-be38-8d60ae2c532e",
+            "@type": "Picklist",
+            "itemValue": "Privacy Rule Safeguards",
+            "orderIndex": 1,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/b8810a5f-dffd-41f5-8353-fe7f371e9fe2",
+            "uuid": "b0a55bdc-6a5d-4964-be38-8d60ae2c532e"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/435da3a6-33f1-400f-9701-ce9c7605e2f6",
+            "@type": "Picklist",
+            "itemValue": "Security Rule Administrative Safeguards",
+            "orderIndex": 2,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/b8810a5f-dffd-41f5-8353-fe7f371e9fe2",
+            "uuid": "435da3a6-33f1-400f-9701-ce9c7605e2f6"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/bce4046f-f8c9-44c5-87e3-0cf43c552aff",
+            "@type": "Picklist",
+            "itemValue": "Security Rule Physical Safeguards",
+            "orderIndex": 3,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/b8810a5f-dffd-41f5-8353-fe7f371e9fe2",
+            "uuid": "bce4046f-f8c9-44c5-87e3-0cf43c552aff"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/5512b711-58fb-43cc-b834-f9cbd02be05a",
+            "@type": "Picklist",
+            "itemValue": "Security Rule Technical Safeguards",
+            "orderIndex": 4,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/b8810a5f-dffd-41f5-8353-fe7f371e9fe2",
+            "uuid": "5512b711-58fb-43cc-b834-f9cbd02be05a"
+        }
+    ],
+    "uuid": "b8810a5f-dffd-41f5-8353-fe7f371e9fe2"
+}

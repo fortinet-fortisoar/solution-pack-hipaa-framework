@@ -23,8 +23,8 @@
                 "breachNotifyDueDate": "{% if vars.input.params.noOfAffectedUsers > 500 %}\n{{arrow.get(vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].breachDetectionDate).shift(days=+60).int_timestamp}}\n{% else %}\n{{ arrow.get('31-12-' + arrow.utcnow().year | string, 'DD-MM-YYYY').int_timestamp }}\n{% endif %}"
             },
             "status": null,
-            "top": "570",
-            "left": "300",
+            "top": "540",
+            "left": "800",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "group": null,
             "uuid": "2cf788da-17b3-47a0-b9b5-2a3b2c630625"
@@ -237,6 +237,36 @@
                     "tasks"
                 ],
                 "inputVariables": [
+                    {
+                        "name": "typeOfDataBreach",
+                        "type": "array",
+                        "label": "Type of Data Breach",
+                        "title": "Dynamic List",
+                        "usable": true,
+                        "options": [
+                            "Hacking or IT Incident",
+                            "Improper Disposal",
+                            "Loss",
+                            "Theft",
+                            "Unauthorized Access or Disclosure"
+                        ],
+                        "tooltip": "\u2022Hacking- Technical Intrusion e.g malware or hacking \u2022Improper Disposal- Improper disposal of electronic media or paper \u2022Loss- Loss of electronic media or paper \u2022Theft- Theft of electronic media or paper",
+                        "dataType": "dynamicList",
+                        "formType": "dynamicList",
+                        "required": false,
+                        "_expanded": false,
+                        "mmdUpdate": true,
+                        "collection": false,
+                        "searchable": false,
+                        "templateUrl": "app\/components\/form\/fields\/dynamicList.html",
+                        "defaultValue": null,
+                        "_previousName": "typeOfDataBreach",
+                        "playbookField": true,
+                        "lengthConstraint": true,
+                        "allowedGridColumn": false,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false
+                    },
                     {
                         "name": "typeOfPHIExposedInBreach",
                         "type": "picklists",
@@ -575,7 +605,7 @@
                         "_addVisibilityConditions": true
                     },
                     {
-                        "name": "typeOfPHIInvolvedInBreachOther",
+                        "name": "typeOfPHIExposedInBreachOther",
                         "type": "string",
                         "label": "Type of PHI Exposed in Breach (Other)",
                         "title": "Text Area",
@@ -591,7 +621,7 @@
                         "templateUrl": "app\/components\/form\/fields\/json.html",
                         "_nameTouched": true,
                         "defaultValue": null,
-                        "_previousName": "typeOfPHIInvolvedInBreach(Other)",
+                        "_previousName": "typeOfPHIInvolvedInBreachOther",
                         "playbookField": true,
                         "visibilityQuery": {
                             "sort": [],
@@ -694,12 +724,13 @@
                 "step_variables": {
                     "input": {
                         "params": {
+                            "typeOfDataBreach": "{{vars.request.data[\"typeOfDataBreach\"]}}",
                             "noOfAffectedUsers": "{{vars.request.data[\"noOfAffectedUsers\"]}}",
                             "typeOfPHIExposedInBreach": "{{vars.request.data[\"typeOfPHIExposedInBreach\"]}}",
                             "clinicalPHIExposedInBreach": "{{vars.request.data[\"clinicalPHIExposedInBreach\"]}}",
                             "financialPHIExposedInBreach": "{{vars.request.data[\"financialPHIExposedInBreach\"]}}",
                             "demographicPHIExposedInBreach": "{{vars.request.data[\"demographicPHIExposedInBreach\"]}}",
-                            "typeOfPHIInvolvedInBreachOther": "{{vars.request.data[\"typeOfPHIInvolvedInBreachOther\"]}}"
+                            "typeOfPHIExposedInBreachOther": "{{vars.request.data[\"typeOfPHIExposedInBreachOther\"]}}"
                         },
                         "records": "{{vars.input.records}}"
                     }
@@ -792,14 +823,13 @@
                     "records": "{{vars.complianceIRI}},{{vars.incidentIRI}}"
                 },
                 "resource": {
+                    "clinicalPHI": "{{vars.input.params.clinicalPHIExposedInBreach}}",
+                    "typeOfDataBreach": "{{\"GDPRDataBreachType\" | picklist(vars.input.params.typeOfDataBreach, \"@id\")}}",
                     "noOfAffectedUsers": "{{vars.input.params.noOfAffectedUsers}}",
-                    "breachNotifyDueDate": "{{vars.breachNotifyDueDate}}",
-                    "wasThePHIEPHIEncrypted": "{{\"YesNoInput\" | picklist(vars.input.params.wasThePHIEncrypted, \"@id\")}}",
-                    "whatHealthInformationWasExposed": "{{vars.input.params.whatHealthInformationWasExposed}}",
-                    "measuresInPlaceToMitigateTheRisk": "{{vars.input.params.measuresInPlaceToMitigateTheRisk}}",
-                    "isPHIMisuseOrDisclosureForeseeable": "{{\"YesNoInput\" | picklist(vars.input.params.isDataMisuseForeseeable, \"@id\")}}",
-                    "wasThePHIEPHIAccessedImpermissibly": "{{\"YesNoInput\" | picklist(vars.input.params.wasThePHIAccessedImpermissibly, \"@id\")}}",
-                    "whoAccessedPHIEPHIWithoutPermission": "{{vars.input.params.whoAccessedPHIWithoutPermission}}"
+                    "typeOfPHIInvolvedInBreach": "{{vars.input.params.typeOfPHIExposedInBreach}}",
+                    "financialPHIExposedInBreach": "{{vars.input.params.financialPHIExposedInBreach}}",
+                    "demographicPHIExposedInBreach": "{{vars.input.params.demographicPHIExposedInBreach}}",
+                    "typeOfPHIInvolvedInBreachOther": "{{vars.input.params.typeOfPHIExposedInBreachOther}}"
                 },
                 "_showJson": false,
                 "operation": "Append",
@@ -808,13 +838,18 @@
                 "collectionType": "\/api\/3\/data_compliances",
                 "fieldOperation": {
                     "recordTags": "Append",
-                    "reminderMailStatus": "Append"
+                    "clinicalPHI": "Append",
+                    "reminderMailStatus": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append",
+                    "financialPHIExposedInBreach": "Append",
+                    "demographicPHIExposedInBreach": "Append",
+                    "safeguardsInPlaceBeforeBreach": "Append"
                 },
                 "step_variables": []
             },
             "status": null,
             "top": "840",
-            "left": "475",
+            "left": "480",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
             "group": null,
             "uuid": "4ece4af6-db9a-4f93-a487-9480ceb8e781"
@@ -900,13 +935,13 @@
     "routes": [
         {
             "@type": "WorkflowRoute",
-            "name": "Calculate Breach Notification Due Date -> Is Breach Reportable",
-            "targetStep": "\/api\/3\/workflow_steps\/f86db341-dfd9-4a41-a973-ce0bd33d1dda",
-            "sourceStep": "\/api\/3\/workflow_steps\/2cf788da-17b3-47a0-b9b5-2a3b2c630625",
+            "name": "Configuration -> Get Compliance Record ID",
+            "targetStep": "\/api\/3\/workflow_steps\/74af9803-5643-4c10-a5d6-16b6f6f572fa",
+            "sourceStep": "\/api\/3\/workflow_steps\/d82472f9-b968-4a8b-9b91-d422ff930cf7",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "ea40b0d0-e1d1-4237-80dc-faff42b4ddd7"
+            "uuid": "1784a21a-adcc-4e99-8b5b-c1aac895bd59"
         },
         {
             "@type": "WorkflowRoute",
@@ -920,13 +955,13 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Get Parent Incident ID -> Calculate Breach Notification Due Date",
-            "targetStep": "\/api\/3\/workflow_steps\/2cf788da-17b3-47a0-b9b5-2a3b2c630625",
+            "name": "Get Parent Incident ID -> Update HIPAA Assessment Data",
+            "targetStep": "\/api\/3\/workflow_steps\/4ece4af6-db9a-4f93-a487-9480ceb8e781",
             "sourceStep": "\/api\/3\/workflow_steps\/100d4515-d76b-4b1e-b4d3-f8bc437d558a",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "edff87e6-03f6-449e-956c-29c1f872681d"
+            "uuid": "f5b55771-8679-412e-9723-bab5abe8c447"
         },
         {
             "@type": "WorkflowRoute",

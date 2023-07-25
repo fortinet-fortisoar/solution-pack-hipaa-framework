@@ -232,20 +232,10 @@
                                                                                                                         {
                                                                                                                             "fields": [
                                                                                                                                 {
-                                                                                                                                    "name": "wasThePHIEPHIEncrypted",
+                                                                                                                                    "name": "briefDescriptionOfTheBreach",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "readOnly": true
                                                                                                                                 },
-                                                                                                                                {
-                                                                                                                                    "name": "isPHIMisuseOrDisclosureForeseeable",
-                                                                                                                                    "highlightMode": true,
-                                                                                                                                    "readOnly": true
-                                                                                                                                }
-                                                                                                                            ],
-                                                                                                                            "style": "col-lg-6"
-                                                                                                                        },
-                                                                                                                        {
-                                                                                                                            "fields": [
                                                                                                                                 {
                                                                                                                                     "name": "wasThePHIEPHIAccessedImpermissibly",
                                                                                                                                     "highlightMode": true,
@@ -255,9 +245,19 @@
                                                                                                                                     "name": "whoAccessedPHIEPHIWithoutPermission",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "readOnly": true
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "wasThePHIEPHIEncrypted",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
                                                                                                                                 },
                                                                                                                                 {
-                                                                                                                                    "name": "briefDescriptionOfTheBreach",
+                                                                                                                                    "name": "isPHIMisuseOrDisclosureForeseeable",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "readOnly": true
                                                                                                                                 }
@@ -341,7 +341,7 @@
                                                                                                                         {
                                                                                                                             "fields": [
                                                                                                                                 {
-                                                                                                                                    "name": "causeOfDataBreach",
+                                                                                                                                    "name": "typeOfDataBreach",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
                                                                                                                                     "readOnly": true
@@ -379,6 +379,16 @@
                                                                                                                                     "name": "measuresToReduceFutureRisks",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "actionsTakenInResponseToBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": false
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "describeOtherActionsTaken",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": false
                                                                                                                                 }
                                                                                                                             ],
                                                                                                                             "style": "col-lg-6"
@@ -386,7 +396,7 @@
                                                                                                                         {
                                                                                                                             "fields": [
                                                                                                                                 {
-                                                                                                                                    "name": "typeOfDataBreach",
+                                                                                                                                    "name": "causeOfDataBreach",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
                                                                                                                                     "readOnly": true
@@ -414,6 +424,36 @@
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
                                                                                                                                     "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "typeOfPHIInvolvedInBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "clinicalPHI",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "demographicPHIExposedInBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "financialPHIExposedInBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "typeOfPHIInvolvedInBreachOther",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "safeguardsInPlaceBeforeBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": false
                                                                                                                                 }
                                                                                                                             ],
                                                                                                                             "style": "col-lg-6"
@@ -785,7 +825,7 @@
                                                     ]
                                                 }
                                             },
-                                            "show": false,
+                                            "show": true,
                                             "icon": "fa fa-exchange",
                                             "visible": true
                                         },

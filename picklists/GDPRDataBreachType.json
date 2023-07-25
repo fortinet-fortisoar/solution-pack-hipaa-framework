@@ -1,0 +1,90 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/233580aa-1e3a-4ebb-a6dd-129c0e0a49db",
+    "@type": "PicklistName",
+    "name": "GDPRDataBreachType",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/af93b263-7293-47bc-b310-4ffa73512602",
+            "@type": "Picklist",
+            "itemValue": "Confidentiality Breach",
+            "orderIndex": 0,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/233580aa-1e3a-4ebb-a6dd-129c0e0a49db",
+            "uuid": "af93b263-7293-47bc-b310-4ffa73512602"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/db889249-5bd8-4db5-8e40-7c045e5db735",
+            "@type": "Picklist",
+            "itemValue": "Integrity Breach",
+            "orderIndex": 1,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/233580aa-1e3a-4ebb-a6dd-129c0e0a49db",
+            "uuid": "db889249-5bd8-4db5-8e40-7c045e5db735"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/906447ad-6312-4341-b597-463544a05218",
+            "@type": "Picklist",
+            "itemValue": "Availability Breach",
+            "orderIndex": 2,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/233580aa-1e3a-4ebb-a6dd-129c0e0a49db",
+            "uuid": "906447ad-6312-4341-b597-463544a05218"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/7954973a-7dc9-496e-863f-8ce310a36a74",
+            "@type": "Picklist",
+            "itemValue": "Hacking or IT Incident",
+            "orderIndex": 3,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/233580aa-1e3a-4ebb-a6dd-129c0e0a49db",
+            "uuid": "7954973a-7dc9-496e-863f-8ce310a36a74"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/498241c2-b78b-486f-9854-bc666b6a69c8",
+            "@type": "Picklist",
+            "itemValue": "Improper Disposal",
+            "orderIndex": 4,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/233580aa-1e3a-4ebb-a6dd-129c0e0a49db",
+            "uuid": "498241c2-b78b-486f-9854-bc666b6a69c8"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/f287d238-a236-4061-8544-6d5c7e576fbf",
+            "@type": "Picklist",
+            "itemValue": "Loss",
+            "orderIndex": 5,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/233580aa-1e3a-4ebb-a6dd-129c0e0a49db",
+            "uuid": "f287d238-a236-4061-8544-6d5c7e576fbf"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/7dfa40fe-5910-443e-bb13-1ef22e3b2867",
+            "@type": "Picklist",
+            "itemValue": "Theft",
+            "orderIndex": 6,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/233580aa-1e3a-4ebb-a6dd-129c0e0a49db",
+            "uuid": "7dfa40fe-5910-443e-bb13-1ef22e3b2867"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/91c5e3e1-1ab0-4bb9-9681-a8e63a4d4be7",
+            "@type": "Picklist",
+            "itemValue": "Unauthorized Access or Disclosure",
+            "orderIndex": 7,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/233580aa-1e3a-4ebb-a6dd-129c0e0a49db",
+            "uuid": "91c5e3e1-1ab0-4bb9-9681-a8e63a4d4be7"
+        }
+    ],
+    "uuid": "233580aa-1e3a-4ebb-a6dd-129c0e0a49db"
+}

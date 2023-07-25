@@ -44,7 +44,16 @@
                 "name": "FinancialPHIType"
             },
             {
+                "name": "GDPRDataBreachType"
+            },
+            {
+                "name": "GDPREUCountryList"
+            },
+            {
                 "name": "GDPRReminderStatus"
+            },
+            {
+                "name": "PHISafeguardType"
             },
             {
                 "name": "ProtectedHealthInformationType"

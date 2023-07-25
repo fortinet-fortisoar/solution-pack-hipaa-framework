@@ -1,0 +1,320 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+    "@type": "PicklistName",
+    "name": "GDPREUCountryList",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/2ecefcd0-b738-43a6-ace7-5787150c79af",
+            "@type": "Picklist",
+            "itemValue": "Austria",
+            "orderIndex": 0,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "2ecefcd0-b738-43a6-ace7-5787150c79af"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/4ac88c4d-f0d8-4ecf-bf10-71411148cbcf",
+            "@type": "Picklist",
+            "itemValue": "Belgium",
+            "orderIndex": 1,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "4ac88c4d-f0d8-4ecf-bf10-71411148cbcf"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/b0d7684e-9d8e-47af-8918-61ca9befb87f",
+            "@type": "Picklist",
+            "itemValue": "Bulgaria",
+            "orderIndex": 2,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "b0d7684e-9d8e-47af-8918-61ca9befb87f"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/104bad78-9949-40dc-883c-6bbd0bd41913",
+            "@type": "Picklist",
+            "itemValue": "Croatia",
+            "orderIndex": 3,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "104bad78-9949-40dc-883c-6bbd0bd41913"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/5576fbb7-073e-485d-9261-6368d3b6033d",
+            "@type": "Picklist",
+            "itemValue": "Cyprus",
+            "orderIndex": 4,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "5576fbb7-073e-485d-9261-6368d3b6033d"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/b1a4ddce-870a-4f0a-8b1e-01484a03ed70",
+            "@type": "Picklist",
+            "itemValue": "Czech Republic",
+            "orderIndex": 5,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "b1a4ddce-870a-4f0a-8b1e-01484a03ed70"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/f9ce0f08-02c1-4a98-8342-83d765797dde",
+            "@type": "Picklist",
+            "itemValue": "Denmark",
+            "orderIndex": 6,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "f9ce0f08-02c1-4a98-8342-83d765797dde"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/9bc42f4e-ce89-40a5-8f6c-3c9960b19bab",
+            "@type": "Picklist",
+            "itemValue": "EDPS",
+            "orderIndex": 7,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "9bc42f4e-ce89-40a5-8f6c-3c9960b19bab"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/49a43e44-0eb9-4418-9045-d2e6ad042f2b",
+            "@type": "Picklist",
+            "itemValue": "Estonia",
+            "orderIndex": 8,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "49a43e44-0eb9-4418-9045-d2e6ad042f2b"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/39ae31c2-68ea-4241-a1b4-e721b078216c",
+            "@type": "Picklist",
+            "itemValue": "Finland",
+            "orderIndex": 9,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "39ae31c2-68ea-4241-a1b4-e721b078216c"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/9c8e5da4-ff98-4359-87ec-528381d8cd64",
+            "@type": "Picklist",
+            "itemValue": "France",
+            "orderIndex": 10,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "9c8e5da4-ff98-4359-87ec-528381d8cd64"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/4db7fd21-f25b-49d0-b296-db54e7a264f0",
+            "@type": "Picklist",
+            "itemValue": "Germany",
+            "orderIndex": 11,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "4db7fd21-f25b-49d0-b296-db54e7a264f0"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/4af061e5-e1c0-4945-bdfd-86e86b3ee9a0",
+            "@type": "Picklist",
+            "itemValue": "Greece",
+            "orderIndex": 12,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "4af061e5-e1c0-4945-bdfd-86e86b3ee9a0"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/8485d3d9-6796-49c8-b97d-11d8e7b266f1",
+            "@type": "Picklist",
+            "itemValue": "Hungary",
+            "orderIndex": 13,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "8485d3d9-6796-49c8-b97d-11d8e7b266f1"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/051980f7-db21-47e4-af23-58b434e8f165",
+            "@type": "Picklist",
+            "itemValue": "Ireland",
+            "orderIndex": 14,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "051980f7-db21-47e4-af23-58b434e8f165"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/8b83ae3d-6c19-4639-8820-81eabdcb97ba",
+            "@type": "Picklist",
+            "itemValue": "Italy",
+            "orderIndex": 15,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "8b83ae3d-6c19-4639-8820-81eabdcb97ba"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/fc4de9bd-010a-4993-a34f-d0e5276292f4",
+            "@type": "Picklist",
+            "itemValue": "Latvia",
+            "orderIndex": 16,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "fc4de9bd-010a-4993-a34f-d0e5276292f4"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/a1fa039f-6e4f-4f8f-9141-eb018e06a56a",
+            "@type": "Picklist",
+            "itemValue": "Lithuania",
+            "orderIndex": 17,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "a1fa039f-6e4f-4f8f-9141-eb018e06a56a"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/2a4e9662-d10b-4fa5-9563-4ce237ba12a8",
+            "@type": "Picklist",
+            "itemValue": "Luxembourg",
+            "orderIndex": 18,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "2a4e9662-d10b-4fa5-9563-4ce237ba12a8"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/a7509ad3-69da-466a-85aa-5ea76ada6056",
+            "@type": "Picklist",
+            "itemValue": "Malta",
+            "orderIndex": 19,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "a7509ad3-69da-466a-85aa-5ea76ada6056"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/f0698e06-33e7-4a67-83f7-19417c3006a0",
+            "@type": "Picklist",
+            "itemValue": "Netherlands",
+            "orderIndex": 20,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "f0698e06-33e7-4a67-83f7-19417c3006a0"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/bf2a32e6-1f08-4ab4-97ff-9882a42e3546",
+            "@type": "Picklist",
+            "itemValue": "Poland",
+            "orderIndex": 21,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "bf2a32e6-1f08-4ab4-97ff-9882a42e3546"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/a7a73e65-7bcf-4c01-89fb-12699845ab98",
+            "@type": "Picklist",
+            "itemValue": "Portugal",
+            "orderIndex": 22,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "a7a73e65-7bcf-4c01-89fb-12699845ab98"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/713533f2-d3ad-4911-a95e-254c7956b13a",
+            "@type": "Picklist",
+            "itemValue": "Romania",
+            "orderIndex": 23,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "713533f2-d3ad-4911-a95e-254c7956b13a"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/7f35592e-ba03-4b08-91d0-a96c710b2c5c",
+            "@type": "Picklist",
+            "itemValue": "Slovakia",
+            "orderIndex": 24,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "7f35592e-ba03-4b08-91d0-a96c710b2c5c"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/b6c6f644-6e8a-4d56-8553-f36c9914f0e6",
+            "@type": "Picklist",
+            "itemValue": "Slovenia",
+            "orderIndex": 25,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "b6c6f644-6e8a-4d56-8553-f36c9914f0e6"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/8867340b-a49f-497b-8ba6-49e697e4d33a",
+            "@type": "Picklist",
+            "itemValue": "Spain",
+            "orderIndex": 26,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "8867340b-a49f-497b-8ba6-49e697e4d33a"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/bddd222b-6d9e-47c3-b231-ed30f27a6a75",
+            "@type": "Picklist",
+            "itemValue": "Sweden",
+            "orderIndex": 27,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "bddd222b-6d9e-47c3-b231-ed30f27a6a75"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/3ae54314-2007-4be7-add1-d1bd37b320dc",
+            "@type": "Picklist",
+            "itemValue": "Iceland",
+            "orderIndex": 28,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "3ae54314-2007-4be7-add1-d1bd37b320dc"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/9fec9651-9c69-4ea9-85b3-2e2ad5418a58",
+            "@type": "Picklist",
+            "itemValue": "Liechtenstein",
+            "orderIndex": 29,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "9fec9651-9c69-4ea9-85b3-2e2ad5418a58"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/1f75fd41-517f-4016-9dc8-19fc59bd6e71",
+            "@type": "Picklist",
+            "itemValue": "Norway",
+            "orderIndex": 30,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/58585f40-557a-4753-9eb5-7895a9077962",
+            "uuid": "1f75fd41-517f-4016-9dc8-19fc59bd6e71"
+        }
+    ],
+    "uuid": "58585f40-557a-4753-9eb5-7895a9077962"
+}
