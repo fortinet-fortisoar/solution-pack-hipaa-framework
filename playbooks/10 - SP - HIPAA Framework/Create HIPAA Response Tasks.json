@@ -261,7 +261,7 @@
                     "tags": [],
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
                     "tenant": "",
-                    "content": "<p>Following tasks have been created to perform HIPAA Assessment.</p>\n<p>&nbsp;</p>\n<p>{% for item in vars.taskList %}</p>\n<p><a href=\"/modules/view-panel/tasks/{{(item | fromIRI).uuid}}\" target=\"_blank\" rel=\"noopener\">Task #{{(item | fromIRI).id}} - {{(item | fromIRI).name}}</a></p>\n<p>{% endfor %}</p>",
+                    "content": "<p>Following tasks have been created to perform HIPAA Assessment.<\/p>\n<p>&nbsp;<\/p>\n<p>{% for item in vars.taskList %}<\/p>\n<p><a href=\"\/modules\/view-panel\/tasks\/{{(item | fromIRI).uuid}}\" target=\"_blank\" rel=\"noopener\">Task #{{(item | fromIRI).id}} - {{(item | fromIRI).name}}<\/a><\/p>\n<p>{% endfor %}<\/p>",
                     "records": ""
                 },
                 "resource": {

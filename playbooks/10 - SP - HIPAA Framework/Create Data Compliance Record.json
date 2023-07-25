@@ -213,14 +213,16 @@
                     "recordTags": "{% if vars.testMode %}HIPAA,Test Mode{% else %}HIPAA{% endif %}",
                     "assignedDate": "{{arrow.utcnow().int_timestamp}}",
                     "breachDetectionDate": "{{arrow.get(vars.steps.Get_Data_Breach_Details.input.breachDetectionDate).int_timestamp}}",
+                    "breachNotifyDueDate": "{{arrow.get(vars.steps.Get_Data_Breach_Details.input.breachDetectionDate).shift(days=+60).int_timestamp}}",
                     "breachOccurrenceDate": "{{arrow.get(vars.steps.Get_Data_Breach_Details.input.breachOccurrenceDate).int_timestamp}}",
                     "regulatoryCompliance": "{{\"RegulatoryBody\" | picklist(vars.steps.Get_Data_Breach_Details.input.regulatoryBody, \"@id\")}}",
                     "breachNotificationSLA": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
-                    "wasThePHIEPHIEncrypted": "{{vars.steps.Get_Data_Breach_Details.input.wasThePHIEPHIEncrypted['@id']}}",
+                    "wasThePHIEPHIEncrypted": "{{\"YesNoInput\" | picklist(vars.steps.Get_Data_Breach_Details.input.wasThePHIEncrypted, \"@id\")}}",
                     "wasPersonalDataAffected": "\/api\/3\/picklists\/cfd49634-d25a-476f-8485-99585e589a8c",
+                    "briefDescriptionOfTheBreach": "{{vars.steps.Get_Data_Breach_Details.input.briefDescriptionOfTheBreach}}",
                     "isHarmRiskOrMisuseForeseeable": "{{vars.steps.Get_Data_Breach_Details.input.isHarmRiskOrMisuseForeseeable}}",
-                    "whatHealthInformationWasExposed": "{{vars.steps.Get_Data_Breach_Details.input.whatHealthInformationWasExposed}}",
-                    "measuresInPlaceToMitigateTheRisk": "{{vars.steps.Get_Data_Breach_Details.input.measuresInPlaceToMitigateTheRisk}}",
+                    "isPHIMisuseOrDisclosureForeseeable": "{{\"YesNoInput\" | picklist(vars.steps.Get_Data_Breach_Details.input.isPHIMisuseOrDisclosureForeseeable, \"@id\")}}",
+                    "wasThePHIEPHIAccessedImpermissibly": "{{\"YesNoInput\" | picklist(vars.steps.Get_Data_Breach_Details.input.wasThePHIAccessedImpermissibly, \"@id\")}}",
                     "whoAccessedPHIEPHIWithoutPermission": "{{vars.steps.Get_Data_Breach_Details.input.whoAccessedPHIEPHIWithoutPermission}}"
                 },
                 "_showJson": false,
@@ -229,7 +231,9 @@
                 "__recommend": [],
                 "fieldOperation": {
                     "recordTags": "Overwrite",
-                    "reminderMailStatus": "Overwrite"
+                    "clinicalPHI": "Overwrite",
+                    "reminderMailStatus": "Overwrite",
+                    "typeOfPHIInvolvedInBreach": "Overwrite"
                 },
                 "step_variables": {
                     "taskList": "[]"
@@ -504,7 +508,7 @@
                             {
                                 "name": "wasTheDataEncrypted",
                                 "type": "picklists",
-                                "label": "Was the data encrypted?",
+                                "label": "Was the Data Encrypted?",
                                 "title": "Picklist",
                                 "usable": true,
                                 "tooltip": "Choose Yes - If breached data was encrypted",
@@ -585,7 +589,7 @@
                             {
                                 "name": "wasTheExposureResolved",
                                 "type": "picklists",
-                                "label": "Was the exposure resolved?",
+                                "label": "Was the Exposure Resolved?",
                                 "title": "Picklist",
                                 "usable": true,
                                 "tooltip": "Choose Yes - If the data breach exposure is not yet resolved",
@@ -666,7 +670,7 @@
                             {
                                 "name": "isHarmRiskOrMisuseForeseeable",
                                 "type": "picklists",
-                                "label": "Is data misuse foreseeable?",
+                                "label": "Is Data Misuse or Disclosure Foreseeable?",
                                 "title": "Picklist",
                                 "usable": true,
                                 "tooltip": "Choose Yes - If the data breach risks to the rights and freedoms of data subjects",
@@ -747,7 +751,7 @@
                             {
                                 "name": "whatWasTheDataFormat",
                                 "type": "string",
-                                "label": "What was the data format?",
+                                "label": "What was the Data Format?",
                                 "tooltip": "Such as Physical or Digital Documents, Multimedia, Spreadsheets etc",
                                 "dataType": "text",
                                 "formType": "text",
@@ -785,7 +789,7 @@
                             {
                                 "name": "whatWasTheDataSource",
                                 "type": "string",
-                                "label": "What was the data source?",
+                                "label": "What was the Data Source?",
                                 "tooltip": "Such as Databases, Cloud, Third-party Site etc.",
                                 "dataType": "text",
                                 "formType": "text",
@@ -816,6 +820,267 @@
                                         }
                                     ]
                                 },
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false,
+                                "_addVisibilityConditions": true
+                            },
+                            {
+                                "name": "wasThePHIEncrypted",
+                                "type": "array",
+                                "label": "Was the PHI\/ePHI Encrypted?",
+                                "title": "Dynamic List",
+                                "usable": true,
+                                "options": [
+                                    "Yes",
+                                    "No"
+                                ],
+                                "tooltip": "",
+                                "dataType": "dynamicList",
+                                "formType": "dynamicList",
+                                "required": true,
+                                "_expanded": false,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": false,
+                                "templateUrl": "app\/components\/form\/fields\/dynamicList.html",
+                                "_nameTouched": true,
+                                "defaultValue": null,
+                                "_previousName": "wasThePHI\/EPHIEncrypted?",
+                                "playbookField": true,
+                                "visibilityQuery": {
+                                    "sort": [],
+                                    "limit": 30,
+                                    "logic": "AND",
+                                    "filters": [
+                                        {
+                                            "type": "array",
+                                            "field": "regulatoryBody",
+                                            "value": [
+                                                "HIPAA"
+                                            ],
+                                            "module": "regulatoryBody",
+                                            "display": "",
+                                            "operator": "in",
+                                            "template": "tags",
+                                            "OPERATOR_KEY": "$",
+                                            "useInOperator": true,
+                                            "previousOperator": "in",
+                                            "previousTemplate": "tags"
+                                        }
+                                    ]
+                                },
+                                "lengthConstraint": true,
+                                "allowedGridColumn": false,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false,
+                                "_addVisibilityConditions": true
+                            },
+                            {
+                                "name": "isPHIMisuseOrDisclosureForeseeable",
+                                "type": "array",
+                                "label": "Is PHI Misuse or Disclosure Foreseeable?",
+                                "title": "Dynamic List",
+                                "usable": true,
+                                "options": [
+                                    "Yes",
+                                    "No"
+                                ],
+                                "tooltip": "",
+                                "dataType": "dynamicList",
+                                "formType": "dynamicList",
+                                "required": true,
+                                "_expanded": false,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": false,
+                                "templateUrl": "app\/components\/form\/fields\/dynamicList.html",
+                                "_nameTouched": true,
+                                "defaultValue": null,
+                                "_previousName": "isPHIMisuseOrDisclosureForeseeable?",
+                                "playbookField": true,
+                                "visibilityQuery": {
+                                    "sort": [],
+                                    "limit": 30,
+                                    "logic": "AND",
+                                    "filters": [
+                                        {
+                                            "type": "array",
+                                            "field": "regulatoryBody",
+                                            "value": [
+                                                "HIPAA"
+                                            ],
+                                            "module": "regulatoryBody",
+                                            "display": "",
+                                            "operator": "in",
+                                            "template": "tags",
+                                            "OPERATOR_KEY": "$",
+                                            "useInOperator": true,
+                                            "previousOperator": "in",
+                                            "previousTemplate": "tags"
+                                        }
+                                    ]
+                                },
+                                "lengthConstraint": true,
+                                "allowedGridColumn": false,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false,
+                                "_addVisibilityConditions": true
+                            },
+                            {
+                                "name": "wasThePHIAccessedImpermissibly",
+                                "type": "array",
+                                "label": "Was the PHI\/ePHI Accessed Impermissibly?",
+                                "title": "Dynamic List",
+                                "usable": true,
+                                "options": [
+                                    "Yes",
+                                    "No"
+                                ],
+                                "tooltip": "",
+                                "dataType": "dynamicList",
+                                "formType": "dynamicList",
+                                "required": true,
+                                "_expanded": false,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": false,
+                                "templateUrl": "app\/components\/form\/fields\/dynamicList.html",
+                                "_nameTouched": true,
+                                "defaultValue": null,
+                                "_previousName": "wasThePHI\/EPHIAccessedImpermissibly?",
+                                "playbookField": true,
+                                "visibilityQuery": {
+                                    "sort": [],
+                                    "limit": 30,
+                                    "logic": "AND",
+                                    "filters": [
+                                        {
+                                            "type": "array",
+                                            "field": "regulatoryBody",
+                                            "value": [
+                                                "HIPAA"
+                                            ],
+                                            "module": "regulatoryBody",
+                                            "display": "",
+                                            "operator": "in",
+                                            "template": "tags",
+                                            "OPERATOR_KEY": "$",
+                                            "useInOperator": true,
+                                            "previousOperator": "in",
+                                            "previousTemplate": "tags"
+                                        }
+                                    ]
+                                },
+                                "lengthConstraint": true,
+                                "allowedGridColumn": false,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false,
+                                "_addVisibilityConditions": true
+                            },
+                            {
+                                "name": "whoAccessedPHIEPHIWithoutPermission",
+                                "type": "string",
+                                "label": "Who Accessed PHI\/ePHI Without Permission? (If Known)",
+                                "title": "Text Area",
+                                "usable": false,
+                                "tooltip": "",
+                                "dataType": "text",
+                                "formType": "textarea",
+                                "required": true,
+                                "_expanded": false,
+                                "mmdUpdate": false,
+                                "collection": false,
+                                "searchable": false,
+                                "templateUrl": "app\/components\/form\/fields\/json.html",
+                                "_nameTouched": true,
+                                "defaultValue": null,
+                                "_previousName": "whoAccessedPHI\/EPHIWithoutPermission?(IfKnown)",
+                                "playbookField": true,
+                                "visibilityQuery": {
+                                    "sort": [],
+                                    "limit": 30,
+                                    "logic": "AND",
+                                    "filters": [
+                                        {
+                                            "type": "array",
+                                            "field": "regulatoryBody",
+                                            "value": [
+                                                "HIPAA"
+                                            ],
+                                            "module": "regulatoryBody",
+                                            "display": "",
+                                            "operator": "in",
+                                            "template": "tags",
+                                            "OPERATOR_KEY": "$",
+                                            "useInOperator": true,
+                                            "previousOperator": "in",
+                                            "previousTemplate": "tags"
+                                        },
+                                        {
+                                            "type": "array",
+                                            "field": "wasThePHIAccessedImpermissibly",
+                                            "value": [
+                                                "Yes"
+                                            ],
+                                            "module": "wasThePHIAccessedImpermissibly",
+                                            "display": "",
+                                            "operator": "in",
+                                            "template": "tags",
+                                            "OPERATOR_KEY": "$",
+                                            "useInOperator": true,
+                                            "previousOperator": "in",
+                                            "previousTemplate": "tags"
+                                        }
+                                    ]
+                                },
+                                "lengthConstraint": false,
+                                "allowedGridColumn": false,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false,
+                                "_addVisibilityConditions": true
+                            },
+                            {
+                                "name": "briefDescriptionOfTheBreach",
+                                "type": "string",
+                                "label": "Brief Description of the Breach",
+                                "title": "Text Area",
+                                "usable": false,
+                                "tooltip": "",
+                                "dataType": "text",
+                                "formType": "textarea",
+                                "required": true,
+                                "_expanded": false,
+                                "mmdUpdate": false,
+                                "collection": false,
+                                "searchable": false,
+                                "templateUrl": "app\/components\/form\/fields\/json.html",
+                                "defaultValue": null,
+                                "_previousName": "briefDescriptionOfTheBreach",
+                                "playbookField": true,
+                                "visibilityQuery": {
+                                    "sort": [],
+                                    "limit": 30,
+                                    "logic": "AND",
+                                    "filters": [
+                                        {
+                                            "type": "array",
+                                            "field": "regulatoryBody",
+                                            "value": [
+                                                "HIPAA"
+                                            ],
+                                            "module": "regulatoryBody",
+                                            "display": "",
+                                            "operator": "in",
+                                            "template": "tags",
+                                            "OPERATOR_KEY": "$",
+                                            "useInOperator": true,
+                                            "previousOperator": "in",
+                                            "previousTemplate": "tags"
+                                        }
+                                    ]
+                                },
+                                "lengthConstraint": false,
+                                "allowedGridColumn": false,
                                 "jinjaExpressionView": true,
                                 "useRecordFieldDefault": false,
                                 "_addVisibilityConditions": true
@@ -1059,6 +1324,7 @@
                 "resource": {
                     "name": "Submit Risk Assessment Information",
                     "type": "\/api\/3\/picklists\/6d113f01-123a-4c78-b68c-029e16df9b8b",
+                    "dueBy": "{{arrow.get(vars.steps.Get_Data_Breach_Details.input.breachDetectionDate).shift(days=+60).int_timestamp}}",
                     "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
                     "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
                     "__replace": "",
@@ -1104,7 +1370,9 @@
                 "collectionType": "\/api\/3\/data_compliances",
                 "fieldOperation": {
                     "recordTags": "Append",
-                    "reminderMailStatus": "Append"
+                    "clinicalPHI": "Append",
+                    "reminderMailStatus": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append"
                 },
                 "step_variables": []
             },

@@ -32,10 +32,22 @@
     "contents": {
         "picklistNames": [
             {
+                "name": "ClinicalPHIType"
+            },
+            {
                 "name": "Contact Title"
             },
             {
+                "name": "DemographicPHIType"
+            },
+            {
+                "name": "FinancialPHIType"
+            },
+            {
                 "name": "GDPRReminderStatus"
+            },
+            {
+                "name": "ProtectedHealthInformationType"
             },
             {
                 "name": "RegulatoryBody"
@@ -81,6 +93,13 @@
                     "list",
                     "detail",
                     "form"
+                ]
+            },
+            "tasks": {
+                "name": "Tasks",
+                "apiName": "tasks",
+                "views": [
+                    "detail"
                 ]
             }
         },

@@ -1,0 +1,354 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "rows",
+    "config": {
+        "actionButtons": [
+            {
+                "id": "\/api\/3\/workflows\/58e70745-195b-42cc-a7c4-7a38bc980f1b",
+                "name": "Get GDPR Impact Assessment Details",
+                "icon": "icon icon-editable-form"
+            },
+            {
+                "id": "\/api\/3\/workflows\/b2e46872-a618-4a2e-926a-63f768143b7e",
+                "name": "04 Create or Modify DPO and DPA Contact",
+                "icon": "fa fa-user"
+            },
+            {
+                "id": "\/api\/3\/workflows\/6d7bf931-7dae-4088-9273-f65e740a2a8d",
+                "name": "05 Notify Data Protection Officer",
+                "icon": "fa fa-user"
+            },
+            {
+                "id": "\/api\/3\/workflows\/0e727ede-cffa-4222-afc2-ab7e26043382",
+                "name": "Notify Affected Users",
+                "icon": "fa fa-users"
+            },
+            {
+                "id": "\/api\/3\/workflows\/70824543-e39d-4c4d-bcf1-86300752ed5f",
+                "name": "Get Data Breach Report Updated from DPO",
+                "icon": "icon icon-generate-incident-summary-report"
+            },
+            {
+                "id": "\/api\/3\/workflows\/8d679fb4-f503-4556-8a74-952ae5feed9b",
+                "name": "Send Data Breach Report to DPA",
+                "icon": "fa fa-envelope-o"
+            },
+            {
+                "id": "\/api\/3\/workflows\/00ae2b3d-0d1d-4a0a-baad-d5ceb7b8ab4c",
+                "name": "Get HIPAA Risk Assessment Details",
+                "icon": "icon icon-summary-01"
+            }
+        ],
+        "rows": [
+            {
+                "columns": [
+                    {
+                        "style": "col-lg-12",
+                        "widgets": [
+                            {
+                                "config": {
+                                    "idField": "id",
+                                    "picklistField": "priority",
+                                    "picklistFieldReadOnly": false,
+                                    "titleField": "name",
+                                    "titleFieldLinky": true,
+                                    "titleFieldReadOnly": false,
+                                    "wid": "127fc5a9-c365-458e-ab29-c4dc6e44050c",
+                                    "featuredRelationship": {
+                                        "field": null,
+                                        "preText": "Under Investigation In",
+                                        "query": null,
+                                        "statusField": null,
+                                        "sort": []
+                                    }
+                                },
+                                "type": "primaryDetail"
+                            },
+                            {
+                                "config": {
+                                    "rows": [
+                                        {
+                                            "columns": [
+                                                {
+                                                    "style": "col-lg-12",
+                                                    "widgets": [
+                                                        {
+                                                            "config": {
+                                                                "rows": [
+                                                                    {
+                                                                        "columns": [
+                                                                            {
+                                                                                "fields": [
+                                                                                    {
+                                                                                        "highlightMode": true,
+                                                                                        "name": "description"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ],
+                                                                        "style": "display-inline-block"
+                                                                    }
+                                                                ],
+                                                                "wid": "19b3d493-bb1c-44dc-941b-fcdb67c47747"
+                                                            },
+                                                            "type": "editableFormGroup"
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "wid": "c688f7ee-babc-4b35-8d06-824bcba35e6a",
+                                            "_collapsed": false
+                                        },
+                                        {
+                                            "columns": [
+                                                {
+                                                    "style": "col-lg-12",
+                                                    "widgets": [
+                                                        {
+                                                            "config": {
+                                                                "rows": [
+                                                                    {
+                                                                        "columns": [
+                                                                            {
+                                                                                "fields": [
+                                                                                    {
+                                                                                        "highlightMode": true,
+                                                                                        "name": "priority",
+                                                                                        "linky": true
+                                                                                    },
+                                                                                    {
+                                                                                        "highlightMode": true,
+                                                                                        "name": "type",
+                                                                                        "linky": true
+                                                                                    },
+                                                                                    {
+                                                                                        "highlightMode": true,
+                                                                                        "name": "status",
+                                                                                        "linky": true
+                                                                                    }
+                                                                                ],
+                                                                                "style": "col-lg-4"
+                                                                            },
+                                                                            {
+                                                                                "fields": [
+                                                                                    {
+                                                                                        "highlightMode": true,
+                                                                                        "name": "assignedToPerson",
+                                                                                        "linky": true
+                                                                                    },
+                                                                                    {
+                                                                                        "highlightMode": true,
+                                                                                        "name": "assignedOnDate",
+                                                                                        "linky": true
+                                                                                    },
+                                                                                    {
+                                                                                        "name": "tenant",
+                                                                                        "highlightMode": true,
+                                                                                        "linky": true,
+                                                                                        "readOnly": false
+                                                                                    }
+                                                                                ],
+                                                                                "style": "col-lg-4"
+                                                                            },
+                                                                            {
+                                                                                "fields": [
+                                                                                    {
+                                                                                        "highlightMode": true,
+                                                                                        "name": "createDate",
+                                                                                        "linky": true
+                                                                                    },
+                                                                                    {
+                                                                                        "highlightMode": true,
+                                                                                        "name": "createUser",
+                                                                                        "linky": true
+                                                                                    },
+                                                                                    {
+                                                                                        "highlightMode": true,
+                                                                                        "name": "dueBy",
+                                                                                        "linky": true
+                                                                                    }
+                                                                                ],
+                                                                                "style": "col-lg-4"
+                                                                            }
+                                                                        ],
+                                                                        "style": "display-inline-block"
+                                                                    }
+                                                                ],
+                                                                "wid": "8dc6dc80-6c82-487b-9058-31d47318eec1"
+                                                            },
+                                                            "type": "editableFormGroup"
+                                                        },
+                                                        {
+                                                            "config": {
+                                                                "rows": [
+                                                                    {
+                                                                        "columns": [
+                                                                            {
+                                                                                "fields": [
+                                                                                    {
+                                                                                        "highlightMode": true,
+                                                                                        "name": "incidentphase"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ],
+                                                                        "style": "display-inline-block"
+                                                                    }
+                                                                ],
+                                                                "wid": "bebcc33f-8523-4330-acf2-88b981d2c048"
+                                                            },
+                                                            "type": "editableFormGroup"
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "wid": "e97d552c-66ed-4a41-b2c4-13575b65bdbe",
+                                            "_collapsed": false
+                                        }
+                                    ],
+                                    "wid": "16d3c0d8-c9e3-4f8f-9459-278f4670ae1e"
+                                },
+                                "type": "rows"
+                            },
+                            {
+                                "config": {
+                                    "tabs": [
+                                        {
+                                            "flag": true,
+                                            "icon": "fa fa-exchange",
+                                            "show": true,
+                                            "title": "Correlations",
+                                            "widget": {
+                                                "config": {
+                                                    "excludes": [
+                                                        "notes",
+                                                        "comments",
+                                                        "persons",
+                                                        "activity",
+                                                        "companies",
+                                                        "owners"
+                                                    ],
+                                                    "gridsConfig": {
+                                                        "alerts": {
+                                                            "columns": [
+                                                                "name",
+                                                                "type",
+                                                                "severity",
+                                                                "status",
+                                                                "assignedTo"
+                                                            ]
+                                                        },
+                                                        "assets": {
+                                                            "columns": [
+                                                                "hostname",
+                                                                "ip",
+                                                                "dateScanned",
+                                                                "propertyOf",
+                                                                "criticality"
+                                                            ]
+                                                        },
+                                                        "companies": {
+                                                            "columns": [
+                                                                "name",
+                                                                "url",
+                                                                "status",
+                                                                "type",
+                                                                "industry"
+                                                            ]
+                                                        },
+                                                        "incidents": {
+                                                            "columns": [
+                                                                "name",
+                                                                "discoveredOn",
+                                                                "phase",
+                                                                "status",
+                                                                "confirmation",
+                                                                "severity",
+                                                                "category",
+                                                                "incidentLead"
+                                                            ]
+                                                        },
+                                                        "people": {
+                                                            "columns": [
+                                                                "firstname",
+                                                                "lastname",
+                                                                "title",
+                                                                "phoneWork",
+                                                                "company"
+                                                            ]
+                                                        },
+                                                        "tasks": {
+                                                            "columns": [
+                                                                "name",
+                                                                "dueDate",
+                                                                "priority",
+                                                                "status",
+                                                                "assignedToPerson"
+                                                            ]
+                                                        },
+                                                        "vulnerabilities": {
+                                                            "columns": [
+                                                                "vulnerabilityId",
+                                                                "name",
+                                                                "severity",
+                                                                "cvss",
+                                                                "lastSeenDate",
+                                                                "status"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "wid": "93af563b-ff75-4336-8931-63e0b55a1114",
+                                                    "selectionType": "exclude",
+                                                    "expandableCol": [],
+                                                    "enableHorizontalScroll": [],
+                                                    "includes": []
+                                                },
+                                                "type": "relationship.subtab"
+                                            },
+                                            "visible": true
+                                        },
+                                        {
+                                            "active": 0,
+                                            "flag": true,
+                                            "icon": "fa fa-eye",
+                                            "show": false,
+                                            "title": "Audit Log",
+                                            "widget": {
+                                                "config": {
+                                                    "wid": "00843217-eeda-439e-a13f-b8b9265f46a7"
+                                                },
+                                                "type": "timeline"
+                                            },
+                                            "visible": true
+                                        },
+                                        {
+                                            "title": "Access Control",
+                                            "active": 0,
+                                            "widget": {
+                                                "type": "accessControl-2.1.0",
+                                                "config": {
+                                                    "wid": "a26f3926-f9e2-4e01-afad-b80743298385"
+                                                }
+                                            },
+                                            "icon": "icon icon-access-control",
+                                            "show": false,
+                                            "visible": true
+                                        }
+                                    ],
+                                    "wid": "454211d9-9215-45c3-9e27-7efb826c9101"
+                                },
+                                "type": "tabs"
+                            }
+                        ]
+                    }
+                ],
+                "wid": "c910819a-90ae-48bd-ba4f-93e8af145280",
+                "_collapsed": false
+            }
+        ],
+        "wid": "fefe2c8e-3dda-4dcd-909e-bbb16aea891b",
+        "metadata": []
+    },
+    "uuid": "modules-tasks-detail"
+}

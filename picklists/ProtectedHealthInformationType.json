@@ -1,0 +1,50 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/9bac88d7-5e78-49dd-a76a-f8a2ad2407a8",
+    "@type": "PicklistName",
+    "name": "ProtectedHealthInformationType",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/0099e28f-fd25-415a-a0f4-2c9e8dfc4c36",
+            "@type": "Picklist",
+            "itemValue": "Clinical",
+            "orderIndex": 0,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/9bac88d7-5e78-49dd-a76a-f8a2ad2407a8",
+            "uuid": "0099e28f-fd25-415a-a0f4-2c9e8dfc4c36"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/cefae12c-c987-43db-b876-61e8b3305b48",
+            "@type": "Picklist",
+            "itemValue": "Demographic",
+            "orderIndex": 1,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/9bac88d7-5e78-49dd-a76a-f8a2ad2407a8",
+            "uuid": "cefae12c-c987-43db-b876-61e8b3305b48"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/a3b69ba0-6e6d-430d-a834-fdf697118921",
+            "@type": "Picklist",
+            "itemValue": "Financial",
+            "orderIndex": 2,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/9bac88d7-5e78-49dd-a76a-f8a2ad2407a8",
+            "uuid": "a3b69ba0-6e6d-430d-a834-fdf697118921"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/e5416ae0-b546-4d15-a5c0-885134f68992",
+            "@type": "Picklist",
+            "itemValue": "Other",
+            "orderIndex": 3,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/9bac88d7-5e78-49dd-a76a-f8a2ad2407a8",
+            "uuid": "e5416ae0-b546-4d15-a5c0-885134f68992"
+        }
+    ],
+    "uuid": "9bac88d7-5e78-49dd-a76a-f8a2ad2407a8"
+}
