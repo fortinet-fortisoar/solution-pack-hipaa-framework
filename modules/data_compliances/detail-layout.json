@@ -431,7 +431,7 @@
                                                                                                                                     "readOnly": true
                                                                                                                                 },
                                                                                                                                 {
-                                                                                                                                    "name": "clinicalPHI",
+                                                                                                                                    "name": "clinicalPHIExposedInBreach",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "readOnly": true
                                                                                                                                 },
@@ -806,7 +806,7 @@
                                                     }
                                                 ]
                                             },
-                                            "show": true,
+                                            "show": false,
                                             "visible": true
                                         },
                                         {

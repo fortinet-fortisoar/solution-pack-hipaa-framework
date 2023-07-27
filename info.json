@@ -32,6 +32,9 @@
     "contents": {
         "picklistNames": [
             {
+                "name": "BreachResponseActions"
+            },
+            {
                 "name": "ClinicalPHIType"
             },
             {

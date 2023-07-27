@@ -1,0 +1,294 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Create HIPAA Assessment Tasks",
+    "aliasName": null,
+    "tag": null,
+    "description": "Creates tasks for HIPAA Assessment and link to HIPAA compliance record",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/4c384067-79c3-4821-a70a-d69c3c149ec6",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/d40597ec-bb00-45fb-9053-c2f4f7a89dd5",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "demoMode": "{% if vars.input.records[0].testMode %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}",
+                "taskList": "[]"
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "eabdeb63-4128-4736-8f50-a0cb94b066f8"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Notify HIPAA Security Officer",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "Notify Data Protection Officer",
+                    "type": "\/api\/3\/picklists\/a6064def-fc9d-4d52-ac45-e0a55679c140",
+                    "dueBy": "{{vars.input.records[0].breachNotifyDueDate}}",
+                    "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
+                    "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
+                    "__replace": "",
+                    "startDate": "{{arrow.utcnow().int_timestamp}}",
+                    "recordTags": [
+                        "\/api\/3\/tags\/Notify HIPAA Security Officer"
+                    ],
+                    "description": "{{vars.demoMode}}\n\nSend the **\"Breach Risk Assessment\"** details to the HIPAA Security Officer to determine if it is a valid breach and reportable.\n\nClick on <span style=\"background: #5d636a; padding: 5px;\">**Notify HIPAA Security Officer**<\/span> button ",
+                    "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
+                    "dataCompliances": "{{vars.input.records[0]['@id']}}",
+                    "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/tasks",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "placeholder": "{{vars.taskList.append(vars.result['@id'])}}"
+                }
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "5565c9d4-941b-4f15-8cf6-1fdf856bb695"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Provide Security Officer Contact Details",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "Provide Security Officer Contact Details",
+                    "type": "\/api\/3\/picklists\/6d113f01-123a-4c78-b68c-029e16df9b8b",
+                    "dueBy": "{{vars.input.records[0].breachNotifyDueDate}}",
+                    "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
+                    "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
+                    "__replace": "",
+                    "startDate": "{{arrow.utcnow().int_timestamp}}",
+                    "recordTags": [
+                        "\/api\/3\/tags\/HIPAA Security Officer Contact"
+                    ],
+                    "description": "{{vars.demoMode}}\n \nPlease provide the contact details of the HIPAA security officer or the designated person responsible for this role.\n\nClick on the <span style=\"background: #5d636a; padding: 5px;\">**Provide Security Officer Contact Details**<\/span> Button",
+                    "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
+                    "dataCompliances": "{{vars.input.records[0]['@id']}}",
+                    "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/tasks",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "placeholder": "{{vars.taskList.append(vars.result['@id'])}}"
+                }
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "bac24e8e-7f4d-4d35-872b-6bc9c3cf5fd1"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "resource": "data_compliances",
+                "resources": [
+                    "data_compliances"
+                ],
+                "step_variables": {
+                    "input": {
+                        "params": [],
+                        "records": [
+                            "{{vars.input.records[0]}}"
+                        ]
+                    }
+                },
+                "fieldbasedtrigger": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "object",
+                            "field": "regulatoryCompliance",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                                "itemValue": "HIPAA"
+                            },
+                            "operator": "eq"
+                        }
+                    ]
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/ea155646-3821-4542-9702-b246da430a8d",
+            "group": null,
+            "uuid": "d40597ec-bb00-45fb-9053-c2f4f7a89dd5"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Submit Risk Assessment Information",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "Submit Risk Assessment Information",
+                    "type": "\/api\/3\/picklists\/6d113f01-123a-4c78-b68c-029e16df9b8b",
+                    "dueBy": "{{vars.input.records[0].breachNotifyDueDate}}",
+                    "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
+                    "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
+                    "__replace": "",
+                    "startDate": "{{arrow.utcnow().int_timestamp}}",
+                    "recordTags": [
+                        "\/api\/3\/tags\/HIPAA Risk Assessment Form"
+                    ],
+                    "description": "{{vars.demoMode}}\n \nPlease submit necessary information for PHI Breach Risk Assessment, including the number of affected individuals and whether the breach is reportable.\n\nClick on <span style=\"background: #5d636a; padding: 5px;\">**Submit HIPAA Risk Assessment Information**<\/span> Button",
+                    "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
+                    "dataCompliances": "{{vars.input.records[0]['@id']}}",
+                    "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/tasks",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "placeholder": "{{vars.taskList.append(vars.steps.Submit_Risk_Assessment_Information['@id'])}}"
+                }
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "37effafa-fd4f-4186-80a8-06aa3891f023"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update HIPAA Data Compliance Record",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<p>Following tasks have been created to perform GDPR Assessment<\/p>\n<p>&nbsp;<\/p>\n<p>{% for item in vars.taskList %}<\/p>\n<p><a rel=\"noopener\" target=\"_blank\" href=\"\/modules\/tasks\/{{(item | fromIRI).uuid}}\">Task #{{(item | fromIRI).id}} - {{(item | fromIRI).name}}<\/a><\/p>\n<p>{% endfor %}<\/p>",
+                    "records": ""
+                },
+                "resource": {
+                    "description": "##### Make sure to complete following tasks within 60 days of breach occurrence\n\n| Sr. No. | Task Name | Task Link | Status  |\n| --- | --- | --- | --- |{% for item in vars.taskList %}\n| {{loop.index}} | {{(item | fromIRI).name}} | <a href=\"\/modules\/tasks\/{{(item | fromIRI).uuid}}\" target=\"_blank\" rel=\"noopener\">Click Here<\/a> | <span>&#10060;<\/span> |{% endfor %}"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "recordTags": "Append",
+                    "clinicalPHI": "Append",
+                    "reminderMailStatus": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append",
+                    "clinicalPHIExposedInBreach": "Append",
+                    "financialPHIExposedInBreach": "Append",
+                    "demographicPHIExposedInBreach": "Append",
+                    "safeguardsInPlaceBeforeBreach": "Append",
+                    "actionsTakenInResponseToBreach": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "705",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "d4a204aa-3439-4f05-9515-04dd922f6f79"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Submit Risk Assessment Information",
+            "targetStep": "\/api\/3\/workflow_steps\/37effafa-fd4f-4186-80a8-06aa3891f023",
+            "sourceStep": "\/api\/3\/workflow_steps\/eabdeb63-4128-4736-8f50-a0cb94b066f8",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "f9d7e4c6-317d-488a-a0fc-dbcecf67696d"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Notify Data Protection Authority -> Update GDPR Incident",
+            "targetStep": "\/api\/3\/workflow_steps\/d4a204aa-3439-4f05-9515-04dd922f6f79",
+            "sourceStep": "\/api\/3\/workflow_steps\/5565c9d4-941b-4f15-8cf6-1fdf856bb695",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "d853e437-d8a0-4775-b22b-3b356bd5d228"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Provide DPO and DPA Contact Details -> Get Breach Report Reviewed and Approved by DPO",
+            "targetStep": "\/api\/3\/workflow_steps\/5565c9d4-941b-4f15-8cf6-1fdf856bb695",
+            "sourceStep": "\/api\/3\/workflow_steps\/bac24e8e-7f4d-4d35-872b-6bc9c3cf5fd1",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "501a1bab-0db5-4535-8237-fdb302792113"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/eabdeb63-4128-4736-8f50-a0cb94b066f8",
+            "sourceStep": "\/api\/3\/workflow_steps\/d40597ec-bb00-45fb-9053-c2f4f7a89dd5",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "4ee09bbc-9dca-462b-8c60-e8e8159966ec"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Submit Risk Assessment Information -> Provide DPO and DPA Contact Details",
+            "targetStep": "\/api\/3\/workflow_steps\/bac24e8e-7f4d-4d35-872b-6bc9c3cf5fd1",
+            "sourceStep": "\/api\/3\/workflow_steps\/37effafa-fd4f-4186-80a8-06aa3891f023",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "1952633e-e759-4ba2-abae-784e486dc596"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "9b8ac872-7609-4aa6-b84a-cbe43c21c1cc",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "PostCreate"
+    ]
+}

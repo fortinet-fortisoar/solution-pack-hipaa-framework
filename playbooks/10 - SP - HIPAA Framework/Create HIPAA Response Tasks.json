@@ -5,7 +5,7 @@
     "aliasName": null,
     "tag": null,
     "description": "Create tasks for HIPAA Response and link them to the HIPAA compliance record.",
-    "isActive": true,
+    "isActive": false,
     "debug": false,
     "singleRecordExecution": false,
     "remoteExecutableFlag": false,

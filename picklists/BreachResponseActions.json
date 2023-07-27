@@ -1,0 +1,150 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/c9391e98-5c5f-497a-a38d-355b81e6776f",
+    "@type": "PicklistName",
+    "name": "BreachResponseActions",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/1b8bd78d-cd54-499f-a150-644d149382b2",
+            "@type": "Picklist",
+            "itemValue": "Adopted Encryption Technologies",
+            "orderIndex": 0,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/c9391e98-5c5f-497a-a38d-355b81e6776f",
+            "uuid": "1b8bd78d-cd54-499f-a150-644d149382b2"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/0e6f1c94-e1c4-402d-b9a1-8462238dfce1",
+            "@type": "Picklist",
+            "itemValue": "Enhanced Password Requirements",
+            "orderIndex": 1,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/c9391e98-5c5f-497a-a38d-355b81e6776f",
+            "uuid": "0e6f1c94-e1c4-402d-b9a1-8462238dfce1"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/76a1f76d-68cd-4875-83ec-deb8c06c8840",
+            "@type": "Picklist",
+            "itemValue": "Implemented New Security Rule Risk Management Plan",
+            "orderIndex": 2,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/c9391e98-5c5f-497a-a38d-355b81e6776f",
+            "uuid": "76a1f76d-68cd-4875-83ec-deb8c06c8840"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/a235793a-4f47-4c48-8fb1-5606a769f7f6",
+            "@type": "Picklist",
+            "itemValue": "Implemented New Technical Safeguard",
+            "orderIndex": 3,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/c9391e98-5c5f-497a-a38d-355b81e6776f",
+            "uuid": "a235793a-4f47-4c48-8fb1-5606a769f7f6"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/075bcd49-da87-43d4-815b-9b1514baee1c",
+            "@type": "Picklist",
+            "itemValue": "Implemented Periodic Evaluations (Technical & Nontechnical)",
+            "orderIndex": 4,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/c9391e98-5c5f-497a-a38d-355b81e6776f",
+            "uuid": "075bcd49-da87-43d4-815b-9b1514baee1c"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/71c2d5b5-44a7-4443-a6e5-58cc59f5ba39",
+            "@type": "Picklist",
+            "itemValue": "Enhanced Physical Security",
+            "orderIndex": 5,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/c9391e98-5c5f-497a-a38d-355b81e6776f",
+            "uuid": "71c2d5b5-44a7-4443-a6e5-58cc59f5ba39"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/e7c31bc0-5a57-45f1-855a-80eec6d82746",
+            "@type": "Picklist",
+            "itemValue": "Performed Security Rule Risk Analysis",
+            "orderIndex": 6,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/c9391e98-5c5f-497a-a38d-355b81e6776f",
+            "uuid": "e7c31bc0-5a57-45f1-855a-80eec6d82746"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/ead048ed-5c4a-4520-98cb-81f2cc6302ca",
+            "@type": "Picklist",
+            "itemValue": "Enhanced HIPAA Training for Business Associates",
+            "orderIndex": 7,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/c9391e98-5c5f-497a-a38d-355b81e6776f",
+            "uuid": "ead048ed-5c4a-4520-98cb-81f2cc6302ca"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/7423c975-7458-48e3-9e58-68ad194ed0e8",
+            "@type": "Picklist",
+            "itemValue": "Offered Free Credit Monitoring to Individuals",
+            "orderIndex": 8,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/c9391e98-5c5f-497a-a38d-355b81e6776f",
+            "uuid": "7423c975-7458-48e3-9e58-68ad194ed0e8"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/539b3164-56f7-48b0-a824-d9f087cf90ee",
+            "@type": "Picklist",
+            "itemValue": "Revised Business Associate Contracts",
+            "orderIndex": 9,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/c9391e98-5c5f-497a-a38d-355b81e6776f",
+            "uuid": "539b3164-56f7-48b0-a824-d9f087cf90ee"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/4d68754a-afb5-4a27-8cab-99febd182aff",
+            "@type": "Picklist",
+            "itemValue": "Revised Policies and Procedures",
+            "orderIndex": 10,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/c9391e98-5c5f-497a-a38d-355b81e6776f",
+            "uuid": "4d68754a-afb5-4a27-8cab-99febd182aff"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/a83c7042-64cc-4692-a496-07a6efa80ddd",
+            "@type": "Picklist",
+            "itemValue": "Sanctioned Workforce Members",
+            "orderIndex": 11,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/c9391e98-5c5f-497a-a38d-355b81e6776f",
+            "uuid": "a83c7042-64cc-4692-a496-07a6efa80ddd"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/81c31177-1a28-4954-ac1e-0dda058dc661",
+            "@type": "Picklist",
+            "itemValue": "Trained\/Retrained Workforce Members",
+            "orderIndex": 12,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/c9391e98-5c5f-497a-a38d-355b81e6776f",
+            "uuid": "81c31177-1a28-4954-ac1e-0dda058dc661"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/fcc0d995-6d28-491d-a73c-965b644efe89",
+            "@type": "Picklist",
+            "itemValue": "Other",
+            "orderIndex": 13,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/c9391e98-5c5f-497a-a38d-355b81e6776f",
+            "uuid": "fcc0d995-6d28-491d-a73c-965b644efe89"
+        }
+    ],
+    "uuid": "c9391e98-5c5f-497a-a38d-355b81e6776f"
+}

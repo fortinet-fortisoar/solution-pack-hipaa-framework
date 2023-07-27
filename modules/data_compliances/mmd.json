@@ -1,18 +1,548 @@
 {
+    "@context": "\/api\/3\/contexts\/StagingModelMetadata",
     "@id": "\/api\/3\/staging_model_metadatas\/5a1123bf-1e3b-4427-83f7-2d520aa6811e",
-    "uuid": "5a1123bf-1e3b-4427-83f7-2d520aa6811e",
-    "descriptions": {
-        "singular": "Data Compliance",
-        "plural": "Data Compliances"
-    },
+    "@type": "StagingModelMetadata",
     "type": "data_compliances",
+    "parentType": null,
+    "tableName": "data_compliance",
+    "ownable": true,
+    "userOwnable": true,
+    "queueable": true,
+    "trackable": true,
+    "taggable": true,
+    "peerReplicable": true,
+    "defaultSort": [],
+    "uniqueConstraint": [
+        {
+            "data_compliances_unique": {
+                "columns": [
+                    "name"
+                ]
+            }
+        }
+    ],
+    "indexable": true,
+    "writable": true,
     "attributes": [
+        {
+            "@type": "AttributeMetadata",
+            "type": "picklists",
+            "name": "clinicalPHIExposedInBreach",
+            "length": null,
+            "orderIndex": 1,
+            "formType": "multiselectpicklist",
+            "dataSource": {
+                "model": "picklists",
+                "query": {
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "listName__name",
+                            "operator": "eq",
+                            "value": "ClinicalPHIType"
+                        }
+                    ],
+                    "sort": [
+                        {
+                            "field": "orderIndex",
+                            "direction": "ASC"
+                        }
+                    ]
+                },
+                "displayConditions": {
+                    "12a64a7c-e776-4957-afe5-6ed3d36a0b54": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "b54f0c8d-8e8e-4b3b-8e34-0b63e2696692": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "816e66c9-a255-46e4-82fb-9dead165107a": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "24c06a96-e5f6-45ae-a331-4455116c59ea": {
+                        "visibility": "visible",
+                        "conditions": null
+                    }
+                }
+            },
+            "searchable": false,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": true,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761,
+                "_enableRange": false
+            },
+            "bulkAction": [],
+            "dataSourceFilters": null,
+            "defaultValue": null,
+            "tooltip": "Clinical Information refers to an individual's treatment details.",
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "regulatoryCompliance",
+                            "operator": "eq",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "itemValue": "HIPAA",
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "field": "typeOfPHIInvolvedInBreach",
+                            "value": [
+                                "\/api\/3\/picklists\/0099e28f-fd25-415a-a0f4-2c9e8dfc4c36"
+                            ],
+                            "display": "",
+                            "operator": "in",
+                            "type": "array",
+                            "OPERATOR_KEY": "$",
+                            "template": "multiselectpicklist",
+                            "previousOperator": "in",
+                            "previousTemplate": "multiselectpicklist",
+                            "useInOperator": true,
+                            "module": "typeOfPHIInvolvedInBreach"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ clinicalPHIExposedInBreach }}",
+            "descriptions": {
+                "singular": "Clinical PHI Exposed in Breach"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
+            "type": "string",
+            "name": "describeOtherActionsTaken",
+            "length": null,
+            "orderIndex": 2,
+            "formType": "textarea",
+            "dataSource": null,
+            "searchable": true,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761,
+                "_enableRange": false
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": null,
+            "tooltip": null,
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "regulatoryCompliance",
+                            "operator": "eq",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "itemValue": "HIPAA",
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "field": "actionsTakenInResponseToBreach",
+                            "value": [
+                                "\/api\/3\/picklists\/fcc0d995-6d28-491d-a73c-965b644efe89"
+                            ],
+                            "display": "",
+                            "operator": "in",
+                            "type": "array",
+                            "OPERATOR_KEY": "$",
+                            "template": "multiselectpicklist",
+                            "previousOperator": "in",
+                            "previousTemplate": "multiselectpicklist",
+                            "useInOperator": true,
+                            "module": "actionsTakenInResponseToBreach"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ describeOtherActionsTaken }}",
+            "descriptions": {
+                "singular": "Describe Other Actions Taken"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
+            "type": "picklists",
+            "name": "actionsTakenInResponseToBreach",
+            "length": null,
+            "orderIndex": 3,
+            "formType": "multiselectpicklist",
+            "dataSource": {
+                "model": "picklists",
+                "query": {
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "listName__name",
+                            "operator": "eq",
+                            "value": "BreachResponseActions"
+                        }
+                    ],
+                    "sort": [
+                        {
+                            "field": "orderIndex",
+                            "direction": "ASC"
+                        }
+                    ]
+                },
+                "displayConditions": {
+                    "1b8bd78d-cd54-499f-a150-644d149382b2": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "0e6f1c94-e1c4-402d-b9a1-8462238dfce1": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "76a1f76d-68cd-4875-83ec-deb8c06c8840": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "a235793a-4f47-4c48-8fb1-5606a769f7f6": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "075bcd49-da87-43d4-815b-9b1514baee1c": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "71c2d5b5-44a7-4443-a6e5-58cc59f5ba39": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "e7c31bc0-5a57-45f1-855a-80eec6d82746": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "ead048ed-5c4a-4520-98cb-81f2cc6302ca": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "7423c975-7458-48e3-9e58-68ad194ed0e8": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "539b3164-56f7-48b0-a824-d9f087cf90ee": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "4d68754a-afb5-4a27-8cab-99febd182aff": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "a83c7042-64cc-4692-a496-07a6efa80ddd": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "81c31177-1a28-4954-ac1e-0dda058dc661": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "fcc0d995-6d28-491d-a73c-965b644efe89": {
+                        "visibility": "visible",
+                        "conditions": null
+                    }
+                }
+            },
+            "searchable": false,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": true,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761,
+                "_enableRange": false
+            },
+            "bulkAction": [],
+            "dataSourceFilters": null,
+            "defaultValue": null,
+            "tooltip": null,
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "regulatoryCompliance",
+                            "operator": "eq",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "itemValue": "HIPAA",
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                            },
+                            "type": "object"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ actionsTakenInResponseToBreach }}",
+            "descriptions": {
+                "singular": "Actions Taken in Response to Breach"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
+            "type": "picklists",
+            "name": "isMediaNoticeRequired",
+            "length": null,
+            "orderIndex": 4,
+            "formType": "picklist",
+            "dataSource": {
+                "model": "picklists",
+                "query": {
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "listName__name",
+                            "operator": "eq",
+                            "value": "YesNoInput"
+                        }
+                    ],
+                    "sort": [
+                        {
+                            "field": "orderIndex",
+                            "direction": "ASC"
+                        }
+                    ]
+                },
+                "displayConditions": {
+                    "cfd49634-d25a-476f-8485-99585e589a8c": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "711303d3-75ea-437d-a871-0a8d14fcdb7d": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "27ff216f-6363-4c93-9fc4-e0e8c15cb0b1": {
+                        "visibility": "hidden",
+                        "conditions": null
+                    }
+                },
+                "useDisplayConditions": true
+            },
+            "searchable": false,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": null,
+            "tooltip": null,
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "regulatoryCompliance",
+                            "operator": "eq",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "display": "HIPAA",
+                                "itemValue": "HIPAA",
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                            },
+                            "type": "object"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ isMediaNoticeRequired }}",
+            "descriptions": {
+                "singular": "Is Media Notice Required?"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
+            "type": "picklists",
+            "name": "isSubstituteNoticeRequired",
+            "length": null,
+            "orderIndex": 5,
+            "formType": "picklist",
+            "dataSource": {
+                "model": "picklists",
+                "query": {
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "listName__name",
+                            "operator": "eq",
+                            "value": "YesNoInput"
+                        }
+                    ],
+                    "sort": [
+                        {
+                            "field": "orderIndex",
+                            "direction": "ASC"
+                        }
+                    ]
+                },
+                "displayConditions": {
+                    "cfd49634-d25a-476f-8485-99585e589a8c": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "711303d3-75ea-437d-a871-0a8d14fcdb7d": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "27ff216f-6363-4c93-9fc4-e0e8c15cb0b1": {
+                        "visibility": "hidden",
+                        "conditions": null
+                    }
+                },
+                "useDisplayConditions": true
+            },
+            "searchable": false,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": null,
+            "tooltip": null,
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "regulatoryCompliance",
+                            "operator": "eq",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "display": "HIPAA",
+                                "itemValue": "HIPAA",
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                            },
+                            "type": "object"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ isSubstituteNoticeRequired }}",
+            "descriptions": {
+                "singular": "Is Substitute Notice Required?"
+            }
+        },
         {
             "@type": "AttributeMetadata",
             "type": "picklists",
             "name": "safeguardsInPlaceBeforeBreach",
             "length": null,
-            "orderIndex": 5,
+            "orderIndex": 6,
             "formType": "multiselectpicklist",
             "dataSource": {
                 "model": "picklists",
@@ -110,7 +640,7 @@
             "type": "picklists",
             "name": "financialPHIExposedInBreach",
             "length": null,
-            "orderIndex": 6,
+            "orderIndex": 7,
             "formType": "multiselectpicklist",
             "dataSource": {
                 "model": "picklists",
@@ -219,7 +749,7 @@
             "type": "picklists",
             "name": "demographicPHIExposedInBreach",
             "length": null,
-            "orderIndex": 7,
+            "orderIndex": 8,
             "formType": "multiselectpicklist",
             "dataSource": {
                 "model": "picklists",
@@ -336,7 +866,7 @@
             "type": "string",
             "name": "typeOfPHIInvolvedInBreachOther",
             "length": null,
-            "orderIndex": 8,
+            "orderIndex": 9,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -464,7 +994,7 @@
             "type": "string",
             "name": "briefDescriptionOfTheBreach",
             "length": null,
-            "orderIndex": 9,
+            "orderIndex": 10,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -520,115 +1050,6 @@
             "displayName": "{{ briefDescriptionOfTheBreach }}",
             "descriptions": {
                 "singular": "Brief Description of the Breach"
-            }
-        },
-        {
-            "@type": "AttributeMetadata",
-            "type": "picklists",
-            "name": "clinicalPHI",
-            "length": null,
-            "orderIndex": 10,
-            "formType": "multiselectpicklist",
-            "dataSource": {
-                "model": "picklists",
-                "query": {
-                    "logic": "AND",
-                    "filters": [
-                        {
-                            "field": "listName__name",
-                            "operator": "eq",
-                            "value": "ClinicalPHIType"
-                        }
-                    ],
-                    "sort": [
-                        {
-                            "field": "orderIndex",
-                            "direction": "ASC"
-                        }
-                    ]
-                },
-                "displayConditions": {
-                    "12a64a7c-e776-4957-afe5-6ed3d36a0b54": {
-                        "visibility": "visible",
-                        "conditions": null
-                    },
-                    "b54f0c8d-8e8e-4b3b-8e34-0b63e2696692": {
-                        "visibility": "visible",
-                        "conditions": null
-                    },
-                    "816e66c9-a255-46e4-82fb-9dead165107a": {
-                        "visibility": "visible",
-                        "conditions": null
-                    },
-                    "24c06a96-e5f6-45ae-a331-4455116c59ea": {
-                        "visibility": "visible",
-                        "conditions": null
-                    }
-                }
-            },
-            "searchable": false,
-            "peerReplicable": true,
-            "system": false,
-            "encrypted": false,
-            "gridColumn": false,
-            "collection": true,
-            "inversedField": null,
-            "ownsRelationship": false,
-            "validation": {
-                "required": false,
-                "minlength": 0,
-                "maxlength": 10485761,
-                "_enableRange": false
-            },
-            "bulkAction": [],
-            "dataSourceFilters": null,
-            "defaultValue": null,
-            "tooltip": "Clinical Information refers to an individual's treatment details.",
-            "visibility": [
-                {
-                    "sort": [],
-                    "limit": 30,
-                    "logic": "AND",
-                    "filters": [
-                        {
-                            "field": "regulatoryCompliance",
-                            "operator": "eq",
-                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
-                            "_value": {
-                                "itemValue": "HIPAA",
-                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
-                            },
-                            "type": "object"
-                        },
-                        {
-                            "field": "typeOfPHIInvolvedInBreach",
-                            "value": [
-                                "\/api\/3\/picklists\/0099e28f-fd25-415a-a0f4-2c9e8dfc4c36"
-                            ],
-                            "display": "",
-                            "operator": "in",
-                            "type": "array",
-                            "OPERATOR_KEY": "$",
-                            "template": "multiselectpicklist",
-                            "previousOperator": "in",
-                            "previousTemplate": "multiselectpicklist",
-                            "useInOperator": true,
-                            "module": "typeOfPHIInvolvedInBreach"
-                        }
-                    ]
-                }
-            ],
-            "htmlEscape": false,
-            "orphanRemoval": null,
-            "readable": true,
-            "writeable": true,
-            "identifier": null,
-            "unique": false,
-            "recommend": false,
-            "skipSerialization": false,
-            "displayName": "{{ clinicalPHI }}",
-            "descriptions": {
-                "singular": "Clinical PHI Exposed in Breach"
             }
         },
         {
@@ -5451,6 +5872,21 @@
             }
         }
     ],
-    "tableName": "data_compliance",
-    "displayName": "{{ name }}"
+    "system": false,
+    "module": "data_compliances",
+    "softDeleteable": false,
+    "archivable": false,
+    "paused": false,
+    "partitionBy": "modifyDate",
+    "archivalCriteria": {
+        "keep_primary_data_for": 24,
+        "delete_primary_data_after": 60
+    },
+    "archivalFilters": [],
+    "uuid": "5a1123bf-1e3b-4427-83f7-2d520aa6811e",
+    "displayName": "{{ name }}",
+    "descriptions": {
+        "singular": "Data Compliance",
+        "plural": "Data Compliances"
+    }
 }

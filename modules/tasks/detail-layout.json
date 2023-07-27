@@ -38,6 +38,11 @@
                 "id": "\/api\/3\/workflows\/00ae2b3d-0d1d-4a0a-baad-d5ceb7b8ab4c",
                 "name": "Get HIPAA Risk Assessment Details",
                 "icon": "icon icon-summary-01"
+            },
+            {
+                "id": "\/api\/3\/workflows\/c3421389-8d26-4c93-844a-5d7e0e7d57a3",
+                "name": "Provide Security Officer Contact",
+                "icon": "fa fa-user"
             }
         ],
         "rows": [
