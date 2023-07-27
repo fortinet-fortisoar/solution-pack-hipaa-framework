@@ -1,8 +1,1 @@
-[
-    {
-        "id": 14,
-        "name": "Current_Date",
-        "value": "{{arrow.utcnow().timestamp}}",
-        "default_value": "{{arrow.utcnow().timestamp}}"
-    }
-]
+[]
