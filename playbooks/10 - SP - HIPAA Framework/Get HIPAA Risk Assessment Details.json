@@ -1041,7 +1041,7 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Update GDPR Assessment Data -> Update Task Status",
+            "name": "Update HIPAA Assessment Data -> Update Task Status",
             "targetStep": "\/api\/3\/workflow_steps\/ab4a390c-52c4-4c21-8a77-9feb6ec7dadf",
             "sourceStep": "\/api\/3\/workflow_steps\/4ece4af6-db9a-4f93-a487-9480ceb8e781",
             "label": null,
