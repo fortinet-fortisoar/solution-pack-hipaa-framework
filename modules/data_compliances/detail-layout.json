@@ -347,6 +347,16 @@
                                                                                                                                     "readOnly": true
                                                                                                                                 },
                                                                                                                                 {
+                                                                                                                                    "name": "locationOfBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "describeOtherLocationOfBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
                                                                                                                                     "name": "dataType",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
@@ -383,12 +393,12 @@
                                                                                                                                 {
                                                                                                                                     "name": "actionsTakenInResponseToBreach",
                                                                                                                                     "highlightMode": true,
-                                                                                                                                    "readOnly": false
+                                                                                                                                    "readOnly": true
                                                                                                                                 },
                                                                                                                                 {
                                                                                                                                     "name": "describeOtherActionsTaken",
                                                                                                                                     "highlightMode": true,
-                                                                                                                                    "readOnly": false
+                                                                                                                                    "readOnly": true
                                                                                                                                 }
                                                                                                                             ],
                                                                                                                             "style": "col-lg-6"
@@ -453,7 +463,7 @@
                                                                                                                                 {
                                                                                                                                     "name": "safeguardsInPlaceBeforeBreach",
                                                                                                                                     "highlightMode": true,
-                                                                                                                                    "readOnly": false
+                                                                                                                                    "readOnly": true
                                                                                                                                 }
                                                                                                                             ],
                                                                                                                             "style": "col-lg-6"

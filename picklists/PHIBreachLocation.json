@@ -1,0 +1,90 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/78abd48c-5bdb-4be7-97b2-0635e0c33a5c",
+    "@type": "PicklistName",
+    "name": "PHIBreachLocation",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/626788a9-b2de-42a5-be80-cd5f5deb81b0",
+            "@type": "Picklist",
+            "itemValue": "Desktop Computer",
+            "orderIndex": 0,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/78abd48c-5bdb-4be7-97b2-0635e0c33a5c",
+            "uuid": "626788a9-b2de-42a5-be80-cd5f5deb81b0"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/9de2ec83-499f-4024-8990-b0969cc6233a",
+            "@type": "Picklist",
+            "itemValue": "Electronic Medical Record",
+            "orderIndex": 1,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/78abd48c-5bdb-4be7-97b2-0635e0c33a5c",
+            "uuid": "9de2ec83-499f-4024-8990-b0969cc6233a"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/c0e5e9da-f0a1-4589-a221-3925688541ea",
+            "@type": "Picklist",
+            "itemValue": "Email",
+            "orderIndex": 2,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/78abd48c-5bdb-4be7-97b2-0635e0c33a5c",
+            "uuid": "c0e5e9da-f0a1-4589-a221-3925688541ea"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/8ea2eea6-6235-4a11-a6cf-ef8be719c7c7",
+            "@type": "Picklist",
+            "itemValue": "Laptop",
+            "orderIndex": 3,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/78abd48c-5bdb-4be7-97b2-0635e0c33a5c",
+            "uuid": "8ea2eea6-6235-4a11-a6cf-ef8be719c7c7"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/88b9c7f8-c266-4797-86bb-1e128e3c33f4",
+            "@type": "Picklist",
+            "itemValue": "Network Server",
+            "orderIndex": 4,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/78abd48c-5bdb-4be7-97b2-0635e0c33a5c",
+            "uuid": "88b9c7f8-c266-4797-86bb-1e128e3c33f4"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/69a2ff63-920b-4379-97ef-19f5811490e2",
+            "@type": "Picklist",
+            "itemValue": "Other Portable Electronic Devices",
+            "orderIndex": 5,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/78abd48c-5bdb-4be7-97b2-0635e0c33a5c",
+            "uuid": "69a2ff63-920b-4379-97ef-19f5811490e2"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/d344c3fd-ffe8-404a-9add-23b3f552aecd",
+            "@type": "Picklist",
+            "itemValue": "Paper\/Films",
+            "orderIndex": 6,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/78abd48c-5bdb-4be7-97b2-0635e0c33a5c",
+            "uuid": "d344c3fd-ffe8-404a-9add-23b3f552aecd"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/1592ba1b-6851-45b7-9b24-bac3dbc62bf5",
+            "@type": "Picklist",
+            "itemValue": "Other",
+            "orderIndex": 7,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/78abd48c-5bdb-4be7-97b2-0635e0c33a5c",
+            "uuid": "1592ba1b-6851-45b7-9b24-bac3dbc62bf5"
+        }
+    ],
+    "uuid": "78abd48c-5bdb-4be7-97b2-0635e0c33a5c"
+}

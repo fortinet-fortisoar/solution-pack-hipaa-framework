@@ -17,40 +17,6 @@
     "steps": [
         {
             "@type": "WorkflowStep",
-            "name": "Add Comment and Update GDPR SLA",
-            "description": null,
-            "arguments": {
-                "message": {
-                    "tags": [
-                        "\/api\/3\/tags\/GDPR"
-                    ],
-                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
-                    "tenant": "",
-                    "thread": true,
-                    "content": "<div>Thanks for your input.<\/div>\n<div>&nbsp;<\/div>\n<div><a href=\"\/modules\/data_compliances\/{{vars.steps.Create_GDPR_Data_Compliance_Record.uuid}}\" target=\"_blank\" rel=\"noopener\">&nbsp;GDPR Compliance Record #{{vars.steps.Create_GDPR_Data_Compliance_Record.id}}<\/a> and corresponding <a href=\"\/modules\/tasks\/{{vars.steps.Create_Task_GDPR_Assessment.uuid}}\" target=\"_blank\" rel=\"noopener\">Task #{{vars.steps.Create_Task_GDPR_Assessment.id}} <\/a>has been created.<\/div>",
-                    "records": "",
-                    "parentstepid": "\/api\/3\/workflow_steps\/1a3cbe27-45b9-4c34-8b5b-afdcb365234c"
-                },
-                "resource": [],
-                "_showJson": false,
-                "operation": "Append",
-                "collection": "{{vars.input.records[0]['@id']}}",
-                "__recommend": [],
-                "collectionType": "\/api\/3\/incidents",
-                "fieldOperation": {
-                    "recordTags": "Append"
-                },
-                "step_variables": []
-            },
-            "status": null,
-            "top": "1245",
-            "left": "125",
-            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
-            "group": null,
-            "uuid": "fb8b0ed6-f392-4157-b655-8872ff2dc693"
-        },
-        {
-            "@type": "WorkflowStep",
             "name": "Add Comment to Incident",
             "description": "Add a comment stating that the Data Compliance Record is already created for the Incident.",
             "arguments": {
@@ -61,7 +27,7 @@
                         "incidents": "{{vars.input.records[0]['@id']}}"
                     },
                     "people": [],
-                    "content": "<div>Thanks for your input.<\/div>\n<div>&nbsp;<\/div>\n<div><a href=\"\/modules\/view-panel\/data_compliances\/{{vars.steps.Find_Correlated_Compliance_Record[0].dataCompliances[0].uuid}}\">&nbsp;Data Compliance Record #{{vars.steps.Find_Correlated_Compliance_Record[0].dataCompliances[0].id}}<\/a> and corresponding <a href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Find_Correlated_Compliance_Record[0].tasks[0].uuid}}\">Task #{{vars.steps.Find_Correlated_Compliance_Record[0].tasks[0].id}} <\/a>has already been created.<\/div>",
+                    "content": "<div><a href=\"\/modules\/view-panel\/data_compliances\/{{vars.steps.Find_Correlated_Compliance_Record[0].dataCompliances[0].uuid}}\">&nbsp;Data Compliance Record #{{vars.steps.Find_Correlated_Compliance_Record[0].dataCompliances[0].id}}<\/a> and corresponding <a href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Find_Correlated_Compliance_Record[0].tasks[0].uuid}}\">Task #{{vars.steps.Find_Correlated_Compliance_Record[0].tasks[0].id}} <\/a>has already been created.<\/div>",
                     "__replace": "",
                     "isImportant": false,
                     "peopleUpdated": false
@@ -257,8 +223,8 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "1100",
-            "left": "120",
+            "top": "1110",
+            "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
             "group": null,
             "uuid": "794136d9-3313-4d30-a284-a617fe04499b"
@@ -1139,11 +1105,12 @@
                                 "\/api\/3\/tags\/Data Compliances"
                             ],
                             "module": "recordTags",
-                            "display": null,
+                            "display": "",
                             "operator": "in",
                             "template": "tags",
                             "enableJinja": true,
                             "OPERATOR_KEY": "$",
+                            "useInOperator": true,
                             "previousOperator": "in",
                             "previousTemplate": "tags"
                         }

@@ -32,9 +32,6 @@
     "contents": {
         "picklistNames": [
             {
-                "name": "BreachResponseActions"
-            },
-            {
                 "name": "ClinicalPHIType"
             },
             {
@@ -54,6 +51,12 @@
             },
             {
                 "name": "GDPRReminderStatus"
+            },
+            {
+                "name": "PHIBreachLocation"
+            },
+            {
+                "name": "PHIBreachResponseActions"
             },
             {
                 "name": "PHISafeguardType"
