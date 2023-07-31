@@ -43,6 +43,11 @@
                 "id": "\/api\/3\/workflows\/c3421389-8d26-4c93-844a-5d7e0e7d57a3",
                 "name": "Provide Security Officer Contact",
                 "icon": "fa fa-user"
+            },
+            {
+                "id": "\/api\/3\/workflows\/9818ea54-d9aa-45d4-a137-63cd0898a624",
+                "name": "PHI Risk Assessment Confirmation by HSO",
+                "icon": "icon icon-approval"
             }
         ],
         "rows": [

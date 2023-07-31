@@ -478,7 +478,7 @@
                                                                                                     {
                                                                                                         "type": "editableFormGroup",
                                                                                                         "config": {
-                                                                                                            "wid": "a3486170-23ed-4419-a753-37d873f0552e",
+                                                                                                            "wid": "36584e6b-1460-4d60-9d14-271c76716783",
                                                                                                             "rows": [
                                                                                                                 {
                                                                                                                     "columns": [
@@ -544,6 +544,65 @@
                                                                                                     {
                                                                                                         "type": "editableFormGroup",
                                                                                                         "config": {
+                                                                                                            "wid": "a3486170-23ed-4419-a753-37d873f0552e",
+                                                                                                            "rows": [
+                                                                                                                {
+                                                                                                                    "columns": [
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "cEName",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "cEStreetAddress",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "cEEmail",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "cEPhone",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "hSOName",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "hSOEmail",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "hSOPhone",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        }
+                                                                                                                    ],
+                                                                                                                    "style": "display-inline-block"
+                                                                                                                }
+                                                                                                            ],
+                                                                                                            "title": "Covered Entity and HSO Contact Details"
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "type": "editableFormGroup",
+                                                                                                        "config": {
                                                                                                             "wid": "717085c3-8ffb-4ecf-821b-f54e853cc136",
                                                                                                             "rows": [
                                                                                                                 {
@@ -567,6 +626,11 @@
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
                                                                                                                                     "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "actionsForApplyingTechnicalFix",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": false
                                                                                                                                 }
                                                                                                                             ],
                                                                                                                             "style": "col-lg-6"
@@ -598,7 +662,7 @@
                                                                                                                     "style": ""
                                                                                                                 }
                                                                                                             ],
-                                                                                                            "title": "DPO Assessment Details"
+                                                                                                            "title": "Risk Assessment Summary"
                                                                                                         }
                                                                                                     }
                                                                                                 ],
@@ -835,7 +899,7 @@
                                                     ]
                                                 }
                                             },
-                                            "show": true,
+                                            "show": false,
                                             "icon": "fa fa-exchange",
                                             "visible": true
                                         },

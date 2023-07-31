@@ -1,10 +1,10 @@
 {
     "@type": "Workflow",
     "triggerLimit": null,
-    "name": "Provide Security Officer Contact",
+    "name": "Get Covered Entity and HSO Contact",
     "aliasName": null,
     "tag": null,
-    "description": "Provide the contact information for the HIPAA Security Officer.",
+    "description": "Collects the contact information for the HIPAA Security Officer (HSO) and the address details of the Covered Entity(CE) or Business Associate(BA).",
     "isActive": true,
     "debug": false,
     "singleRecordExecution": false,
@@ -33,17 +33,19 @@
         },
         {
             "@type": "WorkflowStep",
-            "name": "Create Security Officer Contact",
+            "name": "Create Covered Entity Contact",
             "description": null,
             "arguments": {
                 "resource": {
-                    "name": "{{vars.input.params.dPOName}}",
+                    "name": "{{vars.input.params.cEName}}",
+                    "address": "{{vars.input.params.cEAddress}}",
                     "__replace": "true",
                     "recordTags": [
-                        "\/api\/3\/tags\/HIPAA Security Officer"
+                        "\/api\/3\/tags\/HIPAA",
+                        "\/api\/3\/tags\/Covered Entity"
                     ],
-                    "eMailAddress": "{{vars.input.params.dPOEmail}}",
-                    "telephoneNumber": "{{vars.input.params.dPOTelephone}}"
+                    "eMailAddress": "{{vars.demoEmail}}",
+                    "telephoneNumber": "{{vars.input.params.cEPhone}}"
                 },
                 "_showJson": false,
                 "operation": "Overwrite",
@@ -54,31 +56,67 @@
                 },
                 "step_variables": {
                     "temp": "{{vars.contactIRI.append(vars.result['@id'])}}",
-                    "dpoName": "{{vars.result.name}}",
-                    "dpoEmail": "{{vars.result.eMailAddress}}",
-                    "dpoPhone": "{{vars.result.telephoneNumber}}"
+                    "ceEmail": "{{vars.steps.Create_Covered_Entity_Contact.eMailAddress}}"
+                }
+            },
+            "status": null,
+            "top": "840",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "34c426cc-61e3-488b-aed7-c0b9392d1421"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create HSO Contact",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "{{vars.input.params.hSOName}}",
+                    "__replace": "true",
+                    "recordTags": [
+                        "\/api\/3\/tags\/HIPAA Security Officer",
+                        "\/api\/3\/tags\/HSO"
+                    ],
+                    "eMailAddress": "{{vars.input.params.hSOEmail}}",
+                    "telephoneNumber": "{{vars.input.params.hSOPhone}}"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/upsert\/contact",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "temp": "{{vars.contactIRI.append(vars.result['@id'])}}",
+                    "hsoName": "{{vars.result.name}}",
+                    "hsoEmail": "{{vars.result.eMailAddress}}",
+                    "hsoPhone": "{{vars.result.telephoneNumber}}"
                 }
             },
             "status": null,
             "top": "705",
-            "left": "475",
+            "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
             "group": null,
             "uuid": "542d969d-84f8-4d28-9f23-551f9b27aab8"
         },
         {
             "@type": "WorkflowStep",
-            "name": "Create Test Security Officer Contact",
+            "name": "Create Test Covered Entity Contact",
             "description": null,
             "arguments": {
                 "resource": {
-                    "name": "{{vars.input.params.dPOName}}",
+                    "name": "{{vars.input.params.cEName}}",
+                    "address": "{{vars.input.params.cEAddress}}",
                     "__replace": "true",
                     "recordTags": [
-                        "\/api\/3\/tags\/HIPAA Security Officer"
+                        "\/api\/3\/tags\/HIPAA",
+                        "\/api\/3\/tags\/Covered Entity"
                     ],
                     "eMailAddress": "{{vars.demoEmail}}",
-                    "telephoneNumber": "{{vars.input.params.dPOTelephone}}"
+                    "telephoneNumber": "{{vars.input.params.cEPhone}}"
                 },
                 "_showJson": false,
                 "operation": "Overwrite",
@@ -89,14 +127,48 @@
                 },
                 "step_variables": {
                     "temp": "{{vars.contactIRI.append(vars.result['@id'])}}",
-                    "dpoName": "{{vars.result.name}}",
-                    "dpoEmail": "{{vars.demoEmail}}",
-                    "dpoPhone": "{{vars.input.params.dPOTelephone}}"
+                    "ceEmail": "{{vars.steps.Create_Test_Covered_Entity_Contact.eMailAddress}}"
+                }
+            },
+            "status": null,
+            "top": "840",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "15de42b8-8faf-4d60-81eb-ef9dc8ae41f7"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Test HSO Contact",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "{{vars.input.params.hSOName}}",
+                    "__replace": "true",
+                    "recordTags": [
+                        "\/api\/3\/tags\/HIPAA Security Officer",
+                        "\/api\/3\/tags\/HSO"
+                    ],
+                    "eMailAddress": "{{vars.demoEmail}}",
+                    "telephoneNumber": "{{vars.input.params.hSOPhone}}"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/upsert\/contact",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "temp": "{{vars.contactIRI.append(vars.result['@id'])}}",
+                    "hsoName": "{{vars.result.name}}",
+                    "hsoEmail": "{{vars.demoEmail}}",
+                    "hsoPhone": "{{vars.input.params.hSOPhone}}"
                 }
             },
             "status": null,
             "top": "705",
-            "left": "125",
+            "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
             "group": null,
             "uuid": "28473da9-38c4-4e00-841e-ff6e52af524d"
@@ -128,7 +200,7 @@
                 "step_variables": {
                     "demoMode": "{% if vars.result[0].dataCompliances[0].testMode %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}",
                     "demoEmail": "{{vars.result[0].dataCompliances[0].testEmail}}",
-                    "placeholder": "{% for item in vars.result[0].dataCompliances[0].description.split('\\n') %}\n{% if 'Provide Security Officer Contact Details' in item %}\n{% set _dummy = item | replace('10060', '9989') %}\n{{vars.description.append(_dummy)}}\n{% else %}\n{{vars.description.append(item)}}\n{% endif %}\n{% endfor %}",
+                    "placeholder": "{% for item in vars.result[0].dataCompliances[0].description.split('\\n') %}\n{% if 'Provide Contact Details' in item %}\n{% set _dummy = item | replace('10060', '9989') %}\n{{vars.description.append(_dummy)}}\n{% else %}\n{{vars.description.append(item)}}\n{% endif %}\n{% endfor %}",
                     "complianceID": "{{vars.result[0].dataCompliances[0].id}}",
                     "complianceIRI": "{{vars.result[0].dataCompliances[0]['@id']}}",
                     "complianceUUID": "{{vars.result[0].dataCompliances[0].uuid}}"
@@ -178,19 +250,45 @@
         },
         {
             "@type": "WorkflowStep",
+            "name": "Mark Task as Completed",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                    "description": "{{vars.demoMode}}\n\n###  HIPAA Security Officer\n\n*  **Name**: {{vars.hsoName}}\n*  **Email**: {{vars.hsoEmail}}\n*  **Telephone**: {{vars.hsoPhone}}\n\n###  Covered Entity\n\n* **Name**: **{{vars.input.params.cEName}}**\n{{vars.input.params.cEAddress}}\n*  **Email**: {{vars.ceEmail}}\n*  **Telephone**: {{vars.input.params.cEPhone}}\n\nGo back to <a href=\"\/modules\/data_compliances\/{{vars.complianceUUID}}\" target=\"_blank\" rel=\"noopener\"> Data Compliance Record #{{vars.complianceID}}<\/a> to execute next task <span style=\"background: #5d636a; padding: 5px;\">**Notify HIPAA Security Officer**<\/span>"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/tasks",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "975",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "91f38c9b-2eac-40f1-b941-479e5a1db0d2"
+        },
+        {
+            "@type": "WorkflowStep",
             "name": "Start",
             "description": null,
             "arguments": {
                 "route": "66b0cf77-99b8-4ae2-8978-e77fbfecfc4d",
-                "title": "Provide Security Officer Contact Details",
+                "title": "Provide Contact Details",
                 "resources": [
                     "tasks"
                 ],
                 "inputVariables": [
                     {
-                        "name": "dPOName",
+                        "name": "hSOName",
                         "type": "string",
-                        "label": "Security Officer Name",
+                        "label": "HSO Name",
                         "tooltip": "",
                         "dataType": "text",
                         "formType": "text",
@@ -198,7 +296,7 @@
                         "_expanded": false,
                         "_nameTouched": true,
                         "defaultValue": null,
-                        "_previousName": "securityOfficerName",
+                        "_previousName": "dPOName",
                         "visibilityQuery": {
                             "sort": [],
                             "limit": 30,
@@ -210,9 +308,9 @@
                         "_addVisibilityConditions": true
                     },
                     {
-                        "name": "dPOEmail",
+                        "name": "hSOEmail",
                         "type": "string",
-                        "label": "Security Officer Email",
+                        "label": "HSO Email",
                         "title": "Email Field",
                         "usable": true,
                         "tooltip": "",
@@ -226,7 +324,7 @@
                         "templateUrl": "app\/components\/form\/fields\/email.html",
                         "_nameTouched": true,
                         "defaultValue": null,
-                        "_previousName": "securityOfficerEmail",
+                        "_previousName": "",
                         "visibilityQuery": {
                             "sort": [],
                             "limit": 30,
@@ -241,9 +339,9 @@
                         "_addVisibilityConditions": true
                     },
                     {
-                        "name": "dPOTelephone",
+                        "name": "hSOPhone",
                         "type": "string",
-                        "label": "Security Officer Telephone",
+                        "label": "HSO Phone",
                         "title": "Phone Field",
                         "usable": true,
                         "tooltip": "",
@@ -259,7 +357,7 @@
                         "templateUrl": "app\/components\/form\/fields\/phone.html",
                         "_nameTouched": true,
                         "defaultValue": null,
-                        "_previousName": "securityOfficerTelephone",
+                        "_previousName": "dPOTelephone",
                         "inversedField": null,
                         "displayTemplate": "%7B%7B%20itemValue%20%7D%7D",
                         "visibilityQuery": {
@@ -275,14 +373,107 @@
                         "jinjaExpressionView": true,
                         "useRecordFieldDefault": false,
                         "_addVisibilityConditions": true
+                    },
+                    {
+                        "name": "cEName",
+                        "type": "string",
+                        "label": "Covered Entity Name",
+                        "tooltip": "",
+                        "dataType": "text",
+                        "formType": "text",
+                        "required": true,
+                        "_expanded": false,
+                        "_nameTouched": true,
+                        "defaultValue": null,
+                        "_previousName": "coveredEntity(CE)Name",
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false
+                    },
+                    {
+                        "name": "cEAddress",
+                        "type": "string",
+                        "label": "Covered Entity Address",
+                        "title": "Text Area",
+                        "usable": false,
+                        "tooltip": "",
+                        "dataType": "text",
+                        "formType": "textarea",
+                        "required": true,
+                        "_expanded": true,
+                        "mmdUpdate": false,
+                        "collection": false,
+                        "searchable": false,
+                        "templateUrl": "app\/components\/form\/fields\/json.html",
+                        "_nameTouched": true,
+                        "defaultValue": "\u2022 Street Address - \n\u2022 City - \n\u2022 State - \n\u2022 Zip -",
+                        "_previousName": "cEaddress",
+                        "playbookField": true,
+                        "lengthConstraint": false,
+                        "allowedGridColumn": false,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false
+                    },
+                    {
+                        "name": "cEEmail",
+                        "type": "string",
+                        "label": "Covered Entity Email",
+                        "title": "Email Field",
+                        "usable": true,
+                        "tooltip": "",
+                        "dataType": "email",
+                        "formType": "email",
+                        "required": true,
+                        "_expanded": false,
+                        "mmdUpdate": true,
+                        "collection": false,
+                        "searchable": true,
+                        "templateUrl": "app\/components\/form\/fields\/email.html",
+                        "_nameTouched": true,
+                        "defaultValue": null,
+                        "_previousName": "coveredEntityEmail",
+                        "playbookField": true,
+                        "lengthConstraint": true,
+                        "allowedEncryption": true,
+                        "allowedGridColumn": true,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false
+                    },
+                    {
+                        "name": "cEPhone",
+                        "type": "string",
+                        "label": "Covered Entity Phone",
+                        "title": "Phone Field",
+                        "usable": true,
+                        "tooltip": "",
+                        "dataType": "phone",
+                        "formType": "phone",
+                        "required": true,
+                        "_expanded": false,
+                        "mmdUpdate": true,
+                        "collection": false,
+                        "searchable": true,
+                        "templateUrl": "app\/components\/form\/fields\/phone.html",
+                        "_nameTouched": true,
+                        "defaultValue": null,
+                        "_previousName": "coveredEntityPhone",
+                        "playbookField": true,
+                        "lengthConstraint": true,
+                        "allowedEncryption": false,
+                        "allowedGridColumn": true,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false
                     }
                 ],
                 "step_variables": {
                     "input": {
                         "params": {
-                            "dPOName": "{{vars.request.data[\"dPOName\"]}}",
-                            "dPOEmail": "{{vars.request.data[\"dPOEmail\"]}}",
-                            "dPOTelephone": "{{vars.request.data[\"dPOTelephone\"]}}"
+                            "cEName": "{{vars.request.data[\"cEName\"]}}",
+                            "cEEmail": "{{vars.request.data[\"cEEmail\"]}}",
+                            "cEPhone": "{{vars.request.data[\"cEPhone\"]}}",
+                            "hSOName": "{{vars.request.data[\"hSOName\"]}}",
+                            "hSOEmail": "{{vars.request.data[\"hSOEmail\"]}}",
+                            "hSOPhone": "{{vars.request.data[\"hSOPhone\"]}}",
+                            "cEAddress": "{{vars.request.data[\"cEAddress\"]}}"
                         },
                         "records": "{{vars.input.records}}"
                     }
@@ -370,21 +561,21 @@
                     ],
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
                     "tenant": "",
-                    "content": "<p>HIPAA Security Officer's contact details have been collected.<\/p>",
+                    "content": "<p>HIPAA Security Officer(HSO) and Covered Entity's contact details have been collected.<\/p>",
                     "records": "{{vars.complianceIRI}},{{vars.incidentIRI}}"
                 },
                 "resource": {
                     "__link": {
                         "contacts": "{{vars.contactIRI}}"
                     },
-                    "dPOName": "{{vars.dpoName}}",
-                    "dPAEmail": "{{vars.dpaEmail}}",
-                    "dPOEmail": "{{vars.dpoEmail}}",
-                    "dPAAddress": "{{vars.dpaAddress}}",
-                    "dPAWebsite": "{{vars.dpaWebsite}}",
+                    "cEName": "{{vars.input.params.cEName}}",
+                    "cEEmail": "{{vars.ceEmail}}",
+                    "cEPhone": "{{vars.input.params.cEPhone}}",
+                    "hSOName": "{{vars.hsoName}}",
+                    "hSOEmail": "{{vars.hsoEmail}}",
+                    "hSOPhone": "{{vars.hsoPhone}}",
                     "description": "{{vars.description | join('\\n')}}",
-                    "dPOTelephone": "{{vars.dpoPhone}}",
-                    "dataRegulator": "{{vars.input.params.dataRegulator['@id']}}"
+                    "cEStreetAddress": "{{vars.input.params.cEAddress}}"
                 },
                 "_showJson": false,
                 "operation": "Append",
@@ -393,6 +584,7 @@
                 "collectionType": "\/api\/3\/data_compliances",
                 "fieldOperation": {
                     "recordTags": "Append",
+                    "locationOfBreach": "Append",
                     "reminderMailStatus": "Append",
                     "typeOfPHIInvolvedInBreach": "Append",
                     "clinicalPHIExposedInBreach": "Append",
@@ -404,37 +596,11 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "975",
+            "top": "1110",
             "left": "300",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
             "group": null,
             "uuid": "d0ac9fbb-ad11-40b1-8ed6-422a2eec514f"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Update Task",
-            "description": null,
-            "arguments": {
-                "resource": {
-                    "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
-                    "description": "{{vars.demoMode}}\n\n####  HIPAA Security Officer\n\n*  **Name**: {{vars.dpoName}}\n*  **Email**: {{vars.dpoEmail}}\n*  **Telephone**: {{vars.dpoPhone}}\n\nGo back to <a href=\"\/modules\/data_compliances\/{{vars.complianceUUID}}\" target=\"_blank\" rel=\"noopener\"> Data Compliance Record #{{vars.complianceID}}<\/a> to execute next task <span style=\"background: #5d636a; padding: 5px;\">**Notify HIPAA Security Officer**<\/span>"
-                },
-                "_showJson": false,
-                "operation": "Append",
-                "collection": "{{vars.input.records[0]['@id']}}",
-                "__recommend": [],
-                "collectionType": "\/api\/3\/tasks",
-                "fieldOperation": {
-                    "recordTags": "Append"
-                },
-                "step_variables": []
-            },
-            "status": null,
-            "top": "840",
-            "left": "300",
-            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
-            "group": null,
-            "uuid": "91f38c9b-2eac-40f1-b941-479e5a1db0d2"
         }
     ],
     "routes": [
@@ -446,27 +612,47 @@
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "011211ef-0dad-48cf-9425-23de23799385"
+            "uuid": "191e8d6c-7af7-4c4c-8d2c-e2edb938dd5c"
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Create Demo DPO Contact -> Update Task",
+            "name": "Create Covered Entity Contact -> Mark Task as Completed",
             "targetStep": "\/api\/3\/workflow_steps\/91f38c9b-2eac-40f1-b941-479e5a1db0d2",
-            "sourceStep": "\/api\/3\/workflow_steps\/28473da9-38c4-4e00-841e-ff6e52af524d",
+            "sourceStep": "\/api\/3\/workflow_steps\/34c426cc-61e3-488b-aed7-c0b9392d1421",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "35d1be3b-df56-4f08-bb8c-74307a510298"
+            "uuid": "b397b931-d9be-4972-906e-bd435f61c544"
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Create DPO Contact -> Update Task",
-            "targetStep": "\/api\/3\/workflow_steps\/91f38c9b-2eac-40f1-b941-479e5a1db0d2",
+            "name": "Create HSO Contact -> Create Covered Entity Contact",
+            "targetStep": "\/api\/3\/workflow_steps\/34c426cc-61e3-488b-aed7-c0b9392d1421",
             "sourceStep": "\/api\/3\/workflow_steps\/542d969d-84f8-4d28-9f23-551f9b27aab8",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "edaadf48-deac-4172-a95d-19af131989af"
+            "uuid": "c829164f-3040-4f27-a5ca-3df80d7a09a9"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Test Covered Entity Contact -> Mark Task as Completed",
+            "targetStep": "\/api\/3\/workflow_steps\/91f38c9b-2eac-40f1-b941-479e5a1db0d2",
+            "sourceStep": "\/api\/3\/workflow_steps\/15de42b8-8faf-4d60-81eb-ef9dc8ae41f7",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "e9dba499-1a16-4e13-b4a7-644d11325c46"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Test HSO Contact -> Create Test Covered Entity Contact",
+            "targetStep": "\/api\/3\/workflow_steps\/15de42b8-8faf-4d60-81eb-ef9dc8ae41f7",
+            "sourceStep": "\/api\/3\/workflow_steps\/28473da9-38c4-4e00-841e-ff6e52af524d",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "b8efa4d2-37a4-47e6-ae18-c0f0f0f5d2ae"
         },
         {
             "@type": "WorkflowRoute",

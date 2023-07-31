@@ -17,6 +17,39 @@
     "steps": [
         {
             "@type": "WorkflowStep",
+            "name": "Compliance Record Description Update",
+            "description": "Updates Compliance Record with \"In Progress\" Status & Created Task List",
+            "arguments": {
+                "resource": {
+                    "status": "\/api\/3\/picklists\/bb7402d6-f699-11e7-8c3f-9a214cf093ae",
+                    "description": "{{vars.description | join('\\n')}}"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "locationOfBreach": "Append",
+                    "reminderMailStatus": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append",
+                    "clinicalPHIExposedInBreach": "Append",
+                    "financialPHIExposedInBreach": "Append",
+                    "demographicPHIExposedInBreach": "Append",
+                    "safeguardsInPlaceBeforeBreach": "Append",
+                    "actionsTakenInResponseToBreach": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "840",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "21a175d7-0b77-4b90-9fe3-4321d3533949"
+        },
+        {
+            "@type": "WorkflowStep",
             "name": "Configuration",
             "description": null,
             "arguments": {
@@ -106,11 +139,92 @@
         },
         {
             "@type": "WorkflowStep",
+            "name": "Mark Task as Completed",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                    "description": "{{vars.demoMode}}\n\n##### The information for HIPAA risk assessment has been collected.\n\n##### Go back to <a href=\"\/modules\/data_compliances\/{{vars.complianceUUID}}\" target=\"_blank\" rel=\"noopener\"> Data Compliance Record #{{vars.complianceID}}<\/a> to execute next task <span style=\"background: #5d636a; padding: 5px;\">**Provide Contact Details**<\/span>"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/tasks",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "705",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "ab4a390c-52c4-4c21-8a77-9feb6ec7dadf"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Risk Assessment Details Update in Compliance Record",
+            "description": "Update HIPAA risk assessment details in the compliance record.",
+            "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<p>Necessary information for the PHI Breach Risk Assessment has been collected.<\/p>",
+                    "records": "{{vars.complianceIRI}},{{vars.incidentIRI}}"
+                },
+                "resource": {
+                    "locationOfBreach": "{{vars.input.params.locationOfBreach}}",
+                    "typeOfDataBreach": "{{\"GDPRDataBreachType\" | picklist(vars.input.params.typeOfDataBreach, \"@id\")}}",
+                    "noOfAffectedUsers": "{{vars.input.params.noOfAffectedUsers}}",
+                    "isMediaNoticeRequired": "{% if vars.input.params.noOfAffectedUsers >= 500 %}{{\"YesNoInput\" | picklist(\"Yes\", \"@id\")}}{% else %}{{\"YesNoInput\" | picklist(\"No\", \"@id\")}}{% endif %}",
+                    "describeOtherActionsTaken": "{{vars.input.params.describeOtherActionsTaken}}",
+                    "typeOfPHIInvolvedInBreach": "{{vars.input.params.typeOfPHIExposedInBreach}}",
+                    "clinicalPHIExposedInBreach": "{{vars.input.params.clinicalPHIExposedInBreach}}",
+                    "financialPHIExposedInBreach": "{{vars.input.params.financialPHIExposedInBreach}}",
+                    "demographicPHIExposedInBreach": "{{vars.input.params.demographicPHIExposedInBreach}}",
+                    "describeOtherLocationOfBreach": "{{vars.input.params.describeOtherLocationOfBreach}}",
+                    "safeguardsInPlaceBeforeBreach": "{{vars.input.params.safeguardsInPlaceBeforeBreach}}",
+                    "actionsTakenInResponseToBreach": "{{vars.input.params.actionsTakenInResponseToBreach}}",
+                    "typeOfPHIInvolvedInBreachOther": "{{vars.input.params.typeOfPHIExposedInBreachOther}}"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "recordTags": "Append",
+                    "clinicalPHI": "Append",
+                    "locationOfBreach": "Append",
+                    "reminderMailStatus": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append",
+                    "clinicalPHIExposedInBreach": "Append",
+                    "financialPHIExposedInBreach": "Append",
+                    "demographicPHIExposedInBreach": "Append",
+                    "safeguardsInPlaceBeforeBreach": "Append",
+                    "actionsTakenInResponseToBreach": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "4ece4af6-db9a-4f93-a487-9480ceb8e781"
+        },
+        {
+            "@type": "WorkflowStep",
             "name": "Start",
             "description": null,
             "arguments": {
                 "route": "5b08e550-8b9c-4125-82c5-7321dda82f76",
-                "title": "Submit HIPAA Risk Assessment Details",
+                "title": "Submit HIPAA Risk Assessment Information",
                 "resources": [
                     "tasks"
                 ],
@@ -131,7 +245,7 @@
                         "tooltip": "\u2022Hacking- Technical Intrusion e.g malware or hacking \u2022Improper Disposal- Improper disposal of electronic media or paper \u2022Loss- Loss of electronic media or paper \u2022Theft- Theft of electronic media or paper",
                         "dataType": "dynamicList",
                         "formType": "dynamicList",
-                        "required": false,
+                        "required": true,
                         "_expanded": false,
                         "mmdUpdate": true,
                         "collection": false,
@@ -798,11 +912,11 @@
                         "label": "Actions Taken in Response to Breach",
                         "title": "Multiselect Picklist",
                         "usable": true,
-                        "tooltip": "",
+                        "tooltip": "Choose actions taken in response to the breach from the provided list.",
                         "dataType": "multiselectpicklist",
                         "formType": "multiselectpicklist",
                         "required": true,
-                        "_expanded": false,
+                        "_expanded": true,
                         "mmdUpdate": true,
                         "bulkAction": [],
                         "collection": true,
@@ -911,7 +1025,7 @@
                         "label": "Describe Other Actions Taken",
                         "title": "Text Area",
                         "usable": false,
-                        "tooltip": "",
+                        "tooltip": "Describe any other actions taken that are not listed.",
                         "dataType": "text",
                         "formType": "textarea",
                         "required": true,
@@ -1016,118 +1130,6 @@
             "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
             "group": null,
             "uuid": "485318e6-d483-45fd-bd73-a56be1ac8c9c"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Update Compliance Record Description",
-            "description": null,
-            "arguments": {
-                "resource": {
-                    "status": "\/api\/3\/picklists\/bb7402d6-f699-11e7-8c3f-9a214cf093ae",
-                    "description": "{{vars.description | join('\\n')}}"
-                },
-                "_showJson": false,
-                "operation": "Append",
-                "collection": "{{vars.complianceIRI}}",
-                "__recommend": [],
-                "collectionType": "\/api\/3\/data_compliances",
-                "fieldOperation": {
-                    "reminderMailStatus": "Append",
-                    "typeOfPHIInvolvedInBreach": "Append",
-                    "clinicalPHIExposedInBreach": "Append",
-                    "financialPHIExposedInBreach": "Append",
-                    "demographicPHIExposedInBreach": "Append",
-                    "safeguardsInPlaceBeforeBreach": "Append",
-                    "actionsTakenInResponseToBreach": "Append"
-                },
-                "step_variables": []
-            },
-            "status": null,
-            "top": "840",
-            "left": "125",
-            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
-            "group": null,
-            "uuid": "21a175d7-0b77-4b90-9fe3-4321d3533949"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Update HIPAA Assessment Data",
-            "description": null,
-            "arguments": {
-                "message": {
-                    "tags": [
-                        "\/api\/3\/tags\/HIPAA"
-                    ],
-                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
-                    "tenant": "",
-                    "content": "<p>Necessary information for the Data Breach Risk Assessment has been collected.<\/p>",
-                    "records": "{{vars.complianceIRI}},{{vars.incidentIRI}}"
-                },
-                "resource": {
-                    "locationOfBreach": "{{vars.input.params.locationOfBreach}}",
-                    "typeOfDataBreach": "{{\"GDPRDataBreachType\" | picklist(vars.input.params.typeOfDataBreach, \"@id\")}}",
-                    "noOfAffectedUsers": "{{vars.input.params.noOfAffectedUsers}}",
-                    "describeOtherActionsTaken": "{{vars.input.params.describeOtherActionsTaken}}",
-                    "typeOfPHIInvolvedInBreach": "{{vars.input.params.typeOfPHIExposedInBreach}}",
-                    "clinicalPHIExposedInBreach": "{{vars.input.params.clinicalPHIExposedInBreach}}",
-                    "financialPHIExposedInBreach": "{{vars.input.params.financialPHIExposedInBreach}}",
-                    "demographicPHIExposedInBreach": "{{vars.input.params.demographicPHIExposedInBreach}}",
-                    "describeOtherLocationOfBreach": "{{vars.input.params.describeOtherLocationOfBreach}}",
-                    "safeguardsInPlaceBeforeBreach": "{{vars.input.params.safeguardsInPlaceBeforeBreach}}",
-                    "actionsTakenInResponseToBreach": "{{vars.input.params.actionsTakenInResponseToBreach}}",
-                    "typeOfPHIInvolvedInBreachOther": "{{vars.input.params.typeOfPHIExposedInBreachOther}}"
-                },
-                "_showJson": false,
-                "operation": "Append",
-                "collection": "{{vars.complianceIRI}}",
-                "__recommend": [],
-                "collectionType": "\/api\/3\/data_compliances",
-                "fieldOperation": {
-                    "recordTags": "Append",
-                    "clinicalPHI": "Append",
-                    "locationOfBreach": "Append",
-                    "reminderMailStatus": "Append",
-                    "typeOfPHIInvolvedInBreach": "Append",
-                    "clinicalPHIExposedInBreach": "Append",
-                    "financialPHIExposedInBreach": "Append",
-                    "demographicPHIExposedInBreach": "Append",
-                    "safeguardsInPlaceBeforeBreach": "Append",
-                    "actionsTakenInResponseToBreach": "Append"
-                },
-                "step_variables": []
-            },
-            "status": null,
-            "top": "570",
-            "left": "125",
-            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
-            "group": null,
-            "uuid": "4ece4af6-db9a-4f93-a487-9480ceb8e781"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Update Task Status",
-            "description": null,
-            "arguments": {
-                "resource": {
-                    "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
-                    "description": "{{vars.demoMode}}\n\n##### The information for HIPAA risk assessment has been collected.\n\nGo back to <a href=\"\/modules\/data_compliances\/{{vars.complianceUUID}}\" target=\"_blank\" rel=\"noopener\"> Data Compliance Record #{{vars.complianceID}}<\/a> to execute next task <span style=\"background: #5d636a; padding: 5px;\">**Apply Technical Fix to Stop Incident**<\/span>"
-                },
-                "_showJson": false,
-                "operation": "Append",
-                "collection": "{{vars.input.records[0]['@id']}}",
-                "__recommend": [],
-                "collectionType": "\/api\/3\/tasks",
-                "fieldOperation": {
-                    "recordTags": "Append"
-                },
-                "step_variables": []
-            },
-            "status": null,
-            "top": "705",
-            "left": "125",
-            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
-            "group": null,
-            "uuid": "ab4a390c-52c4-4c21-8a77-9feb6ec7dadf"
         }
     ],
     "routes": [
