@@ -151,7 +151,7 @@
                                                                                                                                     "name": "regulatoryCompliance",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
-                                                                                                                                    "readOnly": true
+                                                                                                                                    "readOnly": false
                                                                                                                                 }
                                                                                                                             ],
                                                                                                                             "style": "col-lg-6"
@@ -616,6 +616,11 @@
                                                                                                                                     "readOnly": true
                                                                                                                                 },
                                                                                                                                 {
+                                                                                                                                    "name": "stepsTakenToInvestigateTheBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
                                                                                                                                     "name": "isDPIARequired",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
@@ -628,9 +633,9 @@
                                                                                                                                     "readOnly": true
                                                                                                                                 },
                                                                                                                                 {
-                                                                                                                                    "name": "actionsForApplyingTechnicalFix",
+                                                                                                                                    "name": "rootCauseAnalysisFindings",
                                                                                                                                     "highlightMode": true,
-                                                                                                                                    "readOnly": false
+                                                                                                                                    "readOnly": true
                                                                                                                                 }
                                                                                                                             ],
                                                                                                                             "style": "col-lg-6"
@@ -653,6 +658,16 @@
                                                                                                                                     "name": "summaryOfDPOAdvice",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "actionsForApplyingTechnicalFix",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "technicalFixSummary",
+                                                                                                                                    "highlightMode": true,
                                                                                                                                     "readOnly": true
                                                                                                                                 }
                                                                                                                             ],
@@ -880,7 +895,7 @@
                                                     }
                                                 ]
                                             },
-                                            "show": false,
+                                            "show": true,
                                             "visible": true
                                         },
                                         {

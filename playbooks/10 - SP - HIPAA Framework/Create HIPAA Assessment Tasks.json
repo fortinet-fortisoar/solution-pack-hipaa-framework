@@ -46,7 +46,7 @@
                     "recordTags": [
                         "\/api\/3\/tags\/Notify HSO"
                     ],
-                    "description": "{{vars.demoMode}}\n\n##### Send the *Breach Risk Assessment* details to the HIPAA Security Officer to determine if it is a valid breach and reportable.\n\n##### Click on <span style=\"background: #5d636a; padding: 5px;\">Notify HIPAA Security Officer<\/span> button ",
+                    "description": "{{vars.demoMode}}\n\n##### Send the *Breach Risk Assessment* details to the HIPAA Security Officer to determine if it is a valid breach and reportable.\n\n##### Click on <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">Notify HIPAA Security Officer<\/span> button ",
                     "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
                     "dataCompliances": "{{vars.input.records[0]['@id']}}",
                     "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
@@ -85,7 +85,7 @@
                     "recordTags": [
                         "\/api\/3\/tags\/HIPAA Security Officer Contact"
                     ],
-                    "description": "{{vars.demoMode}}\n\n##### Provide the contact details of the HIPAA Security Officer(HSO) or the designated person in charge, along with the Covered Entity(CE) Address.\n\n##### Click on the <span style=\"background: #5d636a; padding: 5px;\">**Provide Contact Details**<\/span> Button",
+                    "description": "{{vars.demoMode}}\n\n##### Provide the contact details of the HIPAA Security Officer(HSO) or the designated person in charge, along with the Covered Entity(CE) Address.\n\n##### Click on the <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Provide Contact Details**<\/span> Button",
                     "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
                     "dataCompliances": "{{vars.input.records[0]['@id']}}",
                     "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
@@ -166,7 +166,7 @@
                     "recordTags": [
                         "\/api\/3\/tags\/HIPAA Risk Assessment Form"
                     ],
-                    "description": "{{vars.demoMode}}\n\n##### Please submit necessary information for PHI Breach Risk Assessment, including the number of affected individuals and whether the breach is reportable.\n\n##### Click on <span style=\"background: #5d636a; padding: 5px;\">Submit HIPAA Risk Assessment Information<\/span> Button",
+                    "description": "{{vars.demoMode}}\n\n##### Please submit necessary information for PHI Breach Risk Assessment, including the number of affected individuals and whether the breach is reportable.\n\n##### Click on <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">Submit HIPAA Risk Assessment Information<\/span> Button",
                     "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
                     "dataCompliances": "{{vars.input.records[0]['@id']}}",
                     "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
@@ -198,11 +198,11 @@
                     "tags": [],
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
                     "tenant": "",
-                    "content": "<p>Following tasks have been created to perform HIPAA Assessment<\/p>\n<p>&nbsp;<\/p>\n<p>{% for item in vars.taskList %}<\/p>\n<p><a rel=\"noopener\" target=\"_blank\" href=\"\/modules\/view-panel\/tasks\/{{(item | fromIRI).uuid}}\">Task #{{(item | fromIRI).id}} - {{(item | fromIRI).name}}<\/a><\/p>\n<p>{% endfor %}<\/p>",
+                    "content": "<p>Following tasks have been created to perform HIPAA Assessment<\/p>\n<p>&nbsp;<\/p>\n<p>{% for item in vars.taskList %}<\/p>\n<p><a href=\"\/modules\/view-panel\/tasks\/{{(item | fromIRI).uuid}}\" target=\"_parent\" rel=\"noopener\">Task #{{(item | fromIRI).id}} - {{(item | fromIRI).name}}<\/a><\/p>\n<p>{% endfor %}<\/p>",
                     "records": ""
                 },
                 "resource": {
-                    "description": "##### Make sure to complete following tasks within 60 days of breach occurrence\n\n| Sr. No. | Task Name | Task Link | Status  |\n| --- | --- | --- | --- |{% for item in vars.taskList %}\n| {{loop.index}} | {{(item | fromIRI).name}} | <a href=\"\/modules\/view-panel\/tasks\/{{(item | fromIRI).uuid}}\" target=\"_blank\" rel=\"noopener\">Click Here<\/a> | <span>&#10060;<\/span> |{% endfor %}"
+                    "description": "##### Make sure to complete following tasks within 60 days of breach occurrence\n\n| Sr. No. | Task Name | Task Link | Status  |\n| --- | --- | --- | --- |{% for item in vars.taskList %}\n| {{loop.index}} | {{(item | fromIRI).name}} | <a href=\"\/modules\/view-panel\/tasks\/{{(item | fromIRI).uuid}}\" target=\"_parent\" rel=\"noopener\">Click Here<\/a> | <span>&#10060;<\/span> |{% endfor %}"
                 },
                 "_showJson": false,
                 "operation": "Append",

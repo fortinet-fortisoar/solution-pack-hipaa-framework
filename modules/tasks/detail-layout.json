@@ -48,6 +48,16 @@
                 "id": "\/api\/3\/workflows\/9818ea54-d9aa-45d4-a137-63cd0898a624",
                 "name": "PHI Risk Assessment Confirmation by HSO",
                 "icon": "icon icon-approval"
+            },
+            {
+                "id": "\/api\/3\/workflows\/9b1c25b7-0bbf-4cb6-aa95-bdde86ec8b11",
+                "name": "Perform Actions to Apply Technical Fix",
+                "icon": "icon icon-access-control"
+            },
+            {
+                "id": "\/api\/3\/workflows\/02665001-d443-4a32-9663-a9344f66befa",
+                "name": "Report PHI Breach to Law Enforcement Agency",
+                "icon": "icon icon-generate-incident-summary-report"
             }
         ],
         "rows": [

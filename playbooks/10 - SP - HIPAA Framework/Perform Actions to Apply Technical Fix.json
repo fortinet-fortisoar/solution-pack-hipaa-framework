@@ -1,0 +1,416 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Perform Actions to Apply Technical Fix",
+    "aliasName": null,
+    "tag": null,
+    "description": "Initiates and carry out the necessary actions to apply the technical fix.",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/4c384067-79c3-4821-a70a-d69c3c149ec6",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/f24aebe5-7bae-4863-a41e-01c46f709da8",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "taskList": "[]",
+                "description": "[]",
+                "affectedIndividualsList": "[]"
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "2b5bf774-6fec-4aad-83ce-85d3fd798d0f"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Compliance Record ID",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "id",
+                            "value": "{{vars.input.records[0].id}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ],
+                    "__selectFields": [
+                        "dataCompliances"
+                    ]
+                },
+                "module": "tasks?$limit=30&$relationships=true&$fsr_max_relation_count=100",
+                "checkboxFields": true,
+                "step_variables": {
+                    "demoMode": "{% if vars.result[0].dataCompliances[0].testMode %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}",
+                    "hsoEmail": "{{vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].hSOEmail}}",
+                    "demoEmail": "{{vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].testEmail}}",
+                    "placeholder": "{% for item in vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].description.split('\\n') %}\n{% if 'Apply Technical Fix' in item %}\n{% set _dummy = item | replace('10060', '9989') %}\n{{vars.description.append(_dummy)}}\n{% else %}\n{{vars.description.append(item)}}\n{% endif %}\n{% endfor %}",
+                    "complianceID": "{{vars.result[0].dataCompliances[0].id}}",
+                    "complianceIRI": "{{vars.result[0].dataCompliances[0]['@id']}}",
+                    "complianceName": "{{vars.result[0].dataCompliances[0].name}}",
+                    "complianceUUID": "{{vars.result[0].dataCompliances[0].uuid}}",
+                    "breachNotificationDueDate": "{{vars.result[0].dataCompliances[0].breachNotifyDueDate}}"
+                }
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "802b7c87-38ac-4b5b-be39-7a9282a09612"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Parent Incident ID",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "id",
+                            "value": "{{vars.complianceID}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ],
+                    "__selectFields": [
+                        "incidents"
+                    ]
+                },
+                "module": "data_compliances?$limit=30&$relationships=true&$fsr_max_relation_count=100",
+                "checkboxFields": true,
+                "step_variables": {
+                    "incidentID": "{{vars.result[0].incidents[0].id}}",
+                    "incidentIRI": "{{vars.result[0].incidents[0]['@id']}}",
+                    "currentIndex": "{{vars.description[-1].split(\"|\")[1]}}"
+                }
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "ac5e4e01-1c5b-4546-95d1-a47379ee4abe"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Mark Task as Completed",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                    "description": "{{vars.demoMode}}\n\n##### As advised by HSO, a technical fix has been applied to stop the incident. Additionally, the fix details have been updated in the Data Compliance record.\n\n##### Go back to <a href=\"\/modules\/view-panel\/data_compliances\/{{vars.complianceUUID}}\" target=\"_parent\" rel=\"noopener\"> **Data Compliance Record #{{vars.complianceID}}**<\/a> to execute next task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Report Crime to Law Enforcement Agency**<\/span>"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/tasks",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "840",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "10129dce-93aa-4c42-8d21-8b5f450d820d"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Perform Actions to Apply Technical Fix",
+            "description": null,
+            "arguments": {
+                "type": "InputBased",
+                "input": {
+                    "schema": {
+                        "title": "Perform Actions to Apply Technical Fix",
+                        "description": "##### Please perform following actions to apply technical fix as advised by HSO\n<p>&nbsp<\/p>\n\n```\n{{vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].actionsForApplyingTechnicalFix}}\n```\n",
+                        "inputVariables": [
+                            {
+                                "name": "provideATechnicalFixSummary",
+                                "type": "string",
+                                "label": "Provide a technical fix summary",
+                                "title": "Text Area",
+                                "usable": false,
+                                "tooltip": "",
+                                "dataType": "text",
+                                "formType": "textarea",
+                                "required": true,
+                                "_expanded": true,
+                                "mmdUpdate": false,
+                                "collection": false,
+                                "searchable": false,
+                                "templateUrl": "app\/components\/form\/fields\/json.html",
+                                "defaultValue": null,
+                                "_previousName": "pleaseProvideATechnicalFixSummary",
+                                "playbookField": true,
+                                "lengthConstraint": false,
+                                "allowedGridColumn": false,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false
+                            }
+                        ]
+                    }
+                },
+                "record": "{{ vars.input.records[0][\"@id\"] }}",
+                "agent_id": null,
+                "resources": "tasks",
+                "owner_detail": {
+                    "isAssigned": false
+                },
+                "isRecordLinked": true,
+                "step_variables": [],
+                "response_mapping": {
+                    "options": [
+                        {
+                            "option": "Submit",
+                            "primary": true,
+                            "step_iri": "\/api\/3\/workflow_steps\/cb65f930-cb63-42a7-aacd-6fa34e7785d2"
+                        }
+                    ],
+                    "duplicateOption": false
+                },
+                "email_notification": {
+                    "enabled": false,
+                    "smtpParameters": []
+                },
+                "inline_channel_list": [],
+                "external_channel_list": [],
+                "unauthenticated_input": false
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
+            "group": null,
+            "uuid": "3aba89d7-7777-4571-97e7-b57c7932a248"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "route": "9cd37bf5-435a-4b04-ba5d-331bb6818fb6",
+                "title": "Apply Technical Fix",
+                "resources": [
+                    "tasks"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                    "input": {
+                        "params": [],
+                        "records": "{{vars.input.records}}"
+                    }
+                },
+                "displayConditions": {
+                    "tasks": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": [
+                            {
+                                "type": "object",
+                                "field": "status",
+                                "value": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                                "_value": {
+                                    "@id": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                                    "itemValue": "Completed"
+                                },
+                                "operator": "neq"
+                            },
+                            {
+                                "type": "array",
+                                "field": "recordTags",
+                                "value": [
+                                    "\/api\/3\/tags\/Apply Technical Fix"
+                                ],
+                                "module": "recordTags",
+                                "display": "",
+                                "operator": "in_all",
+                                "template": "tags",
+                                "OPERATOR_KEY": "$",
+                                "previousOperator": "in_all",
+                                "previousTemplate": "tags"
+                            }
+                        ]
+                    }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": false,
+                "singleRecordExecution": true
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+            "group": null,
+            "uuid": "f24aebe5-7bae-4863-a41e-01c46f709da8"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update Compliance Record Description",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "description": "{{vars.description | join('\\n')}}"
+                },
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": [],
+                "step_variables": []
+            },
+            "status": null,
+            "top": "975",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "bbaba77d-038b-4679-9855-0931bb8f5f38"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Updated Fix Details in Compliance Record",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<p>Technical fix to stop the incident has been applied.<\/p>",
+                    "records": "{{vars.complianceIRI}},{{vars.incidentIRI}}"
+                },
+                "resource": {
+                    "technicalFixSummary": "{{vars.steps.Perform_Actions_to_Apply_Technical_Fix.input.provideATechnicalFixSummary}}"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "recordTags": "Append",
+                    "locationOfBreach": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append",
+                    "clinicalPHIExposedInBreach": "Append",
+                    "financialPHIExposedInBreach": "Append",
+                    "demographicPHIExposedInBreach": "Append",
+                    "safeguardsInPlaceBeforeBreach": "Append",
+                    "actionsTakenInResponseToBreach": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "705",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "cb65f930-cb63-42a7-aacd-6fa34e7785d2"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Get Compliance Record ID",
+            "targetStep": "\/api\/3\/workflow_steps\/802b7c87-38ac-4b5b-be39-7a9282a09612",
+            "sourceStep": "\/api\/3\/workflow_steps\/2b5bf774-6fec-4aad-83ce-85d3fd798d0f",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "dd7e17f7-1389-4af5-b305-36916e8f0aed"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Compliance Record ID -> Get Parent Incident ID",
+            "targetStep": "\/api\/3\/workflow_steps\/ac5e4e01-1c5b-4546-95d1-a47379ee4abe",
+            "sourceStep": "\/api\/3\/workflow_steps\/802b7c87-38ac-4b5b-be39-7a9282a09612",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "34165e6f-129a-4374-acf4-4fe3059f1a7a"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Parent Incident ID -> Perform Actions to Apply Technical Fix",
+            "targetStep": "\/api\/3\/workflow_steps\/3aba89d7-7777-4571-97e7-b57c7932a248",
+            "sourceStep": "\/api\/3\/workflow_steps\/ac5e4e01-1c5b-4546-95d1-a47379ee4abe",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "505cdc51-2204-4ec6-9b6a-0a5b84e33fc5"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Perform Actions to Apply Technical Fix -> Updated HIPAA Assessment Data",
+            "targetStep": "\/api\/3\/workflow_steps\/cb65f930-cb63-42a7-aacd-6fa34e7785d2",
+            "sourceStep": "\/api\/3\/workflow_steps\/3aba89d7-7777-4571-97e7-b57c7932a248",
+            "label": "Submit",
+            "isExecuted": false,
+            "group": null,
+            "uuid": "f58a02e8-a182-4cd5-b552-b268f50b1fef"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/2b5bf774-6fec-4aad-83ce-85d3fd798d0f",
+            "sourceStep": "\/api\/3\/workflow_steps\/f24aebe5-7bae-4863-a41e-01c46f709da8",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "34c1ebd9-06e2-40dd-b1cc-2aa89f8bd3c4"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Updated Fix Details in Compliance Record -> Update Task Status",
+            "targetStep": "\/api\/3\/workflow_steps\/10129dce-93aa-4c42-8d21-8b5f450d820d",
+            "sourceStep": "\/api\/3\/workflow_steps\/cb65f930-cb63-42a7-aacd-6fa34e7785d2",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "3db1054d-900b-4785-904f-f297c82dc259"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Update Task Status -> Update Compliance Record Description",
+            "targetStep": "\/api\/3\/workflow_steps\/bbaba77d-038b-4679-9855-0931bb8f5f38",
+            "sourceStep": "\/api\/3\/workflow_steps\/10129dce-93aa-4c42-8d21-8b5f450d820d",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "f43a3e60-a54c-4fc3-b594-59dc9dc7f347"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "9b1c25b7-0bbf-4cb6-aa95-bdde86ec8b11",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "ManualTrigger"
+    ]
+}

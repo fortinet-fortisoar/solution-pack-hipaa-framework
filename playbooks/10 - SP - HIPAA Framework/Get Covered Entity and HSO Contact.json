@@ -255,7 +255,7 @@
             "arguments": {
                 "resource": {
                     "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
-                    "description": "{{vars.demoMode}}\n\n###  HIPAA Security Officer\n\n*  **Name**: {{vars.hsoName}}\n*  **Email**: {{vars.hsoEmail}}\n*  **Telephone**: {{vars.hsoPhone}}\n\n###  Covered Entity\n\n* **Name**: **{{vars.input.params.cEName}}**\n{{vars.input.params.cEAddress}}\n*  **Email**: {{vars.ceEmail}}\n*  **Telephone**: {{vars.input.params.cEPhone}}\n\nGo back to <a href=\"\/modules\/data_compliances\/{{vars.complianceUUID}}\" target=\"_blank\" rel=\"noopener\"> Data Compliance Record #{{vars.complianceID}}<\/a> to execute next task <span style=\"background: #5d636a; padding: 5px;\">**Notify HIPAA Security Officer**<\/span>"
+                    "description": "{{vars.demoMode}}\n\n###  HIPAA Security Officer\n\n*  **Name**: {{vars.hsoName}}\n*  **Email**: {{vars.hsoEmail}}\n*  **Telephone**: {{vars.hsoPhone}}\n\n###  Covered Entity\n\n* **Name**: **{{vars.input.params.cEName}}**\n{{vars.input.params.cEAddress}}\n*  **Email**: {{vars.ceEmail}}\n*  **Telephone**: {{vars.input.params.cEPhone}}\n\nGo back to <a href=\"\/modules\/data_compliances\/{{vars.complianceUUID}}\" target=\"_parent\" rel=\"noopener\"> Data Compliance Record #{{vars.complianceID}}<\/a> to execute next task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Notify HIPAA Security Officer**<\/span>"
                 },
                 "_showJson": false,
                 "operation": "Append",

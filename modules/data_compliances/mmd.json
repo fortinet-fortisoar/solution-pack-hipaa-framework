@@ -1,18 +1,736 @@
 {
+    "@context": "\/api\/3\/contexts\/StagingModelMetadata",
     "@id": "\/api\/3\/staging_model_metadatas\/5a1123bf-1e3b-4427-83f7-2d520aa6811e",
-    "uuid": "5a1123bf-1e3b-4427-83f7-2d520aa6811e",
-    "descriptions": {
-        "singular": "Data Compliance",
-        "plural": "Data Compliances"
-    },
+    "@type": "StagingModelMetadata",
     "type": "data_compliances",
+    "parentType": null,
+    "tableName": "data_compliance",
+    "ownable": true,
+    "userOwnable": true,
+    "queueable": true,
+    "trackable": true,
+    "taggable": true,
+    "peerReplicable": true,
+    "defaultSort": [],
+    "uniqueConstraint": [
+        {
+            "data_compliances_unique": {
+                "columns": [
+                    "name"
+                ]
+            }
+        }
+    ],
+    "indexable": true,
+    "writable": true,
     "attributes": [
+        {
+            "@type": "AttributeMetadata",
+            "type": "string",
+            "name": "stepsTakenToInvestigateTheBreach",
+            "length": null,
+            "orderIndex": 1,
+            "formType": "textarea",
+            "dataSource": null,
+            "searchable": true,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": null,
+            "tooltip": null,
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "regulatoryCompliance",
+                            "operator": "eq",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "display": "HIPAA",
+                                "itemValue": "HIPAA",
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                            },
+                            "type": "object"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ stepsTakenToInvestigateTheBreach }}",
+            "descriptions": {
+                "singular": "Steps Taken to Investigate the Breach"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
+            "type": "string",
+            "name": "rootCauseAnalysisFindings",
+            "length": null,
+            "orderIndex": 2,
+            "formType": "textarea",
+            "dataSource": null,
+            "searchable": true,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761,
+                "_enableRange": false
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": null,
+            "tooltip": null,
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "regulatoryCompliance",
+                            "operator": "eq",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "display": "HIPAA",
+                                "itemValue": "HIPAA",
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                            },
+                            "type": "object"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ rootCauseAnalysisFindings }}",
+            "descriptions": {
+                "singular": "Root Cause Analysis Findings"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
+            "type": "string",
+            "name": "technicalFixSummary",
+            "length": null,
+            "orderIndex": 3,
+            "formType": "textarea",
+            "dataSource": null,
+            "searchable": true,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761,
+                "_enableRange": false
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": null,
+            "tooltip": null,
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "regulatoryCompliance",
+                            "operator": "eq",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "itemValue": "HIPAA",
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                            },
+                            "type": "object"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ technicalFixSummary }}",
+            "descriptions": {
+                "singular": "Technical Fix Summary"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
+            "type": "string",
+            "name": "actionsForApplyingTechnicalFix",
+            "length": null,
+            "orderIndex": 4,
+            "formType": "textarea",
+            "dataSource": null,
+            "searchable": true,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761,
+                "_enableRange": false
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": null,
+            "tooltip": "",
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "regulatoryCompliance",
+                            "operator": "eq",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "itemValue": "HIPAA",
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "field": "actionsForApplyingTechnicalFix",
+                            "operator": "isnull",
+                            "_operator": "isnull",
+                            "value": "false",
+                            "type": "primitive"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ actionsForApplyingTechnicalFix }}",
+            "descriptions": {
+                "singular": "Actions for Applying Technical Fix"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
+            "type": "string",
+            "name": "cEPhone",
+            "length": null,
+            "orderIndex": 5,
+            "formType": "phone",
+            "dataSource": null,
+            "searchable": true,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761,
+                "_enableRange": false
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": null,
+            "tooltip": "Covered Entity's Phone Number",
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "regulatoryCompliance",
+                            "operator": "eq",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "itemValue": "HIPAA",
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                            },
+                            "type": "object"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ cEPhone }}",
+            "descriptions": {
+                "singular": "Phone"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
+            "type": "string",
+            "name": "cEEmail",
+            "length": null,
+            "orderIndex": 6,
+            "formType": "email",
+            "dataSource": null,
+            "searchable": true,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761,
+                "_enableRange": false
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": null,
+            "tooltip": "Covered Entity's Email ID",
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "regulatoryCompliance",
+                            "operator": "eq",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "itemValue": "HIPAA",
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                            },
+                            "type": "object"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ cEEmail }}",
+            "descriptions": {
+                "singular": "Email"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
+            "type": "string",
+            "name": "cEStreetAddress",
+            "length": null,
+            "orderIndex": 7,
+            "formType": "textarea",
+            "dataSource": null,
+            "searchable": true,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761,
+                "_enableRange": false
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": "",
+            "tooltip": "Covered Entity's Address",
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "regulatoryCompliance",
+                            "operator": "eq",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "itemValue": "HIPAA",
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                            },
+                            "type": "object"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ cEStreetAddress }}",
+            "descriptions": {
+                "singular": "Address"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
+            "type": "string",
+            "name": "cEName",
+            "length": null,
+            "orderIndex": 8,
+            "formType": "text",
+            "dataSource": null,
+            "searchable": false,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761,
+                "_enableRange": false
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": "",
+            "tooltip": "Covered Entity's Name",
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "regulatoryCompliance",
+                            "operator": "eq",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "itemValue": "HIPAA",
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                            },
+                            "type": "object"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ cEName }}",
+            "descriptions": {
+                "singular": "CE Name"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
+            "type": "string",
+            "name": "hSOEmail",
+            "length": null,
+            "orderIndex": 9,
+            "formType": "email",
+            "dataSource": null,
+            "searchable": true,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761,
+                "_enableRange": false
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": null,
+            "tooltip": "HIPAA Security Officer's Email ID",
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "regulatoryCompliance",
+                            "operator": "eq",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "itemValue": "HIPAA",
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                            },
+                            "type": "object"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ hSOEmail }}",
+            "descriptions": {
+                "singular": "HSO Email"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
+            "type": "string",
+            "name": "hSOPhone",
+            "length": null,
+            "orderIndex": 10,
+            "formType": "phone",
+            "dataSource": null,
+            "searchable": true,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761,
+                "_enableRange": false
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": null,
+            "tooltip": "HIPAA Security Officer's Phone Number",
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "regulatoryCompliance",
+                            "operator": "eq",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "itemValue": "HIPAA",
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                            },
+                            "type": "object"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ hSOPhone }}",
+            "descriptions": {
+                "singular": "HSO Phone"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
+            "type": "string",
+            "name": "hSOName",
+            "length": null,
+            "orderIndex": 11,
+            "formType": "text",
+            "dataSource": null,
+            "searchable": false,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761,
+                "_enableRange": false
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": "",
+            "tooltip": "HIPAA Security Officer's Name",
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "regulatoryCompliance",
+                            "operator": "eq",
+                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+                            "_value": {
+                                "itemValue": "HIPAA",
+                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+                            },
+                            "type": "object"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ hSOName }}",
+            "descriptions": {
+                "singular": "HSO Name"
+            }
+        },
         {
             "@type": "AttributeMetadata",
             "type": "string",
             "name": "describeOtherLocationOfBreach",
             "length": null,
-            "orderIndex": 9,
+            "orderIndex": 12,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -90,7 +808,7 @@
             "type": "picklists",
             "name": "locationOfBreach",
             "length": null,
-            "orderIndex": 10,
+            "orderIndex": 13,
             "formType": "multiselectpicklist",
             "dataSource": {
                 "model": "picklists",
@@ -200,7 +918,7 @@
             "type": "picklists",
             "name": "clinicalPHIExposedInBreach",
             "length": null,
-            "orderIndex": 11,
+            "orderIndex": 14,
             "formType": "multiselectpicklist",
             "dataSource": {
                 "model": "picklists",
@@ -309,7 +1027,7 @@
             "type": "string",
             "name": "describeOtherActionsTaken",
             "length": null,
-            "orderIndex": 12,
+            "orderIndex": 15,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -387,7 +1105,7 @@
             "type": "picklists",
             "name": "actionsTakenInResponseToBreach",
             "length": null,
-            "orderIndex": 13,
+            "orderIndex": 16,
             "formType": "multiselectpicklist",
             "dataSource": {
                 "model": "picklists",
@@ -529,7 +1247,7 @@
             "type": "picklists",
             "name": "isMediaNoticeRequired",
             "length": null,
-            "orderIndex": 14,
+            "orderIndex": 17,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -625,7 +1343,7 @@
             "type": "picklists",
             "name": "isSubstituteNoticeRequired",
             "length": null,
-            "orderIndex": 15,
+            "orderIndex": 18,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -721,7 +1439,7 @@
             "type": "picklists",
             "name": "safeguardsInPlaceBeforeBreach",
             "length": null,
-            "orderIndex": 16,
+            "orderIndex": 19,
             "formType": "multiselectpicklist",
             "dataSource": {
                 "model": "picklists",
@@ -819,7 +1537,7 @@
             "type": "picklists",
             "name": "financialPHIExposedInBreach",
             "length": null,
-            "orderIndex": 17,
+            "orderIndex": 20,
             "formType": "multiselectpicklist",
             "dataSource": {
                 "model": "picklists",
@@ -928,7 +1646,7 @@
             "type": "picklists",
             "name": "demographicPHIExposedInBreach",
             "length": null,
-            "orderIndex": 18,
+            "orderIndex": 21,
             "formType": "multiselectpicklist",
             "dataSource": {
                 "model": "picklists",
@@ -1045,7 +1763,7 @@
             "type": "string",
             "name": "typeOfPHIInvolvedInBreachOther",
             "length": null,
-            "orderIndex": 19,
+            "orderIndex": 22,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -1171,7 +1889,7 @@
             "type": "string",
             "name": "briefDescriptionOfTheBreach",
             "length": null,
-            "orderIndex": 20,
+            "orderIndex": 23,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -1234,7 +1952,7 @@
             "type": "picklists",
             "name": "typeOfPHIInvolvedInBreach",
             "length": null,
-            "orderIndex": 21,
+            "orderIndex": 24,
             "formType": "multiselectpicklist",
             "dataSource": {
                 "model": "picklists",
@@ -1328,7 +2046,7 @@
             "type": "integer",
             "name": "breachUnpausedDate",
             "length": null,
-            "orderIndex": 22,
+            "orderIndex": 25,
             "formType": "datetime",
             "dataSource": null,
             "searchable": true,
@@ -1373,7 +2091,7 @@
             "type": "picklists",
             "name": "isPHIMisuseOrDisclosureForeseeable",
             "length": null,
-            "orderIndex": 23,
+            "orderIndex": 26,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -1469,7 +2187,7 @@
             "type": "picklists",
             "name": "wasThePHIEPHIAccessedImpermissibly",
             "length": null,
-            "orderIndex": 24,
+            "orderIndex": 27,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -1565,7 +2283,7 @@
             "type": "picklists",
             "name": "isABreachReportable",
             "length": null,
-            "orderIndex": 25,
+            "orderIndex": 28,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -1661,7 +2379,7 @@
             "type": "indicators",
             "name": "indicators",
             "length": null,
-            "orderIndex": 26,
+            "orderIndex": 29,
             "formType": "manyToMany",
             "dataSource": {
                 "model": "indicators"
@@ -1703,7 +2421,7 @@
             "type": "string",
             "name": "whoAccessedPHIEPHIWithoutPermission",
             "length": null,
-            "orderIndex": 27,
+            "orderIndex": 30,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -1776,7 +2494,7 @@
             "type": "string",
             "name": "whatHealthInformationWasExposed",
             "length": null,
-            "orderIndex": 28,
+            "orderIndex": 31,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -1846,7 +2564,7 @@
             "type": "picklists",
             "name": "wasThePHIEPHIEncrypted",
             "length": null,
-            "orderIndex": 29,
+            "orderIndex": 32,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -1942,7 +2660,7 @@
             "type": "picklists",
             "name": "reminderMailStatus",
             "length": null,
-            "orderIndex": 30,
+            "orderIndex": 33,
             "formType": "multiselectpicklist",
             "dataSource": {
                 "model": "picklists",
@@ -2014,7 +2732,7 @@
             "type": "string",
             "name": "testEmail",
             "length": null,
-            "orderIndex": 31,
+            "orderIndex": 34,
             "formType": "email",
             "dataSource": null,
             "searchable": true,
@@ -2059,7 +2777,7 @@
             "type": "boolean",
             "name": "testMode",
             "length": null,
-            "orderIndex": 32,
+            "orderIndex": 35,
             "formType": "checkbox",
             "dataSource": null,
             "searchable": true,
@@ -2104,7 +2822,7 @@
             "type": "integer",
             "name": "breachNotifiedOn",
             "length": null,
-            "orderIndex": 33,
+            "orderIndex": 36,
             "formType": "datetime",
             "dataSource": null,
             "searchable": true,
@@ -2149,7 +2867,7 @@
             "type": "string",
             "name": "whatYouCanDo",
             "length": null,
-            "orderIndex": 34,
+            "orderIndex": 37,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -2194,7 +2912,7 @@
             "type": "string",
             "name": "whatAreWeDoing",
             "length": null,
-            "orderIndex": 35,
+            "orderIndex": 38,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -2239,7 +2957,7 @@
             "type": "string",
             "name": "whatInformationWasInvolved",
             "length": null,
-            "orderIndex": 36,
+            "orderIndex": 39,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -2284,7 +3002,7 @@
             "type": "string",
             "name": "whatHappened",
             "length": null,
-            "orderIndex": 37,
+            "orderIndex": 40,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -2348,7 +3066,7 @@
             "type": "contact",
             "name": "contacts",
             "length": null,
-            "orderIndex": 38,
+            "orderIndex": 41,
             "formType": "manyToMany",
             "dataSource": {
                 "model": "contact"
@@ -2390,7 +3108,7 @@
             "type": "picklists",
             "name": "regulatoryCompliance",
             "length": null,
-            "orderIndex": 39,
+            "orderIndex": 42,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -2467,7 +3185,7 @@
             "type": "comments",
             "name": "comments",
             "length": null,
-            "orderIndex": 40,
+            "orderIndex": 43,
             "formType": "manyToMany",
             "dataSource": {
                 "model": "comments"
@@ -2508,7 +3226,7 @@
             "type": "number",
             "name": "noOfAffectedUsers",
             "length": null,
-            "orderIndex": 41,
+            "orderIndex": 44,
             "formType": "decimal",
             "dataSource": null,
             "searchable": true,
@@ -2577,7 +3295,7 @@
             "type": "number",
             "name": "noOfAffectedDataRecords",
             "length": null,
-            "orderIndex": 42,
+            "orderIndex": 45,
             "formType": "decimal",
             "dataSource": null,
             "searchable": true,
@@ -2641,7 +3359,7 @@
             "type": "tasks",
             "name": "tasks",
             "length": null,
-            "orderIndex": 43,
+            "orderIndex": 46,
             "formType": "manyToMany",
             "dataSource": {
                 "model": "tasks"
@@ -2683,7 +3401,7 @@
             "type": "picklists",
             "name": "wasPersonalDataAffected",
             "length": null,
-            "orderIndex": 44,
+            "orderIndex": 47,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -2791,7 +3509,7 @@
             "type": "people",
             "name": "assignedTo",
             "length": null,
-            "orderIndex": 45,
+            "orderIndex": 48,
             "formType": "lookup",
             "dataSource": {
                 "model": "people"
@@ -2838,7 +3556,7 @@
             "type": "integer",
             "name": "assignedDate",
             "length": null,
-            "orderIndex": 46,
+            "orderIndex": 49,
             "formType": "datetime",
             "dataSource": null,
             "searchable": true,
@@ -2883,7 +3601,7 @@
             "type": "picklists",
             "name": "status",
             "length": null,
-            "orderIndex": 47,
+            "orderIndex": 50,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -2969,7 +3687,7 @@
             "type": "integer",
             "name": "resolvedDate",
             "length": null,
-            "orderIndex": 48,
+            "orderIndex": 51,
             "formType": "datetime",
             "dataSource": null,
             "searchable": true,
@@ -3014,7 +3732,7 @@
             "type": "integer",
             "name": "breachNotifyDueDate",
             "length": null,
-            "orderIndex": 49,
+            "orderIndex": 52,
             "formType": "datetime",
             "dataSource": null,
             "searchable": true,
@@ -3059,7 +3777,7 @@
             "type": "integer",
             "name": "breachPausedDate",
             "length": null,
-            "orderIndex": 50,
+            "orderIndex": 53,
             "formType": "datetime",
             "dataSource": null,
             "searchable": true,
@@ -3104,7 +3822,7 @@
             "type": "picklists",
             "name": "breachNotificationSLA",
             "length": null,
-            "orderIndex": 51,
+            "orderIndex": 54,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -3190,7 +3908,7 @@
             "type": "integer",
             "name": "breachOccurrenceDate",
             "length": null,
-            "orderIndex": 52,
+            "orderIndex": 55,
             "formType": "datetime",
             "dataSource": null,
             "searchable": true,
@@ -3235,7 +3953,7 @@
             "type": "integer",
             "name": "breachDetectionDate",
             "length": null,
-            "orderIndex": 53,
+            "orderIndex": 56,
             "formType": "datetime",
             "dataSource": null,
             "searchable": true,
@@ -3280,7 +3998,7 @@
             "type": "picklists",
             "name": "severity",
             "length": null,
-            "orderIndex": 54,
+            "orderIndex": 57,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -3365,7 +4083,7 @@
             "type": "incidents",
             "name": "incidents",
             "length": null,
-            "orderIndex": 55,
+            "orderIndex": 58,
             "formType": "manyToMany",
             "dataSource": {
                 "model": "incidents"
@@ -3407,7 +4125,7 @@
             "type": "string",
             "name": "summaryOfDPOAdvice",
             "length": null,
-            "orderIndex": 56,
+            "orderIndex": 59,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -3471,7 +4189,7 @@
             "type": "string",
             "name": "reasonToPerformDPIA",
             "length": null,
-            "orderIndex": 57,
+            "orderIndex": 60,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -3535,7 +4253,7 @@
             "type": "string",
             "name": "measuresToReduceFutureRisks",
             "length": null,
-            "orderIndex": 58,
+            "orderIndex": 61,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -3604,7 +4322,7 @@
             "type": "picklists",
             "name": "impactSeverityOnAffectedUsers",
             "length": null,
-            "orderIndex": 59,
+            "orderIndex": 62,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -3679,19 +4397,34 @@
                     "filters": [
                         {
                             "field": "regulatoryCompliance",
-                            "value": [
-                                "\/api\/3\/picklists\/257ec29f-5f8c-4928-a771-59f86778e9ac",
-                                "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
-                            ],
-                            "display": "GDPR",
-                            "operator": "in",
-                            "type": "object",
-                            "OPERATOR_KEY": "$",
-                            "displayTemplate": "",
-                            "template": "multiselectpicklist",
-                            "previousOperator": "in",
-                            "previousTemplate": "multiselectpicklist",
-                            "module": "regulatoryCompliance"
+                            "operator": "eq",
+                            "value": {
+                                "@id": "\/api\/3\/picklists\/257ec29f-5f8c-4928-a771-59f86778e9ac",
+                                "@type": "Picklist",
+                                "itemValue": "GDPR",
+                                "orderIndex": 0,
+                                "color": null,
+                                "icon": null,
+                                "listName": "\/api\/3\/picklist_names\/3e09dde4-7f0a-42e3-80bb-91409836fbeb",
+                                "uuid": "257ec29f-5f8c-4928-a771-59f86778e9ac",
+                                "id": 429,
+                                "importedBy": [],
+                                "display": "GDPR"
+                            },
+                            "_value": {
+                                "@id": "\/api\/3\/picklists\/257ec29f-5f8c-4928-a771-59f86778e9ac",
+                                "@type": "Picklist",
+                                "itemValue": "GDPR",
+                                "orderIndex": 0,
+                                "color": null,
+                                "icon": null,
+                                "listName": "\/api\/3\/picklist_names\/3e09dde4-7f0a-42e3-80bb-91409836fbeb",
+                                "uuid": "257ec29f-5f8c-4928-a771-59f86778e9ac",
+                                "id": 429,
+                                "importedBy": [],
+                                "display": "GDPR"
+                            },
+                            "type": "array"
                         }
                     ]
                 }
@@ -3714,7 +4447,7 @@
             "type": "picklists",
             "name": "isValidBreach",
             "length": null,
-            "orderIndex": 60,
+            "orderIndex": 63,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -3815,7 +4548,7 @@
             "type": "string",
             "name": "dPAWebsite",
             "length": null,
-            "orderIndex": 61,
+            "orderIndex": 64,
             "formType": "url",
             "dataSource": [],
             "searchable": true,
@@ -3874,7 +4607,7 @@
             "type": "string",
             "name": "dPAEmail",
             "length": null,
-            "orderIndex": 62,
+            "orderIndex": 65,
             "formType": "email",
             "dataSource": null,
             "searchable": true,
@@ -3938,7 +4671,7 @@
             "type": "string",
             "name": "dPAAddress",
             "length": null,
-            "orderIndex": 63,
+            "orderIndex": 66,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -4002,7 +4735,7 @@
             "type": "picklists",
             "name": "dataRegulator",
             "length": null,
-            "orderIndex": 64,
+            "orderIndex": 67,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -4210,7 +4943,7 @@
             "type": "string",
             "name": "dPOTelephone",
             "length": null,
-            "orderIndex": 65,
+            "orderIndex": 68,
             "formType": "phone",
             "dataSource": null,
             "searchable": true,
@@ -4274,7 +5007,7 @@
             "type": "string",
             "name": "dPOEmail",
             "length": null,
-            "orderIndex": 66,
+            "orderIndex": 69,
             "formType": "email",
             "dataSource": null,
             "searchable": true,
@@ -4338,7 +5071,7 @@
             "type": "string",
             "name": "dPOName",
             "length": null,
-            "orderIndex": 67,
+            "orderIndex": 70,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -4402,7 +5135,7 @@
             "type": "string",
             "name": "anyAdditionalInformation",
             "length": null,
-            "orderIndex": 68,
+            "orderIndex": 71,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -4466,7 +5199,7 @@
             "type": "string",
             "name": "affectedUsersEmails",
             "length": null,
-            "orderIndex": 69,
+            "orderIndex": 72,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -4530,7 +5263,7 @@
             "type": "string",
             "name": "mitigationActions",
             "length": null,
-            "orderIndex": 70,
+            "orderIndex": 73,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -4593,7 +5326,7 @@
             "type": "string",
             "name": "repercussionsOfBreach",
             "length": null,
-            "orderIndex": 71,
+            "orderIndex": 74,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -4657,7 +5390,7 @@
             "type": "string",
             "name": "dataType",
             "length": null,
-            "orderIndex": 72,
+            "orderIndex": 75,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -4721,7 +5454,7 @@
             "type": "picklists",
             "name": "typeOfDataBreach",
             "length": null,
-            "orderIndex": 73,
+            "orderIndex": 76,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -4971,7 +5704,7 @@
             "type": "string",
             "name": "whatWasTheDataFormat",
             "length": null,
-            "orderIndex": 74,
+            "orderIndex": 77,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -5034,7 +5767,7 @@
             "type": "string",
             "name": "whatWasTheDataSource",
             "length": null,
-            "orderIndex": 75,
+            "orderIndex": 78,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -5097,7 +5830,7 @@
             "type": "picklists",
             "name": "wasTheExposureResolved",
             "length": null,
-            "orderIndex": 76,
+            "orderIndex": 79,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -5192,7 +5925,7 @@
             "type": "picklists",
             "name": "wasTheDataEncrypted",
             "length": null,
-            "orderIndex": 77,
+            "orderIndex": 80,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -5287,7 +6020,7 @@
             "type": "picklists",
             "name": "isHarmRiskOrMisuseForeseeable",
             "length": null,
-            "orderIndex": 78,
+            "orderIndex": 81,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -5403,7 +6136,7 @@
             "type": "string",
             "name": "whereDataWasHosted",
             "length": null,
-            "orderIndex": 79,
+            "orderIndex": 82,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -5467,7 +6200,7 @@
             "type": "string",
             "name": "causeOfDataBreach",
             "length": null,
-            "orderIndex": 80,
+            "orderIndex": 83,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -5531,7 +6264,7 @@
             "type": "string",
             "name": "isDPIARequired",
             "length": null,
-            "orderIndex": 81,
+            "orderIndex": 84,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -5595,7 +6328,7 @@
             "type": "string",
             "name": "postalCode",
             "length": null,
-            "orderIndex": 82,
+            "orderIndex": 85,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -5659,7 +6392,7 @@
             "type": "string",
             "name": "companyName",
             "length": null,
-            "orderIndex": 83,
+            "orderIndex": 86,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -5723,7 +6456,7 @@
             "type": "string",
             "name": "companyCountry",
             "length": null,
-            "orderIndex": 84,
+            "orderIndex": 87,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -5787,7 +6520,7 @@
             "type": "string",
             "name": "companyCity",
             "length": null,
-            "orderIndex": 85,
+            "orderIndex": 88,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -5851,7 +6584,7 @@
             "type": "string",
             "name": "companySize",
             "length": null,
-            "orderIndex": 86,
+            "orderIndex": 89,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -5915,7 +6648,7 @@
             "type": "string",
             "name": "companyAddress",
             "length": null,
-            "orderIndex": 87,
+            "orderIndex": 90,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -5979,7 +6712,7 @@
             "type": "string",
             "name": "description",
             "length": null,
-            "orderIndex": 88,
+            "orderIndex": 91,
             "formType": "richtext",
             "dataSource": null,
             "searchable": true,
@@ -6024,7 +6757,7 @@
             "type": "string",
             "name": "name",
             "length": null,
-            "orderIndex": 89,
+            "orderIndex": 92,
             "formType": "text",
             "dataSource": null,
             "searchable": true,
@@ -6065,6 +6798,21 @@
             }
         }
     ],
-    "tableName": "data_compliance",
-    "displayName": "{{ name }}"
+    "system": false,
+    "module": "data_compliances",
+    "softDeleteable": false,
+    "archivable": false,
+    "paused": false,
+    "partitionBy": "modifyDate",
+    "archivalCriteria": {
+        "keep_primary_data_for": 24,
+        "delete_primary_data_after": 60
+    },
+    "archivalFilters": [],
+    "uuid": "5a1123bf-1e3b-4427-83f7-2d520aa6811e",
+    "displayName": "{{ name }}",
+    "descriptions": {
+        "singular": "Data Compliance",
+        "plural": "Data Compliances"
+    }
 }

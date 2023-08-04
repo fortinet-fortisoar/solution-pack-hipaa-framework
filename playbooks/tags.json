@@ -1,5 +1,6 @@
 [
     "ManualTrigger",
     "PostCreate",
-    "PostUpdate"
+    "PostUpdate",
+    "SystemWaitForCompletion"
 ]
