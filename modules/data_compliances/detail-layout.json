@@ -151,7 +151,7 @@
                                                                                                                                     "name": "regulatoryCompliance",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
-                                                                                                                                    "readOnly": false
+                                                                                                                                    "readOnly": true
                                                                                                                                 }
                                                                                                                             ],
                                                                                                                             "style": "col-lg-6"

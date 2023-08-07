@@ -134,6 +134,11 @@
                 "name": "10 - SP - HIPAA Framework"
             }
         ],
+        "reports": [
+            {
+                "name": "HIPAA Assessment Report"
+            }
+        ],
         "recordSets": [
             {
                 "name": "Key Store",
