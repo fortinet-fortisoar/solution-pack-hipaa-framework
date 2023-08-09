@@ -295,7 +295,7 @@
                     ],
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
                     "tenant": "",
-                    "content": "<p>Created <a title=\"Task #{{vars.steps.Task_to_Notify_Affected_Individuals.id}}\" href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Task_to_Notify_Affected_Individuals.uuid}}\" target=\"_parent\" rel=\"noopener\">Task #{{vars.steps.Task_to_Notify_Affected_Individuals.id}}<\/a> to notify affected individuals.<\/p>",
+                    "content": "<p>Created <a rel=\"noopener\" target=\"_parent\" href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Task_to_Notify_Affected_Individuals.uuid}}\" title=\"Task #{{vars.steps.Task_to_Notify_Affected_Individuals.id}}\">Task #{{vars.steps.Task_to_Notify_Affected_Individuals.id}}<\/a> to notify affected individuals.<\/p>",
                     "records": "{{vars.complianceIRI}}",
                     "parentstepid": "\/api\/3\/workflow_steps\/86f29797-bcb7-45f8-ad86-4f0ea7f29ef3"
                 },
@@ -308,8 +308,7 @@
                     "__replace": "",
                     "startDate": "{{arrow.utcnow().int_timestamp}}",
                     "recordTags": [
-                        "\/api\/3\/tags\/Notify Affected Individuals",
-                        "\/api\/3\/tags\/HIPAA"
+                        "\/api\/3\/tags\/Notify Impacted Individuals"
                     ],
                     "description": "{{vars.demoMode}}\n\n##### Notify individuals affected by the breach\n\n##### Click on <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Notify Affected Individuals**<\/span> Button\n\n\n",
                     "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",

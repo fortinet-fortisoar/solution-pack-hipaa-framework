@@ -816,6 +816,7 @@
                     ],
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
                     "tenant": "",
+                    "thread": false,
                     "content": "<p>Created <a title=\"Task #{{vars.result.id}}\" href=\"\/modules\/view-panel\/tasks\/{{vars.result.uuid}}\" target=\"_parent\" rel=\"noopener\">Task #{{vars.result.id}}<\/a> to apply technical fix or any other fix required to stop the incident.<\/p>",
                     "records": "{{vars.complianceIRI}}",
                     "parentstepid": "\/api\/3\/workflow_steps\/86f29797-bcb7-45f8-ad86-4f0ea7f29ef3"
@@ -865,13 +866,14 @@
                     ],
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
                     "tenant": "",
+                    "thread": false,
                     "content": "<p>Created <a title=\"Task #{{vars.result.id}}\" href=\"\/modules\/view-panel\/tasks\/{{vars.result.uuid}}\" target=\"_parent\" rel=\"noopener\">Task #{{vars.result.id}}<\/a> to notify the Secretary of HHS about PHI Breach.<\/p>",
                     "records": "{{vars.complianceIRI}}",
                     "parentstepid": "\/api\/3\/workflow_steps\/0d74e98b-1384-482c-a55f-99a827d34c83"
                 },
                 "resource": {
                     "name": "Notify Breach to the Secretary of HHS",
-                    "type": "\/api\/3\/picklists\/d09e2bbf-bc2a-4d32-bf35-2a709f5a7b67",
+                    "type": "\/api\/3\/picklists\/62322a54-a069-4f74-a917-3d864f24524a",
                     "dueBy": "{{vars.breachNotificationDueDate}}",
                     "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
                     "tenant": "\/api\/3\/tenants\/b3a700f7-00be-4ef9-90c6-3c8fe6e1be63",
@@ -881,7 +883,7 @@
                     "recordTags": [
                         "\/api\/3\/tags\/Notify Secretary"
                     ],
-                    "description": "{{vars.demoMode}}\n\n##### Notify Breach to the Secretary of HHS(Health and Human Services)\n\n##### Click here to <em><strong><a href=\"https:\/\/ocrportal.hhs.gov\/ocr\/breach\/breach_form.jsf\">Submit a Breach Notification to the Secretary<\/a><\/strong><\/em>\n                                                                          \n##### Please ensure to Mark this Task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Completed**<\/span> after notifying the secretary of the breach.\n\n",
+                    "description": "{{vars.demoMode}}\n\n##### Notify Breach to the Secretary of HHS(Health and Human Services)\n\n##### Click here to <em><strong><a href=\"https:\/\/ocrportal.hhs.gov\/ocr\/breach\/breach_form.jsf\">Submit a Breach Notification to the Secretary<\/a><\/strong><\/em>\n                                                                          \n##### Mark this Task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Completed**<\/span> after notifying the secretary of the breach.\n\n",
                     "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
                     "dataCompliances": "{{vars.complianceIRI}}",
                     "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
@@ -915,9 +917,10 @@
                     ],
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
                     "tenant": "",
+                    "thread": false,
                     "content": "<p>Created <a title=\"Task #{{vars.result.id}} - {{vars.result.name}}\" href=\"https:\/\/{{globalVars.Server_fqhn}}\/modules\/view-panel\/tasks\/{{vars.result.uuid}}\">Task #{{vars.result.id}}<\/a> to report the PHI breach to the relevant criminal law enforcement agencies.<\/p>",
                     "records": "{{vars.complianceIRI}}",
-                    "parentstepid": "\/api\/3\/workflow_steps\/07f62648-9168-4453-a779-db6102a2a986"
+                    "parentstepid": "\/api\/3\/workflow_steps\/6405e58c-3a51-44e7-b36d-a096c315ef4c"
                 },
                 "resource": {
                     "name": "Report Breach to Law Enforcement Agency",

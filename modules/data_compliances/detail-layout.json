@@ -978,7 +978,7 @@
                                                     ]
                                                 }
                                             },
-                                            "show": false,
+                                            "show": true,
                                             "icon": "fa fa-exchange",
                                             "visible": true
                                         },

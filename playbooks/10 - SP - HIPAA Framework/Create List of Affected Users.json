@@ -184,9 +184,19 @@
             "name": "Mark Task as Completed",
             "description": null,
             "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p>Contact information of the users affected by the PHI breach has been gathered.<\/p>",
+                    "records": "{{vars.complianceIRI}},{{vars.incidentIRI}}"
+                },
                 "resource": {
                     "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
-                    "description": "{{vars.demoMode}}\n\n##### The contact details of the PHI breach affected users has been completed\n\n##### Go back to <a href=\"\/modules\/view-panel\/data_compliances\/{{vars.complianceUUID}}\" target=\"_parent\" rel=\"noopener\"> Data Compliance Record #{{vars.complianceID}}<\/a> to execute next task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Notify Affected Individuals**<\/span>"
+                    "description": "{{vars.demoMode}}\n\n##### The contact information of the users affected by the PHI breach has been gathered.\n\n##### Go back to <a href=\"\/modules\/view-panel\/data_compliances\/{{vars.complianceUUID}}\" target=\"_parent\" rel=\"noopener\"> Data Compliance Record #{{vars.complianceID}}<\/a> to execute next task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Notify Affected Individuals**<\/span>"
                 },
                 "_showJson": false,
                 "operation": "Append",

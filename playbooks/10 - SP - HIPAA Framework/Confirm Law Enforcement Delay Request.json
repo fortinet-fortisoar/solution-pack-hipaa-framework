@@ -164,8 +164,7 @@
             "description": null,
             "arguments": {
                 "resource": {
-                    "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
-                    "description": "{{vars.demoMode}}\n\n##### The law enforcement officials have not requested any delay in notifying individuals affected by the breach.\n\n##### Go back to <a href=\"\/modules\/view-panel\/data_compliances\/{{vars.complianceUUID}}\" target=\"_parent\" rel=\"noopener\"> Data Compliance Record #{{vars.complianceID}}<\/a> to execute next task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Notify Affected Individuals**<\/span>"
+                    "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed"
                 },
                 "operation": "Append",
                 "collection": "{{vars.input.records[0]['@id']}}",
@@ -181,9 +180,7 @@
                     "safeguardsInPlaceBeforeBreach": "Append",
                     "actionsTakenInResponseToBreach": "Append"
                 },
-                "step_variables": {
-                    "placeholder": "{% for item in vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].description.split('\\n') %}\n{% if 'Notification Delay Request' in item %}\n{% set _dummy = item | replace('10060', '9989') %}\n{{vars.description.append(_dummy)}}\n{% else %}\n{{vars.description.append(item)}}\n{% endif %}\n{% endfor %}"
-                }
+                "step_variables": []
             },
             "status": null,
             "top": "705",

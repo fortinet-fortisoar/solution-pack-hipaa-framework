@@ -68,6 +68,11 @@
                 "id": "\/api\/3\/workflows\/614cd2bc-6757-43dd-a803-982990e98740",
                 "name": "Notify Individuals Affected by PHI Breach",
                 "icon": "icon icon-send-email"
+            },
+            {
+                "id": "\/api\/3\/workflows\/0e727ede-cffa-4222-afc2-ab7e26043382",
+                "name": "Notify Affected Individuals",
+                "icon": "icon icon-send-email"
             }
         ],
         "rows": [

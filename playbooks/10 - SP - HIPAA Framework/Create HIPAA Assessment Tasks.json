@@ -166,7 +166,7 @@
                     "recordTags": [
                         "\/api\/3\/tags\/HIPAA Risk Assessment Form"
                     ],
-                    "description": "{{vars.demoMode}}\n\n##### Please submit necessary information for PHI Breach Risk Assessment, including the number of affected individuals and whether the breach is reportable.\n\n##### Click on <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">Submit HIPAA Risk Assessment Information<\/span> Button",
+                    "description": "{{vars.demoMode}}\n\n##### Please submit necessary information for PHI Breach Risk Assessment.\n\n##### Click on <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">Submit HIPAA Risk Assessment Information<\/span> Button",
                     "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
                     "dataCompliances": "{{vars.input.records[0]['@id']}}",
                     "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"

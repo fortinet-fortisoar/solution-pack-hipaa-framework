@@ -58,17 +58,18 @@
                             "type": "array",
                             "field": "recordTags",
                             "value": [
-                                "\/api\/3\/tags\/Affected Individual",
-                                "\/api\/3\/tags\/PHI Breach"
+                                "\/api\/3\/tags\/Covered Entity",
+                                "\/api\/3\/tags\/HSO",
+                                "\/api\/3\/tags\/HIPAA Security Officer"
                             ],
                             "module": "recordTags",
                             "display": "",
-                            "operator": "in",
+                            "operator": "nin",
                             "template": "tags",
                             "enableJinja": true,
                             "OPERATOR_KEY": "$",
                             "useInOperator": true,
-                            "previousOperator": "in",
+                            "previousOperator": "nin",
                             "previousTemplate": "tags"
                         }
                     ],
@@ -154,7 +155,6 @@
                 "module": "data_compliances?$limit=30&$relationships=true&$fsr_max_relation_count=100",
                 "checkboxFields": true,
                 "step_variables": {
-                    "_temp": "{% set _task_index = [] %}{% for item in vars.description %}{% if vars.taskName in item %}{{_task_index.append(loop.index0)}}{% endif %}{% endfor %}{{vars.nextTask.append(vars.description[_task_index[0]+1].split(\"|\")[2])}}",
                     "incidentIRI": "{{vars.result[0].incidents[0]['@id']}}"
                 }
             },
@@ -170,21 +170,11 @@
             "name": "Mark Task as Completed",
             "description": null,
             "arguments": {
-                "message": {
-                    "tags": [
-                        "\/api\/3\/tags\/HIPAA"
-                    ],
-                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
-                    "tenant": "",
-                    "content": "<p>Affected individuals have been notified about the PHI breach.<\/p>",
-                    "records": "{{vars.complianceIRI}},{{vars.incidentIRI}}"
-                },
                 "resource": {
                     "__link": {
                         "dataCompliances": "{{vars.complianceIRI}}"
                     },
-                    "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
-                    "description": "{{vars.demoMode}}\n\n##### The affected individuals have been notified about the PHI breach. \n\n##### Go back to <a href=\"\/modules\/view-panel\/data_compliances\/{{vars.complianceUUID}}\" target=\"_parent\" rel=\"noopener\"> Data Compliance Record #{{vars.complianceID}}<\/a> to execute next task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">{{vars.nextTask[0]}}<\/span>"
+                    "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed"
                 },
                 "_showJson": false,
                 "operation": "Append",
@@ -402,8 +392,7 @@
                                 "type": "array",
                                 "field": "recordTags",
                                 "value": [
-                                    "\/api\/3\/tags\/Notify Affected Individuals",
-                                    "\/api\/3\/tags\/HIPAA"
+                                    "\/api\/3\/tags\/Notify Impacted Individuals"
                                 ],
                                 "module": "recordTags",
                                 "display": "",
@@ -436,37 +425,6 @@
             "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
             "group": null,
             "uuid": "15c80738-031a-4522-9e1a-46f7b04072cf"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Update Compliance Record Description",
-            "description": null,
-            "arguments": {
-                "resource": {
-                    "description": "{{vars.description | join('\\n')}}"
-                },
-                "_showJson": false,
-                "operation": "Append",
-                "collection": "{{vars.complianceIRI}}",
-                "__recommend": [],
-                "collectionType": "\/api\/3\/data_compliances",
-                "fieldOperation": {
-                    "recordTags": "Append",
-                    "locationOfBreach": "Append",
-                    "clinicalPHIExposedInBreach": "Append",
-                    "financialPHIExposedInBreach": "Append",
-                    "demographicPHIExposedInBreach": "Append",
-                    "safeguardsInPlaceBeforeBreach": "Append",
-                    "actionsTakenInResponseToBreach": "Append"
-                },
-                "step_variables": []
-            },
-            "status": null,
-            "top": "1245",
-            "left": "125",
-            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
-            "group": null,
-            "uuid": "725e9866-8afc-405e-ad5a-94b63258d471"
         },
         {
             "@type": "WorkflowStep",
@@ -544,7 +502,7 @@
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "66709b9c-1d0e-495c-a081-4e0443d4de98"
+            "uuid": "3fd83e11-319b-4d33-88e2-8643ec0ab777"
         },
         {
             "@type": "WorkflowRoute",
@@ -564,7 +522,7 @@
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "5144e9c4-d9d3-444a-876b-5aa0533844a5"
+            "uuid": "c7e6f077-9077-4d0c-9001-7af80f189831"
         },
         {
             "@type": "WorkflowRoute",
@@ -585,16 +543,6 @@
             "isExecuted": false,
             "group": null,
             "uuid": "0a65ea25-e03b-4f76-a183-4cd426ba9d4c"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Update Task to Notify Affected Users -> Update Incident Description",
-            "targetStep": "\/api\/3\/workflow_steps\/725e9866-8afc-405e-ad5a-94b63258d471",
-            "sourceStep": "\/api\/3\/workflow_steps\/18271bbc-fa8c-4321-a1a8-46d71035832b",
-            "label": null,
-            "isExecuted": false,
-            "group": null,
-            "uuid": "79efcd8b-2f15-4e4d-b3dd-a2fa1abe0618"
         }
     ],
     "groups": [],
