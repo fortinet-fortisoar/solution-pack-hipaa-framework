@@ -1,0 +1,580 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Create Tasks to Notify Affected Individuals",
+    "aliasName": null,
+    "tag": null,
+    "description": "Creates Tasks to Notify Affected Individuals",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/4c384067-79c3-4821-a70a-d69c3c149ec6",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/367ce8ce-7001-41a4-9e1c-68f1f21a48f3",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "taskList": "[]",
+                "taskName": "{{vars.input.records[0].name}}",
+                "description": "[]"
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "60bfc325-f8a2-4b02-9dd3-030f480bfd70"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Compliance Record ID",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "id",
+                            "value": "{{vars.input.records[0].id}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ],
+                    "__selectFields": [
+                        "dataCompliances"
+                    ]
+                },
+                "module": "tasks?$limit=30&$relationships=true&$fsr_max_relation_count=100",
+                "checkboxFields": true,
+                "step_variables": {
+                    "demoMode": "{% if vars.result[0].dataCompliances[0].testMode %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}",
+                    "demoEmail": "{{vars.result[0].dataCompliances[0].testEmail}}",
+                    "placeholder": "{% for item in vars.result[0].dataCompliances[0].description.split('\\n') %}\n{% if vars.taskName in item %}\n{% set _dummy = \"| 7 | Confirm Law Enforcement's Notification Delay Request | <a href='\/modules\/view-panel\/tasks\/\" + vars.input.records[0].uuid + \"' target='_parent' rel='noopener'>Click Here<\/a> | <span>&#9989;<\/span> |\" %}\n{{vars.description.append(_dummy)}}\n{% else %}\n{{vars.description.append(item)}}\n{% endif %}\n{% endfor %}",
+                    "complianceID": "{{vars.result[0].dataCompliances[0].id}}",
+                    "complianceIRI": "{{vars.result[0].dataCompliances[0]['@id']}}",
+                    "complianceName": "{{vars.result[0].dataCompliances[0].name}}",
+                    "complianceUUID": "{{vars.result[0].dataCompliances[0].uuid}}",
+                    "breachNotificationDueDate": "{{vars.result[0].dataCompliances[0].breachNotifyDueDate}}"
+                }
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "46a478a2-6c32-49a2-9232-f11cb74c86c4"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Parent Incident ID",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "id",
+                            "value": "{{vars.complianceID}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ],
+                    "__selectFields": [
+                        "incidents"
+                    ]
+                },
+                "module": "data_compliances?$limit=30&$relationships=true&$fsr_max_relation_count=100",
+                "checkboxFields": true,
+                "step_variables": {
+                    "incidentID": "{{vars.result[0].incidents[0].id}}",
+                    "incidentIRI": "{{vars.result[0].incidents[0]['@id']}}",
+                    "currentIndex": "{{vars.description[-1].split(\"|\")[1]}}"
+                }
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "9a6f6852-3468-4825-be8e-df970fbfd985"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Mark Individual Notice Approved",
+            "description": "Mark Individual Notice Status as \"Approved\"",
+            "arguments": {
+                "resource": {
+                    "individualNoticeApproved": "\/api\/3\/picklists\/a81e3b2b-8d0a-4ef0-9ef2-b286d8adb75b"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "locationOfBreach": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append",
+                    "clinicalPHIExposedInBreach": "Append",
+                    "financialPHIExposedInBreach": "Append",
+                    "demographicPHIExposedInBreach": "Append",
+                    "safeguardsInPlaceBeforeBreach": "Append",
+                    "actionsTakenInResponseToBreach": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "47e9db6d-c45e-4498-b8e7-f0d7b8e739ad"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Mark Task as Completed",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                    "description": "{{vars.demoMode}}\n\n##### Law enforcement has approved notifying affected individuals about the breach.\n\n##### Go back to <a href=\"\/modules\/view-panel\/data_compliances\/{{vars.complianceUUID}}\" target=\"_parent\" rel=\"noopener\"> Data Compliance Record #{{vars.complianceID}}<\/a> to execute next task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Compile List of Affected Individuals**<\/span>"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/tasks",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1245",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "55c79875-5cbe-4ab9-819a-b8ec810314f0"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "resource": "tasks",
+                "resources": [
+                    "tasks"
+                ],
+                "step_variables": {
+                    "input": {
+                        "params": [],
+                        "records": [
+                            "{{vars.input.records[0]}}"
+                        ]
+                    }
+                },
+                "fieldbasedtrigger": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "object",
+                            "field": "status",
+                            "value": "",
+                            "_value": {
+                                "@id": "",
+                                "display": "",
+                                "itemValue": ""
+                            },
+                            "operator": "changed"
+                        },
+                        {
+                            "type": "object",
+                            "field": "status",
+                            "value": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                            "_value": {
+                                "@id": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                                "display": "Completed",
+                                "itemValue": "Completed"
+                            },
+                            "operator": "eq"
+                        },
+                        {
+                            "type": "array",
+                            "field": "recordTags",
+                            "value": [
+                                "\/api\/3\/tags\/Notification Delay Request"
+                            ],
+                            "module": "recordTags",
+                            "display": null,
+                            "operator": "in_all",
+                            "template": "tags",
+                            "OPERATOR_KEY": "$",
+                            "previousOperator": "in_all",
+                            "previousTemplate": "tags"
+                        }
+                    ]
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/9300bf69-5063-486d-b3a6-47eb9da24872",
+            "group": null,
+            "uuid": "367ce8ce-7001-41a4-9e1c-68f1f21a48f3"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Task to Compile User List",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<p>Created <a rel=\"noopener\" target=\"_parent\" href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Task_to_Compile_User_List.uuid}}\" title=\"Task #{{vars.steps.Task_to_Compile_User_List.id}}\">Task #{{vars.steps.Task_to_Compile_User_List.id}}<\/a> to compile list of affected individuals.<\/p>",
+                    "records": "{{vars.complianceIRI}}",
+                    "parentstepid": "\/api\/3\/workflow_steps\/86f29797-bcb7-45f8-ad86-4f0ea7f29ef3"
+                },
+                "resource": {
+                    "name": "Compile List of Affected Individuals",
+                    "type": "\/api\/3\/picklists\/6d113f01-123a-4c78-b68c-029e16df9b8b",
+                    "dueBy": "{{vars.breachNotificationDueDate}}",
+                    "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
+                    "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
+                    "__replace": "",
+                    "startDate": "{{arrow.utcnow().int_timestamp}}",
+                    "recordTags": [
+                        "\/api\/3\/tags\/Compile User List"
+                    ],
+                    "description": "{{vars.demoMode}}\n\n##### Compile a list of individuals who have been affected by the breach.\n\n##### Click on <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Upload Affected Users List**<\/span> Button\n\n\n",
+                    "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
+                    "dataCompliances": "{{vars.complianceIRI}}",
+                    "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/tasks",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "_temp": "{{vars.taskList.append(vars.steps.Task_to_Compile_User_List['@id'])}}"
+                }
+            },
+            "status": null,
+            "top": "705",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "adc09750-7f5e-444e-8fe6-e4552c1a2348"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Task to Notify Affected Individuals",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<p>Created <a title=\"Task #{{vars.steps.Task_to_Notify_Affected_Individuals.id}}\" href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Task_to_Notify_Affected_Individuals.uuid}}\" target=\"_parent\" rel=\"noopener\">Task #{{vars.steps.Task_to_Notify_Affected_Individuals.id}}<\/a> to notify affected individuals.<\/p>",
+                    "records": "{{vars.complianceIRI}}",
+                    "parentstepid": "\/api\/3\/workflow_steps\/86f29797-bcb7-45f8-ad86-4f0ea7f29ef3"
+                },
+                "resource": {
+                    "name": "Notify Affected Individuals",
+                    "type": "\/api\/3\/picklists\/6d113f01-123a-4c78-b68c-029e16df9b8b",
+                    "dueBy": "{{vars.breachNotificationDueDate}}",
+                    "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
+                    "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
+                    "__replace": "",
+                    "startDate": "{{arrow.utcnow().int_timestamp}}",
+                    "recordTags": [
+                        "\/api\/3\/tags\/Notify Affected Individuals",
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "description": "{{vars.demoMode}}\n\n##### Notify individuals affected by the breach\n\n##### Click on <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Notify Affected Individuals**<\/span> Button\n\n\n",
+                    "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
+                    "dataCompliances": "{{vars.complianceIRI}}",
+                    "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/tasks",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "_temp": "{{vars.taskList.append(vars.steps.Task_to_Notify_Affected_Individuals['@id'])}}"
+                }
+            },
+            "status": null,
+            "top": "840",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "dc7a3dc0-d22a-4e8f-b306-5f4b13960647"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Task to Provide Media Notice",
+            "description": null,
+            "arguments": {
+                "when": "{{'Yes' in (vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].isMediaNoticeRequired | fromIRI).itemValue}}",
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<p>Created <a rel=\"noopener\" target=\"_parent\" href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Task_to_Provide_Media_Notice.uuid}}\" title=\"Task #{{vars.steps.Task_to_Provide_Media_Notice.id}}\">Task #{{vars.steps.Task_to_Provide_Media_Notice.id}}<\/a> to provide media notice.<\/p>",
+                    "records": "{{vars.complianceIRI}}",
+                    "parentstepid": "\/api\/3\/workflow_steps\/86f29797-bcb7-45f8-ad86-4f0ea7f29ef3"
+                },
+                "resource": {
+                    "name": "Provide Media Notice",
+                    "type": "\/api\/3\/picklists\/6d113f01-123a-4c78-b68c-029e16df9b8b",
+                    "dueBy": "{{vars.breachNotificationDueDate}}",
+                    "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
+                    "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
+                    "__replace": "",
+                    "startDate": "{{arrow.utcnow().int_timestamp}}",
+                    "recordTags": [
+                        "\/api\/3\/tags\/Provide Media Notice"
+                    ],
+                    "description": "{{vars.demoMode}}\n\n##### Provide media notice to appropriate media outlets serving the affected area\n\n##### Mark this Task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Completed**<\/span> once the media notice provided.\n\n\n",
+                    "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
+                    "dataCompliances": "{{vars.complianceIRI}}",
+                    "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/tasks",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "_temp": "{{vars.taskList.append(vars.steps.Task_to_Provide_Media_Notice['@id'])}}"
+                }
+            },
+            "status": null,
+            "top": "1110",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "f02f554a-4c77-4e2d-acc0-50cc30e4c443"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Task to Provide Substitute Notice",
+            "description": null,
+            "arguments": {
+                "when": "{{'Yes' in (vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].isSubstituteNoticeRequired | fromIRI).itemValue}}",
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<p>Created <a title=\"Task #{{vars.steps.Task_to_Provide_Substitute_Notice.id}}\" href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Task_to_Provide_Substitute_Notice.uuid}}\" target=\"_parent\" rel=\"noopener\">Task #{{vars.steps.Task_to_Provide_Substitute_Notice.id}}<\/a> to provide substitute notice to affected individuals.<\/p>",
+                    "records": "{{vars.complianceIRI}}",
+                    "parentstepid": "\/api\/3\/workflow_steps\/86f29797-bcb7-45f8-ad86-4f0ea7f29ef3"
+                },
+                "resource": {
+                    "name": "Provide Substitute Notice",
+                    "type": "\/api\/3\/picklists\/6d113f01-123a-4c78-b68c-029e16df9b8b",
+                    "dueBy": "{{vars.breachNotificationDueDate}}",
+                    "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
+                    "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
+                    "__replace": "",
+                    "startDate": "{{arrow.utcnow().int_timestamp}}",
+                    "recordTags": [
+                        "\/api\/3\/tags\/Provide Substitute Notice"
+                    ],
+                    "description": "{{vars.demoMode}}\n\n##### Provide substitute notice, like alternative written form, telephone, or other means, for individuals with outdated contact details.\n\n##### Mark this Task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Completed**<\/span> once the substitute notice provided.\n\n\n",
+                    "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
+                    "dataCompliances": "{{vars.complianceIRI}}",
+                    "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/tasks",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "_temp": "{{vars.taskList.append(vars.steps.Task_to_Provide_Substitute_Notice['@id'])}}"
+                }
+            },
+            "status": null,
+            "top": "975",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "2dc88210-5be2-4617-ae65-3ce1c42af696"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update Compliance Record Description",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "description": "{{vars.description | join('\\n')}}{% for item in vars.taskList %}\n| {{loop.index+vars.currentIndex}} | {{(item | fromIRI).name}} | <a href=\"\/modules\/view-panel\/tasks\/{{(item | fromIRI).uuid}}\" target=\"_parent\" rel=\"noopener\">Click Here<\/a> | <span>&#10060;<\/span> |{% endfor %}"
+                },
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "locationOfBreach": "Append",
+                    "reminderMailStatus": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append",
+                    "clinicalPHIExposedInBreach": "Append",
+                    "financialPHIExposedInBreach": "Append",
+                    "demographicPHIExposedInBreach": "Append",
+                    "safeguardsInPlaceBeforeBreach": "Append",
+                    "actionsTakenInResponseToBreach": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1380",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "ebb88055-824f-45fd-9e24-4a2e5496cff2"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Get Compliance Record ID",
+            "targetStep": "\/api\/3\/workflow_steps\/46a478a2-6c32-49a2-9232-f11cb74c86c4",
+            "sourceStep": "\/api\/3\/workflow_steps\/60bfc325-f8a2-4b02-9dd3-030f480bfd70",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "317b6bd2-9619-4feb-bdb7-29bf2e80dd86"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Copy of Task to Notify Affected Individuals -> Copy of Copy of Task to Notify Affected Individuals",
+            "targetStep": "\/api\/3\/workflow_steps\/f02f554a-4c77-4e2d-acc0-50cc30e4c443",
+            "sourceStep": "\/api\/3\/workflow_steps\/2dc88210-5be2-4617-ae65-3ce1c42af696",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "8cb8c18b-f3d8-4188-9f7f-b6c3a1afc5d3"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Compliance Record ID -> Get Parent Incident ID",
+            "targetStep": "\/api\/3\/workflow_steps\/9a6f6852-3468-4825-be8e-df970fbfd985",
+            "sourceStep": "\/api\/3\/workflow_steps\/46a478a2-6c32-49a2-9232-f11cb74c86c4",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "018273f6-7026-4ff8-a0c4-17e8920d0fa4"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Parent Incident ID -> Mark Notification Status In Progress",
+            "targetStep": "\/api\/3\/workflow_steps\/47e9db6d-c45e-4498-b8e7-f0d7b8e739ad",
+            "sourceStep": "\/api\/3\/workflow_steps\/9a6f6852-3468-4825-be8e-df970fbfd985",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "c327a1b5-17bb-4230-857e-d1183879016f"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Mark Individual Notice Approved -> Task to Apply Technical Fix",
+            "targetStep": "\/api\/3\/workflow_steps\/adc09750-7f5e-444e-8fe6-e4552c1a2348",
+            "sourceStep": "\/api\/3\/workflow_steps\/47e9db6d-c45e-4498-b8e7-f0d7b8e739ad",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "61767734-3cb6-4f8f-8190-104a0a891b1a"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Mark Task as Completed -> Update Compliance Record Description",
+            "targetStep": "\/api\/3\/workflow_steps\/ebb88055-824f-45fd-9e24-4a2e5496cff2",
+            "sourceStep": "\/api\/3\/workflow_steps\/55c79875-5cbe-4ab9-819a-b8ec810314f0",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "a088cfa4-7074-4d21-a10c-7d2a2c6d7873"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/60bfc325-f8a2-4b02-9dd3-030f480bfd70",
+            "sourceStep": "\/api\/3\/workflow_steps\/367ce8ce-7001-41a4-9e1c-68f1f21a48f3",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "1368cbd6-e1f6-493c-8772-dcaf1a816dff"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Task to Compile User List -> Copy of Task to Compile User List",
+            "targetStep": "\/api\/3\/workflow_steps\/dc7a3dc0-d22a-4e8f-b306-5f4b13960647",
+            "sourceStep": "\/api\/3\/workflow_steps\/adc09750-7f5e-444e-8fe6-e4552c1a2348",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "5a3b232f-1a53-4c7a-aa1c-25fd3f838511"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Task to Notify Affected Individuals -> Copy of Task to Notify Affected Individuals",
+            "targetStep": "\/api\/3\/workflow_steps\/2dc88210-5be2-4617-ae65-3ce1c42af696",
+            "sourceStep": "\/api\/3\/workflow_steps\/dc7a3dc0-d22a-4e8f-b306-5f4b13960647",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "c8debb6f-0247-472d-a06f-bc1a1e01296c"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Task to Provide Media Notice -> Mark Task as Completed",
+            "targetStep": "\/api\/3\/workflow_steps\/55c79875-5cbe-4ab9-819a-b8ec810314f0",
+            "sourceStep": "\/api\/3\/workflow_steps\/f02f554a-4c77-4e2d-acc0-50cc30e4c443",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "c61a25b8-2fcb-4437-9d69-0a20df0dd050"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "a4cfc1fa-86b9-4cbb-b4a1-b174b342dcc1",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "PostUpdate"
+    ]
+}

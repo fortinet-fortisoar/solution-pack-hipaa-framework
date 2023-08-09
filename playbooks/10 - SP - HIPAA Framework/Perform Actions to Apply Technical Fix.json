@@ -118,7 +118,7 @@
             "arguments": {
                 "resource": {
                     "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
-                    "description": "{{vars.demoMode}}\n\n##### As advised by HSO, a technical fix has been applied to stop the incident. Additionally, the fix details have been updated in the Data Compliance record.\n\n##### Go back to <a href=\"\/modules\/view-panel\/data_compliances\/{{vars.complianceUUID}}\" target=\"_parent\" rel=\"noopener\"> **Data Compliance Record #{{vars.complianceID}}**<\/a> to execute next task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Report Crime to Law Enforcement Agency**<\/span>"
+                    "description": "{{vars.demoMode}}\n\n##### As advised by HSO, a technical fix has been applied to stop the incident. Additionally, the fix details have been updated in the Data Compliance record.\n\n##### Go back to <a href=\"\/modules\/view-panel\/data_compliances\/{{vars.complianceUUID}}\" target=\"_parent\" rel=\"noopener\">Data Compliance Record #{{vars.complianceID}}<\/a> to execute next task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Notify Breach to the Secretary of HHS**<\/span>"
                 },
                 "_showJson": false,
                 "operation": "Append",
@@ -146,7 +146,7 @@
                 "input": {
                     "schema": {
                         "title": "Perform Actions to Apply Technical Fix",
-                        "description": "##### Please perform following actions to apply technical fix as advised by HSO\n<p>&nbsp<\/p>\n\n```\n{{vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].actionsForApplyingTechnicalFix}}\n```\n",
+                        "description": "##### Please perform following actions to apply technical fix as advised by HSO\n<p>&nbsp<\/p>\n\n```\n{{vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].actionsForApplyingTechnicalFix or 'NA'}}\n```\n",
                         "inputVariables": [
                             {
                                 "name": "provideATechnicalFixSummary",

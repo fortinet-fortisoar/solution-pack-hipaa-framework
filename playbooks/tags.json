@@ -2,5 +2,7 @@
     "ManualTrigger",
     "PostCreate",
     "PostUpdate",
+    "Referenced",
+    "Scheduled",
     "SystemWaitForCompletion"
 ]

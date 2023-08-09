@@ -55,7 +55,7 @@
                     "recordTags": "Overwrite"
                 },
                 "step_variables": {
-                    "temp": "{{vars.contactIRI.append(vars.result['@id'])}}",
+                    "temp": "{{vars.contactIRI.append(vars.steps.Create_Covered_Entity_Contact['@id'])}}",
                     "ceEmail": "{{vars.steps.Create_Covered_Entity_Contact.eMailAddress}}"
                 }
             },
@@ -89,7 +89,7 @@
                     "recordTags": "Overwrite"
                 },
                 "step_variables": {
-                    "temp": "{{vars.contactIRI.append(vars.result['@id'])}}",
+                    "temp": "{{vars.contactIRI.append(vars.steps.Create_HSO_Contact['@id'])}}",
                     "hsoName": "{{vars.result.name}}",
                     "hsoEmail": "{{vars.result.eMailAddress}}",
                     "hsoPhone": "{{vars.result.telephoneNumber}}"
@@ -126,7 +126,7 @@
                     "recordTags": "Overwrite"
                 },
                 "step_variables": {
-                    "temp": "{{vars.contactIRI.append(vars.result['@id'])}}",
+                    "temp": "{{vars.contactIRI.append(vars.steps.Create_Test_Covered_Entity_Contact['@id'])}}",
                     "ceEmail": "{{vars.steps.Create_Test_Covered_Entity_Contact.eMailAddress}}"
                 }
             },
@@ -160,7 +160,7 @@
                     "recordTags": "Overwrite"
                 },
                 "step_variables": {
-                    "temp": "{{vars.contactIRI.append(vars.result['@id'])}}",
+                    "temp": "{{vars.contactIRI.append(vars.steps.Create_Test_HSO_Contact['@id'])}}",
                     "hsoName": "{{vars.result.name}}",
                     "hsoEmail": "{{vars.demoEmail}}",
                     "hsoPhone": "{{vars.input.params.hSOPhone}}"

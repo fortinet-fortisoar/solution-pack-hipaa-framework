@@ -14,17 +14,16 @@
                                     "wid": "eb7a13c5-2b50-49f6-b99d-beab5941e21c",
                                     "module": "data_compliances",
                                     "columns": [
-                                        "assignedTo",
+                                        "id",
+                                        "name",
+                                        "severity",
                                         "status",
+                                        "assignedTo",
+                                        "breachOccurrenceDate",
+                                        "breachDetectionDate",
                                         "breachNotifyDueDate",
                                         "breachNotificationSLA",
-                                        "breachDetectionDate",
-                                        "severity",
-                                        "name",
-                                        "id",
-                                        "tenant",
-                                        "tenantRecordId",
-                                        "fsrQueue"
+                                        "tenant"
                                     ],
                                     "expandableCol": [
                                         {

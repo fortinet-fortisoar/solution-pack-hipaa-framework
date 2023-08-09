@@ -1,10 +1,10 @@
 {
     "@type": "Workflow",
     "triggerLimit": null,
-    "name": "Check for Law Enforcement Notification Delay Request",
+    "name": "Confirm Law Enforcement Delay Request",
     "aliasName": null,
     "tag": null,
-    "description": "Pauses breach notification SLA until law enforcement officials approves notifying affected individuals.",
+    "description": "Confirms law enforcement's delay request for breach notification to affected individuals and pauses breach notification SLA until approval.",
     "isActive": true,
     "debug": false,
     "singleRecordExecution": false,
@@ -199,7 +199,7 @@
             "arguments": {
                 "resource": {
                     "status": "\/api\/3\/picklists\/33b6b889-4c5c-4801-999b-6c446b9568f3",
-                    "description": "{{vars.demoMode}}\n\n##### The law enforcement officials have requested to delay in notifying individuals affected by the breach.\n\n##### Update task status to <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Completed**<\/span> once the enforcement agency has given the go-ahead."
+                    "description": "{{vars.demoMode}}\n\n##### The law enforcement officials have requested to delay in notifying individuals affected by the breach.\n\n##### Mark this Task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Completed**<\/span> once the law enforcement agency has given the go-ahead."
                 },
                 "operation": "Append",
                 "collection": "{{vars.input.records[0]['@id']}}",
@@ -216,7 +216,7 @@
                     "actionsTakenInResponseToBreach": "Append"
                 },
                 "step_variables": {
-                    "placeholder": "{% for item in vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].description.split('\\n') %}\n{% if 'Notification Delay Request' in item %}\n{% set _dummy = item | replace('10060', '8856') | replace(\"<span>\",\"<span style='color:red; font-weight: bold; font-size:16px;' title='On Hold\/Blocked'>\") %}\n{{vars.description.append(_dummy)}}\n{% else %}\n{{vars.description.append(item)}}\n{% endif %}\n{% endfor %}"
+                    "placeholder": "{% for item in vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].description.split('\\n') %}\n{% if 'Notification Delay Request' in item %}\n{% set _dummy = \"| 7 | <span title='Awaiting Law Enforcement Approval for Individual Notification. Mark Task as Completed once the go-ahead provided.'>Confirm Law Enforcement's Notification Delay Request<\/span> | <a href='\/modules\/view-panel\/tasks\/\" + vars.input.records[0].uuid + \"' target='_parent' rel='noopener' title='Awaiting Law Enforcement Approval for Individual Notification. Mark Task as Completed once the go-ahead provided.'>Click Here<\/a> | <span style='color:red; font-weight: bold; font-size:16px;' title='On Hold\/Blocked'>&#8856;<\/span> |\" %}\n{{vars.description.append(_dummy)}}\n{% else %}\n{{vars.description.append(item)}}\n{% endif %}\n{% endfor %}"
                 }
             },
             "status": null,
@@ -232,7 +232,7 @@
             "description": null,
             "arguments": {
                 "route": "877e9c94-3642-4902-9ebc-b121ead754c0",
-                "title": "Check Notification Delay Request",
+                "title": "Confirm Delay Request Status",
                 "resources": [
                     "tasks"
                 ],
@@ -252,13 +252,18 @@
                             {
                                 "type": "object",
                                 "field": "status",
-                                "value": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
-                                "_value": {
-                                    "@id": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
-                                    "display": "Completed",
-                                    "itemValue": "Completed"
-                                },
-                                "operator": "neq"
+                                "value": [
+                                    "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                                    "\/api\/3\/picklists\/33b6b889-4c5c-4801-999b-6c446b9568f3"
+                                ],
+                                "module": "status",
+                                "display": "Completed",
+                                "operator": "nin",
+                                "template": "multiselectpicklist",
+                                "OPERATOR_KEY": "$",
+                                "displayTemplate": "",
+                                "previousOperator": "nin",
+                                "previousTemplate": "multiselectpicklist"
                             },
                             {
                                 "type": "array",
@@ -267,7 +272,7 @@
                                     "\/api\/3\/tags\/Notification Delay Request"
                                 ],
                                 "module": "recordTags",
-                                "display": null,
+                                "display": "",
                                 "operator": "in_all",
                                 "template": "tags",
                                 "OPERATOR_KEY": "$",
@@ -290,14 +295,53 @@
         },
         {
             "@type": "WorkflowStep",
+            "name": "Update Compliance Record Description",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<p>The law enforcement officials have requested to delay in notifying individuals affected by the breach. Mark <a title=\"Task #{{vars.input.records[0].id}} - {{vars.input.records[0].name}}\" href=\"\/modules\/view-panel\/tasks\/{{vars.input.records[0].uuid}}\" target=\"_parent\" rel=\"noopener\">Task #{{vars.input.records[0].id}} - {{vars.input.records[0].name}}<\/a> as <span class=\"rating\" style=\"background: #5d636a;\">Completed<\/span> once the go-ahead provided.<\/p>",
+                    "records": "{{vars.complianceIRI}},{{vars.incidentIRI}}"
+                },
+                "resource": {
+                    "description": "{{vars.description | join('\\n')}}"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "recordTags": "Append",
+                    "locationOfBreach": "Append",
+                    "reminderMailStatus": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append",
+                    "clinicalPHIExposedInBreach": "Append",
+                    "financialPHIExposedInBreach": "Append",
+                    "demographicPHIExposedInBreach": "Append",
+                    "safeguardsInPlaceBeforeBreach": "Append",
+                    "actionsTakenInResponseToBreach": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "975",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "b09b14a1-ec69-46bd-bab6-0ff375ccc13f"
+        },
+        {
+            "@type": "WorkflowStep",
             "name": "Update Delay Request Status",
             "description": null,
             "arguments": {
                 "resource": {
-                    "status": "\/api\/3\/picklists\/bb74042a-f699-11e7-8c3f-9a214cf093ae",
-                    "breachPausedDate": "{{arrow.utcnow().int_timestamp}}",
-                    "breachNotificationSLA": "\/api\/3\/picklists\/3f4ef2dc-7f56-4886-b215-ee08b344cbdf",
-                    "individualNoticeApproved": "\/api\/3\/picklists\/711303d3-75ea-437d-a871-0a8d14fcdb7d"
+                    "individualNoticeApproved": "\/api\/3\/picklists\/d26464e0-1df4-46c2-a032-018911ba0c40"
                 },
                 "_showJson": false,
                 "operation": "Append",
@@ -374,6 +418,16 @@
             "isExecuted": false,
             "group": null,
             "uuid": "56b338d3-44c6-42e5-acc5-49adb19579ec"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Mark Task as On Hold -> Update Compliance Record Description",
+            "targetStep": "\/api\/3\/workflow_steps\/b09b14a1-ec69-46bd-bab6-0ff375ccc13f",
+            "sourceStep": "\/api\/3\/workflow_steps\/86729011-9b1a-48ba-81f8-d8ae9c624408",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "f8f68636-ce98-44cb-9aee-0721c20d0bed"
         },
         {
             "@type": "WorkflowRoute",

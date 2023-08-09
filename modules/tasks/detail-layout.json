@@ -20,11 +20,6 @@
                 "icon": "fa fa-user"
             },
             {
-                "id": "\/api\/3\/workflows\/0e727ede-cffa-4222-afc2-ab7e26043382",
-                "name": "Notify Affected Users",
-                "icon": "fa fa-users"
-            },
-            {
                 "id": "\/api\/3\/workflows\/70824543-e39d-4c4d-bcf1-86300752ed5f",
                 "name": "Get Data Breach Report Updated from DPO",
                 "icon": "icon icon-generate-incident-summary-report"
@@ -58,6 +53,21 @@
                 "id": "\/api\/3\/workflows\/02665001-d443-4a32-9663-a9344f66befa",
                 "name": "Report PHI Breach to Law Enforcement Agency",
                 "icon": "icon icon-generate-incident-summary-report"
+            },
+            {
+                "id": "\/api\/3\/workflows\/c207b346-ecad-48c5-9cf7-15c017e7b23d",
+                "name": "Check for Law Enforcement Notification Delay Request",
+                "icon": "icon icon-approval"
+            },
+            {
+                "id": "\/api\/3\/workflows\/c526d8a3-f23b-44d0-8e02-c93d2cd08f0e",
+                "name": "Create List of Affected Users",
+                "icon": "fa fa-upload"
+            },
+            {
+                "id": "\/api\/3\/workflows\/614cd2bc-6757-43dd-a803-982990e98740",
+                "name": "Notify Individuals Affected by PHI Breach",
+                "icon": "icon icon-send-email"
             }
         ],
         "rows": [
