@@ -170,5 +170,64 @@
     "deletedAt": null,
     "recordTags": [
         "Scheduled"
+    ],
+    "schedules": [
+        {
+            "id": "gAAAAABk1f2qeO2pPleMhGvWxhb3WkGfQfz4zKBYW7mJ_EAwIkZzUBhDvo7bNdjXVDy0JfRl7EKioSxlcrOZdBja8jJFrrsFIQ==",
+            "crontab": {
+                "id": 10,
+                "minute": "*\/5",
+                "hour": "*",
+                "day_of_week": "*",
+                "day_of_month": "*",
+                "month_of_year": "*",
+                "timezone": "UTC"
+            },
+            "interval": null,
+            "name": "HIPAA - Check for SLA Violation",
+            "task": "workflow.tasks.periodic_task",
+            "args": "[]",
+            "kwargs": {
+                "exit_if_running": true,
+                "wf_iri": "\/api\/3\/workflows\/8a91707a-a888-4bd3-8e75-f69ae18140fb",
+                "priority": {
+                    "@id": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+                    "@type": "Picklist",
+                    "itemValue": "Medium",
+                    "orderIndex": 1,
+                    "color": null,
+                    "icon": null,
+                    "listName": "\/api\/3\/picklist_names\/e104ef72-11b4-4d0c-be0e-e1cf3b87b5f2",
+                    "uuid": "2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+                    "id": 111,
+                    "importedBy": []
+                },
+                "createUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+                "name": "HIPAA - Check for SLA Violation",
+                "description": "HIPAA - Check for SLA Violation",
+                "auth": {
+                    "auth_method": "CS HMAC"
+                },
+                "referenceid": null,
+                "schedule_entry_name": "HIPAA - Check for SLA Violation",
+                "schedule_id": "13ef289f-a51b-4ed4-84f7-79cd6af6d0cb"
+            },
+            "queue": null,
+            "exchange": null,
+            "routing_key": null,
+            "headers": "{}",
+            "priority": 3,
+            "expires": null,
+            "expire_seconds": null,
+            "one_off": false,
+            "start_time": null,
+            "enabled": false,
+            "last_run_at": null,
+            "total_run_count": 0,
+            "date_changed": "2023-08-11T09:15:29.310683Z",
+            "description": "HIPAA - Check for SLA Violation",
+            "solar": null,
+            "clocked": null
+        }
     ]
 }
