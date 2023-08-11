@@ -76,7 +76,8 @@
             "validation": {
                 "required": false,
                 "minlength": 0,
-                "maxlength": 10485761
+                "maxlength": 10485761,
+                "_enableRange": false
             },
             "bulkAction": {
                 "allow": false,
@@ -98,7 +99,6 @@
                             "operator": "eq",
                             "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
                             "_value": {
-                                "display": "HIPAA",
                                 "itemValue": "HIPAA",
                                 "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
                             },
@@ -559,7 +559,6 @@
                             "operator": "eq",
                             "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
                             "_value": {
-                                "display": "HIPAA",
                                 "itemValue": "HIPAA",
                                 "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
                             },
@@ -2473,51 +2472,6 @@
         },
         {
             "@type": "AttributeMetadata",
-            "type": "integer",
-            "name": "breachUnpausedDate",
-            "length": null,
-            "orderIndex": 29,
-            "formType": "datetime",
-            "dataSource": null,
-            "searchable": true,
-            "peerReplicable": true,
-            "system": false,
-            "encrypted": false,
-            "gridColumn": false,
-            "collection": false,
-            "inversedField": null,
-            "ownsRelationship": false,
-            "validation": {
-                "required": false,
-                "minlength": 0,
-                "maxlength": 10485761,
-                "_enableRange": false
-            },
-            "bulkAction": {
-                "allow": false,
-                "buttonText": "",
-                "buttonIcon": "",
-                "buttonClass": "btn btn-default btn-sm"
-            },
-            "dataSourceFilters": null,
-            "defaultValue": null,
-            "tooltip": null,
-            "visibility": false,
-            "htmlEscape": false,
-            "orphanRemoval": null,
-            "readable": true,
-            "writeable": true,
-            "identifier": null,
-            "unique": false,
-            "recommend": false,
-            "skipSerialization": false,
-            "displayName": "{{ breachUnpausedDate }}",
-            "descriptions": {
-                "singular": "Breach Unpaused Date"
-            }
-        },
-        {
-            "@type": "AttributeMetadata",
             "type": "picklists",
             "name": "isPHIMisuseOrDisclosureForeseeable",
             "length": null,
@@ -2710,102 +2664,6 @@
         },
         {
             "@type": "AttributeMetadata",
-            "type": "picklists",
-            "name": "isABreachReportable",
-            "length": null,
-            "orderIndex": 32,
-            "formType": "picklist",
-            "dataSource": {
-                "model": "picklists",
-                "query": {
-                    "logic": "AND",
-                    "filters": [
-                        {
-                            "field": "listName__name",
-                            "operator": "eq",
-                            "value": "YesNoInput"
-                        }
-                    ],
-                    "sort": [
-                        {
-                            "field": "orderIndex",
-                            "direction": "ASC"
-                        }
-                    ]
-                },
-                "displayConditions": {
-                    "cfd49634-d25a-476f-8485-99585e589a8c": {
-                        "visibility": "visible",
-                        "conditions": null
-                    },
-                    "711303d3-75ea-437d-a871-0a8d14fcdb7d": {
-                        "visibility": "visible",
-                        "conditions": null
-                    },
-                    "27ff216f-6363-4c93-9fc4-e0e8c15cb0b1": {
-                        "visibility": "hidden",
-                        "conditions": null
-                    }
-                },
-                "useDisplayConditions": true
-            },
-            "searchable": false,
-            "peerReplicable": true,
-            "system": false,
-            "encrypted": false,
-            "gridColumn": false,
-            "collection": false,
-            "inversedField": null,
-            "ownsRelationship": false,
-            "validation": {
-                "required": false,
-                "minlength": 0,
-                "maxlength": 10485761,
-                "_enableRange": false
-            },
-            "bulkAction": {
-                "allow": false,
-                "buttonText": "",
-                "buttonIcon": "",
-                "buttonClass": "btn btn-default btn-sm"
-            },
-            "dataSourceFilters": null,
-            "defaultValue": null,
-            "tooltip": null,
-            "visibility": [
-                {
-                    "sort": [],
-                    "limit": 30,
-                    "logic": "AND",
-                    "filters": [
-                        {
-                            "field": "regulatoryCompliance",
-                            "operator": "eq",
-                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
-                            "_value": {
-                                "itemValue": "HIPAA",
-                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
-                            },
-                            "type": "object"
-                        }
-                    ]
-                }
-            ],
-            "htmlEscape": false,
-            "orphanRemoval": null,
-            "readable": true,
-            "writeable": true,
-            "identifier": null,
-            "unique": false,
-            "recommend": false,
-            "skipSerialization": false,
-            "displayName": "{{ isABreachReportable }}",
-            "descriptions": {
-                "singular": "Is a breach reportable?"
-            }
-        },
-        {
-            "@type": "AttributeMetadata",
             "type": "indicators",
             "name": "indicators",
             "length": null,
@@ -2917,76 +2775,6 @@
             "displayName": "{{ whoAccessedPHIEPHIWithoutPermission }}",
             "descriptions": {
                 "singular": "Who accessed PHI\/ePHI without permission?(If Known)"
-            }
-        },
-        {
-            "@type": "AttributeMetadata",
-            "type": "string",
-            "name": "whatHealthInformationWasExposed",
-            "length": null,
-            "orderIndex": 35,
-            "formType": "text",
-            "dataSource": null,
-            "searchable": false,
-            "peerReplicable": true,
-            "system": false,
-            "encrypted": false,
-            "gridColumn": false,
-            "collection": false,
-            "inversedField": null,
-            "ownsRelationship": false,
-            "validation": {
-                "required": false,
-                "minlength": 0,
-                "maxlength": 10485761,
-                "_enableRange": false
-            },
-            "bulkAction": {
-                "allow": false,
-                "buttonText": "",
-                "buttonIcon": "",
-                "buttonClass": "btn btn-default btn-sm"
-            },
-            "dataSourceFilters": null,
-            "defaultValue": "",
-            "tooltip": null,
-            "visibility": [
-                {
-                    "sort": [],
-                    "limit": 30,
-                    "logic": "AND",
-                    "filters": [
-                        {
-                            "field": "regulatoryCompliance",
-                            "operator": "eq",
-                            "value": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
-                            "_value": {
-                                "itemValue": "HIPAA",
-                                "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a"
-                            },
-                            "type": "object"
-                        },
-                        {
-                            "field": "whatHealthInformationWasExposed",
-                            "operator": "isnull",
-                            "_operator": "isnull",
-                            "value": "false",
-                            "type": "primitive"
-                        }
-                    ]
-                }
-            ],
-            "htmlEscape": false,
-            "orphanRemoval": null,
-            "readable": true,
-            "writeable": true,
-            "identifier": null,
-            "unique": false,
-            "recommend": false,
-            "skipSerialization": false,
-            "displayName": "{{ whatHealthInformationWasExposed }}",
-            "descriptions": {
-                "singular": "What health information was exposed?"
             }
         },
         {
