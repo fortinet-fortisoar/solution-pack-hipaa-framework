@@ -817,7 +817,7 @@
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
                     "tenant": "",
                     "thread": false,
-                    "content": "<p>Created <a title=\"Task #{{vars.result.id}}\" href=\"\/modules\/view-panel\/tasks\/{{vars.result.uuid}}\" target=\"_parent\" rel=\"noopener\">Task #{{vars.result.id}}<\/a> to apply technical fix or any other fix required to stop the incident.<\/p>",
+                    "content": "<p>Created <a title=\"Task #{{vars.steps.Task_to_Apply_Technical_Fix.id}}\" href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Task_to_Apply_Technical_Fix.uuid}}\" target=\"_parent\" rel=\"noopener\">Task #{{vars.steps.Task_to_Apply_Technical_Fix.id}}<\/a> to apply technical fix or any other fix required to stop the incident.<\/p>",
                     "records": "{{vars.complianceIRI}}",
                     "parentstepid": "\/api\/3\/workflow_steps\/86f29797-bcb7-45f8-ad86-4f0ea7f29ef3"
                 },
@@ -867,7 +867,7 @@
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
                     "tenant": "",
                     "thread": false,
-                    "content": "<p>Created <a title=\"Task #{{vars.result.id}}\" href=\"\/modules\/view-panel\/tasks\/{{vars.result.uuid}}\" target=\"_parent\" rel=\"noopener\">Task #{{vars.result.id}}<\/a> to notify the Secretary of HHS about PHI Breach.<\/p>",
+                    "content": "<p>Created <a title=\"Task #{{vars.steps.Task_to_Notify_Breach_to_the_Secretary.id}}\" href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Task_to_Notify_Breach_to_the_Secretary.uuid}}\" target=\"_parent\" rel=\"noopener\">Task #{{vars.steps.Task_to_Notify_Breach_to_the_Secretary.id}}<\/a> to notify the Secretary of HHS about PHI Breach.<\/p>",
                     "records": "{{vars.complianceIRI}}",
                     "parentstepid": "\/api\/3\/workflow_steps\/0d74e98b-1384-482c-a55f-99a827d34c83"
                 },
@@ -918,7 +918,7 @@
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
                     "tenant": "",
                     "thread": false,
-                    "content": "<p>Created <a title=\"Task #{{vars.result.id}} - {{vars.result.name}}\" href=\"https:\/\/{{globalVars.Server_fqhn}}\/modules\/view-panel\/tasks\/{{vars.result.uuid}}\">Task #{{vars.result.id}}<\/a> to report the PHI breach to the relevant criminal law enforcement agencies.<\/p>",
+                    "content": "<p>Created <a title=\"Task #{{vars.steps.Task_to_Report_Law_Enforcement_Agency.id}} - {{vars.steps.Task_to_Report_Law_Enforcement_Agency.name}}\" href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Task_to_Report_Law_Enforcement_Agency.uuid}}\" target=\"_parent\" rel=\"noopener\">Task #{{vars.steps.Task_to_Report_Law_Enforcement_Agency.id}}<\/a> to report the PHI breach to the relevant criminal law enforcement agencies.<\/p>",
                     "records": "{{vars.complianceIRI}}",
                     "parentstepid": "\/api\/3\/workflow_steps\/6405e58c-3a51-44e7-b36d-a096c315ef4c"
                 },
