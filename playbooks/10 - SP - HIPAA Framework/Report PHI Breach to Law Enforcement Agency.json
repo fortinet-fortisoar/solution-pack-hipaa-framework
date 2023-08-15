@@ -1,0 +1,548 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Report PHI Breach to Law Enforcement Agency",
+    "aliasName": null,
+    "tag": null,
+    "description": "Reports a PHI breach to the Law Enforcement Agency.",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/4c384067-79c3-4821-a70a-d69c3c149ec6",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/1dd46740-9167-4bd4-9709-0fc566569bfd",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Add Note for Task creation",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "people": [],
+                    "content": "<p>Created <a rel=\"noopener\" target=\"_parent\" href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Task_to_Confirm_Law_Enforcement_Notification_Delay_Request.uuid}}\">Task #{{vars.steps.Task_to_Confirm_Law_Enforcement_Notification_Delay_Request.id}} - {{vars.steps.Task_to_Confirm_Law_Enforcement_Notification_Delay_Request.name}}<\/a> to confirm if law enforcement officials requested a delay in notifying breach to affected individuals.<\/p>",
+                    "__replace": "",
+                    "recordTags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "isImportant": false,
+                    "peopleUpdated": false,
+                    "dataCompliances": "{{vars.complianceIRI}}"
+                },
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/comments",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1380",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "d5ce0f23-7247-47cc-a0c5-bb3f24aca73a"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "taskList": "[]",
+                "description": "[]"
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "66891eb2-bc52-45ef-99df-8c8789e42438"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Generate Breach Report",
+            "description": null,
+            "arguments": {
+                "name": "Report Engine",
+                "params": {
+                    "user_id": "{{vars.currentUser}}",
+                    "timezone": "{{vars.request.headers.tz}}",
+                    "report_id": "6c340af4-91ab-43ba-b054-aa93709ca491",
+                    "query_params": "{\"qparam\": {\"complianceID\":{{vars.complianceID}}}}"
+                },
+                "version": "1.3.2",
+                "connector": "cyops-schedule-report",
+                "operation": "schedule_report_manual",
+                "operationTitle": "Generate Report From Report ID",
+                "pickFromTenant": false,
+                "step_variables": []
+            },
+            "status": null,
+            "top": "705",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "41c3e031-d051-4a3f-b113-7a6b1111f952"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Compliance Record ID",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "id",
+                            "value": "{{vars.input.records[0].id}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ],
+                    "__selectFields": [
+                        "dataCompliances"
+                    ]
+                },
+                "module": "tasks?$limit=30&$relationships=true&$fsr_max_relation_count=100",
+                "checkboxFields": true,
+                "step_variables": {
+                    "demoMode": "{% if vars.result[0].dataCompliances[0].testMode %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}",
+                    "demoEmail": "{{vars.result[0].dataCompliances[0].testEmail}}",
+                    "placeholder": "{% for item in vars.result[0].dataCompliances[0].description.split('\\n') %}\n{% if 'Report Breach to Law Enforcement Agency' in item %}\n{% set _dummy = item | replace('10060', '9989') %}\n{{vars.description.append(_dummy)}}\n{% else %}\n{{vars.description.append(item)}}\n{% endif %}\n{% endfor %}",
+                    "complianceID": "{{vars.result[0].dataCompliances[0].id}}",
+                    "complianceIRI": "{{vars.result[0].dataCompliances[0]['@id']}}",
+                    "complianceName": "{{vars.result[0].dataCompliances[0].name}}",
+                    "complianceUUID": "{{vars.result[0].dataCompliances[0].uuid}}",
+                    "lawEnforAgencyEmail": "{{vars.input.params.emailIDOfLawEnforcementAgency}}",
+                    "breachNotificationDueDate": "{{vars.result[0].dataCompliances[0].breachNotifyDueDate}}"
+                }
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "1b36d8cf-9947-44f3-a724-0c155a12f350"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Parent Incident ID",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "id",
+                            "value": "{{vars.complianceID}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ],
+                    "__selectFields": [
+                        "incidents"
+                    ]
+                },
+                "module": "data_compliances?$limit=30&$relationships=true&$fsr_max_relation_count=100",
+                "checkboxFields": true,
+                "step_variables": {
+                    "incidentID": "{{vars.result[0].incidents[0].id}}",
+                    "incidentIRI": "{{vars.result[0].incidents[0]['@id']}}",
+                    "currentIndex": "{{vars.description[-1].split(\"|\")[1]}}"
+                }
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "87635668-8f52-4b1c-801f-73f9dbbc82a6"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Mark Notification Status In Progress",
+            "description": "Mark Law Enforcement Agency Notification Status as \"In Progress\"",
+            "arguments": {
+                "resource": {
+                    "isLawEnforcementAgencyNotified": "\/api\/3\/picklists\/959021fc-c19d-4aee-8e51-5395c5029719"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "locationOfBreach": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append",
+                    "clinicalPHIExposedInBreach": "Append",
+                    "financialPHIExposedInBreach": "Append",
+                    "demographicPHIExposedInBreach": "Append",
+                    "safeguardsInPlaceBeforeBreach": "Append",
+                    "actionsTakenInResponseToBreach": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "e781fadf-80df-41e5-9b1b-d414ee59356c"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Mark Task as Completed",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                    "description": "{{vars.demoMode}}\n\n##### PHI Breach has been reported to the Law Enforcement Agency \n\n##### Go back to <a href=\"\/modules\/view-panel\/data_compliances\/{{vars.complianceUUID}}\" target=\"_parent\" rel=\"noopener\"> Data Compliance Record #{{vars.complianceID}}<\/a> to execute next task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Confirm Law Enforcement Delay Request**<\/span>"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/tasks",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "975",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "a3aafdf8-c039-4a16-8335-c4cbfe5fd096"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Send Report to Law Enforcement Agency",
+            "description": null,
+            "arguments": {
+                "config": "88c3d39c-2fa9-4731-b00d-29815008f17c",
+                "params": {
+                    "cc": "",
+                    "to": "{% if vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].testMode %}{{vars.demoEmail}}{% else %}{{vars.dpaEmail}}{% endif %}",
+                    "bcc": "",
+                    "from": "",
+                    "type": "Manual Input",
+                    "content": "<p>Hello,<\/p>\n<p>We've observed a PHI Breach incident at our organization. &nbsp;&nbsp;<\/p>\n<p>Before notifying affected individuals or issuing any media notice, we await your confirmation to proceed, ensuring no impediment to criminal investigations or national security concerns. We'll cooperate fully with your investigation to secure PHI.<\/p>\n<p>Please find the details in the attached report.&nbsp;<\/p>\n<p>Thanks,<\/p>\n<p>SOC Admin<\/p>",
+                    "subject": "Protected Health Information Breach Notification",
+                    "iri_list": "{{vars.steps.Generate_Breach_Report.data.file['@id']}}",
+                    "body_type": "Rich Text",
+                    "file_name": "",
+                    "file_path": ""
+                },
+                "version": "2.5.0",
+                "from_str": "admin@example.com",
+                "connector": "smtp",
+                "operation": "send_email_new",
+                "operationTitle": "Send Email (Advanced)",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "840",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/4c0019b2-055c-44d0-968c-678a0c2d762e",
+            "group": null,
+            "uuid": "f181d6db-3c76-407e-927b-839859b848be"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "route": "ca15be83-02d8-4f3c-86bf-71d2a496e291",
+                "title": "Report Law Enforcement Agency",
+                "resources": [
+                    "tasks"
+                ],
+                "inputVariables": [
+                    {
+                        "name": "emailIDOfLawEnforcementAgency",
+                        "type": "string",
+                        "label": "Provide Email ID of Law Enforcement Agency",
+                        "title": "Email Field",
+                        "usable": true,
+                        "tooltip": "For multiple recipients, provide a comma-separated list of emails",
+                        "dataType": "email",
+                        "formType": "email",
+                        "required": true,
+                        "_expanded": true,
+                        "mmdUpdate": true,
+                        "collection": false,
+                        "searchable": true,
+                        "templateUrl": "app\/components\/form\/fields\/email.html",
+                        "_nameTouched": true,
+                        "defaultValue": null,
+                        "_previousName": "provideEmailIDOfLawEnforcementAgency",
+                        "playbookField": true,
+                        "lengthConstraint": true,
+                        "allowedEncryption": true,
+                        "allowedGridColumn": true,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false
+                    }
+                ],
+                "step_variables": {
+                    "input": {
+                        "params": {
+                            "emailIDOfLawEnforcementAgency": "{{vars.request.data[\"emailIDOfLawEnforcementAgency\"]}}"
+                        },
+                        "records": "{{vars.input.records}}"
+                    }
+                },
+                "_promptexpanded": true,
+                "displayConditions": {
+                    "tasks": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": [
+                            {
+                                "type": "array",
+                                "field": "recordTags",
+                                "value": [
+                                    "\/api\/3\/tags\/Report Law Enforcement Agency"
+                                ],
+                                "module": "recordTags",
+                                "display": "",
+                                "operator": "in_all",
+                                "template": "tags",
+                                "OPERATOR_KEY": "$",
+                                "previousOperator": "in_all",
+                                "previousTemplate": "tags"
+                            },
+                            {
+                                "type": "object",
+                                "field": "status",
+                                "value": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                                "_value": {
+                                    "@id": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                                    "itemValue": "Completed"
+                                },
+                                "operator": "neq"
+                            }
+                        ]
+                    }
+                },
+                "executeButtonText": "Submit",
+                "noRecordExecution": false,
+                "singleRecordExecution": true
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+            "group": null,
+            "uuid": "1dd46740-9167-4bd4-9709-0fc566569bfd"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Task to Confirm Law Enforcement Notification Delay Request",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "Confirm Law Enforcement's Notification Delay Request",
+                    "type": "\/api\/3\/picklists\/30300411-a2e0-42dc-9180-513904f73ab9",
+                    "dueBy": "{{vars.breachNotificationDueDate}}",
+                    "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
+                    "tenant": "\/api\/3\/tenants\/b3a700f7-00be-4ef9-90c6-3c8fe6e1be63",
+                    "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
+                    "__replace": "",
+                    "startDate": "{{arrow.utcnow().int_timestamp}}",
+                    "recordTags": [
+                        "\/api\/3\/tags\/Notification Delay Request"
+                    ],
+                    "description": "{{vars.demoMode}}\n\n##### Confirm if law enforcement requested a delay in notifying breach to affected individuals.\n\n##### Click on <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Confirm Delay Request Status**<\/span> Button",
+                    "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
+                    "dataCompliances": "{{vars.complianceIRI}}",
+                    "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/tasks",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "_temp": "{{vars.taskList.append(vars.steps.Task_to_Confirm_Law_Enforcement_Notification_Delay_Request['@id'])}}"
+                }
+            },
+            "status": null,
+            "top": "1110",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "d0b3d689-6307-4583-9240-13118e8b68b9"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update Compliance Record Description",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<p>PHI Breach has been reported to the law enforcement agency<\/p>",
+                    "records": "{{vars.complianceIRI}},{{vars.incidentIRI}}",
+                    "parentstepid": "\/api\/3\/workflow_steps\/d0b3d689-6307-4583-9240-13118e8b68b9"
+                },
+                "resource": {
+                    "description": "{{vars.description | join('\\n')}}{% for item in vars.taskList %}\n| {{loop.index+vars.currentIndex}} | {{(item | fromIRI).name}} | <a href=\"\/modules\/view-panel\/tasks\/{{(item | fromIRI).uuid}}\" target=\"_parent\" rel=\"noopener\">Click Here<\/a> | <span>&#10060;<\/span> |{% endfor %}",
+                    "isLawEnforcementAgencyNotified": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "recordTags": "Append",
+                    "locationOfBreach": "Append",
+                    "reminderMailStatus": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append",
+                    "clinicalPHIExposedInBreach": "Append",
+                    "financialPHIExposedInBreach": "Append",
+                    "demographicPHIExposedInBreach": "Append",
+                    "safeguardsInPlaceBeforeBreach": "Append",
+                    "actionsTakenInResponseToBreach": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1245",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "2e9ef23c-dc92-40dc-a927-72d4b0c14913"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Get Compliance Record ID",
+            "targetStep": "\/api\/3\/workflow_steps\/1b36d8cf-9947-44f3-a724-0c155a12f350",
+            "sourceStep": "\/api\/3\/workflow_steps\/66891eb2-bc52-45ef-99df-8c8789e42438",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "e3faff68-e02f-48a8-b160-da0e40e193d4"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Generate Breach Report -> Send Report to DPA",
+            "targetStep": "\/api\/3\/workflow_steps\/f181d6db-3c76-407e-927b-839859b848be",
+            "sourceStep": "\/api\/3\/workflow_steps\/41c3e031-d051-4a3f-b113-7a6b1111f952",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "f4961000-1758-4f89-b79d-8dfe5266b06b"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Compliance Record ID -> Get Parent Incident ID",
+            "targetStep": "\/api\/3\/workflow_steps\/87635668-8f52-4b1c-801f-73f9dbbc82a6",
+            "sourceStep": "\/api\/3\/workflow_steps\/1b36d8cf-9947-44f3-a724-0c155a12f350",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "417c53ca-dae8-4e86-a4e4-1bde55c479a6"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Parent Incident ID -> Mark Notifiaction Status In Progress",
+            "targetStep": "\/api\/3\/workflow_steps\/e781fadf-80df-41e5-9b1b-d414ee59356c",
+            "sourceStep": "\/api\/3\/workflow_steps\/87635668-8f52-4b1c-801f-73f9dbbc82a6",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "fddfe0ba-5cb7-4d90-b6b5-49d6a01f9256"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Mark Notification Status In Progress -> Generate Breach Report",
+            "targetStep": "\/api\/3\/workflow_steps\/41c3e031-d051-4a3f-b113-7a6b1111f952",
+            "sourceStep": "\/api\/3\/workflow_steps\/e781fadf-80df-41e5-9b1b-d414ee59356c",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "7a58cebb-b9db-4b33-b54a-6bb7db7727a3"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Mark Task as Completed -> Task to Confirm Law Enforcement Notification Delay Request",
+            "targetStep": "\/api\/3\/workflow_steps\/d0b3d689-6307-4583-9240-13118e8b68b9",
+            "sourceStep": "\/api\/3\/workflow_steps\/a3aafdf8-c039-4a16-8335-c4cbfe5fd096",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "6e900cd9-84e2-427a-8c44-16d93a31a3a2"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Send Report to Law Enforcement Agency -> Mark Task as Completed",
+            "targetStep": "\/api\/3\/workflow_steps\/a3aafdf8-c039-4a16-8335-c4cbfe5fd096",
+            "sourceStep": "\/api\/3\/workflow_steps\/f181d6db-3c76-407e-927b-839859b848be",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "72f37189-3069-4912-91dc-bcc13f735e96"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/66891eb2-bc52-45ef-99df-8c8789e42438",
+            "sourceStep": "\/api\/3\/workflow_steps\/1dd46740-9167-4bd4-9709-0fc566569bfd",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "4889bc28-4442-47b3-b364-856ea36b1395"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Task to Confirm Law Enforcement Notification Delay Request -> Update Compliance Record Description",
+            "targetStep": "\/api\/3\/workflow_steps\/2e9ef23c-dc92-40dc-a927-72d4b0c14913",
+            "sourceStep": "\/api\/3\/workflow_steps\/d0b3d689-6307-4583-9240-13118e8b68b9",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "e3e2677a-9327-48bf-8ebe-fcd2b24b3b29"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Update Compliance Record Description -> Add Note for Task creation",
+            "targetStep": "\/api\/3\/workflow_steps\/d5ce0f23-7247-47cc-a0c5-bb3f24aca73a",
+            "sourceStep": "\/api\/3\/workflow_steps\/2e9ef23c-dc92-40dc-a927-72d4b0c14913",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "0ca8bd1b-20ea-48c2-a8db-230f2128471c"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "02665001-d443-4a32-9663-a9344f66befa",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "SystemWaitForCompletion",
+        "ManualTrigger"
+    ]
+}

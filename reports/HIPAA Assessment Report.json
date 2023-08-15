@@ -1,0 +1,564 @@
+{
+    "@context": "\/api\/3\/contexts\/Reporting",
+    "@type": "Reporting",
+    "uuid": "6c340af4-91ab-43ba-b054-aa93709ca491",
+    "displayName": "HIPAA Assessment Report",
+    "type": "rows",
+    "templateType": "reporting",
+    "roles": [
+        "\/api\/3\/roles\/21d7a7c6-9d68-438f-b732-e8950c5f745b"
+    ],
+    "parentTemplateId": null,
+    "config": {
+        "rows": [
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "sectionHeader",
+                                "config": {
+                                    "wid": "2726ce5d-29ab-4b5a-857d-9132d40e866b",
+                                    "query": {
+                                        "filters": [],
+                                        "sort": [],
+                                        "limit": 10
+                                    },
+                                    "editorType": "html",
+                                    "sectionText": "<p style=\"text-align: center;\">&nbsp;<\/p>\n<p style=\"text-align: center; background: #4e94d0; padding-top: 5px;\"><span style=\"font-size: 25pt;\"><strong><span style=\"color: #efefee;\">PHI Breach Assessment Report<\/span>&nbsp;<\/strong><\/span><\/p>\n<p style=\"background: #2a5173; padding: 5px; text-align: center;\"><span style=\"font-size: 12pt; color: #efefee;\">Generated On {{todayDate}}<\/span><\/p>"
+                                }
+                            },
+                            {
+                                "type": "readonlyFormGroup",
+                                "config": {
+                                    "wid": "feb57921-5255-4d16-95b4-f3fbee60a82f",
+                                    "rows": [
+                                        {
+                                            "columns": [
+                                                {
+                                                    "fields": [
+                                                        {
+                                                            "name": "cEName",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "cEStreetAddress",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "cEEmail",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "cEPhone",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        }
+                                                    ],
+                                                    "style": "col-lg-6"
+                                                },
+                                                {
+                                                    "fields": [
+                                                        {
+                                                            "name": "hSOName",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "hSOEmail",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "hSOPhone",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        }
+                                                    ],
+                                                    "style": "col-lg-6"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "resource": "data_compliances",
+                                    "query": {
+                                        "sort": [],
+                                        "limit": 30,
+                                        "logic": "AND",
+                                        "filters": [
+                                            {
+                                                "field": "id",
+                                                "operator": "eq",
+                                                "_operator": "eq",
+                                                "value": "{{complianceID}}",
+                                                "type": "primitive"
+                                            }
+                                        ]
+                                    },
+                                    "title": "",
+                                    "style": "display-inline-block",
+                                    "displayType": "card-view",
+                                    "gridColumns": [],
+                                    "widgetAlwaysDisplay": false,
+                                    "recordTitle": {
+                                        "type": "sectionHeader",
+                                        "wid": "f2973204-70f8-4810-a947-098051d812b8",
+                                        "clone": false,
+                                        "remove": false,
+                                        "query": {
+                                            "filters": [],
+                                            "sort": [],
+                                            "limit": 10
+                                        },
+                                        "editorType": "html",
+                                        "sectionText": "<h4 style=\"background: #404142; padding: 5px; text-align: left;\"><span style=\"font-size: 12pt; color: #ffffff;\"><strong>Covered Entity and HSO Contact Details<\/strong><\/span><\/h4>"
+                                    },
+                                    "relatedTemplate": {
+                                        "type": "rows",
+                                        "rows": [],
+                                        "wid": "a0be558f-66e8-4f92-9797-eed1dfded02c"
+                                    },
+                                    "enableColumnWidthConfig": true
+                                }
+                            },
+                            {
+                                "type": "readonlyFormGroup",
+                                "config": {
+                                    "wid": "1a1ea6dc-94b2-4cae-9e63-3ce2827742e5",
+                                    "gridColumns": [],
+                                    "displayType": "card-view",
+                                    "widgetAlwaysDisplay": false,
+                                    "query": {
+                                        "sort": [],
+                                        "limit": 10,
+                                        "logic": "AND",
+                                        "filters": [
+                                            {
+                                                "field": "id",
+                                                "operator": "eq",
+                                                "_operator": "eq",
+                                                "value": "{{complianceID}}",
+                                                "type": "primitive"
+                                            }
+                                        ]
+                                    },
+                                    "recordTitle": {
+                                        "type": "sectionHeader",
+                                        "wid": "34e555da-86f6-4e6f-a8e6-6afae56bf546",
+                                        "clone": false,
+                                        "remove": false,
+                                        "query": {
+                                            "filters": [],
+                                            "sort": [],
+                                            "limit": 10
+                                        },
+                                        "editorType": "html",
+                                        "sectionText": "<h4 style=\"background: #404142; padding: 5px; text-align: left;\"><span style=\"font-size: 12pt; color: #ffffff;\"><strong>Breach Incident Details<br \/><\/strong><\/span><\/h4>"
+                                    },
+                                    "relatedTemplate": {
+                                        "type": "rows",
+                                        "rows": [],
+                                        "wid": "9670d721-473c-4b30-b23d-a863555ba007"
+                                    },
+                                    "rows": [
+                                        {
+                                            "columns": [
+                                                {
+                                                    "fields": [
+                                                        {
+                                                            "name": "breachOccurrenceDate",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "breachDetectionDate",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "briefDescriptionOfTheBreach",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        }
+                                                    ],
+                                                    "style": "col-lg-6"
+                                                },
+                                                {
+                                                    "fields": [
+                                                        {
+                                                            "name": "wasThePHIEPHIEncrypted",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "isPHIMisuseOrDisclosureForeseeable",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "wasThePHIEPHIAccessedImpermissibly",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "whoAccessedPHIEPHIWithoutPermission",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        }
+                                                    ],
+                                                    "style": "col-lg-6"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "resource": "data_compliances",
+                                    "style": ""
+                                }
+                            },
+                            {
+                                "type": "readonlyFormGroup",
+                                "config": {
+                                    "wid": "456e6b68-1f79-417d-862b-01f56e8440ea",
+                                    "gridColumns": [],
+                                    "displayType": "card-view",
+                                    "widgetAlwaysDisplay": false,
+                                    "query": {
+                                        "sort": [],
+                                        "limit": 10,
+                                        "logic": "AND",
+                                        "filters": [
+                                            {
+                                                "field": "id",
+                                                "operator": "eq",
+                                                "_operator": "eq",
+                                                "value": "{{complianceID}}",
+                                                "type": "primitive"
+                                            }
+                                        ]
+                                    },
+                                    "recordTitle": {
+                                        "type": "sectionHeader",
+                                        "wid": "34e555da-86f6-4e6f-a8e6-6afae56bf546",
+                                        "clone": false,
+                                        "remove": false,
+                                        "query": {
+                                            "filters": [],
+                                            "sort": [],
+                                            "limit": 10
+                                        },
+                                        "editorType": "html",
+                                        "sectionText": "<h4 style=\"background: #404142; padding: 5px; text-align: left;\"><span style=\"font-size: 12pt; color: #ffffff;\"><strong>Breach Impact Details<\/strong><\/span><\/h4>"
+                                    },
+                                    "relatedTemplate": {
+                                        "type": "rows",
+                                        "rows": [],
+                                        "wid": "9670d721-473c-4b30-b23d-a863555ba007"
+                                    },
+                                    "rows": [
+                                        {
+                                            "columns": [
+                                                {
+                                                    "fields": [
+                                                        {
+                                                            "name": "noOfAffectedUsers",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "locationOfBreach",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "describeOtherLocationOfBreach",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "safeguardsInPlaceBeforeBreach",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        }
+                                                    ],
+                                                    "style": "col-lg-6"
+                                                },
+                                                {
+                                                    "fields": [
+                                                        {
+                                                            "name": "typeOfDataBreach",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "typeOfPHIInvolvedInBreach",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "clinicalPHIExposedInBreach",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "demographicPHIExposedInBreach",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "financialPHIExposedInBreach",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "typeOfPHIInvolvedInBreachOther",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        }
+                                                    ],
+                                                    "style": "col-lg-6"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "resource": "data_compliances",
+                                    "style": ""
+                                }
+                            },
+                            {
+                                "type": "readonlyFormGroup",
+                                "config": {
+                                    "wid": "4545187c-2709-4061-a8f3-438066dea38c",
+                                    "gridColumns": [],
+                                    "displayType": "card-view",
+                                    "widgetAlwaysDisplay": false,
+                                    "query": {
+                                        "sort": [],
+                                        "limit": 10,
+                                        "logic": "AND",
+                                        "filters": [
+                                            {
+                                                "field": "id",
+                                                "operator": "eq",
+                                                "_operator": "eq",
+                                                "value": "{{complianceID}}",
+                                                "type": "primitive"
+                                            }
+                                        ]
+                                    },
+                                    "recordTitle": {
+                                        "type": "sectionHeader",
+                                        "wid": "34e555da-86f6-4e6f-a8e6-6afae56bf546",
+                                        "clone": false,
+                                        "remove": false,
+                                        "query": {
+                                            "filters": [],
+                                            "sort": [],
+                                            "limit": 10
+                                        },
+                                        "editorType": "html",
+                                        "sectionText": "<h4 style=\"background: #404142; padding: 5px; text-align: left;\"><span style=\"font-size: 12pt; color: #ffffff;\"><strong>Breach Investigation and Remediation Details<br \/><\/strong><\/span><\/h4>"
+                                    },
+                                    "relatedTemplate": {
+                                        "type": "rows",
+                                        "rows": [],
+                                        "wid": "9670d721-473c-4b30-b23d-a863555ba007"
+                                    },
+                                    "rows": [
+                                        {
+                                            "columns": [
+                                                {
+                                                    "fields": [
+                                                        {
+                                                            "name": "stepsTakenToInvestigateTheBreach",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "rootCauseAnalysisFindings",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "measuresToReduceFutureRisks",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        }
+                                                    ],
+                                                    "style": "col-lg-6"
+                                                },
+                                                {
+                                                    "fields": [
+                                                        {
+                                                            "name": "actionsTakenInResponseToBreach",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "describeOtherActionsTaken",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "actionsForApplyingTechnicalFix",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        },
+                                                        {
+                                                            "name": "technicalFixSummary",
+                                                            "highlightMode": true,
+                                                            "readOnly": true
+                                                        }
+                                                    ],
+                                                    "style": "col-lg-6"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "resource": "data_compliances",
+                                    "style": ""
+                                }
+                            },
+                            {
+                                "type": "sectionHeader",
+                                "config": {
+                                    "wid": "eb9764b2-4d66-4bbb-a343-5f13fe32d001",
+                                    "query": {
+                                        "filters": [],
+                                        "sort": [],
+                                        "limit": 10
+                                    },
+                                    "editorType": "html",
+                                    "sectionText": "<h4 style=\"background: #404142; padding: 5px; text-align: left;\"><span style=\"font-size: 12pt; color: #ffffff;\"><strong>Threat Indicators<\/strong><\/span><\/h4>"
+                                }
+                            },
+                            {
+                                "type": "readonlyFormGroup",
+                                "config": {
+                                    "wid": "e85f538a-86f3-4625-be95-116e47854b8d",
+                                    "gridColumns": [
+                                        "value",
+                                        "typeofindicator",
+                                        "reputation",
+                                        "description"
+                                    ],
+                                    "displayType": "grid-view",
+                                    "widgetAlwaysDisplay": false,
+                                    "query": {
+                                        "sort": [
+                                            {
+                                                "direction": "ASC",
+                                                "field": "reputation.orderIndex",
+                                                "_fieldTitle": "Reputation",
+                                                "_fieldName": "reputation"
+                                            }
+                                        ],
+                                        "limit": 30,
+                                        "logic": "AND",
+                                        "filters": [
+                                            {
+                                                "field": "dataCompliances.id",
+                                                "operator": "eq",
+                                                "_operator": "eq",
+                                                "value": "{{complianceID}}",
+                                                "type": "primitive"
+                                            },
+                                            {
+                                                "field": "reputation",
+                                                "value": [
+                                                    "\/api\/3\/picklists\/7074e547-7785-4979-be32-c6d0c863e4bd",
+                                                    "\/api\/3\/picklists\/50bfd06c-9aff-4f7d-b6d9-821339e31fe7"
+                                                ],
+                                                "display": "",
+                                                "operator": "in",
+                                                "type": "array",
+                                                "OPERATOR_KEY": "$",
+                                                "template": "multiselectpicklist",
+                                                "previousOperator": "in",
+                                                "previousTemplate": "multiselectpicklist",
+                                                "useInOperator": true,
+                                                "module": "reputation"
+                                            }
+                                        ]
+                                    },
+                                    "recordTitle": {
+                                        "type": "sectionHeader",
+                                        "wid": "34e555da-86f6-4e6f-a8e6-6afae56bf546",
+                                        "clone": false,
+                                        "remove": false,
+                                        "query": {
+                                            "filters": [],
+                                            "sort": [],
+                                            "limit": 10
+                                        },
+                                        "editorType": "html",
+                                        "sectionText": ""
+                                    },
+                                    "relatedTemplate": {
+                                        "type": "rows",
+                                        "rows": [],
+                                        "wid": "9670d721-473c-4b30-b23d-a863555ba007"
+                                    },
+                                    "rows": [
+                                        {
+                                            "columns": [
+                                                {
+                                                    "fields": [],
+                                                    "style": "col-lg-12"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "resource": "indicators",
+                                    "style": "",
+                                    "enableColumnWidthConfig": true,
+                                    "mapping": {
+                                        "columns": {
+                                            "value": {
+                                                "width": "15"
+                                            },
+                                            "typeofindicator": {
+                                                "width": "10"
+                                            },
+                                            "reputation": {
+                                                "width": "10"
+                                            },
+                                            "description": {
+                                                "width": "65"
+                                            }
+                                        }
+                                    },
+                                    "title": ""
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "f207f02d-85f5-4187-9d7e-1e0ea8741217",
+                "container": true,
+                "_collapsed": false,
+                "pageBreak": "avoid"
+            }
+        ],
+        "wid": "daaaadd9-c536-462a-8e54-47f8d9897aff",
+        "metadata": {
+            "customTemplateTitle": "Reporting"
+        }
+    },
+    "filterArray": [
+        {
+            "key": "complianceID",
+            "open": true,
+            "type": "number",
+            "label": "Compliance ID",
+            "value": null,
+            "required": true,
+            "expression": "{{complianceID}}",
+            "defaultValue": null
+        }
+    ],
+    "updateDate": null
+}

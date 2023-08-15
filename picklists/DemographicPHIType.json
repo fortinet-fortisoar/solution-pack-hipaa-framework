@@ -1,0 +1,70 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/6e669349-7d03-4da2-8af0-b35255aeab31",
+    "@type": "PicklistName",
+    "name": "DemographicPHIType",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/456aa9ba-a690-429e-b0e7-dc55eb647651",
+            "@type": "Picklist",
+            "itemValue": "Address\/ZIP",
+            "orderIndex": 0,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/6e669349-7d03-4da2-8af0-b35255aeab31",
+            "uuid": "456aa9ba-a690-429e-b0e7-dc55eb647651"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/bc53856c-b492-4286-8469-f6b04703e9f8",
+            "@type": "Picklist",
+            "itemValue": "Date of Birth",
+            "orderIndex": 1,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/6e669349-7d03-4da2-8af0-b35255aeab31",
+            "uuid": "bc53856c-b492-4286-8469-f6b04703e9f8"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/454a6197-c3a2-417c-a4c2-55d4c3e35781",
+            "@type": "Picklist",
+            "itemValue": "Driver\u2019s License",
+            "orderIndex": 2,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/6e669349-7d03-4da2-8af0-b35255aeab31",
+            "uuid": "454a6197-c3a2-417c-a4c2-55d4c3e35781"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/d7a75427-a640-4cdc-804f-ed186f9fb0aa",
+            "@type": "Picklist",
+            "itemValue": "Name",
+            "orderIndex": 3,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/6e669349-7d03-4da2-8af0-b35255aeab31",
+            "uuid": "d7a75427-a640-4cdc-804f-ed186f9fb0aa"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/32394b4f-2ec4-491f-aab3-b8e81dfef0c8",
+            "@type": "Picklist",
+            "itemValue": "SSN",
+            "orderIndex": 4,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/6e669349-7d03-4da2-8af0-b35255aeab31",
+            "uuid": "32394b4f-2ec4-491f-aab3-b8e81dfef0c8"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/4a16c44f-93c3-4d35-9564-8b776642a0b1",
+            "@type": "Picklist",
+            "itemValue": "Other",
+            "orderIndex": 5,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/6e669349-7d03-4da2-8af0-b35255aeab31",
+            "uuid": "4a16c44f-93c3-4d35-9564-8b776642a0b1"
+        }
+    ],
+    "uuid": "6e669349-7d03-4da2-8af0-b35255aeab31"
+}

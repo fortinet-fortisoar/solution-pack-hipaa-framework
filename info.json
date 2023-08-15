@@ -32,10 +32,37 @@
     "contents": {
         "picklistNames": [
             {
+                "name": "ClinicalPHIType"
+            },
+            {
                 "name": "Contact Title"
             },
             {
+                "name": "DemographicPHIType"
+            },
+            {
+                "name": "FinancialPHIType"
+            },
+            {
+                "name": "GDPRDataBreachType"
+            },
+            {
+                "name": "GDPREUCountryList"
+            },
+            {
                 "name": "GDPRReminderStatus"
+            },
+            {
+                "name": "PHIBreachLocation"
+            },
+            {
+                "name": "PHIBreachResponseActions"
+            },
+            {
+                "name": "PHISafeguardType"
+            },
+            {
+                "name": "ProtectedHealthInformationType"
             },
             {
                 "name": "RegulatoryBody"
@@ -82,11 +109,17 @@
                     "detail",
                     "form"
                 ]
+            },
+            "tasks": {
+                "name": "Tasks",
+                "apiName": "tasks",
+                "views": [
+                    "detail"
+                ]
             }
         },
         "views": {
             "navigation": [
-                "Resources",
                 "Data Compliances"
             ]
         },
@@ -98,6 +131,11 @@
         "playbooks": [
             {
                 "name": "10 - SP - HIPAA Framework"
+            }
+        ],
+        "reports": [
+            {
+                "name": "HIPAA Assessment Report"
             }
         ],
         "recordSets": [

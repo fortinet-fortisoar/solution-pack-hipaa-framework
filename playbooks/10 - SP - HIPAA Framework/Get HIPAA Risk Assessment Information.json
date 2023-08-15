@@ -1,0 +1,1206 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Get HIPAA Risk Assessment Information",
+    "aliasName": null,
+    "tag": null,
+    "description": "Collects HIPAA assessment details and completes the corresponding task",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/4c384067-79c3-4821-a70a-d69c3c149ec6",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/485318e6-d483-45fd-bd73-a56be1ac8c9c",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Compliance Record Description Update",
+            "description": "Updates Compliance Record with \"In Progress\" Status & Created Task List",
+            "arguments": {
+                "resource": {
+                    "status": "\/api\/3\/picklists\/bb7402d6-f699-11e7-8c3f-9a214cf093ae",
+                    "description": "{{vars.description | join('\\n')}}"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "locationOfBreach": "Append",
+                    "reminderMailStatus": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append",
+                    "clinicalPHIExposedInBreach": "Append",
+                    "financialPHIExposedInBreach": "Append",
+                    "demographicPHIExposedInBreach": "Append",
+                    "safeguardsInPlaceBeforeBreach": "Append",
+                    "actionsTakenInResponseToBreach": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "840",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "21a175d7-0b77-4b90-9fe3-4321d3533949"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "description": "[]"
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "d82472f9-b968-4a8b-9b91-d422ff930cf7"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Compliance Record ID",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "id",
+                            "value": "{{vars.input.records[0].id}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ],
+                    "__selectFields": [
+                        "dataCompliances"
+                    ]
+                },
+                "module": "tasks?$limit=30&$relationships=true&$fsr_max_relation_count=100",
+                "checkboxFields": true,
+                "step_variables": {
+                    "demoMode": "{% if vars.result[0].dataCompliances[0].testMode %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}",
+                    "placeholder": "{% for item in vars.result[0].dataCompliances[0].description.split('\\n') %}\n{% if 'Submit Risk Assessment Information' in item %}\n{% set _dummy = item | replace('10060', '9989') %}\n{{vars.description.append(_dummy)}}\n{% else %}\n{{vars.description.append(item)}}\n{% endif %}\n{% endfor %}",
+                    "complianceID": "{{vars.result[0].dataCompliances[0].id}}",
+                    "complianceIRI": "{{vars.result[0].dataCompliances[0]['@id']}}",
+                    "complianceUUID": "{{vars.result[0].dataCompliances[0].uuid}}"
+                }
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "74af9803-5643-4c10-a5d6-16b6f6f572fa"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Parent Incident ID",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "id",
+                            "value": "{{vars.complianceID}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ],
+                    "__selectFields": [
+                        "incidents"
+                    ]
+                },
+                "module": "data_compliances?$limit=30&$relationships=true&$fsr_max_relation_count=100",
+                "checkboxFields": true,
+                "step_variables": {
+                    "incidentID": "{{vars.steps.Get_Parent_Incident_ID[0].incidents[0].id}}",
+                    "incidentIRI": "{{vars.steps.Get_Parent_Incident_ID[0].incidents[0]['@id']}}"
+                }
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "100d4515-d76b-4b1e-b4d3-f8bc437d558a"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Mark Task as Completed",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                    "description": "{{vars.demoMode}}\n\n##### The information for HIPAA risk assessment has been collected.\n\n##### Go back to <a href=\"\/modules\/data_compliances\/{{vars.complianceUUID}}\" target=\"_parent\" rel=\"noopener\"> Data Compliance Record #{{vars.complianceID}}<\/a> to execute next task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Provide Contact Details**<\/span>"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/tasks",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "705",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "ab4a390c-52c4-4c21-8a77-9feb6ec7dadf"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Risk Assessment Details Update in Compliance Record",
+            "description": "Update HIPAA risk assessment details in the compliance record.",
+            "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<p>Necessary information for the PHI Breach Risk Assessment has been collected.<\/p>",
+                    "records": "{{vars.complianceIRI}},{{vars.incidentIRI}}"
+                },
+                "resource": {
+                    "locationOfBreach": "{{vars.input.params.locationOfBreach}}",
+                    "typeOfDataBreach": "{{\"GDPRDataBreachType\" | picklist(vars.input.params.typeOfDataBreach, \"@id\")}}",
+                    "noOfAffectedUsers": "{{vars.input.params.noOfAffectedUsers}}",
+                    "isMediaNoticeRequired": "{% if vars.input.params.noOfAffectedUsers >= 500 %}{{\"YesNoInput\" | picklist(\"Yes\", \"@id\")}}{% else %}{{\"YesNoInput\" | picklist(\"No\", \"@id\")}}{% endif %}",
+                    "describeOtherActionsTaken": "{{vars.input.params.describeOtherActionsTaken}}",
+                    "typeOfPHIInvolvedInBreach": "{{vars.input.params.typeOfPHIExposedInBreach}}",
+                    "clinicalPHIExposedInBreach": "{{vars.input.params.clinicalPHIExposedInBreach}}",
+                    "financialPHIExposedInBreach": "{{vars.input.params.financialPHIExposedInBreach}}",
+                    "demographicPHIExposedInBreach": "{{vars.input.params.demographicPHIExposedInBreach}}",
+                    "describeOtherLocationOfBreach": "{{vars.input.params.describeOtherLocationOfBreach}}",
+                    "safeguardsInPlaceBeforeBreach": "{{vars.input.params.safeguardsInPlaceBeforeBreach}}",
+                    "actionsTakenInResponseToBreach": "{{vars.input.params.actionsTakenInResponseToBreach}}",
+                    "typeOfPHIInvolvedInBreachOther": "{{vars.input.params.typeOfPHIExposedInBreachOther}}"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "recordTags": "Append",
+                    "clinicalPHI": "Append",
+                    "locationOfBreach": "Append",
+                    "reminderMailStatus": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append",
+                    "clinicalPHIExposedInBreach": "Append",
+                    "financialPHIExposedInBreach": "Append",
+                    "demographicPHIExposedInBreach": "Append",
+                    "safeguardsInPlaceBeforeBreach": "Append",
+                    "actionsTakenInResponseToBreach": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "4ece4af6-db9a-4f93-a487-9480ceb8e781"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "route": "5b08e550-8b9c-4125-82c5-7321dda82f76",
+                "title": "Submit HIPAA Risk Assessment Information",
+                "resources": [
+                    "tasks"
+                ],
+                "inputVariables": [
+                    {
+                        "name": "typeOfDataBreach",
+                        "type": "array",
+                        "label": "Type of Data Breach",
+                        "title": "Dynamic List",
+                        "usable": true,
+                        "options": [
+                            "Hacking or IT Incident",
+                            "Improper Disposal",
+                            "Loss",
+                            "Theft",
+                            "Unauthorized Access or Disclosure"
+                        ],
+                        "tooltip": "\u2022Hacking- Technical Intrusion e.g malware or hacking \u2022Improper Disposal- Improper disposal of electronic media or paper \u2022Loss- Loss of electronic media or paper \u2022Theft- Theft of electronic media or paper",
+                        "dataType": "dynamicList",
+                        "formType": "dynamicList",
+                        "required": true,
+                        "_expanded": false,
+                        "mmdUpdate": true,
+                        "collection": false,
+                        "searchable": false,
+                        "templateUrl": "app\/components\/form\/fields\/dynamicList.html",
+                        "defaultValue": null,
+                        "_previousName": "typeOfDataBreach",
+                        "playbookField": true,
+                        "lengthConstraint": true,
+                        "allowedGridColumn": false,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false
+                    },
+                    {
+                        "name": "locationOfBreach",
+                        "type": "picklists",
+                        "label": "Location of Breach",
+                        "title": "Multiselect Picklist",
+                        "usable": true,
+                        "tooltip": "Select the breach location from the provided options.",
+                        "dataType": "multiselectpicklist",
+                        "formType": "multiselectpicklist",
+                        "required": true,
+                        "_expanded": false,
+                        "mmdUpdate": true,
+                        "bulkAction": [],
+                        "collection": true,
+                        "dataSource": {
+                            "model": "picklists",
+                            "query": {
+                                "sort": [
+                                    {
+                                        "field": "orderIndex",
+                                        "direction": "ASC"
+                                    }
+                                ],
+                                "logic": "AND",
+                                "filters": [
+                                    {
+                                        "field": "listName__name",
+                                        "value": "PHIBreachLocation",
+                                        "operator": "eq"
+                                    }
+                                ]
+                            },
+                            "displayConditions": {
+                                "1592ba1b-6851-45b7-9b24-bac3dbc62bf5": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "626788a9-b2de-42a5-be80-cd5f5deb81b0": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "69a2ff63-920b-4379-97ef-19f5811490e2": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "88b9c7f8-c266-4797-86bb-1e128e3c33f4": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "8ea2eea6-6235-4a11-a6cf-ef8be719c7c7": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "9de2ec83-499f-4024-8990-b0969cc6233a": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "c0e5e9da-f0a1-4589-a221-3925688541ea": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "d344c3fd-ffe8-404a-9add-23b3f552aecd": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                }
+                            }
+                        },
+                        "searchable": false,
+                        "templateUrl": "app\/components\/form\/fields\/typeahead.multiselect.html",
+                        "defaultValue": null,
+                        "_previousName": "",
+                        "inversedField": null,
+                        "playbookField": true,
+                        "displayTemplate": "%7B%7B%20itemValue%20%7D%7D",
+                        "lengthConstraint": false,
+                        "ownsRelationship": false,
+                        "allowedEncryption": false,
+                        "allowedGridColumn": true,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false
+                    },
+                    {
+                        "name": "describeOtherLocationOfBreach",
+                        "type": "string",
+                        "label": "Describe Other Location of Breach",
+                        "tooltip": "Describe the breach location not listed in the options.",
+                        "dataType": "text",
+                        "formType": "text",
+                        "required": true,
+                        "_expanded": false,
+                        "defaultValue": null,
+                        "_previousName": "",
+                        "visibilityQuery": {
+                            "sort": [],
+                            "limit": 30,
+                            "logic": "AND",
+                            "filters": [
+                                {
+                                    "type": "array",
+                                    "field": "locationOfBreach",
+                                    "value": [
+                                        "\/api\/3\/picklists\/1592ba1b-6851-45b7-9b24-bac3dbc62bf5"
+                                    ],
+                                    "module": "locationOfBreach",
+                                    "display": "",
+                                    "operator": "in",
+                                    "template": "multiselectpicklist",
+                                    "OPERATOR_KEY": "$",
+                                    "useInOperator": true,
+                                    "previousOperator": "in",
+                                    "previousTemplate": "multiselectpicklist"
+                                }
+                            ]
+                        },
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false,
+                        "_addVisibilityConditions": true
+                    },
+                    {
+                        "name": "typeOfPHIExposedInBreach",
+                        "type": "picklists",
+                        "label": "Type of PHI Exposed in Breach",
+                        "title": "Multiselect Picklist",
+                        "usable": true,
+                        "tooltip": "\u2022 Clinical - Treatment Information \u2022 Demographic - Identifier Information \u2022 Financial - Financial Information",
+                        "dataType": "multiselectpicklist",
+                        "formType": "multiselectpicklist",
+                        "required": true,
+                        "_expanded": false,
+                        "mmdUpdate": true,
+                        "bulkAction": [],
+                        "collection": true,
+                        "dataSource": {
+                            "model": "picklists",
+                            "query": {
+                                "sort": [
+                                    {
+                                        "field": "orderIndex",
+                                        "direction": "ASC"
+                                    }
+                                ],
+                                "logic": "AND",
+                                "filters": [
+                                    {
+                                        "field": "listName__name",
+                                        "value": "ProtectedHealthInformationType",
+                                        "operator": "eq"
+                                    }
+                                ]
+                            },
+                            "displayConditions": {
+                                "0099e28f-fd25-415a-a0f4-2c9e8dfc4c36": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "a3b69ba0-6e6d-430d-a834-fdf697118921": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "cefae12c-c987-43db-b876-61e8b3305b48": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "e5416ae0-b546-4d15-a5c0-885134f68992": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                }
+                            }
+                        },
+                        "searchable": false,
+                        "templateUrl": "app\/components\/form\/fields\/typeahead.multiselect.html",
+                        "defaultValue": null,
+                        "_previousName": "typeOfPHIExInBreach",
+                        "inversedField": null,
+                        "playbookField": true,
+                        "displayTemplate": "%7B%7B%20itemValue%20%7D%7D",
+                        "lengthConstraint": false,
+                        "ownsRelationship": false,
+                        "allowedEncryption": false,
+                        "allowedGridColumn": true,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false
+                    },
+                    {
+                        "name": "clinicalPHIExposedInBreach",
+                        "type": "picklists",
+                        "label": "Clinical PHI Exposed in Breach",
+                        "title": "Multiselect Picklist",
+                        "usable": true,
+                        "tooltip": "Clinical Information refers to an individual's treatment details.",
+                        "dataType": "multiselectpicklist",
+                        "formType": "multiselectpicklist",
+                        "required": true,
+                        "_expanded": false,
+                        "mmdUpdate": true,
+                        "bulkAction": [],
+                        "collection": true,
+                        "dataSource": {
+                            "model": "picklists",
+                            "query": {
+                                "sort": [
+                                    {
+                                        "field": "orderIndex",
+                                        "direction": "ASC"
+                                    }
+                                ],
+                                "logic": "AND",
+                                "filters": [
+                                    {
+                                        "field": "listName__name",
+                                        "value": "ClinicalPHIType",
+                                        "operator": "eq"
+                                    }
+                                ]
+                            },
+                            "displayConditions": {
+                                "12a64a7c-e776-4957-afe5-6ed3d36a0b54": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "24c06a96-e5f6-45ae-a331-4455116c59ea": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "816e66c9-a255-46e4-82fb-9dead165107a": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "b54f0c8d-8e8e-4b3b-8e34-0b63e2696692": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                }
+                            }
+                        },
+                        "searchable": false,
+                        "templateUrl": "app\/components\/form\/fields\/typeahead.multiselect.html",
+                        "defaultValue": null,
+                        "_previousName": "clinicalPHIExposedInBreach",
+                        "inversedField": null,
+                        "playbookField": true,
+                        "displayTemplate": "%7B%7B%20itemValue%20%7D%7D",
+                        "visibilityQuery": {
+                            "sort": [],
+                            "limit": 30,
+                            "logic": "AND",
+                            "filters": [
+                                {
+                                    "type": "array",
+                                    "field": "typeOfPHIExposedInBreach",
+                                    "value": [
+                                        "\/api\/3\/picklists\/0099e28f-fd25-415a-a0f4-2c9e8dfc4c36"
+                                    ],
+                                    "module": "typeOfPHIExposedInBreach",
+                                    "display": "",
+                                    "operator": "in",
+                                    "template": "multiselectpicklist",
+                                    "OPERATOR_KEY": "$",
+                                    "useInOperator": true,
+                                    "previousOperator": "in",
+                                    "previousTemplate": "multiselectpicklist"
+                                }
+                            ]
+                        },
+                        "lengthConstraint": false,
+                        "ownsRelationship": false,
+                        "allowedEncryption": false,
+                        "allowedGridColumn": true,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false,
+                        "_addVisibilityConditions": true
+                    },
+                    {
+                        "name": "demographicPHIExposedInBreach",
+                        "type": "picklists",
+                        "label": "Demographic PHI Exposed in Breach",
+                        "title": "Multiselect Picklist",
+                        "usable": true,
+                        "tooltip": "Demographic Information refers to an individual's identification details.",
+                        "dataType": "multiselectpicklist",
+                        "formType": "multiselectpicklist",
+                        "required": true,
+                        "_expanded": false,
+                        "mmdUpdate": true,
+                        "bulkAction": [],
+                        "collection": true,
+                        "dataSource": {
+                            "model": "picklists",
+                            "query": {
+                                "sort": [
+                                    {
+                                        "field": "orderIndex",
+                                        "direction": "ASC"
+                                    }
+                                ],
+                                "logic": "AND",
+                                "filters": [
+                                    {
+                                        "field": "listName__name",
+                                        "value": "DemographicPHIType",
+                                        "operator": "eq"
+                                    }
+                                ]
+                            },
+                            "displayConditions": {
+                                "32394b4f-2ec4-491f-aab3-b8e81dfef0c8": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "454a6197-c3a2-417c-a4c2-55d4c3e35781": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "456aa9ba-a690-429e-b0e7-dc55eb647651": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "4a16c44f-93c3-4d35-9564-8b776642a0b1": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "bc53856c-b492-4286-8469-f6b04703e9f8": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "d7a75427-a640-4cdc-804f-ed186f9fb0aa": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                }
+                            }
+                        },
+                        "searchable": false,
+                        "templateUrl": "app\/components\/form\/fields\/typeahead.multiselect.html",
+                        "defaultValue": null,
+                        "_previousName": "",
+                        "inversedField": null,
+                        "playbookField": true,
+                        "displayTemplate": "%7B%7B%20itemValue%20%7D%7D",
+                        "visibilityQuery": {
+                            "sort": [],
+                            "limit": 30,
+                            "logic": "AND",
+                            "filters": [
+                                {
+                                    "type": "array",
+                                    "field": "typeOfPHIExposedInBreach",
+                                    "value": [
+                                        "\/api\/3\/picklists\/cefae12c-c987-43db-b876-61e8b3305b48"
+                                    ],
+                                    "module": "typeOfPHIExposedInBreach",
+                                    "display": "",
+                                    "operator": "in",
+                                    "template": "multiselectpicklist",
+                                    "OPERATOR_KEY": "$",
+                                    "useInOperator": true,
+                                    "previousOperator": "in",
+                                    "previousTemplate": "multiselectpicklist"
+                                }
+                            ]
+                        },
+                        "lengthConstraint": false,
+                        "ownsRelationship": false,
+                        "allowedEncryption": false,
+                        "allowedGridColumn": true,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false,
+                        "_addVisibilityConditions": true
+                    },
+                    {
+                        "name": "financialPHIExposedInBreach",
+                        "type": "picklists",
+                        "label": "Financial PHI Exposed in Breach",
+                        "title": "Multiselect Picklist",
+                        "usable": true,
+                        "tooltip": "Financial Information refers to an individual's financial details.",
+                        "dataType": "multiselectpicklist",
+                        "formType": "multiselectpicklist",
+                        "required": true,
+                        "_expanded": false,
+                        "mmdUpdate": true,
+                        "bulkAction": [],
+                        "collection": true,
+                        "dataSource": {
+                            "model": "picklists",
+                            "query": {
+                                "sort": [
+                                    {
+                                        "field": "orderIndex",
+                                        "direction": "ASC"
+                                    }
+                                ],
+                                "logic": "AND",
+                                "filters": [
+                                    {
+                                        "field": "listName__name",
+                                        "value": "FinancialPHIType",
+                                        "operator": "eq"
+                                    }
+                                ]
+                            },
+                            "displayConditions": {
+                                "0492dabb-fb41-4c48-bb74-06f841559834": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "3b731725-16ae-4912-a38d-aacf43d21e28": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "b9293255-77cc-4689-8a3f-8efcd75f76cc": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "edc6bcf1-28f6-4625-b135-c2e1a3eb261b": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                }
+                            }
+                        },
+                        "searchable": false,
+                        "templateUrl": "app\/components\/form\/fields\/typeahead.multiselect.html",
+                        "defaultValue": null,
+                        "_previousName": "",
+                        "inversedField": null,
+                        "playbookField": true,
+                        "displayTemplate": "%7B%7B%20itemValue%20%7D%7D",
+                        "visibilityQuery": {
+                            "sort": [],
+                            "limit": 30,
+                            "logic": "AND",
+                            "filters": [
+                                {
+                                    "type": "array",
+                                    "field": "typeOfPHIExposedInBreach",
+                                    "value": [
+                                        "\/api\/3\/picklists\/a3b69ba0-6e6d-430d-a834-fdf697118921"
+                                    ],
+                                    "module": "typeOfPHIExposedInBreach",
+                                    "display": "",
+                                    "operator": "in",
+                                    "template": "multiselectpicklist",
+                                    "OPERATOR_KEY": "$",
+                                    "useInOperator": true,
+                                    "previousOperator": "in",
+                                    "previousTemplate": "multiselectpicklist"
+                                }
+                            ]
+                        },
+                        "lengthConstraint": false,
+                        "ownsRelationship": false,
+                        "allowedEncryption": false,
+                        "allowedGridColumn": true,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false,
+                        "_addVisibilityConditions": true
+                    },
+                    {
+                        "name": "typeOfPHIExposedInBreachOther",
+                        "type": "string",
+                        "label": "Type of PHI Exposed in Breach (Other)",
+                        "title": "Text Area",
+                        "usable": false,
+                        "tooltip": "Describe the specific protected health information involved in the breach that is not listed in the provided options.",
+                        "dataType": "text",
+                        "formType": "textarea",
+                        "required": true,
+                        "_expanded": false,
+                        "mmdUpdate": false,
+                        "collection": false,
+                        "searchable": false,
+                        "templateUrl": "app\/components\/form\/fields\/json.html",
+                        "_nameTouched": true,
+                        "defaultValue": null,
+                        "_previousName": "typeOfPHIInvolvedInBreachOther",
+                        "playbookField": true,
+                        "visibilityQuery": {
+                            "sort": [],
+                            "limit": 30,
+                            "logic": "OR",
+                            "filters": [
+                                {
+                                    "type": "array",
+                                    "field": "typeOfPHIExposedInBreach",
+                                    "value": [
+                                        "\/api\/3\/picklists\/e5416ae0-b546-4d15-a5c0-885134f68992"
+                                    ],
+                                    "module": "typeOfPHIExposedInBreach",
+                                    "display": "",
+                                    "operator": "in",
+                                    "template": "multiselectpicklist",
+                                    "OPERATOR_KEY": "$",
+                                    "useInOperator": true,
+                                    "previousOperator": "in",
+                                    "previousTemplate": "multiselectpicklist"
+                                },
+                                {
+                                    "type": "array",
+                                    "field": "clinicalPHIExposedInBreach",
+                                    "value": [
+                                        "\/api\/3\/picklists\/24c06a96-e5f6-45ae-a331-4455116c59ea"
+                                    ],
+                                    "module": "clinicalPHIExposedInBreach",
+                                    "display": "",
+                                    "operator": "in",
+                                    "template": "multiselectpicklist",
+                                    "OPERATOR_KEY": "$",
+                                    "useInOperator": true,
+                                    "previousOperator": "in",
+                                    "previousTemplate": "multiselectpicklist"
+                                },
+                                {
+                                    "type": "array",
+                                    "field": "demographicPHIExposedInBreach",
+                                    "value": [
+                                        "\/api\/3\/picklists\/4a16c44f-93c3-4d35-9564-8b776642a0b1"
+                                    ],
+                                    "module": "demographicPHIExposedInBreach",
+                                    "display": "",
+                                    "operator": "in",
+                                    "template": "multiselectpicklist",
+                                    "OPERATOR_KEY": "$",
+                                    "useInOperator": true,
+                                    "previousOperator": "in",
+                                    "previousTemplate": "multiselectpicklist"
+                                },
+                                {
+                                    "type": "array",
+                                    "field": "financialPHIExposedInBreach",
+                                    "value": [
+                                        "\/api\/3\/picklists\/3b731725-16ae-4912-a38d-aacf43d21e28"
+                                    ],
+                                    "module": "financialPHIExposedInBreach",
+                                    "display": "",
+                                    "operator": "in",
+                                    "template": "multiselectpicklist",
+                                    "OPERATOR_KEY": "$",
+                                    "useInOperator": true,
+                                    "previousOperator": "in",
+                                    "previousTemplate": "multiselectpicklist"
+                                }
+                            ]
+                        },
+                        "lengthConstraint": false,
+                        "allowedGridColumn": false,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false,
+                        "_addVisibilityConditions": true
+                    },
+                    {
+                        "name": "noOfAffectedUsers",
+                        "type": "number",
+                        "label": "No. of Affected Users",
+                        "title": "Decimal Field",
+                        "usable": true,
+                        "tooltip": "The approximate number of individuals affected by the breach",
+                        "dataType": "decimal",
+                        "formType": "decimal",
+                        "required": true,
+                        "_expanded": false,
+                        "mmdUpdate": true,
+                        "collection": false,
+                        "searchable": true,
+                        "templateUrl": "app\/components\/form\/fields\/number.html",
+                        "_nameTouched": true,
+                        "defaultValue": null,
+                        "_previousName": "no.OfAffectedUsers",
+                        "lengthConstraint": true,
+                        "allowedEncryption": false,
+                        "allowedGridColumn": true,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false
+                    },
+                    {
+                        "name": "safeguardsInPlaceBeforeBreach",
+                        "type": "picklists",
+                        "label": "Safeguards in Place Before Breach",
+                        "title": "Multiselect Picklist",
+                        "usable": true,
+                        "tooltip": "- Privacy Rule (Training, Policies and Procedures) - Security Rule Administrative (Risk Analysis, Risk Management) - Security Rule Physical (Facility Access Controls, Workstation Security) - Security Rule Technical (Access Controls, Transmission Security)",
+                        "dataType": "multiselectpicklist",
+                        "formType": "multiselectpicklist",
+                        "required": true,
+                        "_expanded": false,
+                        "mmdUpdate": true,
+                        "bulkAction": [],
+                        "collection": true,
+                        "dataSource": {
+                            "model": "picklists",
+                            "query": {
+                                "sort": [
+                                    {
+                                        "field": "orderIndex",
+                                        "direction": "ASC"
+                                    }
+                                ],
+                                "logic": "AND",
+                                "filters": [
+                                    {
+                                        "field": "listName__name",
+                                        "value": "PHISafeguardType",
+                                        "operator": "eq"
+                                    }
+                                ]
+                            },
+                            "displayConditions": {
+                                "219feeab-9a3e-4a16-8dfc-d393a9bfdf20": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "435da3a6-33f1-400f-9701-ce9c7605e2f6": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "5512b711-58fb-43cc-b834-f9cbd02be05a": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "b0a55bdc-6a5d-4964-be38-8d60ae2c532e": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "bce4046f-f8c9-44c5-87e3-0cf43c552aff": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                }
+                            }
+                        },
+                        "searchable": false,
+                        "templateUrl": "app\/components\/form\/fields\/typeahead.multiselect.html",
+                        "defaultValue": null,
+                        "_previousName": "safeguardsInPlaceBeforeBreach",
+                        "inversedField": null,
+                        "playbookField": true,
+                        "displayTemplate": "%7B%7B%20itemValue%20%7D%7D",
+                        "visibilityQuery": {
+                            "sort": [],
+                            "limit": 30,
+                            "logic": "AND",
+                            "filters": []
+                        },
+                        "lengthConstraint": false,
+                        "ownsRelationship": false,
+                        "allowedEncryption": false,
+                        "allowedGridColumn": true,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false,
+                        "_addVisibilityConditions": true
+                    },
+                    {
+                        "name": "actionsTakenInResponseToBreach",
+                        "type": "picklists",
+                        "label": "Actions Taken in Response to Breach",
+                        "title": "Multiselect Picklist",
+                        "usable": true,
+                        "tooltip": "Choose actions taken in response to the breach from the provided list.",
+                        "dataType": "multiselectpicklist",
+                        "formType": "multiselectpicklist",
+                        "required": true,
+                        "_expanded": true,
+                        "mmdUpdate": true,
+                        "bulkAction": [],
+                        "collection": true,
+                        "dataSource": {
+                            "model": "picklists",
+                            "query": {
+                                "sort": [
+                                    {
+                                        "field": "orderIndex",
+                                        "direction": "ASC"
+                                    }
+                                ],
+                                "logic": "AND",
+                                "filters": [
+                                    {
+                                        "field": "listName__name",
+                                        "value": "PHIBreachResponseActions",
+                                        "operator": "eq"
+                                    }
+                                ]
+                            },
+                            "displayConditions": {
+                                "075bcd49-da87-43d4-815b-9b1514baee1c": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "0e6f1c94-e1c4-402d-b9a1-8462238dfce1": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "1b8bd78d-cd54-499f-a150-644d149382b2": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "4d68754a-afb5-4a27-8cab-99febd182aff": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "539b3164-56f7-48b0-a824-d9f087cf90ee": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "71c2d5b5-44a7-4443-a6e5-58cc59f5ba39": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "7423c975-7458-48e3-9e58-68ad194ed0e8": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "76a1f76d-68cd-4875-83ec-deb8c06c8840": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "81c31177-1a28-4954-ac1e-0dda058dc661": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "a235793a-4f47-4c48-8fb1-5606a769f7f6": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "a83c7042-64cc-4692-a496-07a6efa80ddd": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "d0f181af-80cc-4e9c-b056-35690fd46437": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "d6f7a21c-aa2e-4602-aca7-9553d1943f74": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "e7c31bc0-5a57-45f1-855a-80eec6d82746": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "ead048ed-5c4a-4520-98cb-81f2cc6302ca": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                },
+                                "fcc0d995-6d28-491d-a73c-965b644efe89": {
+                                    "conditions": null,
+                                    "visibility": "visible"
+                                }
+                            }
+                        },
+                        "searchable": false,
+                        "templateUrl": "app\/components\/form\/fields\/typeahead.multiselect.html",
+                        "defaultValue": null,
+                        "_previousName": "actionsTakenInResponseToBreach",
+                        "inversedField": null,
+                        "playbookField": true,
+                        "displayTemplate": "%7B%7B%20itemValue%20%7D%7D",
+                        "lengthConstraint": false,
+                        "ownsRelationship": false,
+                        "allowedEncryption": false,
+                        "allowedGridColumn": true,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false
+                    },
+                    {
+                        "name": "describeOtherActionsTaken",
+                        "type": "string",
+                        "label": "Describe Other Actions Taken",
+                        "title": "Text Area",
+                        "usable": false,
+                        "tooltip": "Describe any other actions taken that are not listed.",
+                        "dataType": "text",
+                        "formType": "textarea",
+                        "required": true,
+                        "_expanded": false,
+                        "mmdUpdate": false,
+                        "collection": false,
+                        "searchable": false,
+                        "templateUrl": "app\/components\/form\/fields\/json.html",
+                        "defaultValue": null,
+                        "_previousName": "",
+                        "playbookField": true,
+                        "visibilityQuery": {
+                            "sort": [],
+                            "limit": 30,
+                            "logic": "AND",
+                            "filters": [
+                                {
+                                    "type": "array",
+                                    "field": "actionsTakenInResponseToBreach",
+                                    "value": [
+                                        "\/api\/3\/picklists\/fcc0d995-6d28-491d-a73c-965b644efe89"
+                                    ],
+                                    "module": "actionsTakenInResponseToBreach",
+                                    "display": "",
+                                    "operator": "in",
+                                    "template": "multiselectpicklist",
+                                    "OPERATOR_KEY": "$",
+                                    "useInOperator": true,
+                                    "previousOperator": "in",
+                                    "previousTemplate": "multiselectpicklist"
+                                }
+                            ]
+                        },
+                        "lengthConstraint": false,
+                        "allowedGridColumn": false,
+                        "jinjaExpressionView": true,
+                        "useRecordFieldDefault": false,
+                        "_addVisibilityConditions": true
+                    }
+                ],
+                "step_variables": {
+                    "input": {
+                        "params": {
+                            "locationOfBreach": "{{vars.request.data[\"locationOfBreach\"]}}",
+                            "typeOfDataBreach": "{{vars.request.data[\"typeOfDataBreach\"]}}",
+                            "noOfAffectedUsers": "{{vars.request.data[\"noOfAffectedUsers\"]}}",
+                            "typeOfPHIExposedInBreach": "{{vars.request.data[\"typeOfPHIExposedInBreach\"]}}",
+                            "describeOtherActionsTaken": "{{vars.request.data[\"describeOtherActionsTaken\"]}}",
+                            "clinicalPHIExposedInBreach": "{{vars.request.data[\"clinicalPHIExposedInBreach\"]}}",
+                            "financialPHIExposedInBreach": "{{vars.request.data[\"financialPHIExposedInBreach\"]}}",
+                            "demographicPHIExposedInBreach": "{{vars.request.data[\"demographicPHIExposedInBreach\"]}}",
+                            "describeOtherLocationOfBreach": "{{vars.request.data[\"describeOtherLocationOfBreach\"]}}",
+                            "safeguardsInPlaceBeforeBreach": "{{vars.request.data[\"safeguardsInPlaceBeforeBreach\"]}}",
+                            "typeOfPHIExposedInBreachOther": "{{vars.request.data[\"typeOfPHIExposedInBreachOther\"]}}",
+                            "actionsTakenInResponseToBreach": "{{vars.request.data[\"actionsTakenInResponseToBreach\"]}}"
+                        },
+                        "records": "{{vars.input.records}}"
+                    }
+                },
+                "_promptexpanded": true,
+                "displayConditions": {
+                    "tasks": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": [
+                            {
+                                "type": "array",
+                                "field": "recordTags",
+                                "value": [
+                                    "\/api\/3\/tags\/HIPAA Risk Assessment Form"
+                                ],
+                                "module": "recordTags",
+                                "display": "",
+                                "operator": "in",
+                                "template": "tags",
+                                "OPERATOR_KEY": "$",
+                                "useInOperator": true,
+                                "previousOperator": "in",
+                                "previousTemplate": "tags"
+                            },
+                            {
+                                "type": "object",
+                                "field": "status",
+                                "value": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                                "_value": {
+                                    "@id": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                                    "itemValue": "Completed"
+                                },
+                                "operator": "neq"
+                            }
+                        ]
+                    }
+                },
+                "executeButtonText": "Submit",
+                "noRecordExecution": false,
+                "singleRecordExecution": false
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+            "group": null,
+            "uuid": "485318e6-d483-45fd-bd73-a56be1ac8c9c"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Get Compliance Record ID",
+            "targetStep": "\/api\/3\/workflow_steps\/74af9803-5643-4c10-a5d6-16b6f6f572fa",
+            "sourceStep": "\/api\/3\/workflow_steps\/d82472f9-b968-4a8b-9b91-d422ff930cf7",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "34688551-b121-497b-a7b7-c5148fb2f472"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Compliance Record ID -> Get Parent Incident ID",
+            "targetStep": "\/api\/3\/workflow_steps\/100d4515-d76b-4b1e-b4d3-f8bc437d558a",
+            "sourceStep": "\/api\/3\/workflow_steps\/74af9803-5643-4c10-a5d6-16b6f6f572fa",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "0cd1e112-440a-439c-b9e7-ec11e124734e"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Parent Incident ID -> Update HIPAA Assessment Data",
+            "targetStep": "\/api\/3\/workflow_steps\/4ece4af6-db9a-4f93-a487-9480ceb8e781",
+            "sourceStep": "\/api\/3\/workflow_steps\/100d4515-d76b-4b1e-b4d3-f8bc437d558a",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "f5b55771-8679-412e-9723-bab5abe8c447"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/d82472f9-b968-4a8b-9b91-d422ff930cf7",
+            "sourceStep": "\/api\/3\/workflow_steps\/485318e6-d483-45fd-bd73-a56be1ac8c9c",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "d6826d22-a6f6-48f3-8b8b-937f9fc47437"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Update GDPR Assessment Data -> Update Task Status",
+            "targetStep": "\/api\/3\/workflow_steps\/ab4a390c-52c4-4c21-8a77-9feb6ec7dadf",
+            "sourceStep": "\/api\/3\/workflow_steps\/4ece4af6-db9a-4f93-a487-9480ceb8e781",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "38b5e49e-6f50-49d8-860d-1f0e20d622fd"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Update Task Status -> Update Compliance Record Description",
+            "targetStep": "\/api\/3\/workflow_steps\/21a175d7-0b77-4b90-9fe3-4321d3533949",
+            "sourceStep": "\/api\/3\/workflow_steps\/ab4a390c-52c4-4c21-8a77-9feb6ec7dadf",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "6e60a522-e653-4756-8911-f45f31654c1a"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "00ae2b3d-0d1d-4a0a-baad-d5ceb7b8ab4c",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "ManualTrigger"
+    ]
+}

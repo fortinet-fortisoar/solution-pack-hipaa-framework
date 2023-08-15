@@ -59,6 +59,68 @@
                                                                                             {
                                                                                                 "widgets": [
                                                                                                     {
+                                                                                                        "type": "customPicklistMessage-1.1.1",
+                                                                                                        "config": {
+                                                                                                            "wid": "a7db84b6-cd19-4121-a3bc-9f1d89a27fd2",
+                                                                                                            "picklits_mapping": {
+                                                                                                                "options": [
+                                                                                                                    {
+                                                                                                                        "picklistValue": "In progress",
+                                                                                                                        "showSpinner": true,
+                                                                                                                        "picklistLoadingTitle": "Notifying Law Enforcement of PHI Breach"
+                                                                                                                    }
+                                                                                                                ]
+                                                                                                            },
+                                                                                                            "picklistItem": "isLawEnforcementAgencyNotified"
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "type": "customPicklistMessage-1.1.1",
+                                                                                                        "config": {
+                                                                                                            "wid": "f4678e52-9d4b-4c6b-9a0f-4418c2920b9d",
+                                                                                                            "picklits_mapping": {
+                                                                                                                "options": [
+                                                                                                                    {
+                                                                                                                        "picklistValue": "Pending",
+                                                                                                                        "picklistLoadingTitle": "Awaiting Law Enforcement Approval for Individual Notification",
+                                                                                                                        "showIcon": false,
+                                                                                                                        "picklistMessageIcon": "icon icon-wait",
+                                                                                                                        "showSpinner": true
+                                                                                                                    }
+                                                                                                                ]
+                                                                                                            },
+                                                                                                            "picklistItem": "individualNoticeApproved"
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "type": "customPicklistMessage-1.1.1",
+                                                                                                        "config": {
+                                                                                                            "wid": "5da42f9a-ffb8-4c1f-82c4-78d47d5ac535",
+                                                                                                            "picklits_mapping": {
+                                                                                                                "options": [
+                                                                                                                    {
+                                                                                                                        "picklistValue": "In progress",
+                                                                                                                        "showSpinner": true,
+                                                                                                                        "picklistLoadingTitle": "Awaiting for HSO's PHI Breach Risk Assessment"
+                                                                                                                    }
+                                                                                                                ]
+                                                                                                            },
+                                                                                                            "picklistItem": "hasHSOReviewedThePHIBreachReport"
+                                                                                                        }
+                                                                                                    }
+                                                                                                ],
+                                                                                                "style": "col-lg-12"
+                                                                                            }
+                                                                                        ],
+                                                                                        "wid": "3ad4ff93-db9b-48ca-aa75-4c97838cb7bb",
+                                                                                        "container": true,
+                                                                                        "_collapsed": false
+                                                                                    },
+                                                                                    {
+                                                                                        "columns": [
+                                                                                            {
+                                                                                                "widgets": [
+                                                                                                    {
                                                                                                         "type": "editableFormGroup",
                                                                                                         "config": {
                                                                                                             "wid": "c978b2e2-583f-4275-aac8-b23f00a9bd1a",
@@ -97,7 +159,7 @@
                                                                                                             "slaMappedOn": "breachNotificationSLA",
                                                                                                             "pausedItemvalue": "Paused",
                                                                                                             "metItemvalue": "Met",
-                                                                                                            "stopStateTitle": "DPA Authority is Notified",
+                                                                                                            "stopStateTitle": "Breach has been Notified",
                                                                                                             "timeToDisplay": "consumedTime"
                                                                                                         }
                                                                                                     }
@@ -165,7 +227,7 @@
                                                                                                     {
                                                                                                         "type": "editableFormGroup",
                                                                                                         "config": {
-                                                                                                            "wid": "52d8f3b4-1ce5-432b-a1fe-d2a27377800a",
+                                                                                                            "wid": "0c5c71e7-75c7-4bbe-b3e8-fccd70b33654",
                                                                                                             "rows": [
                                                                                                                 {
                                                                                                                     "columns": [
@@ -217,6 +279,55 @@
                                                                                                                         }
                                                                                                                     ],
                                                                                                                     "style": "display-inline-block"
+                                                                                                                }
+                                                                                                            ],
+                                                                                                            "title": "Data Breach Details"
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "type": "editableFormGroup",
+                                                                                                        "config": {
+                                                                                                            "wid": "52d8f3b4-1ce5-432b-a1fe-d2a27377800a",
+                                                                                                            "rows": [
+                                                                                                                {
+                                                                                                                    "columns": [
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "briefDescriptionOfTheBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "wasThePHIEPHIAccessedImpermissibly",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "whoAccessedPHIEPHIWithoutPermission",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "wasThePHIEPHIEncrypted",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "isPHIMisuseOrDisclosureForeseeable",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        }
+                                                                                                                    ],
+                                                                                                                    "style": ""
                                                                                                                 }
                                                                                                             ],
                                                                                                             "title": "Data Breach Details"
@@ -292,19 +403,19 @@
                                                                                                                         {
                                                                                                                             "fields": [
                                                                                                                                 {
-                                                                                                                                    "name": "wasThePHIEPHIEncrypted",
-                                                                                                                                    "highlightMode": true,
-                                                                                                                                    "readOnly": true
-                                                                                                                                },
-                                                                                                                                {
-                                                                                                                                    "name": "whatHealthInformationWasExposed",
-                                                                                                                                    "highlightMode": true,
-                                                                                                                                    "readOnly": true
-                                                                                                                                },
-                                                                                                                                {
-                                                                                                                                    "name": "causeOfDataBreach",
+                                                                                                                                    "name": "typeOfDataBreach",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "locationOfBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "describeOtherLocationOfBreach",
+                                                                                                                                    "highlightMode": true,
                                                                                                                                     "readOnly": true
                                                                                                                                 },
                                                                                                                                 {
@@ -342,7 +453,12 @@
                                                                                                                                     "readOnly": true
                                                                                                                                 },
                                                                                                                                 {
-                                                                                                                                    "name": "measuresInPlaceToMitigateTheRisk",
+                                                                                                                                    "name": "actionsTakenInResponseToBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "describeOtherActionsTaken",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "readOnly": true
                                                                                                                                 }
@@ -352,22 +468,7 @@
                                                                                                                         {
                                                                                                                             "fields": [
                                                                                                                                 {
-                                                                                                                                    "name": "wasThePHIEPHIAccessedImpermissibly",
-                                                                                                                                    "highlightMode": true,
-                                                                                                                                    "readOnly": true
-                                                                                                                                },
-                                                                                                                                {
-                                                                                                                                    "name": "whoAccessedPHIEPHIWithoutPermission",
-                                                                                                                                    "highlightMode": true,
-                                                                                                                                    "readOnly": true
-                                                                                                                                },
-                                                                                                                                {
-                                                                                                                                    "name": "isPHIMisuseOrDisclosureForeseeable",
-                                                                                                                                    "highlightMode": true,
-                                                                                                                                    "readOnly": true
-                                                                                                                                },
-                                                                                                                                {
-                                                                                                                                    "name": "typeOfDataBreach",
+                                                                                                                                    "name": "causeOfDataBreach",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
                                                                                                                                     "readOnly": true
@@ -397,7 +498,32 @@
                                                                                                                                     "readOnly": true
                                                                                                                                 },
                                                                                                                                 {
-                                                                                                                                    "name": "isABreachReportable",
+                                                                                                                                    "name": "typeOfPHIInvolvedInBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "clinicalPHIExposedInBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "demographicPHIExposedInBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "financialPHIExposedInBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "typeOfPHIInvolvedInBreachOther",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "safeguardsInPlaceBeforeBreach",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "readOnly": true
                                                                                                                                 }
@@ -414,7 +540,7 @@
                                                                                                     {
                                                                                                         "type": "editableFormGroup",
                                                                                                         "config": {
-                                                                                                            "wid": "a3486170-23ed-4419-a753-37d873f0552e",
+                                                                                                            "wid": "36584e6b-1460-4d60-9d14-271c76716783",
                                                                                                             "rows": [
                                                                                                                 {
                                                                                                                     "columns": [
@@ -480,6 +606,65 @@
                                                                                                     {
                                                                                                         "type": "editableFormGroup",
                                                                                                         "config": {
+                                                                                                            "wid": "a3486170-23ed-4419-a753-37d873f0552e",
+                                                                                                            "rows": [
+                                                                                                                {
+                                                                                                                    "columns": [
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "cEName",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "cEStreetAddress",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "cEEmail",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "cEPhone",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                            "fields": [
+                                                                                                                                {
+                                                                                                                                    "name": "hSOName",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "hSOEmail",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "hSOPhone",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "style": "col-lg-6"
+                                                                                                                        }
+                                                                                                                    ],
+                                                                                                                    "style": "display-inline-block"
+                                                                                                                }
+                                                                                                            ],
+                                                                                                            "title": "Covered Entity and HSO Contact Details"
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "type": "editableFormGroup",
+                                                                                                        "config": {
                                                                                                             "wid": "717085c3-8ffb-4ecf-821b-f54e853cc136",
                                                                                                             "rows": [
                                                                                                                 {
@@ -493,6 +678,11 @@
                                                                                                                                     "readOnly": true
                                                                                                                                 },
                                                                                                                                 {
+                                                                                                                                    "name": "stepsTakenToInvestigateTheBreach",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
                                                                                                                                     "name": "isDPIARequired",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
@@ -502,6 +692,11 @@
                                                                                                                                     "name": "reasonToPerformDPIA",
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "rootCauseAnalysisFindings",
+                                                                                                                                    "highlightMode": true,
                                                                                                                                     "readOnly": true
                                                                                                                                 }
                                                                                                                             ],
@@ -526,6 +721,16 @@
                                                                                                                                     "highlightMode": true,
                                                                                                                                     "linky": true,
                                                                                                                                     "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "actionsForApplyingTechnicalFix",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "name": "technicalFixSummary",
+                                                                                                                                    "highlightMode": true,
+                                                                                                                                    "readOnly": true
                                                                                                                                 }
                                                                                                                             ],
                                                                                                                             "style": "col-lg-6"
@@ -534,7 +739,7 @@
                                                                                                                     "style": ""
                                                                                                                 }
                                                                                                             ],
-                                                                                                            "title": "DPO Assessment Details"
+                                                                                                            "title": "Risk Assessment Summary"
                                                                                                         }
                                                                                                     }
                                                                                                 ],
@@ -672,10 +877,12 @@
                                                                                                             "wid": "2a0455b7-caad-4cd6-8cb8-13399a792244"
                                                                                                         }
                                                                                                     }
-                                                                                                ]
+                                                                                                ],
+                                                                                                "style": "col-lg-12"
                                                                                             }
                                                                                         ],
-                                                                                        "wid": "a6f61abb-57b9-484b-9e75-76a66559e90f"
+                                                                                        "wid": "a6f61abb-57b9-484b-9e75-76a66559e90f",
+                                                                                        "_collapsed": false
                                                                                     }
                                                                                 ]
                                                                             }
@@ -771,7 +978,7 @@
                                                     ]
                                                 }
                                             },
-                                            "show": false,
+                                            "show": true,
                                             "icon": "fa fa-exchange",
                                             "visible": true
                                         },

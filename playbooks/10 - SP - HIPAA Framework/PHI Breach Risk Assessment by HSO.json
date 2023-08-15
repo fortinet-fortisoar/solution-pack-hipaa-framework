@@ -1,0 +1,1250 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "PHI Breach Risk Assessment by HSO",
+    "aliasName": null,
+    "tag": null,
+    "description": "Sends PHI risk assessment information to HSO (HIPAA Security Officer) for review and receives confirmation on whether the breach is reportable to relevant federal or law enforcement agencies.",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/4c384067-79c3-4821-a70a-d69c3c149ec6",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/2c16bee8-5d44-474c-8139-d38f391888f6",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Add Comment for Valid Breach",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "people": [],
+                    "content": "<p>HSO assessment of PHI Breach Report is completed.<\/p>",
+                    "__replace": "",
+                    "incidents": "{{vars.incidentIRI}}",
+                    "recordTags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "isImportant": false,
+                    "peopleUpdated": false,
+                    "dataCompliances": "{{vars.complianceIRI}}"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/comments",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1245",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "e0a93125-e5da-4700-a5c0-58e87f0ff177"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "taskList": "[]",
+                "taskName": "{{vars.input.records[0].name}}",
+                "description": "[]",
+                "affectedIndividualsList": "[]"
+            },
+            "status": null,
+            "top": "165",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "12a9e2c1-f8a0-4909-9966-39cf5fea1f32"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Assessment Data Table",
+            "description": null,
+            "arguments": {
+                "params": {
+                    "data": "[\n    {\n        \"Breach Occurrence Date\" : \"<p>{{arrow.get(vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].breachOccurrenceDate).to(vars.request.headers.tz).format(\"MM-DD-YYYY HH:mm:ss\")}}<\/p>\",\n        \"Breach Detection Date\" : \"<p>{{arrow.get(vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].breachDetectionDate).to(vars.request.headers.tz).format(\"MM-DD-YYYY HH:mm:ss\")}}<\/p>\",\n        \"No. of Affected Users\" : \"<p style='word-break: break-word;white-space: pre-wrap;'>{{vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].noOfAffectedUsers}}<\/p>\",\n        \"Brief Description of the Breach\" : \"<p style='word-break: break-word;white-space: pre-wrap;'>{{vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].briefDescriptionOfTheBreach}}<\/p>\",\n        \"Was the PHI\/ePHI Encrypted?\": \"<p>{{(vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].wasThePHIEPHIEncrypted | fromIRI).itemValue}}<\/p>\",\n        \"Is PHI Misuse or Disclosure Foreseeable?\": \"<p>{{(vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].isPHIMisuseOrDisclosureForeseeable | fromIRI).itemValue}}<\/p>\",\n        \"Was the PHI\/ePHI Accessed Impermissibly?\": \"<p>{{(vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].wasThePHIEPHIAccessedImpermissibly | fromIRI).itemValue}}<\/p>\",\n        {% if vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].whoAccessedPHIEPHIWithoutPermission %}\"Who accessed PHI\/ePHI without permission?(If Known)\" : \"<p style='word-break: break-word;white-space: pre-wrap;'>{{vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].whoAccessedPHIEPHIWithoutPermission}}<\/p>\",{% endif %}\n        \"Type Of Data Breach\": \"<p>{{(vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].typeOfDataBreach | fromIRI).itemValue}}<\/p>\",\n        \"Location of Breach\": \"<p><ul style='padding-left: 10px; margin: 0px;'>{% for item in vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].locationOfBreach %}<li>{{(item | fromIRI).itemValue}}<\/li>{% endfor %}<\/ul><p>\",\n        {% if vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].describeOtherLocationOfBreach %}\"Describe Other Location of Breach\" : \"<p style='word-break: break-word;white-space: pre-wrap;'>{{vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].describeOtherLocationOfBreach}}<\/p>\",{% endif %}\n        \"Type of PHI Exposed in Breach\": \"<p><ul style='padding-left: 10px; margin: 0px; list-style-position: outside;'>{% for item in vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].typeOfPHIInvolvedInBreach %}<li>{{(item | fromIRI).itemValue}}<\/li>{% endfor %}<\/ul><p>\",\n        {% if vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].clinicalPHIExposedInBreach %}\"Clinical PHI Exposed in Breach\" : \"<p><ul style='padding-left: 10px; margin: 0px; list-style-position: outside;'>{% for item in vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].clinicalPHIExposedInBreach %}<li>{{(item | fromIRI).itemValue}}<\/li>{% endfor %}<\/ul><p>\",{% endif %}\n        {% if vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].demographicPHIExposedInBreach %}\"Demographic PHI Exposed in Breach\" : \"<p><ul style='padding-left: 10px; margin: 0px; list-style-position: outside;'>{% for item in vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].demographicPHIExposedInBreach %}<li>{{(item | fromIRI).itemValue}}<\/li>{% endfor %}<\/ul><p>\",{% endif %}\n        {% if vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].financialPHIExposedInBreach %}\"Financial PHI Exposed in Breach\" : \"<p><ul style='padding-left: 10px; margin: 0px; list-style-position: outside;'>{% for item in vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].financialPHIExposedInBreach %}<li>{{(item | fromIRI).itemValue}}<\/li>{% endfor %}<\/ul><p>\",{% endif %}\n        {% if vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].typeOfPHIInvolvedInBreachOther %}\"Type of PHI Exposed in Breach (Other)\" : \"<p style='word-break: break-word;white-space: pre-wrap;'>{{vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].typeOfPHIInvolvedInBreachOther}}<\/p>\",{% endif %}\n        \"Safeguards in Place Before Breach\": \"<p><ul style='padding-left: 10px; margin: 0px; list-style-position: outside;'>{% for item in vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].safeguardsInPlaceBeforeBreach %}<li>{{(item | fromIRI).itemValue}}<\/li>{% endfor %}<\/ul><p>\",\n        \"Actions Taken in Response to Breach\": \"<p><ul style='padding-left: 10px; margin: 0px; list-style-position: outside;'>{% for item in vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].actionsTakenInResponseToBreach %}<li>{{(item | fromIRI).itemValue}}<\/li>{% endfor %}<\/ul><p>\"{% if vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].describeOtherActionsTaken %},\"Describe Other Actions Taken\" : \"<p style='word-break: break-word;white-space: pre-wrap;'>{{vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].describeOtherActionsTaken}}<\/p>\"{% endif %}\n    }\n]",
+                    "display": "Vertical",
+                    "styling": false,
+                    "template": "Stylized with row selection",
+                    "row_fields": ""
+                },
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<p>The PHI Breach Report has been sent to HSO for review.<\/p>",
+                    "records": "{{vars.incidentIRI}},{{vars.complianceIRI}}"
+                },
+                "version": "3.2.3",
+                "agent_id": null,
+                "connector": "cyops_utilities",
+                "operation": "json_to_html",
+                "operationTitle": "Utils: Convert JSON into a HTML Table",
+                "step_variables": {
+                    "table": "{{vars.steps.Create_Assessment_Data_Table.data}}"
+                }
+            },
+            "status": null,
+            "top": "705",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "group": null,
+            "uuid": "86f29797-bcb7-45f8-ad86-4f0ea7f29ef3"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Compliance Record ID",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "id",
+                            "value": "{{vars.input.records[0].id}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ],
+                    "__selectFields": [
+                        "dataCompliances"
+                    ]
+                },
+                "module": "tasks?$limit=30&$relationships=true&$fsr_max_relation_count=100",
+                "checkboxFields": true,
+                "step_variables": {
+                    "demoMode": "{% if vars.result[0].dataCompliances[0].testMode %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}",
+                    "hsoEmail": "{{vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].hSOEmail}}",
+                    "demoEmail": "{{vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].testEmail}}",
+                    "placeholder": "{% for item in vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].description.split('\\n') %}\n{% if vars.taskName in item %}\n{% set _dummy = item | replace('10060', '9989') %}\n{{vars.description.append(_dummy)}}\n{% else %}\n{{vars.description.append(item)}}\n{% endif %}\n{% endfor %}",
+                    "complianceID": "{{vars.result[0].dataCompliances[0].id}}",
+                    "complianceIRI": "{{vars.result[0].dataCompliances[0]['@id']}}",
+                    "complianceName": "{{vars.result[0].dataCompliances[0].name}}",
+                    "complianceUUID": "{{vars.result[0].dataCompliances[0].uuid}}",
+                    "breachNotificationDueDate": "{{vars.result[0].dataCompliances[0].breachNotifyDueDate}}"
+                }
+            },
+            "status": null,
+            "top": "300",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "e0122099-a34f-4411-93f3-48258ab706ea"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Parent Incident ID",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "id",
+                            "value": "{{vars.complianceID}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ],
+                    "__selectFields": [
+                        "incidents"
+                    ]
+                },
+                "module": "data_compliances?$limit=30&$relationships=true&$fsr_max_relation_count=100",
+                "checkboxFields": true,
+                "step_variables": {
+                    "incidentID": "{{vars.result[0].incidents[0].id}}",
+                    "incidentIRI": "{{vars.result[0].incidents[0]['@id']}}",
+                    "currentIndex": "{{vars.description[-1].split(\"|\")[1]}}"
+                }
+            },
+            "status": null,
+            "top": "435",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "06401608-0743-4866-bb0b-f26c408fdd88"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Is Valid Breach",
+            "description": null,
+            "arguments": {
+                "conditions": [
+                    {
+                        "option": "Yes",
+                        "step_iri": "\/api\/3\/workflow_steps\/e0a93125-e5da-4700-a5c0-58e87f0ff177",
+                        "condition": "{{ 'Valid Breach' == vars.steps.Send_Risk_Assessment_Details_to_HSO.input.isValidBreach }}",
+                        "step_name": "Add Comment for Valid Breach"
+                    },
+                    {
+                        "option": "No",
+                        "default": true,
+                        "step_iri": "\/api\/3\/workflow_steps\/b30420f2-b45b-453a-883e-cb62faa04983",
+                        "step_name": "Update Task Status in Incident"
+                    }
+                ]
+            },
+            "status": null,
+            "top": "1110",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+            "group": null,
+            "uuid": "b16015ca-3a54-431f-9ff3-88b079842473"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Mark HSO Review Status In Progress",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "hasHSOReviewedThePHIBreachReport": "\/api\/3\/picklists\/959021fc-c19d-4aee-8e51-5395c5029719"
+                },
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "locationOfBreach": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append",
+                    "clinicalPHIExposedInBreach": "Append",
+                    "financialPHIExposedInBreach": "Append",
+                    "demographicPHIExposedInBreach": "Append",
+                    "safeguardsInPlaceBeforeBreach": "Append",
+                    "actionsTakenInResponseToBreach": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "570",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "a569dc20-fb6c-4d01-871a-c507234b0986"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Mark Parent Task as Completed",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed"
+                },
+                "operation": "Append",
+                "collection": "{{vars.parentTaskIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/tasks",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1650",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "63231262-1402-4c2c-a713-466eaed6800c"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Mark Task as Completed",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                    "description": "{{vars.demoMode}}\n\n##### The 'Risk Assessment Information' has been reviewed by HSO\n\n##### Go back to <a href=\"\/modules\/view-panel\/data_compliances\/{{vars.complianceUUID}}\" target=\"_parent\" rel=\"noopener\"> Data Compliance Record #{{vars.complianceID}}<\/a> to execute next task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Perform Actions to Apply Technical Fix**<\/span>"
+                },
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/tasks",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1785",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "10e06ba5-3714-42f0-845f-5ee418faeb92"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Resolve Compliance Record",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<p>HSO confirmed the breach as invalid. The incident can now be closed.<\/p>",
+                    "records": "{{vars.complianceIRI}},{{vars.incidentIRI}}",
+                    "parentstepid": "\/api\/3\/workflow_steps\/86f29797-bcb7-45f8-ad86-4f0ea7f29ef3"
+                },
+                "resource": {
+                    "status": "\/api\/3\/picklists\/bb73fd5e-f699-11e7-8c3f-9a214cf093ae",
+                    "description": "{{vars.description | join('\\n')}}",
+                    "resolvedDate": "{{arrow.utcnow().int_timestamp}}",
+                    "hasHSOReviewedThePHIBreachReport": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "recordTags": "Append",
+                    "locationOfBreach": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append",
+                    "clinicalPHIExposedInBreach": "Append",
+                    "financialPHIExposedInBreach": "Append",
+                    "demographicPHIExposedInBreach": "Append",
+                    "safeguardsInPlaceBeforeBreach": "Append",
+                    "actionsTakenInResponseToBreach": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1245",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "b30420f2-b45b-453a-883e-cb62faa04983"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Retrive Parent Task ID",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "incidents.id",
+                            "value": "{{vars.incidentID}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        },
+                        {
+                            "type": "array",
+                            "field": "recordTags",
+                            "value": [
+                                "\/api\/3\/tags\/HIPAA Assessment"
+                            ],
+                            "module": "recordTags",
+                            "display": "",
+                            "operator": "in",
+                            "template": "tags",
+                            "enableJinja": true,
+                            "OPERATOR_KEY": "$",
+                            "useInOperator": true,
+                            "previousOperator": "in",
+                            "previousTemplate": "tags"
+                        }
+                    ],
+                    "__selectFields": [
+                        "incidents"
+                    ]
+                },
+                "module": "tasks?$limit=30&$relationships=true&$fsr_max_relation_count=100",
+                "checkboxFields": true,
+                "step_variables": {
+                    "parentTaskIRI": "{{vars.result[0]['@id']}}"
+                }
+            },
+            "status": null,
+            "top": "1515",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "6e8e161e-00e7-4c37-bdd0-5c52c36b8f99"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Send Risk Assessment Details to HSO",
+            "description": null,
+            "arguments": {
+                "type": "InputBased",
+                "input": {
+                    "schema": {
+                        "title": "PHI Breach Report Approval",
+                        "description": "{{vars.demoMode}}\n<br>\nHi {{vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].hSOName.split(' ')[0]}},\n\n&nbsp;\n\nWe have come across a PHI breach event. Please review the below report and identify if this valid breach.\n\n&nbsp;\n\n* * *\n##### Data Breach Report\n\n{{vars.table}}",
+                        "inputVariables": [
+                            {
+                                "name": "isValidBreach",
+                                "type": "array",
+                                "label": "Is this a valid breach?",
+                                "title": "Dynamic List",
+                                "usable": true,
+                                "options": [
+                                    "Valid Breach",
+                                    "Invalid Breach"
+                                ],
+                                "tooltip": "",
+                                "dataType": "dynamicList",
+                                "formType": "dynamicList",
+                                "required": true,
+                                "_expanded": false,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": false,
+                                "templateUrl": "app\/components\/form\/fields\/dynamicList.html",
+                                "_nameTouched": true,
+                                "defaultValue": null,
+                                "_previousName": "isValidBreach?",
+                                "lengthConstraint": true,
+                                "allowedGridColumn": false,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false
+                            },
+                            {
+                                "name": "stepsTakenToInvestigateTheBreach",
+                                "type": "string",
+                                "label": "Please specify steps taken to investigate the breach",
+                                "title": "Text Area",
+                                "usable": false,
+                                "tooltip": "",
+                                "dataType": "text",
+                                "formType": "textarea",
+                                "required": true,
+                                "_expanded": false,
+                                "mmdUpdate": false,
+                                "collection": false,
+                                "searchable": false,
+                                "templateUrl": "app\/components\/form\/fields\/json.html",
+                                "_nameTouched": true,
+                                "defaultValue": null,
+                                "_previousName": "pleaseSpecifyStepsTakenToInvestigateTheBreach",
+                                "playbookField": true,
+                                "visibilityQuery": {
+                                    "sort": [],
+                                    "limit": 30,
+                                    "logic": "AND",
+                                    "filters": []
+                                },
+                                "lengthConstraint": false,
+                                "allowedGridColumn": false,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false,
+                                "_addVisibilityConditions": true
+                            },
+                            {
+                                "name": "rootCauseAnalysisFindings",
+                                "type": "string",
+                                "label": "Please specify root cause analysis",
+                                "title": "Text Area",
+                                "usable": false,
+                                "tooltip": "",
+                                "dataType": "text",
+                                "formType": "textarea",
+                                "required": true,
+                                "_expanded": false,
+                                "mmdUpdate": false,
+                                "collection": false,
+                                "searchable": false,
+                                "templateUrl": "app\/components\/form\/fields\/json.html",
+                                "_nameTouched": true,
+                                "defaultValue": null,
+                                "_previousName": "rootCauseAnalysis",
+                                "playbookField": true,
+                                "visibilityQuery": {
+                                    "sort": [],
+                                    "limit": 30,
+                                    "logic": "AND",
+                                    "filters": [
+                                        {
+                                            "type": "array",
+                                            "field": "isValidBreach",
+                                            "value": [
+                                                "Valid Breach"
+                                            ],
+                                            "module": "isValidBreach",
+                                            "display": "",
+                                            "operator": "in",
+                                            "template": "tags",
+                                            "OPERATOR_KEY": "$",
+                                            "useInOperator": true,
+                                            "previousOperator": "in",
+                                            "previousTemplate": "tags"
+                                        }
+                                    ]
+                                },
+                                "lengthConstraint": false,
+                                "allowedGridColumn": false,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false,
+                                "_addVisibilityConditions": true
+                            },
+                            {
+                                "name": "actionsForApplyingTechnicalFix",
+                                "type": "string",
+                                "label": "Please advise on the actions needed to apply the technical fix",
+                                "title": "Text Area",
+                                "usable": false,
+                                "tooltip": "",
+                                "dataType": "text",
+                                "formType": "textarea",
+                                "required": true,
+                                "_expanded": false,
+                                "mmdUpdate": false,
+                                "collection": false,
+                                "searchable": false,
+                                "templateUrl": "app\/components\/form\/fields\/json.html",
+                                "_nameTouched": true,
+                                "defaultValue": null,
+                                "_previousName": "pleaseAdviseOnTheActionsNeededToApplyTheTechnicalFix.",
+                                "playbookField": true,
+                                "visibilityQuery": {
+                                    "sort": [],
+                                    "limit": 30,
+                                    "logic": "AND",
+                                    "filters": [
+                                        {
+                                            "type": "array",
+                                            "field": "isValidBreach",
+                                            "value": [
+                                                "Valid Breach"
+                                            ],
+                                            "module": "isValidBreach",
+                                            "display": "",
+                                            "operator": "in",
+                                            "template": "tags",
+                                            "OPERATOR_KEY": "$",
+                                            "useInOperator": true,
+                                            "previousOperator": "in",
+                                            "previousTemplate": "tags"
+                                        }
+                                    ]
+                                },
+                                "lengthConstraint": false,
+                                "allowedGridColumn": false,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false,
+                                "_addVisibilityConditions": true
+                            },
+                            {
+                                "name": "measuresToReduceFutureRisks",
+                                "type": "string",
+                                "label": "Identify measures need to be taken to reduce or eliminate risks in future",
+                                "title": "Text Area",
+                                "usable": true,
+                                "tooltip": "",
+                                "dataType": "text",
+                                "formType": "textarea",
+                                "required": true,
+                                "_expanded": false,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": true,
+                                "templateUrl": "app\/components\/form\/fields\/textarea.html",
+                                "_nameTouched": true,
+                                "defaultValue": null,
+                                "_previousName": "measuresToReduceFutureRisks?",
+                                "visibilityQuery": {
+                                    "sort": [],
+                                    "limit": 30,
+                                    "logic": "AND",
+                                    "filters": [
+                                        {
+                                            "type": "array",
+                                            "field": "isValidBreach",
+                                            "value": [
+                                                "Valid Breach"
+                                            ],
+                                            "module": "isValidBreach",
+                                            "display": "",
+                                            "operator": "in",
+                                            "template": "tags",
+                                            "OPERATOR_KEY": "$",
+                                            "useInOperator": true,
+                                            "previousOperator": "in",
+                                            "previousTemplate": "tags"
+                                        }
+                                    ]
+                                },
+                                "lengthConstraint": true,
+                                "allowedEncryption": true,
+                                "allowedGridColumn": true,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false,
+                                "_addVisibilityConditions": true
+                            },
+                            {
+                                "name": "areTheAffectedIndividualsContactDetailsOutdated",
+                                "type": "array",
+                                "label": "Are the affected individuals contact details outdated?",
+                                "title": "Dynamic List",
+                                "usable": true,
+                                "options": [
+                                    "Yes",
+                                    "No"
+                                ],
+                                "tooltip": "",
+                                "dataType": "dynamicList",
+                                "formType": "dynamicList",
+                                "required": true,
+                                "_expanded": false,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": false,
+                                "templateUrl": "app\/components\/form\/fields\/dynamicList.html",
+                                "_nameTouched": true,
+                                "defaultValue": null,
+                                "_previousName": "areTheAffectedIndividualsContactDetailsOutdated?",
+                                "playbookField": true,
+                                "visibilityQuery": {
+                                    "sort": [],
+                                    "limit": 30,
+                                    "logic": "AND",
+                                    "filters": [
+                                        {
+                                            "type": "array",
+                                            "field": "isValidBreach",
+                                            "value": [
+                                                "Valid Breach"
+                                            ],
+                                            "module": "isValidBreach",
+                                            "display": "",
+                                            "operator": "in",
+                                            "template": "tags",
+                                            "OPERATOR_KEY": "$",
+                                            "useInOperator": true,
+                                            "previousOperator": "in",
+                                            "previousTemplate": "tags"
+                                        }
+                                    ]
+                                },
+                                "lengthConstraint": true,
+                                "allowedGridColumn": false,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false,
+                                "_addVisibilityConditions": true
+                            },
+                            {
+                                "name": "isSubstituteNoticeRequired",
+                                "type": "array",
+                                "label": "Is substitute notice required?",
+                                "title": "Dynamic List",
+                                "usable": true,
+                                "options": [
+                                    "Yes",
+                                    "No"
+                                ],
+                                "tooltip": "For under 10 outdated contacts, substitute notice can be given.",
+                                "dataType": "dynamicList",
+                                "formType": "dynamicList",
+                                "required": true,
+                                "_expanded": false,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": false,
+                                "templateUrl": "app\/components\/form\/fields\/dynamicList.html",
+                                "_nameTouched": true,
+                                "defaultValue": null,
+                                "_previousName": "isSubstituteNoticeNeeded",
+                                "playbookField": true,
+                                "visibilityQuery": {
+                                    "sort": [],
+                                    "limit": 30,
+                                    "logic": "AND",
+                                    "filters": [
+                                        {
+                                            "type": "array",
+                                            "field": "isValidBreach",
+                                            "value": [
+                                                "Valid Breach"
+                                            ],
+                                            "module": "isValidBreach",
+                                            "display": "",
+                                            "operator": "in",
+                                            "template": "tags",
+                                            "OPERATOR_KEY": "$",
+                                            "useInOperator": true,
+                                            "previousOperator": "in",
+                                            "previousTemplate": "tags"
+                                        }
+                                    ]
+                                },
+                                "lengthConstraint": true,
+                                "allowedGridColumn": false,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false,
+                                "_addVisibilityConditions": true
+                            }
+                        ]
+                    }
+                },
+                "record": "{{vars.input.records[0]['@id']}}",
+                "agent_id": null,
+                "resources": "tasks",
+                "owner_detail": {
+                    "isAssigned": false,
+                    "emailRecipients": "{% if 'Test Mode ON' in vars.demoMode %}{{vars.demoEmail}}{% else %}{{vars.hsoEmail}}{% endif %}"
+                },
+                "isRecordLinked": true,
+                "step_variables": [],
+                "response_mapping": {
+                    "options": [
+                        {
+                            "option": "Submit",
+                            "primary": true,
+                            "step_iri": "\/api\/3\/workflow_steps\/2a650cfc-734b-4817-bf5a-5b7541761619"
+                        }
+                    ],
+                    "duplicateOption": false
+                },
+                "inputExternalUser": true,
+                "email_notification": {
+                    "enabled": false,
+                    "smtpParameters": []
+                },
+                "inline_channel_list": [],
+                "external_channel_list": [
+                    "\/api\/3\/picklists\/afb18b7f-510b-471a-9b9c-7f4646edd4bb"
+                ],
+                "unauthenticated_input": true
+            },
+            "status": null,
+            "top": "840",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
+            "group": null,
+            "uuid": "d8f64bc4-dfec-46bb-b2d3-df847c95d556"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "route": "572d0ba6-4bcd-49de-b229-c2e6691875e2",
+                "title": "Notify HIPAA Security Officer",
+                "resources": [
+                    "tasks"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                    "input": {
+                        "params": [],
+                        "records": "{{vars.input.records}}"
+                    }
+                },
+                "displayConditions": {
+                    "tasks": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": [
+                            {
+                                "type": "array",
+                                "field": "recordTags",
+                                "value": [
+                                    "\/api\/3\/tags\/Notify HSO"
+                                ],
+                                "module": "recordTags",
+                                "display": "",
+                                "operator": "in",
+                                "template": "tags",
+                                "OPERATOR_KEY": "$",
+                                "useInOperator": true,
+                                "previousOperator": "in",
+                                "previousTemplate": "tags"
+                            },
+                            {
+                                "type": "object",
+                                "field": "status",
+                                "value": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                                "_value": {
+                                    "@id": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                                    "itemValue": "Completed"
+                                },
+                                "operator": "neq"
+                            }
+                        ]
+                    },
+                    "incidents": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": false,
+                "singleRecordExecution": true
+            },
+            "status": null,
+            "top": "30",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+            "group": null,
+            "uuid": "2c16bee8-5d44-474c-8139-d38f391888f6"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Task to Apply Technical Fix",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p>Created <a title=\"Task #{{vars.steps.Task_to_Apply_Technical_Fix.id}}\" href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Task_to_Apply_Technical_Fix.uuid}}\" target=\"_parent\" rel=\"noopener\">Task #{{vars.steps.Task_to_Apply_Technical_Fix.id}}<\/a> to apply technical fix or any other fix required to stop the incident.<\/p>",
+                    "records": "{{vars.complianceIRI}}",
+                    "parentstepid": "\/api\/3\/workflow_steps\/86f29797-bcb7-45f8-ad86-4f0ea7f29ef3"
+                },
+                "resource": {
+                    "name": "Perform Actions to Apply Technical Fix",
+                    "type": "\/api\/3\/picklists\/6d113f01-123a-4c78-b68c-029e16df9b8b",
+                    "dueBy": "{{vars.breachNotificationDueDate}}",
+                    "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
+                    "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
+                    "__replace": "",
+                    "startDate": "{{arrow.utcnow().int_timestamp}}",
+                    "recordTags": [
+                        "\/api\/3\/tags\/Apply Technical Fix"
+                    ],
+                    "description": "{{vars.demoMode}}\n\n##### Perform technical fixes as advised by HSO.\n\n##### Click on <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Apply Technical Fix**<\/span> Button\n\n\n",
+                    "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
+                    "dataCompliances": "{{vars.complianceIRI}}",
+                    "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/tasks",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "_temp": "{{vars.taskList.append(vars.steps.Task_to_Apply_Technical_Fix['@id'])}}"
+                }
+            },
+            "status": null,
+            "top": "1380",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "0d74e98b-1384-482c-a55f-99a827d34c83"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Task to Notify Breach to the Secretary",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p>Created <a title=\"Task #{{vars.steps.Task_to_Notify_Breach_to_the_Secretary.id}}\" href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Task_to_Notify_Breach_to_the_Secretary.uuid}}\" target=\"_parent\" rel=\"noopener\">Task #{{vars.steps.Task_to_Notify_Breach_to_the_Secretary.id}}<\/a> to notify the Secretary of HHS about PHI Breach.<\/p>",
+                    "records": "{{vars.complianceIRI}}",
+                    "parentstepid": "\/api\/3\/workflow_steps\/0d74e98b-1384-482c-a55f-99a827d34c83"
+                },
+                "resource": {
+                    "name": "Notify Breach to the Secretary of HHS",
+                    "type": "\/api\/3\/picklists\/62322a54-a069-4f74-a917-3d864f24524a",
+                    "dueBy": "{{vars.breachNotificationDueDate}}",
+                    "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
+                    "tenant": "\/api\/3\/tenants\/b3a700f7-00be-4ef9-90c6-3c8fe6e1be63",
+                    "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
+                    "__replace": "",
+                    "startDate": "{{arrow.utcnow().int_timestamp}}",
+                    "recordTags": [
+                        "\/api\/3\/tags\/Notify Secretary"
+                    ],
+                    "description": "{{vars.demoMode}}\n\n##### Notify Breach to the Secretary of HHS(Health and Human Services)\n\n##### Click here to <em><strong><a href=\"https:\/\/ocrportal.hhs.gov\/ocr\/breach\/breach_form.jsf\">Submit a Breach Notification to the Secretary<\/a><\/strong><\/em>\n                                                                          \n##### Mark this Task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Completed**<\/span> after notifying the secretary of the breach.\n\n",
+                    "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
+                    "dataCompliances": "{{vars.complianceIRI}}",
+                    "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/tasks",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "_temp": "{{vars.taskList.append(vars.steps.Task_to_Notify_Breach_to_the_Secretary['@id'])}}"
+                }
+            },
+            "status": null,
+            "top": "1515",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "6405e58c-3a51-44e7-b36d-a096c315ef4c"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Task to Report Law Enforcement Agency",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/HIPAA"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p>Created <a title=\"Task #{{vars.steps.Task_to_Report_Law_Enforcement_Agency.id}} - {{vars.steps.Task_to_Report_Law_Enforcement_Agency.name}}\" href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Task_to_Report_Law_Enforcement_Agency.uuid}}\" target=\"_parent\" rel=\"noopener\">Task #{{vars.steps.Task_to_Report_Law_Enforcement_Agency.id}}<\/a> to report the PHI breach to the relevant criminal law enforcement agencies.<\/p>",
+                    "records": "{{vars.complianceIRI}}",
+                    "parentstepid": "\/api\/3\/workflow_steps\/6405e58c-3a51-44e7-b36d-a096c315ef4c"
+                },
+                "resource": {
+                    "name": "Report Breach to Law Enforcement Agency",
+                    "type": "\/api\/3\/picklists\/62322a54-a069-4f74-a917-3d864f24524a",
+                    "dueBy": "{{vars.breachNotificationDueDate}}",
+                    "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
+                    "priority": "\/api\/3\/picklists\/90088ebe-0a7d-4aa6-9c9c-93b937a4e4f8",
+                    "__replace": "",
+                    "startDate": "{{arrow.utcnow().int_timestamp}}",
+                    "recordTags": [
+                        "\/api\/3\/tags\/Report Law Enforcement Agency"
+                    ],
+                    "description": "{{vars.demoMode}}\n\n##### Report the PHI breach to the relevant criminal law enforcement agencies.\n\n##### Click on <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Report Law Enforcement Agency**<\/span> Button",
+                    "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
+                    "dataCompliances": "{{vars.complianceIRI}}",
+                    "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/tasks",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "_temp": "{{vars.taskList.append(vars.steps.Task_to_Report_Law_Enforcement_Agency['@id'])}}"
+                }
+            },
+            "status": null,
+            "top": "1650",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "985e9cb3-45a2-4e4b-972d-83e473e9d3b9"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update Compliance Record Description",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "description": "{{vars.description | join('\\n')}}{% for item in vars.taskList %}\n| {{loop.index+vars.currentIndex}} | {{(item | fromIRI).name}} | <a href=\"\/modules\/view-panel\/tasks\/{{(item | fromIRI).uuid}}\" target=\"_parent\" rel=\"noopener\">Click Here<\/a> | <span>&#10060;<\/span> |{% endfor %}",
+                    "hasHSOReviewedThePHIBreachReport": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "recordTags": "Append",
+                    "locationOfBreach": "Append",
+                    "reminderMailStatus": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append",
+                    "clinicalPHIExposedInBreach": "Append",
+                    "financialPHIExposedInBreach": "Append",
+                    "demographicPHIExposedInBreach": "Append",
+                    "safeguardsInPlaceBeforeBreach": "Append",
+                    "actionsTakenInResponseToBreach": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1920",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "7f5a7ba2-0e44-46c8-817c-a166026b8b66"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update HIPAA Assessment Data",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "isValidBreach": "{% if 'Valid Breach' == vars.steps.Send_Risk_Assessment_Details_to_HSO.input.isValidBreach %}{{\"YesNoInput\" | picklist(\"Yes\", \"@id\")}}{% else %}{{\"YesNoInput\" | picklist(\"No\", \"@id\")}}{% endif %}",
+                    "rootCauseAnalysisFindings": "{{vars.steps.Send_Risk_Assessment_Details_to_HSO.input.rootCauseAnalysisFindings}}",
+                    "isSubstituteNoticeRequired": "{{\"YesNoInput\" | picklist(vars.steps.Send_Risk_Assessment_Details_to_HSO.input.isSubstituteNoticeRequired, \"@id\")}}",
+                    "measuresToReduceFutureRisks": "{{vars.steps.Send_Risk_Assessment_Details_to_HSO.input.measuresToReduceFutureRisks}}",
+                    "actionsForApplyingTechnicalFix": "{{vars.steps.Send_Risk_Assessment_Details_to_HSO.input.actionsForApplyingTechnicalFix or 'NA'}}",
+                    "stepsTakenToInvestigateTheBreach": "{{vars.steps.Send_Risk_Assessment_Details_to_HSO.input.stepsTakenToInvestigateTheBreach}}",
+                    "areTheAffectedIndividualsContactDetailsOutdated": "{{\"YesNoInput\" | picklist(vars.steps.Send_Risk_Assessment_Details_to_HSO.input.areTheAffectedIndividualsContactDetailsOutdated, \"@id\")}}"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "recordTags": "Append",
+                    "locationOfBreach": "Append",
+                    "reminderMailStatus": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append",
+                    "clinicalPHIExposedInBreach": "Append",
+                    "financialPHIExposedInBreach": "Append",
+                    "demographicPHIExposedInBreach": "Append",
+                    "safeguardsInPlaceBeforeBreach": "Append",
+                    "actionsTakenInResponseToBreach": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "975",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "2a650cfc-734b-4817-bf5a-5b7541761619"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update Task Description",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                    "description": "{{vars.demoMode}}\n\n##### HSO confirmed the breach as invalid. The incident can now be closed."
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/tasks",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1380",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "8e3c5d4a-1c09-444b-9eb8-ad4bcb5bb110"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Add Comment for Valid Breach -> Task to Apply Technical Fix",
+            "targetStep": "\/api\/3\/workflow_steps\/0d74e98b-1384-482c-a55f-99a827d34c83",
+            "sourceStep": "\/api\/3\/workflow_steps\/e0a93125-e5da-4700-a5c0-58e87f0ff177",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "0fd10450-18fc-4860-8e9e-a88743b5cb14"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Get Incident ID",
+            "targetStep": "\/api\/3\/workflow_steps\/e0122099-a34f-4411-93f3-48258ab706ea",
+            "sourceStep": "\/api\/3\/workflow_steps\/12a9e2c1-f8a0-4909-9966-39cf5fea1f32",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "d2ef1cef-9e35-4796-9dad-b78d12b73ac6"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Assessment Data Table -> Send Risk Assessment Details to HSO",
+            "targetStep": "\/api\/3\/workflow_steps\/d8f64bc4-dfec-46bb-b2d3-df847c95d556",
+            "sourceStep": "\/api\/3\/workflow_steps\/86f29797-bcb7-45f8-ad86-4f0ea7f29ef3",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "b34518cd-bc7b-478c-9bc7-3f86ba654bcf"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Compliance Record ID -> Get Incident ID",
+            "targetStep": "\/api\/3\/workflow_steps\/06401608-0743-4866-bb0b-f26c408fdd88",
+            "sourceStep": "\/api\/3\/workflow_steps\/e0122099-a34f-4411-93f3-48258ab706ea",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "b32f0a99-1ba1-4f35-aaf3-35b5794f5a49"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Parent Incident ID -> Mark HSO Review Status In Progress",
+            "targetStep": "\/api\/3\/workflow_steps\/a569dc20-fb6c-4d01-871a-c507234b0986",
+            "sourceStep": "\/api\/3\/workflow_steps\/06401608-0743-4866-bb0b-f26c408fdd88",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "a2027074-d866-4c0c-a37a-4c4bfc7a06d2"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Parent Task -> Update Parent Task Status",
+            "targetStep": "\/api\/3\/workflow_steps\/63231262-1402-4c2c-a713-466eaed6800c",
+            "sourceStep": "\/api\/3\/workflow_steps\/6e8e161e-00e7-4c37-bdd0-5c52c36b8f99",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "0ff4fd39-8710-4a03-ada4-0eb25ce27fe8"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Is Valid Breach -> Add Comment for Valid Breach",
+            "targetStep": "\/api\/3\/workflow_steps\/e0a93125-e5da-4700-a5c0-58e87f0ff177",
+            "sourceStep": "\/api\/3\/workflow_steps\/b16015ca-3a54-431f-9ff3-88b079842473",
+            "label": "Yes",
+            "isExecuted": false,
+            "group": null,
+            "uuid": "6ddf15b0-6593-4ef7-82f4-da7ffbbf80d4"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Is Valid Breach -> Update Task Status in Incident",
+            "targetStep": "\/api\/3\/workflow_steps\/b30420f2-b45b-453a-883e-cb62faa04983",
+            "sourceStep": "\/api\/3\/workflow_steps\/b16015ca-3a54-431f-9ff3-88b079842473",
+            "label": "No",
+            "isExecuted": false,
+            "group": null,
+            "uuid": "828856c8-e1b2-4ef5-8234-2cf0763b5467"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Mark HSO Review Status In Progress -> Create Assessment Data Table",
+            "targetStep": "\/api\/3\/workflow_steps\/86f29797-bcb7-45f8-ad86-4f0ea7f29ef3",
+            "sourceStep": "\/api\/3\/workflow_steps\/a569dc20-fb6c-4d01-871a-c507234b0986",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "c6318652-030a-449f-b363-4aaafb042c04"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Resolve Compliance Record -> Copy of Update Task Status",
+            "targetStep": "\/api\/3\/workflow_steps\/8e3c5d4a-1c09-444b-9eb8-ad4bcb5bb110",
+            "sourceStep": "\/api\/3\/workflow_steps\/b30420f2-b45b-453a-883e-cb62faa04983",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "814b63be-20c1-4646-94c0-2b448eb5648f"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Send Risk Assessment Details to DPO -> Update GDPR Assessment Data",
+            "targetStep": "\/api\/3\/workflow_steps\/2a650cfc-734b-4817-bf5a-5b7541761619",
+            "sourceStep": "\/api\/3\/workflow_steps\/d8f64bc4-dfec-46bb-b2d3-df847c95d556",
+            "label": "Submit",
+            "isExecuted": false,
+            "group": null,
+            "uuid": "c402723e-112f-4b67-b6df-a1d2ae2874f5"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/12a9e2c1-f8a0-4909-9966-39cf5fea1f32",
+            "sourceStep": "\/api\/3\/workflow_steps\/2c16bee8-5d44-474c-8139-d38f391888f6",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "75165b45-42aa-4c85-bd56-5512714e3cad"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Task to Apply Technical Fix -> Task to Notify Breach to the Secretary",
+            "targetStep": "\/api\/3\/workflow_steps\/6405e58c-3a51-44e7-b36d-a096c315ef4c",
+            "sourceStep": "\/api\/3\/workflow_steps\/0d74e98b-1384-482c-a55f-99a827d34c83",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "d85b8b4d-5ce0-45c8-935c-de0e8a974d15"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Task to Notify Breach to the Secretary -> Task to Report Law Enforcement Agency",
+            "targetStep": "\/api\/3\/workflow_steps\/985e9cb3-45a2-4e4b-972d-83e473e9d3b9",
+            "sourceStep": "\/api\/3\/workflow_steps\/6405e58c-3a51-44e7-b36d-a096c315ef4c",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "c83237dc-0e24-4870-a777-99111d9ee1b7"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Task to Report Law Enforcement Agency -> Mark Task as Completed",
+            "targetStep": "\/api\/3\/workflow_steps\/10e06ba5-3714-42f0-845f-5ee418faeb92",
+            "sourceStep": "\/api\/3\/workflow_steps\/985e9cb3-45a2-4e4b-972d-83e473e9d3b9",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "26fc5738-1cea-40fc-86d2-929a5ffa4293"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Update HIPAA Assessment Data -> Is Valid Breach",
+            "targetStep": "\/api\/3\/workflow_steps\/b16015ca-3a54-431f-9ff3-88b079842473",
+            "sourceStep": "\/api\/3\/workflow_steps\/2a650cfc-734b-4817-bf5a-5b7541761619",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "6d983fae-de5a-49e5-904b-24ed42e0e276"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Update Task Description -> Get Parent Task",
+            "targetStep": "\/api\/3\/workflow_steps\/6e8e161e-00e7-4c37-bdd0-5c52c36b8f99",
+            "sourceStep": "\/api\/3\/workflow_steps\/8e3c5d4a-1c09-444b-9eb8-ad4bcb5bb110",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "9a340a39-be04-45ad-914c-fc031ca7fcb6"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Update Task  Description -> Update Compliance Record Description",
+            "targetStep": "\/api\/3\/workflow_steps\/7f5a7ba2-0e44-46c8-817c-a166026b8b66",
+            "sourceStep": "\/api\/3\/workflow_steps\/10e06ba5-3714-42f0-845f-5ee418faeb92",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "0b03a1fb-eb92-40b2-9c71-d12fce8232e6"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "9818ea54-d9aa-45d4-a137-63cd0898a624",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "ManualTrigger"
+    ]
+}

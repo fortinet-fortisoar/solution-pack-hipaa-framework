@@ -1,0 +1,50 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/8169731d-7955-4202-9c7a-1ca4844b207e",
+    "@type": "PicklistName",
+    "name": "ClinicalPHIType",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/12a64a7c-e776-4957-afe5-6ed3d36a0b54",
+            "@type": "Picklist",
+            "itemValue": "Diagnosis\/Conditions",
+            "orderIndex": 0,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/8169731d-7955-4202-9c7a-1ca4844b207e",
+            "uuid": "12a64a7c-e776-4957-afe5-6ed3d36a0b54"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/b54f0c8d-8e8e-4b3b-8e34-0b63e2696692",
+            "@type": "Picklist",
+            "itemValue": "Lab Results",
+            "orderIndex": 1,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/8169731d-7955-4202-9c7a-1ca4844b207e",
+            "uuid": "b54f0c8d-8e8e-4b3b-8e34-0b63e2696692"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/816e66c9-a255-46e4-82fb-9dead165107a",
+            "@type": "Picklist",
+            "itemValue": "Medications",
+            "orderIndex": 2,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/8169731d-7955-4202-9c7a-1ca4844b207e",
+            "uuid": "816e66c9-a255-46e4-82fb-9dead165107a"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/24c06a96-e5f6-45ae-a331-4455116c59ea",
+            "@type": "Picklist",
+            "itemValue": "Other",
+            "orderIndex": 3,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/8169731d-7955-4202-9c7a-1ca4844b207e",
+            "uuid": "24c06a96-e5f6-45ae-a331-4455116c59ea"
+        }
+    ],
+    "uuid": "8169731d-7955-4202-9c7a-1ca4844b207e"
+}
