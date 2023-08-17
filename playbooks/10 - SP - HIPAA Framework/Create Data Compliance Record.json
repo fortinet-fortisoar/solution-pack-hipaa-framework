@@ -27,7 +27,7 @@
                         "incidents": "{{vars.input.records[0]['@id']}}"
                     },
                     "people": [],
-                    "content": "<div><a href=\"\/modules\/view-panel\/data_compliances\/{{vars.steps.Find_Correlated_Compliance_Record[0].dataCompliances[0].uuid}}\">&nbsp;Data Compliance Record #{{vars.steps.Find_Correlated_Compliance_Record[0].dataCompliances[0].id}}<\/a> and corresponding <a href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Find_Correlated_Compliance_Record[0].tasks[0].uuid}}\">Task #{{vars.steps.Find_Correlated_Compliance_Record[0].tasks[0].id}} <\/a>has already been created.<\/div>",
+                    "content": "<div><a href=\"\/modules\/view-panel\/data_compliances\/{{vars.steps.Find_Correlated_Compliance_Record[0].dataCompliances[0].uuid}}\">Data Compliance Record #{{vars.steps.Find_Correlated_Compliance_Record[0].dataCompliances[0].id}}<\/a> and corresponding <a href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Find_Correlated_Compliance_Record[0].tasks[0].uuid}}\">Task #{{vars.steps.Find_Correlated_Compliance_Record[0].tasks[0].id}} <\/a>has already been created.<\/div>",
                     "__replace": "",
                     "isImportant": false,
                     "peopleUpdated": false
@@ -195,7 +195,7 @@
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
                     "tenant": "",
                     "thread": true,
-                    "content": "<div>Thanks for your input.<\/div>\n<div>&nbsp;<\/div>\n<div><a href=\"\/modules\/data_compliances\/{{vars.steps.Create_GDPR_Data_Compliance_Record.uuid}}\" target=\"_blank\" rel=\"noopener\">&nbsp;GDPR Compliance Record #{{vars.steps.Create_GDPR_Data_Compliance_Record.id}}<\/a> and corresponding <a href=\"\/modules\/tasks\/{{vars.steps.Create_Task_GDPR_Assessment.uuid}}\" target=\"_blank\" rel=\"noopener\">Task #{{vars.steps.Create_Task_GDPR_Assessment.id}} <\/a>has been created.<\/div>",
+                    "content": "<div>Thanks for your input.<\/div>\n<div>&nbsp;<\/div>\n<div><a href=\"\/modules\/data_compliances\/{{vars.steps.Create_GDPR_Data_Compliance_Record.uuid}}\" target=\"_blank\" rel=\"noopener\">GDPR Compliance Record #{{vars.steps.Create_GDPR_Data_Compliance_Record.id}}<\/a> and corresponding <a href=\"\/modules\/tasks\/{{vars.steps.Create_Task_GDPR_Assessment.uuid}}\" target=\"_blank\" rel=\"noopener\">Task #{{vars.steps.Create_Task_GDPR_Assessment.id}} <\/a>has been created.<\/div>",
                     "records": "",
                     "parentstepid": "\/api\/3\/workflow_steps\/1a3cbe27-45b9-4c34-8b5b-afdcb365234c"
                 },
@@ -209,7 +209,7 @@
                     "recordTags": [
                         "\/api\/3\/tags\/GDPR Assessment"
                     ],
-                    "description": "{% if vars.testModeStatus %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}\nAs per GDPR guidelines provided in [*Article - 33*](https:\/\/gdpr-info.eu\/art-33-gdpr\/), in the event of a personal data breach, it is mandatory to notify Data Protection Authority within 72 hours of the breach happening.\n\nBased on your information, the following GDPR Data Compliance record has been created.\n\n<a href=\"\/modules\/data_compliances\/{{vars.steps.Create_GDPR_Data_Compliance_Record.uuid}}\" target=\"_blank\" rel=\"noopener\">&nbsp;GDPR Compliance Record #{{vars.steps.Create_GDPR_Data_Compliance_Record.id}}<\/a> \n\nPerform the tasks provided in the record and complete the GDPR Assessment",
+                    "description": "{% if vars.testModeStatus %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}\nAs per GDPR guidelines provided in [*Article - 33*](https:\/\/gdpr-info.eu\/art-33-gdpr\/), in the event of a personal data breach, it is mandatory to notify Data Protection Authority within 72 hours of the breach happening.\n\nBased on your information, the following GDPR Data Compliance record has been created.\n\n<a href=\"\/modules\/data_compliances\/{{vars.steps.Create_GDPR_Data_Compliance_Record.uuid}}\" target=\"_blank\" rel=\"noopener\">GDPR Compliance Record #{{vars.steps.Create_GDPR_Data_Compliance_Record.id}}<\/a> \n\nPerform the tasks provided in the record and complete the GDPR Assessment",
                     "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
                     "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
                 },
