@@ -883,7 +883,7 @@
                     "recordTags": [
                         "\/api\/3\/tags\/Notify Secretary"
                     ],
-                    "description": "{{vars.demoMode}}\n\n##### Notify Breach to the Secretary of HHS(Health and Human Services)\n\n##### Click here to <em><strong><a href=\"https:\/\/ocrportal.hhs.gov\/ocr\/breach\/breach_form.jsf\">Submit a Breach Notification to the Secretary<\/a><\/strong><\/em>\n                                                                          \n##### Mark this Task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Completed**<\/span> after notifying the secretary of the breach.\n\n",
+                    "description": "{{vars.demoMode}}\n\n##### Notify Breach to the Secretary of HHS (Health and Human Services)\n\n##### Click here to <em><strong><a href=\"https:\/\/ocrportal.hhs.gov\/ocr\/breach\/breach_form.jsf\">Submit a Breach Notification to the Secretary<\/a><\/strong><\/em>\n                                                                          \n##### Mark this Task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Completed**<\/span> after notifying the secretary of the breach.\n\n",
                     "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
                     "dataCompliances": "{{vars.complianceIRI}}",
                     "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
