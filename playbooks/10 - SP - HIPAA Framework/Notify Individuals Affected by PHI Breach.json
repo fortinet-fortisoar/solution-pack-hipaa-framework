@@ -202,7 +202,7 @@
                 "input": {
                     "schema": {
                         "title": "Breach Notification to Affected Users",
-                        "description": "{{vars.demoMode}}\n<br>\nHi Team,\n\nWe have detected valid PHI breach event for  **[Data Compliance Record #{{vars.complianceID}} - {{vars.complianceName}}](\/modules\/view-panel\/data_compliances\/{{vars.complianceUUID}})** and individuals affected by the breach are need to be notified about the same. \n<br>\nPlease provide your input for the corresponding notification mail.\n\nThanks,",
+                        "description": "{{vars.demoMode}}\n<br>\nRegarding the PHI breach event for **[Data Compliance Record #{{vars.complianceID}} - {{vars.complianceName}}](\/modules\/view-panel\/data_compliances\/{{vars.complianceUUID}})**, we need to notify the affected individuals.\n<br>\nThe notification email will be drafted using the information given for the following fields. Please provide your input for this.",
                         "inputVariables": [
                             {
                                 "name": "whatHappened?",
