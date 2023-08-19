@@ -15,7 +15,7 @@
     ],
     "prerequisite": null,
     "publisher": "Fortinet",
-    "description": "This solution pack demonstrates procedures involved in HIPAA",
+    "description": "The HIPAA Framework solution pack helps users to report \"Protected Health Information (PHI)\" breaches to affected individuals, the relevant federal agency, and local media, as per the guidelines outlined in HIPAA's Breach Notification Rule.",
     "help": "https://github.com/fortinet-fortisoar/solution-pack-hipaa-framework/blob/release/1.0.0/README.md",
     "category": [
         "Compliance and Reporting"
