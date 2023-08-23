@@ -32,7 +32,11 @@ The **HIPAA Framework** solution pack contains the following resources.
 | Key Store | This module is require to have recordset with key value as a "HIPAA" to denote that HIPAA Framework solution pack is installed on the system |
 
 
+## Connectors
 
+|Name|
+| :- |
+| CSV Data Management |
 
 ## Roles
 
