@@ -138,6 +138,12 @@
                 "name": "HIPAA Assessment Report"
             }
         ],
+        "connectors": [
+            {
+                "name": "CSV Data Management",
+                "apiName": "csv-data-management"
+            }
+        ],
         "recordSets": [
             {
                 "name": "Key Store",

@@ -305,7 +305,9 @@
                     "records": "{{vars.complianceIRI}},{{vars.incidentIRI}}"
                 },
                 "resource": {
-                    "description": "{{vars.description | join('\\n')}}"
+                    "description": "{{vars.description | join('\\n')}}",
+                    "breachPausedDate": "{{arrow.utcnow().int_timestamp}}",
+                    "breachNotificationSLA": "\/api\/3\/picklists\/3f4ef2dc-7f56-4886-b215-ee08b344cbdf"
                 },
                 "_showJson": false,
                 "operation": "Append",
