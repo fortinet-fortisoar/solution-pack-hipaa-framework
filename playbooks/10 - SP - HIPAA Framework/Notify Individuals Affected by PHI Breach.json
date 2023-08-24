@@ -58,9 +58,9 @@
                             "type": "array",
                             "field": "recordTags",
                             "value": [
-                                "\/api\/3\/tags\/Covered Entity",
                                 "\/api\/3\/tags\/HSO",
-                                "\/api\/3\/tags\/HIPAA Security Officer"
+                                "\/api\/3\/tags\/HIPAA Security Officer",
+                                "\/api\/3\/tags\/HIPAA Covered Entity"
                             ],
                             "module": "recordTags",
                             "display": "",
@@ -68,7 +68,6 @@
                             "template": "tags",
                             "enableJinja": true,
                             "OPERATOR_KEY": "$",
-                            "useInOperator": true,
                             "previousOperator": "nin",
                             "previousTemplate": "tags"
                         }
@@ -187,7 +186,7 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "1110",
+            "top": "1245",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
             "group": null,
@@ -202,7 +201,7 @@
                 "input": {
                     "schema": {
                         "title": "Breach Notification to Affected Users",
-                        "description": "{{vars.demoMode}}\n<br>\nHi Team,\n\nWe have detected valid PHI breach event for  **[Data Compliance Record #{{vars.complianceID}} - {{vars.complianceName}}](\/modules\/view-panel\/data_compliances\/{{vars.complianceUUID}})** and individuals affected by the breach are need to be notified about the same. \n<br>\nPlease provide your input for the corresponding notification mail.\n\nThanks,",
+                        "description": "{{vars.demoMode}}\n<br>\nRegarding the PHI breach event for **<a href=\"\/modules\/view-panel\/data_compliances\/{{vars.complianceUUID}}\" target=\"_blank\" rel=\"noopener\"> Data Compliance Record #{{vars.complianceID}} - {{vars.complianceName}}<\/a>**, we need to notify the affected individuals.\n<br>\nThe notification email will be drafted using the information given for the following fields. Please provide your input for this.\n<br>\n**Note-** Make sure not to add any sensitive information in notification email.",
                         "inputVariables": [
                             {
                                 "name": "whatHappened?",
@@ -334,6 +333,77 @@
         },
         {
             "@type": "WorkflowStep",
+            "name": "Review Email Content",
+            "description": null,
+            "arguments": {
+                "type": "InputBased",
+                "input": {
+                    "schema": {
+                        "title": "Review Email Content",
+                        "description": "Please review the email content and make any necessary changes before sending it to the affected individuals.",
+                        "inputVariables": [
+                            {
+                                "name": "emailContent",
+                                "type": "string",
+                                "label": "Email Content",
+                                "title": "Rich Text (HTML)",
+                                "usable": true,
+                                "tooltip": "",
+                                "dataType": "text",
+                                "formType": "html",
+                                "required": true,
+                                "_expanded": true,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": true,
+                                "templateUrl": "app\/components\/form\/fields\/htmlEditor.html",
+                                "defaultValue": "<p>Hello,<\/p>\n<p>We're reaching out due to a Protected Health Information breach at our organization. While no misuse is known, we're notifying potentially affected individuals.<\/p>\n<p><strong>What happened?<\/strong><br>{{vars.steps.Update_Notification_Fields.whatHappened}}<\/p>\n<p><strong>What information was involved?<\/strong><br>{{vars.steps.Update_Notification_Fields.whatInformationWasInvolved}}<\/p>\n<p><strong>What are we doing?<\/strong><br>{{vars.steps.Update_Notification_Fields.whatAreWeDoing}}<\/p>\n<p><strong>What you can do?<\/strong><br>{{vars.steps.Update_Notification_Fields.whatYouCanDo}}<\/p>\n<p>Thanks,<br>Security Team<\/p>",
+                                "_previousName": "email",
+                                "playbookField": true,
+                                "lengthConstraint": true,
+                                "allowedEncryption": true,
+                                "allowedGridColumn": true,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false
+                            }
+                        ]
+                    }
+                },
+                "record": "{{ vars.input.records[0][\"@id\"] }}",
+                "agent_id": null,
+                "resources": "tasks",
+                "owner_detail": {
+                    "isAssigned": false
+                },
+                "isRecordLinked": true,
+                "step_variables": [],
+                "response_mapping": {
+                    "options": [
+                        {
+                            "option": "Submit",
+                            "primary": true,
+                            "step_iri": "\/api\/3\/workflow_steps\/a8381729-940e-4133-ba6e-ba5bbccd0473"
+                        }
+                    ],
+                    "duplicateOption": false
+                },
+                "email_notification": {
+                    "enabled": false,
+                    "smtpParameters": []
+                },
+                "inline_channel_list": [],
+                "external_channel_list": [],
+                "unauthenticated_input": false
+            },
+            "status": null,
+            "top": "975",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
+            "group": null,
+            "uuid": "8d1dd22b-ad84-4c3c-a2e7-7cbaf6356e15"
+        },
+        {
+            "@type": "WorkflowStep",
             "name": "Send PHI Breach Notification",
             "description": null,
             "arguments": {
@@ -344,7 +414,7 @@
                     "bcc": "{% if vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].testMode %}{{vars.demoEmail}}{% else %}{{vars.steps.Get_Affected_Users_Emails | json_query(\"[].eMailAddress\") | join(', ')}}{% endif %}",
                     "from": "",
                     "type": "Manual Input",
-                    "content": "<p>Hello,<\/p>\n<p>We're reaching out due to a Protected Health Information breach at our organization. While no misuse is known, we're notifying potentially affected individuals.<\/p>\n<p><strong>What happened?<\/strong><br>{{vars.steps.Update_Notification_Fields.whatHappened}}<\/p>\n<p><strong>What information was involved?<\/strong><br>{{vars.steps.Update_Notification_Fields.whatInformationWasInvolved}}<\/p>\n<p><strong>What are we doing?<\/strong><br>{{vars.steps.Update_Notification_Fields.whatAreWeDoing}}<\/p>\n<p><strong>What you can do?<\/strong><br>{{vars.steps.Update_Notification_Fields.whatYouCanDo}}<\/p>\n<p>Thanks,<br>Security Team<\/p>",
+                    "content": "<p>{{vars.steps.Review_Email_Content.input.emailContent}}<\/p>",
                     "subject": "Protected Health Information Breach Notification",
                     "iri_list": "",
                     "body_type": "Rich Text",
@@ -359,7 +429,7 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "975",
+            "top": "1110",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/4c0019b2-055c-44d0-968c-678a0c2d762e",
             "group": null,
@@ -476,16 +546,6 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Copy of Update Compliance Record Description -> Send Data Breach Notification",
-            "targetStep": "\/api\/3\/workflow_steps\/a8381729-940e-4133-ba6e-ba5bbccd0473",
-            "sourceStep": "\/api\/3\/workflow_steps\/458aad45-9d77-482b-ba55-608608b2ba9e",
-            "label": null,
-            "isExecuted": false,
-            "group": null,
-            "uuid": "a995435f-9a69-4942-9969-510dd6b00ad7"
-        },
-        {
-            "@type": "WorkflowRoute",
             "name": "Data Breach Notification -> Copy of Update Compliance Record Description",
             "targetStep": "\/api\/3\/workflow_steps\/458aad45-9d77-482b-ba55-608608b2ba9e",
             "sourceStep": "\/api\/3\/workflow_steps\/80dc4c15-6911-4cc2-988d-feedc60337cf",
@@ -526,6 +586,16 @@
         },
         {
             "@type": "WorkflowRoute",
+            "name": "Review Email Content -> Send PHI Breach Notification",
+            "targetStep": "\/api\/3\/workflow_steps\/a8381729-940e-4133-ba6e-ba5bbccd0473",
+            "sourceStep": "\/api\/3\/workflow_steps\/8d1dd22b-ad84-4c3c-a2e7-7cbaf6356e15",
+            "label": "Submit",
+            "isExecuted": false,
+            "group": null,
+            "uuid": "8f44774e-3ab2-429d-b560-a6853ce34e03"
+        },
+        {
+            "@type": "WorkflowRoute",
             "name": "Send Data Breach Notification -> Update Task to Notify Affected Users",
             "targetStep": "\/api\/3\/workflow_steps\/18271bbc-fa8c-4321-a1a8-46d71035832b",
             "sourceStep": "\/api\/3\/workflow_steps\/a8381729-940e-4133-ba6e-ba5bbccd0473",
@@ -543,6 +613,16 @@
             "isExecuted": false,
             "group": null,
             "uuid": "0a65ea25-e03b-4f76-a183-4cd426ba9d4c"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Update Notification Fields -> Review Email Content",
+            "targetStep": "\/api\/3\/workflow_steps\/8d1dd22b-ad84-4c3c-a2e7-7cbaf6356e15",
+            "sourceStep": "\/api\/3\/workflow_steps\/458aad45-9d77-482b-ba55-608608b2ba9e",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "d997d2cf-67b9-40f9-9ef0-a439400b8f04"
         }
     ],
     "groups": [],

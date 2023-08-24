@@ -959,8 +959,8 @@
                                                     }
                                                 ]
                                             },
-                                            "show": true,
-                                            "visible": true
+                                            "show": false,
+                                            "visible": false
                                         },
                                         {
                                             "title": "Correlations",

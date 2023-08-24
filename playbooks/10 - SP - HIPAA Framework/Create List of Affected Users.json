@@ -45,6 +45,7 @@
                 },
                 "resource": {
                     "name": "{{vars.item.name}}",
+                    "address": "{{vars.item.address}}",
                     "__replace": "true",
                     "incidents": "{{vars.incidentIRI}}",
                     "recordTags": [
@@ -53,7 +54,8 @@
                         "\/api\/3\/tags\/PHI Breach"
                     ],
                     "eMailAddress": "{{vars.item.email}}",
-                    "dataCompliances": "{{vars.complianceIRI}}"
+                    "dataCompliances": "{{vars.complianceIRI}}",
+                    "telephoneNumber": "{{vars.item.phone}}"
                 },
                 "operation": "Overwrite",
                 "collection": "\/api\/3\/upsert\/contact",
@@ -158,7 +160,7 @@
                 "params": {
                     "input": "File IRI",
                     "value": "{{vars.input.params.uploadAffectedUserDetails['@id']}}",
-                    "columnNames": "name,email",
+                    "columnNames": "name,email,phone,address",
                     "filterInput": "",
                     "recordBatch": "",
                     "deDupValuesOn": "email",
@@ -359,7 +361,7 @@
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "6a88a774-2a4e-422f-b82f-3be19bf5ecc9"
+            "uuid": "7385f082-b4e4-45c3-bfde-530b4d16ebe7"
         },
         {
             "@type": "WorkflowRoute",
@@ -389,7 +391,7 @@
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "4fd4d53f-1350-40f9-8b4d-bfa03b50239c"
+            "uuid": "06945743-3285-4655-91bf-7f5deca701a9"
         },
         {
             "@type": "WorkflowRoute",

@@ -116,6 +116,7 @@
             "description": "Mark Individual Notice Status as \"Approved\"",
             "arguments": {
                 "resource": {
+                    "breachNotificationSLA": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
                     "individualNoticeApproved": "\/api\/3\/picklists\/a81e3b2b-8d0a-4ef0-9ef2-b286d8adb75b"
                 },
                 "_showJson": false,
@@ -125,6 +126,7 @@
                 "collectionType": "\/api\/3\/data_compliances",
                 "fieldOperation": {
                     "locationOfBreach": "Append",
+                    "reminderMailStatus": "Append",
                     "typeOfPHIInvolvedInBreach": "Append",
                     "clinicalPHIExposedInBreach": "Append",
                     "financialPHIExposedInBreach": "Append",

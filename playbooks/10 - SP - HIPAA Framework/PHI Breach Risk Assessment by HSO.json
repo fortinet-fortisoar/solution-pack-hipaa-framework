@@ -688,6 +688,21 @@
                                             "useInOperator": true,
                                             "previousOperator": "in",
                                             "previousTemplate": "tags"
+                                        },
+                                        {
+                                            "type": "array",
+                                            "field": "areTheAffectedIndividualsContactDetailsOutdated",
+                                            "value": [
+                                                "Yes"
+                                            ],
+                                            "module": "areTheAffectedIndividualsContactDetailsOutdated",
+                                            "display": "",
+                                            "operator": "in",
+                                            "template": "tags",
+                                            "OPERATOR_KEY": "$",
+                                            "useInOperator": true,
+                                            "previousOperator": "in",
+                                            "previousTemplate": "tags"
                                         }
                                     ]
                                 },
@@ -867,7 +882,7 @@
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
                     "tenant": "",
                     "thread": false,
-                    "content": "<p>Created <a title=\"Task #{{vars.steps.Task_to_Notify_Breach_to_the_Secretary.id}}\" href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Task_to_Notify_Breach_to_the_Secretary.uuid}}\" target=\"_parent\" rel=\"noopener\">Task #{{vars.steps.Task_to_Notify_Breach_to_the_Secretary.id}}<\/a> to notify the Secretary of HHS about PHI Breach.<\/p>",
+                    "content": "<p>Created <a rel=\"noopener\" target=\"_parent\" href=\"\/modules\/view-panel\/tasks\/{{vars.steps.Task_to_Notify_Breach_to_the_Secretary.uuid}}\" title=\"Task #{{vars.steps.Task_to_Notify_Breach_to_the_Secretary.id}}\">Task #{{vars.steps.Task_to_Notify_Breach_to_the_Secretary.id}}<\/a> to notify the Secretary of HHS about PHI Breach.<\/p>",
                     "records": "{{vars.complianceIRI}}",
                     "parentstepid": "\/api\/3\/workflow_steps\/0d74e98b-1384-482c-a55f-99a827d34c83"
                 },
@@ -883,7 +898,7 @@
                     "recordTags": [
                         "\/api\/3\/tags\/Notify Secretary"
                     ],
-                    "description": "{{vars.demoMode}}\n\n##### Notify Breach to the Secretary of HHS(Health and Human Services)\n\n##### Click here to <em><strong><a href=\"https:\/\/ocrportal.hhs.gov\/ocr\/breach\/breach_form.jsf\">Submit a Breach Notification to the Secretary<\/a><\/strong><\/em>\n                                                                          \n##### Mark this Task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Completed**<\/span> after notifying the secretary of the breach.\n\n",
+                    "description": "{{vars.demoMode}}\n\n##### Notify Breach to the Secretary of HHS (Health and Human Services)\n\n##### Click here to <em><strong><a href=\"https:\/\/ocrportal.hhs.gov\/ocr\/breach\/breach_form.jsf\">Submit a Breach Notification to the Secretary<\/a><\/strong><\/em>\n                                                                          \n##### Mark this Task <span style=\"border-radius: 3px; background: #5d636a; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px;\">**Completed**<\/span> after notifying the secretary of the breach.\n\n",
                     "assignedOnDate": "{{arrow.utcnow().int_timestamp}}",
                     "dataCompliances": "{{vars.complianceIRI}}",
                     "assignedToPerson": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
@@ -1085,7 +1100,7 @@
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "b34518cd-bc7b-478c-9bc7-3f86ba654bcf"
+            "uuid": "ddeb6bb0-fcf4-472b-a174-b94c70c1a49e"
         },
         {
             "@type": "WorkflowRoute",
@@ -1145,7 +1160,7 @@
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "c6318652-030a-449f-b363-4aaafb042c04"
+            "uuid": "fb081496-9ac0-4408-8cda-eaf20fb4797a"
         },
         {
             "@type": "WorkflowRoute",

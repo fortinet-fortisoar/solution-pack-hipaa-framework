@@ -431,7 +431,7 @@
                                         "limit": 10
                                     },
                                     "editorType": "html",
-                                    "sectionText": "<h4 style=\"background: #404142; padding: 5px; text-align: left;\"><span style=\"font-size: 12pt; color: #ffffff;\"><strong>Threat Indicators<\/strong><\/span><\/h4>"
+                                    "sectionText": "<h4 style=\"background: #404142; padding: 5px; text-align: left;\"><span style=\"font-size: 12pt; color: #ffffff;\"><strong>Malicious Threat Indicators<\/strong><\/span><\/h4>"
                                 }
                             },
                             {
