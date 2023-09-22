@@ -3,57 +3,14 @@
 
 # Usage
 
->**WARNING**: If you have GDPR Solution Pack already installed in your system then make sure inactivate this playbook "10 - SP - GDPR Framework > Create Data Compliance Record"
+<table>
+    <tr>
+        <th>WARNING</th>
+        <td>If you have GDPR Solution Pack already installed in your system then make sure inactivate the playbook <strong>10 - SP - GDPR Framework > Create Data Compliance Record</strong></td>
+    </tr>
+</table>
 
-## Playbook Execution Modes
-
-You can execute the HIPAA playbooks in *Test Mode* as well as in *Production Mode*
-
-- The playbooks are by default configured to execute in *Test Mode*
-  - The *Test Mode* uses a test email address for all email communication towards HIPAA Security Officer (HSO), affected individuals, or Law Enforcement Agency
-  - The *Production Mode* uses the actual email addresses of relevant authorities and stakeholders
-
->**WARNING**: Please be careful of the email addresses you use, as data breach notification emails are sent to these addresses. Hence, while in *Test mode*, do not use actual email addresses.
-
-### Test Mode
-
-To change the execution mode to *Test* make the following changes:
-
-1. Go to the *Create Data Compliance Record* playbook under the **10 - SP - HIPAA Framework** collection and open the *Configuration* step
-
-    ![Execution Mode Configuration](./res/execution-mode-configuration.png)
-
-2. Modify the value of the `testMode` variable to `true`.
-3. Change the value of the `testEmail` variable to a valid email address capable of receiving all HIPAA email notifications.
-
-    >**WARNING**: When in *Test mode*, the value of the `testEmail` variable must not be empty.
-
-    ![Execution Mode Configuration Parameters](./res/execution-mode-configuration-parametes.png)
-
-### Production Mode
-
-To change the execution mode to *Production* make the following changes:
-
-1. Go to the *Create Data Compliance Record* playbook under the **10 - SP - HIPAA Framework** collection and open the *Configuration* step
-
-    ![Execution Mode Configuration](./res/execution-mode-configuration.png)
-
-2. Modify the value of the `testMode` variable to `false`.
-3. Keep the `testEmail` variable blank.
-
-    ![Execution Mode Configuration Parameters](./res/execution-mode-configuration-parameters.png)
-
-## Check for SLA Violation Playbook
-
-This playbook sends progressive SLA breach reminder emails. To set threshold values for reminder notifications, make the following configuration changes:
-
-1. Goto **Check for SLA violation** Playbook and open the *Configuration* step.
-2. The reminder threshold value is in hours. Change values of the following variables
-    - `firstReminderSLA`: The default value is 24 Hours which means the first reminder is sent when the SLA time remaining is less than 24 hours left.
-    - `secondReminderSLA`: The default value is 4 Hours which means the second reminder is sent when the SLA time remaining is less than 4 hours left.
-        ![Reminder Email Configuration Setting](./res/reminder-mail-configuration.png)
-
-A third and final reminder, of the SLA breach, is sent after the completion of 60 days.
+**HIPAA Framework** solution pack helps users track and follow the guidelines provided in the [*Breach Notification Rule*](https://www.hhs.gov/hipaa/for-professionals/breach-notification/index.html), in the event of a breach of unsecured PHI/ePHI. As per the guidelines, it is mandatory to notify individuals, the relevant federal agency, and in some cases, the local media.
 
 ## Gathering Details on Protect Health Information (PHI) Breach
 
@@ -63,13 +20,16 @@ A third and final reminder, of the SLA breach, is sent after the completion of 6
 
 2. A pop-up appears that collects additional information related to the incident
 
-    >**NOTE:** When playbooks are executed in *Test* mode, the **Green** icon shown in the following screenshot appears in all the tasks related to this solution pack
-    >
-    >![Personal Data Additional Details](./res/personal-data-additional-details.png)
-    >
-    >Similarly, when playbooks are executed in *Production* mode, a **Red** icon shown in the following screenshot appears
-    >
-    >![Personal Data Additional Details PROD](./res/personal-data-additional-details-prod.png)
+    <table>
+        <tr>
+            <th>NOTE</th>
+            <td>When playbooks are executed in <code>Test</code> mode, the <strong>Green</strong> icon shown in the following screenshot appears in all the tasks related to this solution pack.
+            <p><img src="./res/personal-data-additional-details.png" alt="Personal Data Additional Details"></p>
+            <p>Similarly, when playbooks are executed in <code>Production</code> mode, a <strong>Red</strong> icon shown in the following screenshot appears</p>
+            <p><img src="./res/personal-data-additional-details-prod.png" alt="Personal Data Additional Details PROD"></p>            
+            </td>
+        </tr>
+    </table>
 
 3. Select **HIPAA** in **Regulatory Body** and provide the required information
 
@@ -144,7 +104,7 @@ Based on the inputs from HSO, new tasks may be created. The following flow diagr
 ## Notify Breach to the Secretary of HHS
 
 1. Open the task and click the link provided in the task description to notify the Secretary of HHS about the PHI breach.
-2. Once the Secretary of HHS is notified about the breach, mark this task as `Completed` manually.
+2. Once the Secretary of HHS is notified about the breach, mark this task as `Completed`.
 
 ## Report Breach to Law Enforcement Agency
 
@@ -160,52 +120,61 @@ This task is created to report a breach to the law enforcement Agency of PHI bre
 
 3. Once the report is sent to the law enforcement agency then the task is marked as Completed and a new task to `Confirm Law Enforcement's Notification Delay Request` will be created.
 
->WARNING - Please make sure that you are not sending any confidential/personal information of the patients while reporting a PHI brach to the law enforcement agency
-
+<table>
+    <tr>
+        <th>WARNING</th>
+        <td>Ensure that you are not sending any confidential or personal information of the affected individuals while reporting a PHI brach to the law enforcement agency.</td>
+    </tr>
+</table>
 
 ## Confirm Law Enforcement's Notification Delay Request
 
 This task is created to confirm if law enforcement requested a delay in notifying the breach to affected individuals. 
 
-The delay may be requested by law enforcement officials if the notifying breach may impede their investigation.
+The delay may be requested by law enforcement officials if notifying about the breach impedes their investigation.
 
 1. Open the task and click the **Confirm Delay Request Status** Button and provide an appropriate response.
 
     ![Confirm Delay Request Status](./res/confirm-delay-request-status.png)
 
 2. If the law enforcement agency has requested a delay then; 
-    - The task will be marked as `On Hold/Blocked`
-    - The SLA will be paused for the Data Compliance record created for the breach
+    - The task is marked as **On Hold/Blocked**
+    - The SLA is paused for the Data Compliance record created for the breach
 
         ![Pause SLA](./res/pause-sla.png)
 
-    - Mark this Task `Completed` manually once the law enforcement agency has given the go-ahead to notify individuals affected by the breach.
+    - Mark this Task **Completed** once the law enforcement agency has given the go-ahead to notify individuals affected by the breach.
 
 ## Compile List of Affected Individuals
 
 This task compiles a list of individuals who have been affected by the breach.
 
 1. Open the task and click the **Upload Affected Users List** button.
-2. Upload the affected user's contact details in CSV format, this will create Contact records for each user.
+2. Upload the affected user's contact details in CSV format, this creates Contact records for each user.
 
     ![Upload Affected User CSV](./res/upload-affected-user-csv.png)
 
-3. Refer to the below file for the sample CSV file.
+3. The following is a sample CSV file.
 
-    ![Sample CSV File](./res/sample-user-list.csv)
+    [Sample CSV File](./res/sample-user-list.csv)
 
-4. Once User's contacts are uploaded and contact records created, the task will be Marked as Completed.
+4. Once User's contacts are uploaded and contact records created, the task is marked as **Completed**.
 
->Note- Contact details of individuals fall under sensitive information and will be stored in FortiSOAR as contact records. This information, specifically email addresses, will be used to notify individuals about the PHI breach.
+<table>
+    <tr>
+        <th>NOTE</th>
+        <td>Contact details of individuals fall under sensitive information and is stored in FortiSOAR as contact records. This information, specifically email addresses, is used to notify individuals about the PHI breach.</td>
+    </tr>
+</table>
 
 ## Notify Affected Users
 
 1. Open the task and click the **Notify Affected Individuals** button
 2. The notification should contain the following information
-    - What happened? - Provide brief information on data breach
-    - What Information Was Involved? - Provide information on what type of data was compromised
-    - What Are We Doing? - Provide remediation/mitigation action are taken or planned to be taken
-    - What You Can Do? - Provide advisory to the user about actions to be taken to minimize the risk
+    - **What happened?** - Provide brief information on data breach
+    - **What Information Was Involved?** - Provide information on what type of data was compromised
+    - **What Are We Doing?** - Provide remediation/mitigation action taken or planned
+    - **What You Can Do?** - Provide advisory to the user about actions to be taken to minimize the risk
 
         ![Notify Affected Users](./res/notify-affected-users.png)
 
@@ -213,19 +182,19 @@ This task compiles a list of individuals who have been affected by the breach.
 
     ![Review Email Content](./res/review-email-content.png)
 
-
 ## Provide Substitute Notice
 
-1. If the contact information of affected individuals is outdated and the HSO opts to send a substitute notice in the *Notify HIPAA Security Officer* task, this new task will be generated. This task will notify affected users using alternative methods like written forms, telephone, or other means for those with outdated contact details.
+1. If the contact information of affected individuals is outdated and the HSO opts to send a substitute notice in the *Notify HIPAA Security Officer* task, this new task is created. This task notifies affected users using alternative methods like written forms, telephone, or other means for those with outdated contact details.
 
-2. Once the individuals are notified using substitute methods then mark this task as completed manually.
+2. Once the individuals are notified using substitute methods, mark this task as **Completed**.
 
 ## Provide Media Notice
 
-1. This task will be created only if more than 500 individuals were affected by the breach, then in such case the covered entity is required to provide notice to prominent media outlets 
+1. This task is created only if more than 500 individuals were affected by the breach. In such a case, the covered entity is required to provide notice to prominent media outlets. 
 
-2. Once the media notice is provided then mark this task as completed manually.
+2. Once the media notice is provided, mark this task as **Completed**.
 
+# Next Steps
 
 | [Installation](./setup.md#installation) | [Configuration](./setup.md#configuration) | [Contents](./contents.md) |
 |-----------------------------------------|-------------------------------------------|---------------------------|
