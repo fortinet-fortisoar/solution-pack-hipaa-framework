@@ -21,7 +21,7 @@
         "Compliance and Reporting"
     ],
     "supportInfo": null,
-    "iconLarge": null,
+    "iconLarge": "fsr-icon-large.png",
     "postInstallConfig": {
         "enabled": false
     },
