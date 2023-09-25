@@ -202,6 +202,7 @@
                 "resource": {
                     "name": "Perform GDPR Assessment",
                     "dueBy": "{{arrow.get(vars.steps.Get_Data_Breach_Details.input.breachOccurrenceDate).shift(hours=+72).int_timestamp}}",
+                    "status": "\/api\/3\/picklists\/7669725a-28cc-4b19-98a3-9ca71e0f88f4",
                     "priority": "\/api\/3\/picklists\/612befbc-4255-403a-958b-11efce3e1d8c",
                     "__replace": "",
                     "incidents": "{{vars.input.records[0]['@id']}}",
