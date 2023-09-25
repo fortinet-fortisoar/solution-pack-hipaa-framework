@@ -773,7 +773,7 @@
             "skipSerialization": false,
             "displayName": "{{ cEPhone }}",
             "descriptions": {
-                "singular": "Phone"
+                "singular": "CE Phone"
             }
         },
         {
@@ -836,7 +836,7 @@
             "skipSerialization": false,
             "displayName": "{{ cEEmail }}",
             "descriptions": {
-                "singular": "Email"
+                "singular": "CE Email"
             }
         },
         {
@@ -899,7 +899,7 @@
             "skipSerialization": false,
             "displayName": "{{ cEStreetAddress }}",
             "descriptions": {
-                "singular": "Address"
+                "singular": "CE Address"
             }
         },
         {
