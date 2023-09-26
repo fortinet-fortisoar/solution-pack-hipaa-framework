@@ -1,0 +1,92 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "app",
+    "config": {
+        "navigation": [
+            {
+                "title": "Resources",
+                "icon": "icon icon-resources",
+                "items": [
+                    {
+                        "title": "Attachments",
+                        "icon": "icon icon-attachments",
+                        "require": {
+                            "module": "attachments",
+                            "action": "read"
+                        },
+                        "state": {
+                            "name": "main.modules.list",
+                            "parameters": {
+                                "module": "attachments"
+                            }
+                        },
+                        "editMode": false
+                    },
+                    {
+                        "title": "Assets",
+                        "icon": "icon icon-assets",
+                        "require": {
+                            "module": "assets",
+                            "action": "read"
+                        },
+                        "state": {
+                            "name": "main.modules.list",
+                            "parameters": {
+                                "module": "assets"
+                            }
+                        },
+                        "editMode": false
+                    },
+                    {
+                        "title": "Email Templates",
+                        "require": {
+                            "module": "email_templates",
+                            "action": "read"
+                        },
+                        "state": {
+                            "name": "main.modules.list",
+                            "parameters": {
+                                "module": "email_templates"
+                            }
+                        },
+                        "editMode": false,
+                        "icon": "icon icon-email-templates"
+                    },
+                    {
+                        "title": "Key Store",
+                        "require": {
+                            "module": "keys",
+                            "action": "read"
+                        },
+                        "state": {
+                            "name": "main.modules.list",
+                            "parameters": {
+                                "module": "keys"
+                            }
+                        },
+                        "icon": "fa fa-key",
+                        "editMode": false
+                    }
+                ],
+                "editMode": false
+            },
+            {
+                "editMode": false,
+                "icon": "icon icon-data_sets",
+                "require": {
+                    "action": "read",
+                    "module": "data_compliances"
+                },
+                "state": {
+                    "name": "main.modules.list",
+                    "parameters": {
+                        "module": "data_compliances"
+                    }
+                },
+                "title": "Data Compliances"
+            }
+        ]
+    },
+    "uuid": "navigation"
+}

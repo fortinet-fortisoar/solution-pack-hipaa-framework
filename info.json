@@ -1,0 +1,156 @@
+{
+    "name": "hIPAAFramework",
+    "version": "1.0.0",
+    "fsrMinCompatibility": "7.2.2",
+    "type": "solutionpack",
+    "local": true,
+    "label": "HIPAA Framework",
+    "dependencies": [
+        {
+            "name": "sOARFramework",
+            "type": "solutionpack",
+            "label": "SOAR Framework",
+            "minVersion": null
+        }
+    ],
+    "prerequisite": null,
+    "publisher": "Fortinet",
+    "description": "The HIPAA Framework solution pack helps users to report \"Protected Health Information (PHI)\" breaches to affected individuals, the relevant federal agency, and local media, as per the guidelines outlined in HIPAA's Breach Notification Rule.",
+    "help": "https://github.com/fortinet-fortisoar/solution-pack-hipaa-framework/blob/release/1.0.0/README.md",
+    "category": [
+        "Compliance and Reporting"
+    ],
+    "supportInfo": null,
+    "iconLarge": "fsr-icon-large.png",
+    "postInstallConfig": {
+        "enabled": false
+    },
+    "recordTags": [
+        "HIPAA"
+    ],
+    "date": "2023-07-13T09:36:17+00:00",
+    "contents": {
+        "picklistNames": [
+            {
+                "name": "ClinicalPHIType"
+            },
+            {
+                "name": "Contact Title"
+            },
+            {
+                "name": "DemographicPHIType"
+            },
+            {
+                "name": "FinancialPHIType"
+            },
+            {
+                "name": "GDPRDataBreachType"
+            },
+            {
+                "name": "GDPREUCountryList"
+            },
+            {
+                "name": "GDPRReminderStatus"
+            },
+            {
+                "name": "PHIBreachLocation"
+            },
+            {
+                "name": "PHIBreachResponseActions"
+            },
+            {
+                "name": "PHISafeguardType"
+            },
+            {
+                "name": "ProtectedHealthInformationType"
+            },
+            {
+                "name": "RegulatoryBody"
+            }
+        ],
+        "modules": {
+            "contact": {
+                "name": "Contacts",
+                "apiName": "contact"
+            },
+            "data_compliances": {
+                "name": "Data Compliances",
+                "apiName": "data_compliances"
+            },
+            "keys": {
+                "name": "Key Store",
+                "apiName": "keys"
+            }
+        },
+        "viewTemplates": {
+            "contact": {
+                "name": "Contacts",
+                "apiName": "contact",
+                "views": [
+                    "list",
+                    "detail",
+                    "form"
+                ]
+            },
+            "data_compliances": {
+                "name": "Data Compliances",
+                "apiName": "data_compliances",
+                "views": [
+                    "list",
+                    "detail",
+                    "form"
+                ]
+            },
+            "keys": {
+                "name": "Key Store",
+                "apiName": "keys",
+                "views": [
+                    "list",
+                    "detail",
+                    "form"
+                ]
+            },
+            "tasks": {
+                "name": "Tasks",
+                "apiName": "tasks",
+                "views": [
+                    "detail"
+                ]
+            }
+        },
+        "views": {
+            "navigation": [
+                "Resources",
+                "Data Compliances"
+            ]
+        },
+        "roles": [
+            {
+                "name": "Full App Permissions"
+            }
+        ],
+        "playbooks": [
+            {
+                "name": "10 - SP - HIPAA Framework"
+            }
+        ],
+        "reports": [
+            {
+                "name": "HIPAA Assessment Report"
+            }
+        ],
+        "connectors": [
+            {
+                "name": "CSV Data Management",
+                "apiName": "csv-data-management"
+            }
+        ],
+        "recordSets": [
+            {
+                "name": "Key Store",
+                "apiName": "keys",
+                "count": 1
+            }
+        ]
+    }
+}

@@ -1,0 +1,637 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Notify Individuals Affected by PHI Breach",
+    "aliasName": null,
+    "tag": null,
+    "description": "Sends email notification to the individuals who have been affected by the PHI breach.",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "affectedUsersEmailIDs",
+        "incidentIRI",
+        "incidentName",
+        "incidentID"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/4c384067-79c3-4821-a70a-d69c3c149ec6",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/15c80738-031a-4522-9e1a-46f7b04072cf",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "nextTask": "[]",
+                "taskName": "{{vars.input.records[0].name}}",
+                "description": "[]",
+                "affectedIndividualsList": "[]"
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "4842b6c3-92e9-423a-9363-49d4f5bf0f47"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Affected Users Emails",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "dataCompliances.id",
+                            "value": "{{vars.complianceID}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        },
+                        {
+                            "type": "array",
+                            "field": "recordTags",
+                            "value": [
+                                "\/api\/3\/tags\/HSO",
+                                "\/api\/3\/tags\/HIPAA Security Officer",
+                                "\/api\/3\/tags\/HIPAA Covered Entity"
+                            ],
+                            "module": "recordTags",
+                            "display": "",
+                            "operator": "nin",
+                            "template": "tags",
+                            "enableJinja": true,
+                            "OPERATOR_KEY": "$",
+                            "previousOperator": "nin",
+                            "previousTemplate": "tags"
+                        }
+                    ],
+                    "__selectFields": [
+                        "eMailAddress"
+                    ]
+                },
+                "module": "contact?$limit=5000&$relationships=true&$fsr_max_relation_count=100",
+                "checkboxFields": true,
+                "step_variables": []
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "b13061ac-92a3-4517-ab54-8b10b6d0244d"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Compliance Record ID",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "id",
+                            "value": "{{vars.input.records[0].id}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ],
+                    "__selectFields": [
+                        "dataCompliances"
+                    ]
+                },
+                "module": "tasks?$limit=30&$relationships=true&$fsr_max_relation_count=100",
+                "checkboxFields": true,
+                "step_variables": {
+                    "demoMode": "{% if vars.result[0].dataCompliances[0].testMode %}<span data-tomark-pass=\"\" style=\"border-radius: 25px; background: #73AD21; padding-left: 12px;padding-right: 12px;padding-top: 6px;padding-bottom: 6px;font-size: 11px;\"><strong>Test Mode ON<\/strong><\/span>{% endif %}",
+                    "dpaEmail": "{{vars.result[0].dataCompliances[0].dPAEmail}}",
+                    "demoEmail": "{{vars.result[0].dataCompliances[0].testEmail}}",
+                    "placeholder": "{% for item in vars.result[0].dataCompliances[0].description.split('\\n') %}\n{% if vars.taskName in item %}\n{% set _dummy = item | replace('10060', '9989') %}\n{{vars.description.append(_dummy)}}\n{% else %}\n{{vars.description.append(item)}}\n{% endif %}\n{% endfor %}",
+                    "complianceID": "{{vars.result[0].dataCompliances[0].id}}",
+                    "complianceIRI": "{{vars.result[0].dataCompliances[0]['@id']}}",
+                    "complianceName": "{{vars.result[0].dataCompliances[0].name}}",
+                    "complianceUUID": "{{vars.result[0].dataCompliances[0].uuid}}"
+                }
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "9c30538c-382c-4ff4-9660-1739200d8155"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Parent Incident ID",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "id",
+                            "value": "{{vars.complianceID}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ],
+                    "__selectFields": [
+                        "incidents"
+                    ]
+                },
+                "module": "data_compliances?$limit=30&$relationships=true&$fsr_max_relation_count=100",
+                "checkboxFields": true,
+                "step_variables": {
+                    "incidentIRI": "{{vars.result[0].incidents[0]['@id']}}"
+                }
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "43bbab03-4fa5-491d-be54-92b85a2c8e03"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Mark Task as Completed",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "__link": {
+                        "dataCompliances": "{{vars.complianceIRI}}"
+                    },
+                    "status": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/tasks",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1245",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "18271bbc-fa8c-4321-a1a8-46d71035832b"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "PHI Breach Notification",
+            "description": null,
+            "arguments": {
+                "type": "InputBased",
+                "input": {
+                    "schema": {
+                        "title": "Breach Notification to Affected Users",
+                        "description": "{{vars.demoMode}}\n<br>\nRegarding the PHI breach event for **<a href=\"\/modules\/view-panel\/data_compliances\/{{vars.complianceUUID}}\" target=\"_blank\" rel=\"noopener\"> Data Compliance Record #{{vars.complianceID}} - {{vars.complianceName}}<\/a>**, we need to notify the affected individuals.\n<br>\nThe notification email will be drafted using the information given for the following fields. Please provide your input for this.\n<br>\n**Note-** Make sure not to add any sensitive information in notification email.",
+                        "inputVariables": [
+                            {
+                                "name": "whatHappened?",
+                                "type": "string",
+                                "label": "What Happened?",
+                                "title": "Text Area",
+                                "usable": true,
+                                "tooltip": "Provide a concise summary of the breach incident, outlining key details and impacts",
+                                "dataType": "text",
+                                "formType": "textarea",
+                                "required": true,
+                                "_expanded": true,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": true,
+                                "templateUrl": "app\/components\/form\/fields\/textarea.html",
+                                "defaultValue": "{{vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].briefDescriptionOfTheBreach}}",
+                                "_previousName": "whatHappened",
+                                "lengthConstraint": true,
+                                "allowedEncryption": true,
+                                "allowedGridColumn": true,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false
+                            },
+                            {
+                                "name": "whatInformationWasInvolved?",
+                                "type": "string",
+                                "label": "What Information Was Involved?",
+                                "title": "Text Area",
+                                "usable": true,
+                                "tooltip": "Provide information on what type of data was compromised",
+                                "dataType": "text",
+                                "formType": "textarea",
+                                "required": true,
+                                "_expanded": true,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": true,
+                                "templateUrl": "app\/components\/form\/fields\/textarea.html",
+                                "defaultValue": null,
+                                "_previousName": "",
+                                "lengthConstraint": true,
+                                "allowedEncryption": true,
+                                "allowedGridColumn": true,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false
+                            },
+                            {
+                                "name": "whatAreWeDoing?",
+                                "type": "string",
+                                "label": "What Are We Doing?",
+                                "title": "Text Area",
+                                "usable": true,
+                                "tooltip": "Provide remidiation\/mitigation actions we have taking",
+                                "dataType": "text",
+                                "formType": "textarea",
+                                "required": true,
+                                "_expanded": true,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": true,
+                                "templateUrl": "app\/components\/form\/fields\/textarea.html",
+                                "defaultValue": null,
+                                "_previousName": "",
+                                "lengthConstraint": true,
+                                "allowedEncryption": true,
+                                "allowedGridColumn": true,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false
+                            },
+                            {
+                                "name": "whatYouCanDo?",
+                                "type": "string",
+                                "label": "What You Can Do?",
+                                "title": "Text Area",
+                                "usable": true,
+                                "tooltip": "Action to be taken by the user to minimize the risk",
+                                "dataType": "text",
+                                "formType": "textarea",
+                                "required": true,
+                                "_expanded": true,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": true,
+                                "templateUrl": "app\/components\/form\/fields\/textarea.html",
+                                "defaultValue": null,
+                                "_previousName": "",
+                                "lengthConstraint": true,
+                                "allowedEncryption": true,
+                                "allowedGridColumn": true,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false
+                            }
+                        ]
+                    }
+                },
+                "record": "{{vars.input.records[0]['@id']}}",
+                "agent_id": null,
+                "resources": "tasks",
+                "owner_detail": {
+                    "isAssigned": false
+                },
+                "isRecordLinked": true,
+                "step_variables": [],
+                "response_mapping": {
+                    "options": [
+                        {
+                            "option": "Submit",
+                            "primary": true,
+                            "step_iri": "\/api\/3\/workflow_steps\/458aad45-9d77-482b-ba55-608608b2ba9e"
+                        }
+                    ],
+                    "duplicateOption": false
+                },
+                "email_notification": {
+                    "enabled": false,
+                    "smtpParameters": []
+                },
+                "inline_channel_list": [],
+                "external_channel_list": [],
+                "unauthenticated_input": false
+            },
+            "status": null,
+            "top": "705",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
+            "group": null,
+            "uuid": "80dc4c15-6911-4cc2-988d-feedc60337cf"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Review Email Content",
+            "description": null,
+            "arguments": {
+                "type": "InputBased",
+                "input": {
+                    "schema": {
+                        "title": "Review Email Content",
+                        "description": "Please review the email content and make any necessary changes before sending it to the affected individuals.",
+                        "inputVariables": [
+                            {
+                                "name": "emailContent",
+                                "type": "string",
+                                "label": "Email Content",
+                                "title": "Rich Text (HTML)",
+                                "usable": true,
+                                "tooltip": "",
+                                "dataType": "text",
+                                "formType": "html",
+                                "required": true,
+                                "_expanded": true,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": true,
+                                "templateUrl": "app\/components\/form\/fields\/htmlEditor.html",
+                                "defaultValue": "<p>Hello,<\/p>\n<p>We're reaching out due to a Protected Health Information breach at our organization. While no misuse is known, we're notifying potentially affected individuals.<\/p>\n<p><strong>What happened?<\/strong><br>{{vars.steps.Update_Notification_Fields.whatHappened}}<\/p>\n<p><strong>What information was involved?<\/strong><br>{{vars.steps.Update_Notification_Fields.whatInformationWasInvolved}}<\/p>\n<p><strong>What are we doing?<\/strong><br>{{vars.steps.Update_Notification_Fields.whatAreWeDoing}}<\/p>\n<p><strong>What you can do?<\/strong><br>{{vars.steps.Update_Notification_Fields.whatYouCanDo}}<\/p>\n<p>Thanks,<br>Security Team<\/p>",
+                                "_previousName": "email",
+                                "playbookField": true,
+                                "lengthConstraint": true,
+                                "allowedEncryption": true,
+                                "allowedGridColumn": true,
+                                "jinjaExpressionView": true,
+                                "useRecordFieldDefault": false
+                            }
+                        ]
+                    }
+                },
+                "record": "{{ vars.input.records[0][\"@id\"] }}",
+                "agent_id": null,
+                "resources": "tasks",
+                "owner_detail": {
+                    "isAssigned": false
+                },
+                "isRecordLinked": true,
+                "step_variables": [],
+                "response_mapping": {
+                    "options": [
+                        {
+                            "option": "Submit",
+                            "primary": true,
+                            "step_iri": "\/api\/3\/workflow_steps\/a8381729-940e-4133-ba6e-ba5bbccd0473"
+                        }
+                    ],
+                    "duplicateOption": false
+                },
+                "email_notification": {
+                    "enabled": false,
+                    "smtpParameters": []
+                },
+                "inline_channel_list": [],
+                "external_channel_list": [],
+                "unauthenticated_input": false
+            },
+            "status": null,
+            "top": "975",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
+            "group": null,
+            "uuid": "8d1dd22b-ad84-4c3c-a2e7-7cbaf6356e15"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Send PHI Breach Notification",
+            "description": null,
+            "arguments": {
+                "config": "88c3d39c-2fa9-4731-b00d-29815008f17c",
+                "params": {
+                    "cc": "",
+                    "to": "{{globalVars.Default_Email}}",
+                    "bcc": "{% if vars.steps.Get_Compliance_Record_ID[0].dataCompliances[0].testMode %}{{vars.demoEmail}}{% else %}{{vars.steps.Get_Affected_Users_Emails | json_query(\"[].eMailAddress\") | join(', ')}}{% endif %}",
+                    "from": "",
+                    "type": "Manual Input",
+                    "content": "<p>{{vars.steps.Review_Email_Content.input.emailContent}}<\/p>",
+                    "subject": "Protected Health Information Breach Notification",
+                    "iri_list": "",
+                    "body_type": "Rich Text",
+                    "file_name": "",
+                    "file_path": ""
+                },
+                "version": "2.5.0",
+                "from_str": "admin@example.com",
+                "connector": "smtp",
+                "operation": "send_email_new",
+                "operationTitle": "Send Email (Advanced)",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1110",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/4c0019b2-055c-44d0-968c-678a0c2d762e",
+            "group": null,
+            "uuid": "a8381729-940e-4133-ba6e-ba5bbccd0473"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "route": "57d923a6-944c-4cef-afad-e39cc11986ea",
+                "title": "Notify Affected Individuals",
+                "resources": [
+                    "tasks"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                    "input": {
+                        "params": [],
+                        "records": "{{vars.input.records}}"
+                    }
+                },
+                "displayConditions": {
+                    "tasks": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": [
+                            {
+                                "type": "array",
+                                "field": "recordTags",
+                                "value": [
+                                    "\/api\/3\/tags\/Notify Impacted Individuals"
+                                ],
+                                "module": "recordTags",
+                                "display": "",
+                                "operator": "in_all",
+                                "template": "tags",
+                                "OPERATOR_KEY": "$",
+                                "previousOperator": "in_all",
+                                "previousTemplate": "tags"
+                            },
+                            {
+                                "type": "object",
+                                "field": "status",
+                                "value": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                                "_value": {
+                                    "@id": "\/api\/3\/picklists\/343f4b67-e929-4205-bf95-ba5b70545fed",
+                                    "itemValue": "Completed"
+                                },
+                                "operator": "neq"
+                            }
+                        ]
+                    }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": false,
+                "singleRecordExecution": false
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+            "group": null,
+            "uuid": "15c80738-031a-4522-9e1a-46f7b04072cf"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update Notification Fields",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "whatHappened": "{{vars.steps.PHI_Breach_Notification.input['whatHappened?']}}",
+                    "whatYouCanDo": "{{vars.steps.PHI_Breach_Notification.input['whatYouCanDo?']}}",
+                    "whatAreWeDoing": "{{vars.steps.PHI_Breach_Notification.input['whatAreWeDoing?']}}",
+                    "whatInformationWasInvolved": "{{vars.steps.PHI_Breach_Notification.input['whatInformationWasInvolved?']}}"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.complianceIRI}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/data_compliances",
+                "fieldOperation": {
+                    "recordTags": "Append",
+                    "locationOfBreach": "Append",
+                    "reminderMailStatus": "Append",
+                    "typeOfPHIInvolvedInBreach": "Append",
+                    "clinicalPHIExposedInBreach": "Append",
+                    "financialPHIExposedInBreach": "Append",
+                    "demographicPHIExposedInBreach": "Append",
+                    "safeguardsInPlaceBeforeBreach": "Append",
+                    "actionsTakenInResponseToBreach": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "840",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "458aad45-9d77-482b-ba55-608608b2ba9e"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Get Incident ID",
+            "targetStep": "\/api\/3\/workflow_steps\/9c30538c-382c-4ff4-9660-1739200d8155",
+            "sourceStep": "\/api\/3\/workflow_steps\/4842b6c3-92e9-423a-9363-49d4f5bf0f47",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "57867ce2-ceb8-463e-91b6-64322fea4548"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Data Breach Notification -> Copy of Update Compliance Record Description",
+            "targetStep": "\/api\/3\/workflow_steps\/458aad45-9d77-482b-ba55-608608b2ba9e",
+            "sourceStep": "\/api\/3\/workflow_steps\/80dc4c15-6911-4cc2-988d-feedc60337cf",
+            "label": "Submit",
+            "isExecuted": false,
+            "group": null,
+            "uuid": "b1150f9e-6b37-435b-97e1-2bd72c989f71"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Affected Users Emails -> PHI Breach Notification",
+            "targetStep": "\/api\/3\/workflow_steps\/80dc4c15-6911-4cc2-988d-feedc60337cf",
+            "sourceStep": "\/api\/3\/workflow_steps\/b13061ac-92a3-4517-ab54-8b10b6d0244d",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "3fd83e11-319b-4d33-88e2-8643ec0ab777"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Compliance Record ID -> Get Parent Incident ID",
+            "targetStep": "\/api\/3\/workflow_steps\/43bbab03-4fa5-491d-be54-92b85a2c8e03",
+            "sourceStep": "\/api\/3\/workflow_steps\/9c30538c-382c-4ff4-9660-1739200d8155",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "30887d43-75bb-4d91-b6e7-a6733c07f919"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Parent Incident ID -> Get Affected Users Emails",
+            "targetStep": "\/api\/3\/workflow_steps\/b13061ac-92a3-4517-ab54-8b10b6d0244d",
+            "sourceStep": "\/api\/3\/workflow_steps\/43bbab03-4fa5-491d-be54-92b85a2c8e03",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "c7e6f077-9077-4d0c-9001-7af80f189831"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Review Email Content -> Send PHI Breach Notification",
+            "targetStep": "\/api\/3\/workflow_steps\/a8381729-940e-4133-ba6e-ba5bbccd0473",
+            "sourceStep": "\/api\/3\/workflow_steps\/8d1dd22b-ad84-4c3c-a2e7-7cbaf6356e15",
+            "label": "Submit",
+            "isExecuted": false,
+            "group": null,
+            "uuid": "8f44774e-3ab2-429d-b560-a6853ce34e03"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Send Data Breach Notification -> Update Task to Notify Affected Users",
+            "targetStep": "\/api\/3\/workflow_steps\/18271bbc-fa8c-4321-a1a8-46d71035832b",
+            "sourceStep": "\/api\/3\/workflow_steps\/a8381729-940e-4133-ba6e-ba5bbccd0473",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "2c639a6f-235b-4ea3-a7a6-e0db9b1790ed"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/4842b6c3-92e9-423a-9363-49d4f5bf0f47",
+            "sourceStep": "\/api\/3\/workflow_steps\/15c80738-031a-4522-9e1a-46f7b04072cf",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "0a65ea25-e03b-4f76-a183-4cd426ba9d4c"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Update Notification Fields -> Review Email Content",
+            "targetStep": "\/api\/3\/workflow_steps\/8d1dd22b-ad84-4c3c-a2e7-7cbaf6356e15",
+            "sourceStep": "\/api\/3\/workflow_steps\/458aad45-9d77-482b-ba55-608608b2ba9e",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "d997d2cf-67b9-40f9-9ef0-a439400b8f04"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "614cd2bc-6757-43dd-a803-982990e98740",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "ManualTrigger"
+    ]
+}

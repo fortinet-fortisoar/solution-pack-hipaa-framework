@@ -1,0 +1,63 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "rows",
+    "config": {
+        "rows": [
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "grid",
+                                "config": {
+                                    "wid": "eb7a13c5-2b50-49f6-b99d-beab5941e21c",
+                                    "module": "data_compliances",
+                                    "columns": [
+                                        "id",
+                                        "name",
+                                        "severity",
+                                        "status",
+                                        "assignedTo",
+                                        "breachOccurrenceDate",
+                                        "breachDetectionDate",
+                                        "breachNotifyDueDate",
+                                        "breachNotificationSLA",
+                                        "tenant"
+                                    ],
+                                    "expandableCol": [
+                                        {
+                                            "openTab": false,
+                                            "name": "description"
+                                        }
+                                    ],
+                                    "relationshipField": [],
+                                    "checkboxStatus": true,
+                                    "editableFields": false,
+                                    "actionButtons": [],
+                                    "query": {
+                                        "sort": [],
+                                        "limit": 30,
+                                        "logic": "AND",
+                                        "filters": []
+                                    },
+                                    "enableHorizontalScroll": true,
+                                    "lightMode": true
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "197eab36-965b-41b8-a4cf-8794fc177d2a",
+                "_collapsed": false
+            }
+        ],
+        "wid": "8ba77141-ae3d-4a61-bf49-08d5da5ca96b",
+        "metadata": {
+            "customTemplateTitle": "Data Compliances",
+            "originalTemplateTitle": "Data Compliances"
+        }
+    },
+    "uuid": "modules-data_compliances-list"
+}

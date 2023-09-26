@@ -1,0 +1,30 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/3e09dde4-7f0a-42e3-80bb-91409836fbeb",
+    "@type": "PicklistName",
+    "name": "RegulatoryBody",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/257ec29f-5f8c-4928-a771-59f86778e9ac",
+            "@type": "Picklist",
+            "itemValue": "GDPR",
+            "orderIndex": 0,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/3e09dde4-7f0a-42e3-80bb-91409836fbeb",
+            "uuid": "257ec29f-5f8c-4928-a771-59f86778e9ac"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/858e341d-2ee4-4cd0-bc5a-462c5f40199a",
+            "@type": "Picklist",
+            "itemValue": "HIPAA",
+            "orderIndex": 1,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/3e09dde4-7f0a-42e3-80bb-91409836fbeb",
+            "uuid": "858e341d-2ee4-4cd0-bc5a-462c5f40199a"
+        }
+    ],
+    "uuid": "3e09dde4-7f0a-42e3-80bb-91409836fbeb"
+}

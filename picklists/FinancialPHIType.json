@@ -1,0 +1,50 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/b5762e3a-d37f-4006-a52d-c3aa7f1fb6c3",
+    "@type": "PicklistName",
+    "name": "FinancialPHIType",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/0492dabb-fb41-4c48-bb74-06f841559834",
+            "@type": "Picklist",
+            "itemValue": "Bank Account",
+            "orderIndex": 0,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/b5762e3a-d37f-4006-a52d-c3aa7f1fb6c3",
+            "uuid": "0492dabb-fb41-4c48-bb74-06f841559834"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/b9293255-77cc-4689-8a3f-8efcd75f76cc",
+            "@type": "Picklist",
+            "itemValue": "Claims Information",
+            "orderIndex": 1,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/b5762e3a-d37f-4006-a52d-c3aa7f1fb6c3",
+            "uuid": "b9293255-77cc-4689-8a3f-8efcd75f76cc"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/edc6bcf1-28f6-4625-b135-c2e1a3eb261b",
+            "@type": "Picklist",
+            "itemValue": "Credit Card",
+            "orderIndex": 2,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/b5762e3a-d37f-4006-a52d-c3aa7f1fb6c3",
+            "uuid": "edc6bcf1-28f6-4625-b135-c2e1a3eb261b"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/3b731725-16ae-4912-a38d-aacf43d21e28",
+            "@type": "Picklist",
+            "itemValue": "Other",
+            "orderIndex": 3,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/b5762e3a-d37f-4006-a52d-c3aa7f1fb6c3",
+            "uuid": "3b731725-16ae-4912-a38d-aacf43d21e28"
+        }
+    ],
+    "uuid": "b5762e3a-d37f-4006-a52d-c3aa7f1fb6c3"
+}
